@@ -1,0 +1,7 @@
+{
+  "name": "longlast",
+  "version": "0.0.0",
+  "author": "Ben Christel (https://benchristel.com/)",
+  "license": "MIT",
+  "packageManager": "pnpm@10.14.0"
+}
