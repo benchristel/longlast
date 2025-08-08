@@ -128,6 +128,11 @@ record-like, but can also have methods. This style promotes discoverability and
 cohesion, while also allowing functional idioms like
 `movies.map(prop("title"))`.
 
+### AI Policy
+
+No generative AI tools will be used in the development of longlast. All
+absurdities and goof-ups are 100% my own :)
+
 ## TODO
 
 - Makefile
