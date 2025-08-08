@@ -215,6 +215,44 @@ cohesion, while also allowing functional idioms like
 No generative AI tools will be used in the development of longlast. All
 absurdities and goof-ups are 100% my own :)
 
+## Development
+
+### Setup
+
+Recommended dependency versions:
+
+```
+GNU Make  4.2.1
+Node.js   24.5.0
+pnpm      10.14.0
+```
+
+After installing those, run:
+
+```sh
+make deps  # installs dependencies and configures git hooks
+```
+
+### Everyday commands
+
+```sh
+make         # alias for `make right` (below)
+make right   # runs all checks and fixes formatting
+make verify  # runs all checks
+make test    # runs unit tests
+make sys     # runs system tests
+make ts      # runs the typechecker in watch mode
+make lint    # finds problems
+make fix     # fixes (some) problems
+```
+
+### Releasing
+
+```sh
+make release  # interactively cut a release
+make publish  # publish
+```
+
 ## TODO
 
 - Makefile
