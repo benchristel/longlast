@@ -58,6 +58,46 @@ for packages to defend against unreasonable use. That means:
 - Using [brands](https://www.semver-ts.org/3-practical-guidance.html#avoiding-user-constructibility)
   to ensure clients _can't_ construct types they're not supposed to.
 - Separating "input" (contravariant) types from "output" (covariant) types.
+
+  <details>
+    <summary>Example</summary>
+
+    Suppose we have some code like this:
+
+    ```ts
+    export type Person = {name: string};
+    export function setName(p: Person, name: string): Person {
+        // ...
+    }
+    ```
+
+    This might seem innocuous, but consider what happens if we add a new
+    property to `Person`:
+
+    ```ts
+    export type Person = {name: string, dob: Date};
+    export function setName(p: Person, name: string): Person {
+        // ...
+    }
+    ```
+
+    Clients who were constructing their own `Person` objects to pass to
+    `setName` will now get type errors, because they aren't providing the
+    required `dob` property!
+
+    The rule that solves this is to make sure each exported type is either:
+
+    - only used in contravariant positions, like function parameters and
+      write-only properties.
+    - only used in covariant positions, like function return values and
+      read-only properties.
+    - not user-constructible.
+
+    Incidentally, the need for "variance hygiene" seems like a strong reason
+    to prefer immutability in structurally typed languages.
+
+  </details>
+
 - Making sure methods are non-enumerable.
 - Using symbols for "ubiquitous" methods like `equals`, `hashCode`, `copy`. This
   ensures these names won't collide with methods from client code.
