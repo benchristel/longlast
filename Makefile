@@ -12,7 +12,7 @@ test:
 
 .PHONY: ts
 ts:
-	@pnpm tsc --watch --project dev/config/tsconfig.json
+	@pnpm tsc --watch
 
 .PHONY: fix
 fix:
@@ -28,7 +28,7 @@ typetest:
 
 .PHONY: typecheck
 typecheck:
-	@pnpm tsc --project dev/config/tsconfig.json
+	@pnpm tsc
 
 .PHONY: sys
 sys:

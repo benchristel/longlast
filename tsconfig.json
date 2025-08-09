@@ -1,5 +1,5 @@
 {
-  "include": ["../../packages", "../../dev"],
+  "include": ["packages", "dev"],
   "compilerOptions": {
     "noEmit": true,
     "target": "es2022",
