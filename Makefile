@@ -4,3 +4,6 @@ test:
 
 fix:
 	@dev/scripts/fix
+
+ts:
+	@pnpm tsc --watch --project dev/config/tsconfig.json

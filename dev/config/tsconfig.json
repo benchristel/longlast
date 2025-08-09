@@ -1,0 +1,13 @@
+{
+  "include": ["../../packages", "../../dev"],
+  "compilerOptions": {
+    "noEmit": true,
+    "target": "es2022",
+    "module": "nodenext",
+    "declaration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
+}
