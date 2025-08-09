@@ -1,0 +1,9 @@
+{
+  "baseIndentSize": 0,
+  "indentSize": 4,
+  "tabSize": 4,
+  "indentStyle": 2,
+  "newLineCharacter": "\n",
+  "convertTabsToSpaces": true,
+  "insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false
+}
