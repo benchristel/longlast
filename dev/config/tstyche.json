@@ -1,0 +1,12 @@
+{
+    "$schema": "https://tstyche.org/schemas/config.json",
+    "rejectAnyType": true,
+    "rejectNeverType": true,
+    "rootPath": "../../",
+    "testFileMatch": [
+        "**/*.typetest.ts"
+    ],
+    "target": [
+        "5.9.2"
+    ]
+}

@@ -24,7 +24,7 @@ lint:
 
 .PHONY: typetest
 typetest:
-	@pnpm tstyche
+	@pnpm tstyche --config dev/config/tstyche.json
 
 .PHONY: typecheck
 typecheck:
