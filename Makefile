@@ -10,9 +10,9 @@ verify: test typecheck typetest lint sys ;
 test:
 	@dev/scripts/test.ts
 
-.PHONY: typetest
-typetest:
-	@pnpm tstyche
+.PHONY: ts
+ts:
+	@pnpm tsc --watch --project dev/config/tsconfig.json
 
 .PHONY: fix
 fix:
@@ -22,9 +22,9 @@ fix:
 lint:
 	@dev/scripts/format --verify
 
-.PHONY: ts
-ts:
-	@pnpm tsc --watch --project dev/config/tsconfig.json
+.PHONY: typetest
+typetest:
+	@pnpm tstyche
 
 .PHONY: typecheck
 typecheck:
