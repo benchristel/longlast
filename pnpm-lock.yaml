@@ -17,6 +17,9 @@ importers:
       husky:
         specifier: ^9.1.7
         version: 9.1.7
+      tstyche:
+        specifier: ^4.3.0
+        version: 4.3.0(typescript@5.9.2)
       typescript:
         specifier: ^5.9.2
         version: 5.9.2
@@ -61,6 +64,16 @@ packages:
 
   sigmund@1.0.1:
     resolution: {integrity: sha512-fCvEXfh6NWpm+YSuY2bpXb/VIihqWA6hLsgboC+0nl71Q7N7o2eaCW8mJa/NLvQhs6jpd3VZV4UiUQlV6+lc8g==}
+
+  tstyche@4.3.0:
+    resolution: {integrity: sha512-X5mSVCivhCSDKHr9tWfCH0kmEo5cLApZILK5XfssTIirc9wEvcSYhCaixj5TSR/39cIC7U5TQD+wtGKsYh7nlw==}
+    engines: {node: '>=20.9'}
+    hasBin: true
+    peerDependencies:
+      typescript: '>=4.7'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   typescript-formatter@7.2.2:
     resolution: {integrity: sha512-V7vfI9XArVhriOTYHPzMU2WUnm5IMdu9X/CPxs8mIMGxmTBFpDABlbkBka64PZJ9/xgQeRpK8KzzAG4MPzxBDQ==}
@@ -111,6 +124,10 @@ snapshots:
   semver@5.7.2: {}
 
   sigmund@1.0.1: {}
+
+  tstyche@4.3.0(typescript@5.9.2):
+    optionalDependencies:
+      typescript: 5.9.2
 
   typescript-formatter@7.2.2(typescript@5.9.2):
     dependencies:

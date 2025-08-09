@@ -1,14 +1,18 @@
 .DEFAULT_GOAL = right
 
 .PHONY: right
-right: fix test typecheck ;
+right: fix test typecheck typetest ;
 
 .PHONY: verify
-verify: test typecheck lint ;
+verify: test typecheck typetest lint ;
 
 .PHONY: test
 test:
 	@dev/scripts/test.ts
+
+.PHONY: typetest
+typetest:
+	@pnpm tstyche
 
 .PHONY: fix
 fix:

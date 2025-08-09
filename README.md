@@ -236,14 +236,15 @@ make deps  # installs dependencies and configures git hooks
 ### Everyday commands
 
 ```sh
-make         # alias for `make right` (below)
-make right   # runs all checks and fixes formatting
-make verify  # runs all checks
-make test    # runs unit tests
-make sys     # runs system tests
-make ts      # runs the typechecker in watch mode
-make lint    # finds problems
-make fix     # fixes (some) problems
+make           # alias for `make right` (below)
+make right     # runs all checks and fixes formatting
+make verify    # runs all checks
+make test      # runs unit tests
+make sys       # runs system tests
+make ts        # runs the typechecker in watch mode
+make typetest  # runs type-level tests
+make lint      # finds problems
+make fix       # fixes (some) problems
 ```
 
 ### Releasing
@@ -255,7 +256,7 @@ make publish  # publish
 
 ## TODO
 
-- tstyche
+- configure supported typescript versions for tstyche
 - editor config
 - dev/checks/ (any executable at the top level fails `make verify` if it exits
   nonzero)
