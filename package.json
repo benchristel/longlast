@@ -1,7 +1,12 @@
 {
   "name": "longlast",
   "version": "0.0.0",
+  "type": "module",
   "author": "Ben Christel (https://benchristel.com/)",
   "license": "MIT",
-  "packageManager": "pnpm@10.14.0"
+  "packageManager": "pnpm@10.14.0",
+  "devDependencies": {
+    "@benchristel/taste": "^0.6.0",
+    "@types/node": "^24.2.1"
+  }
 }

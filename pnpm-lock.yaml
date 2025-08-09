@@ -1,0 +1,37 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    devDependencies:
+      '@benchristel/taste':
+        specifier: ^0.6.0
+        version: 0.6.0
+      '@types/node':
+        specifier: ^24.2.1
+        version: 24.2.1
+
+packages:
+
+  '@benchristel/taste@0.6.0':
+    resolution: {integrity: sha512-+PNsgwYRKgZQLCUGFCGLRbPTIpJYsyhMr5935ZjEdWlAjm6N0aj0jd80uGqNSgLJOhlmGCQhrZyzhPfXHJTBwg==}
+
+  '@types/node@24.2.1':
+    resolution: {integrity: sha512-DRh5K+ka5eJic8CjH7td8QpYEV6Zo10gfRkjHCO3weqZHWDtAaSTFtl4+VMqOJ4N5jcuhZ9/l+yy8rVgw7BQeQ==}
+
+  undici-types@7.10.0:
+    resolution: {integrity: sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag==}
+
+snapshots:
+
+  '@benchristel/taste@0.6.0': {}
+
+  '@types/node@24.2.1':
+    dependencies:
+      undici-types: 7.10.0
+
+  undici-types@7.10.0: {}
