@@ -4,7 +4,7 @@
 right: fix test typecheck typetest ;
 
 .PHONY: verify
-verify: test typecheck typetest lint ;
+verify: test typecheck typetest lint sys ;
 
 .PHONY: test
 test:
@@ -29,3 +29,7 @@ ts:
 .PHONY: typecheck
 typecheck:
 	@pnpm tsc --project dev/config/tsconfig.json
+
+.PHONY: sys
+sys:
+	@echo "No system tests to run."
