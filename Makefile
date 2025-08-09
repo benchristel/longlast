@@ -1,10 +1,10 @@
 .DEFAULT_GOAL = right
 
 .PHONY: right
-right: fix verify ;
+right: fix test typecheck ;
 
 .PHONY: verify
-verify: test typecheck ;
+verify: test typecheck lint ;
 
 .PHONY: test
 test:
@@ -12,7 +12,11 @@ test:
 
 .PHONY: fix
 fix:
-	@dev/scripts/fix
+	@dev/scripts/format --replace
+
+.PHONY: lint
+lint:
+	@dev/scripts/format --verify
 
 .PHONY: ts
 ts:

@@ -9,4 +9,4 @@
 ) \
     | tr '\0' '\n' \
     | grep '\.ts$' \
-    | xargs -r pnpm tsfmt -r --useTsfmt dev/config/tsfmt.json
+    | xargs -r pnpm tsfmt "$@" --useTsfmt dev/config/tsfmt.json
