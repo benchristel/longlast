@@ -1,9 +1,19 @@
-# Stash unstaged changes, to ensure that what gets linted is exactly what will
-# be committed.
-git stash --keep-index --include-untracked >/dev/null || exit 1
+# If there are no changed files, there's nothing to lint, so exit early. This
+# is necessary because `git stash push` fails if there are no changed files
+# (though it will happily create an empty stash if you specify --keep-index and
+# there are staged changes but no unstaged changes!) There might be no changed
+# files if e.g. we're running `git commit --amend` to reword a commit message.
+if [ -z "$(git diff --name-only --diff-filter=ACMRTUB)" ]; then
+    exit 0
+fi
+
+# Stash any unstaged changes, to ensure that what gets linted is exactly what
+# will be committed.
+git stash push --keep-index --include-untracked >/dev/null || exit 1
 
 if make lint; then
     git stash pop >/dev/null
+    exit 0
 else
     git stash pop >/dev/null
     exit 1
