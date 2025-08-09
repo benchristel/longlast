@@ -256,7 +256,6 @@ make publish  # publish
 ## TODO
 
 - tstyche
-- git hooks
 - editor config
 - dev/checks/ (any executable at the top level fails `make verify` if it exits
   nonzero)

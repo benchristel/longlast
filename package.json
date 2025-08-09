@@ -8,7 +8,11 @@
   "devDependencies": {
     "@benchristel/taste": "^0.6.0",
     "@types/node": "^24.2.1",
+    "husky": "^9.1.7",
     "typescript": "^5.9.2",
     "typescript-formatter": "^7.2.2"
+  },
+  "scripts": {
+    "prepare": "husky"
   }
 }
