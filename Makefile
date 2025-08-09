@@ -33,3 +33,7 @@ typecheck:
 .PHONY: sys
 sys:
 	@echo "No system tests to run."
+
+.PHONY: deps
+deps:
+	@pnpm install
