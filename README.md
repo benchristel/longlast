@@ -255,12 +255,8 @@ make publish  # publish
 
 ## TODO
 
-- Makefile
-- pnpm monorepo
-- TypeScript
-- tsfmt
-- taste
 - tstyche
+- git hooks
 - editor config
 - dev/checks/ (any executable at the top level fails `make verify` if it exits
   nonzero)
