@@ -3,10 +3,6 @@
     "rejectAnyType": true,
     "rejectNeverType": true,
     "rootPath": "../../",
-    "testFileMatch": [
-        "**/*.typetest.ts"
-    ],
-    "target": [
-        "5.9.2"
-    ]
+    "testFileMatch": ["**/*.typetest.ts"],
+    "target": ["5.9.2"]
 }

@@ -5,6 +5,6 @@
     "compilerOptions": {
         "noEmit": false,
         "noCheck": true,
-        "outDir": "dist",
+        "outDir": "dist"
     }
 }
