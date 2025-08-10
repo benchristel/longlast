@@ -1,19 +1,20 @@
 {
-  "name": "longlast",
-  "version": "0.0.0",
-  "type": "module",
-  "author": "Ben Christel (https://benchristel.com/)",
-  "license": "MIT",
-  "packageManager": "pnpm@10.14.0",
-  "devDependencies": {
-    "@benchristel/taste": "^0.6.0",
-    "@types/node": "^24.2.1",
-    "husky": "^9.1.7",
-    "tstyche": "^4.3.0",
-    "typescript": "^5.9.2",
-    "typescript-formatter": "^7.2.2"
-  },
-  "scripts": {
-    "prepare": "husky"
-  }
+    "name": "longlast",
+    "version": "0.0.0",
+    "type": "module",
+    "author": "Ben Christel (https://benchristel.com/)",
+    "license": "MIT",
+    "packageManager": "pnpm@10.14.0",
+    "devDependencies": {
+        "@benchristel/taste": "^0.6.0",
+        "@types/node": "^24.2.1",
+        "husky": "^9.1.7",
+        "prettier": "^3.6.2",
+        "tstyche": "^4.3.0",
+        "typescript": "^5.9.2",
+        "typescript-formatter": "^7.2.2"
+    },
+    "scripts": {
+        "prepare": "husky"
+    }
 }

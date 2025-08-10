@@ -16,11 +16,13 @@ ts:
 
 .PHONY: fix
 fix:
-	@dev/scripts/format --replace
+	@dev/scripts/changed_files | dev/scripts/tsfmt --replace
+	@dev/scripts/changed_files | dev/scripts/jsonprettier --write
 
 .PHONY: lint
 lint:
-	@dev/scripts/format --verify
+	@dev/scripts/changed_files | dev/scripts/tsfmt --verify
+	@dev/scripts/changed_files | dev/scripts/jsonprettier --check
 
 .PHONY: typetest
 typetest:

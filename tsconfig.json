@@ -1,18 +1,18 @@
 {
-  "include": ["packages", "dev"],
-  "compilerOptions": {
-    "noEmit": true,
-    "target": "es2022",
-    "module": "nodenext",
-    "declaration": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowImportingTsExtensions": true,
-    "rewriteRelativeImportExtensions": true,
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
-    "isolatedDeclarations": true,
-    "skipLibCheck": true
-  }
+    "include": ["packages", "dev"],
+    "compilerOptions": {
+        "noEmit": true,
+        "target": "es2022",
+        "module": "nodenext",
+        "declaration": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "allowImportingTsExtensions": true,
+        "rewriteRelativeImportExtensions": true,
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+        "exactOptionalPropertyTypes": true,
+        "isolatedDeclarations": true,
+        "skipLibCheck": true
+    }
 }
