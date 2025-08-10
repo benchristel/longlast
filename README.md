@@ -102,6 +102,24 @@ code, but it doesn't interfere with your use of other libraries.
 - For convenience and consistency in development, the source code will be
   structured as a pnpm monorepo.
 
+### Naming
+
+Exported names should be unique across all packages, because they will all get
+exported from `@longlast/index`.
+
+If a suitable unique name cannot be found, the name should be "namespaced" in
+an object.
+
+Types, classes, and "namespace" objects use `PascalCase`.
+
+All other values use `lowerCamelCase`.
+
+The names of symbol values start with a dollar sign, e.g. `$equals`.
+
+Ruby casing conventions are used for initialisms: `toJson`, not `toJSON`,
+`HttpClient`, not `HTTPClient`. This allows the casing of names to be
+transformed automatically.
+
 ### Versioning
 
 Breaking changes are just about the second-worst thing in software engineering
