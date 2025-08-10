@@ -10,8 +10,16 @@
         "allowImportingTsExtensions": true,
         "rewriteRelativeImportExtensions": true,
         "strict": true,
-        "noUncheckedIndexedAccess": true,
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
         "exactOptionalPropertyTypes": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "noUncheckedIndexedAccess": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
         "isolatedDeclarations": true,
         "skipLibCheck": true
     }
