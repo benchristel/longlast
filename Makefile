@@ -44,7 +44,7 @@ typecheck:
 
 .PHONY: sys
 sys:
-	@echo "No system tests to run."
+	@dev/scripts/test_packaging
 
 .PHONY: build
 build: clean

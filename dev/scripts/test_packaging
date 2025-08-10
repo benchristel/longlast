@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -euo pipefail
+
+HERE="$(dirname "$0")"
+
+BUILD="$($HERE/clone_worktree)"
+CLIENT="$($HERE/clone_worktree)"
+
+pushd "$BUILD"
+    make deps
+    make build
+    pnpm pack --recursive
+popd
+
+pushd "$CLIENT"
+    rm -rf pnpm-workspace.yaml packages
+    make deps
+    # TODO: don't hardcode package version
+    pnpm add "$BUILD/longlast-symbols-0.0.0.tgz"
+    pushd "$BUILD"
+        ls -d packages/*/package-tests | \
+            xargs -I{} cp -r --parents {} "$CLIENT"
+    popd
+    find packages -type f | xargs sed -ie 's/@ts-nocheck//'
+    make test typecheck
+popd
