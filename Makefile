@@ -38,6 +38,10 @@ sys:
 build:
 	@dev/scripts/build
 
+.PHONY: clean
+clean:
+	@rm -rf packages/*/dist
+
 .PHONY: deps
 deps:
 	@pnpm install
