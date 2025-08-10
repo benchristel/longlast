@@ -1,5 +1,4 @@
-// @ts-nocheck
-import {$equals} from "@longlast/symbols"
+import {$equals} from "#@longlast/symbols"
 
 $equals satisfies Symbol
 

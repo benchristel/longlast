@@ -53,7 +53,12 @@ pushd "$CLIENT" >/dev/null
     echo "Package tests:"
     find packages -type f
 
-    find packages -type f | xargs sed -ie 's/@ts-nocheck//'
+    # The package tests contain self-imports like "#@longlast/symbols". During
+    # development, these imports are resolved to the packages' index.ts files
+    # by an `imports` field in package.json. When running the package tests,
+    # though, we can use the actual package name, so we remove the '#' here.
+    # See: https://nodejs.org/docs/v22.18.0/api/packages.html#imports
+    find packages -type f | xargs sed -ie 's/from "#@longlast/from "@longlast/'
 
     # Actually run the tests.
     pnpm tsc
