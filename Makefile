@@ -35,7 +35,7 @@ sys:
 	@echo "No system tests to run."
 
 .PHONY: build
-build:
+build: clean
 	@dev/scripts/build
 
 .PHONY: clean
