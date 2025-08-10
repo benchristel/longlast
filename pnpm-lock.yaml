@@ -29,6 +29,8 @@ importers:
 
   packages/example: {}
 
+  packages/symbols: {}
+
 packages:
 
   '@benchristel/taste@0.6.0':
