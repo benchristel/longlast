@@ -31,6 +31,12 @@ pushd "$CLIENT" >/dev/null
         ls -d packages/*/package-tests | \
             xargs -I{} cp -r --parents {} "$CLIENT"
     popd >/dev/null
+
+    # Print the names of the test files
+    echo
+    echo "Package tests:"
+    find packages -type f
+
     find packages -type f | xargs sed -ie 's/@ts-nocheck//'
     pnpm tsc
 popd >/dev/null
