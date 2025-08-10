@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# clone_worktree creates a copy of this git repository, including any untracked
+# files and uncommited changes in the working tree. It outputs the path to the
+# clone.
+#
+# The purpose of clone_worktree is to create a sandbox for running tests on a
+# modified version of the repository. For example, a cloned worktree can be
+# used to test whether the code typechecks with a particular version of
+# TypeScript, or whether a package works with a specific dependency version
+# other than the one in pnpm-lock.yaml.
+
+HERE="$(dirname "$0")"
+ROOT="$(cd "$HERE/../.." && pwd)"
+TMPDIR="$(mktemp -d)"
+
+git clone --depth 1 "file://$ROOT" "$TMPDIR" >/dev/null
+
+# Copy untracked and modified files into the clone
+"$HERE/all_files" | xargs -I{} cp --parents {} "$TMPDIR"
+
+echo "$TMPDIR"
