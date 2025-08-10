@@ -274,7 +274,6 @@ make publish  # publish
 
 ## TODO
 
-- `make lint-all fix-all`
 - installer system tests
 - make sure tsconfig.json specifies the strictest typechecking settings
 - fork typescript-formatter and add a config option to insert trailing newlines
