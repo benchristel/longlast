@@ -4,7 +4,7 @@
 right: fix verify ;
 
 .PHONY: verify
-verify: test typecheck typetest lint sys ;
+verify: test typecheck typetest lint-all sys ;
 
 .PHONY: test
 test:
@@ -19,10 +19,20 @@ fix:
 	@dev/scripts/changed_files | dev/scripts/tsfmt --replace
 	@dev/scripts/changed_files | dev/scripts/jsonprettier --write
 
+.PHONY: fix-all
+fix-all:
+	@dev/scripts/all_files | dev/scripts/tsfmt --replace
+	@dev/scripts/all_files | dev/scripts/jsonprettier --write
+
 .PHONY: lint
 lint:
 	@dev/scripts/changed_files | dev/scripts/tsfmt --verify
 	@dev/scripts/changed_files | dev/scripts/jsonprettier --check
+
+.PHONY: lint-all
+lint-all:
+	@dev/scripts/all_files | dev/scripts/tsfmt --verify
+	@dev/scripts/all_files | dev/scripts/jsonprettier --check
 
 .PHONY: typetest
 typetest:

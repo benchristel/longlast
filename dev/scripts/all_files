@@ -1,0 +1,2 @@
+#!/bin/bash
+git ls-files -z -cmo --exclude-standard | tr '\0' '\n'
