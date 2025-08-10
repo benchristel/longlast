@@ -2,29 +2,35 @@
 
 set -euo pipefail
 
+handle_exit() {
+    rv=$?
+    if ! [ "$rv" -eq 0 ]; then
+        echo "Tests failed."
+    fi
+    exit $rv
+}
+
+trap handle_exit EXIT
+
 HERE="$(dirname "$0")"
 
 BUILD="$($HERE/clone_worktree 2>/dev/null)"
 CLIENT="$($HERE/clone_worktree 2>/dev/null)"
 
-{
-    pushd "$BUILD"
-        make deps
-        make build
-        pnpm pack --recursive
-    popd
-} >/dev/null
+pushd "$BUILD" >/dev/null
+    make deps >/dev/null
+    make build >/dev/null
+    pnpm pack --recursive >/dev/null
+popd >/dev/null
 
 pushd "$CLIENT" >/dev/null
-    {
-        rm -rf pnpm-workspace.yaml packages
-        make deps
-        pnpm add "$BUILD"/longlast-*.tgz
-        pushd "$BUILD"
-            ls -d packages/*/package-tests | \
-                xargs -I{} cp -r --parents {} "$CLIENT"
-        popd
-        find packages -type f | xargs sed -ie 's/@ts-nocheck//'
-    } >/dev/null
+    rm -rf pnpm-workspace.yaml packages
+    make deps >/dev/null
+    pnpm add "$BUILD"/longlast-*.tgz >/dev/null
+    pushd "$BUILD" >/dev/null
+        ls -d packages/*/package-tests | \
+            xargs -I{} cp -r --parents {} "$CLIENT"
+    popd >/dev/null
+    find packages -type f | xargs sed -ie 's/@ts-nocheck//'
     pnpm tsc
 popd >/dev/null
