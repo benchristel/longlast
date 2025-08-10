@@ -34,6 +34,10 @@ typecheck:
 sys:
 	@echo "No system tests to run."
 
+.PHONY: build
+build:
+	@dev/scripts/build
+
 .PHONY: deps
 deps:
 	@pnpm install
