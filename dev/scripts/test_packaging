@@ -16,8 +16,7 @@ popd
 pushd "$CLIENT"
     rm -rf pnpm-workspace.yaml packages
     make deps
-    # TODO: don't hardcode package version
-    pnpm add "$BUILD/longlast-symbols-0.0.0.tgz"
+    pnpm add "$BUILD"/longlast-*.tgz
     pushd "$BUILD"
         ls -d packages/*/package-tests | \
             xargs -I{} cp -r --parents {} "$CLIENT"
