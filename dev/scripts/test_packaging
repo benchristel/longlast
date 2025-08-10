@@ -1,7 +1,10 @@
 #!/bin/bash
 
+# Exit immediately on any failure.
 set -euo pipefail
 
+# Print a message if this script exits nonzero, to make sure the failure is
+# human-visible.
 handle_exit() {
     rv=$?
     if ! [ "$rv" -eq 0 ]; then
@@ -9,14 +12,19 @@ handle_exit() {
     fi
     exit $rv
 }
-
 trap handle_exit EXIT
 
 HERE="$(dirname "$0")"
 
+# Create two clones of the current working tree. We'll use the first one to
+# build the packages. The second one will play the role of "client," and we'll
+# install the built packages into it as dependencies. Using a worktree clone as
+# a client is convenient (if kludgey) -- really, all we need is a Node.js
+# repository with TypeScript.
 BUILD="$($HERE/clone_worktree 2>/dev/null)"
 CLIENT="$($HERE/clone_worktree 2>/dev/null)"
 
+# Build the packages and pack them into .tgz files.
 pushd "$BUILD" >/dev/null
     make deps >/dev/null
     make build >/dev/null
@@ -24,19 +32,29 @@ pushd "$BUILD" >/dev/null
 popd >/dev/null
 
 pushd "$CLIENT" >/dev/null
+    # Get rid of @longlast source code and pnpm-workspace.yaml. Our client
+    # doesn't need to be a monorepo.
     rm -rf pnpm-workspace.yaml packages
+
     make deps >/dev/null
+
+    # Install the @longlast packages we built earlier.
     pnpm add "$BUILD"/longlast-*.tgz >/dev/null
+
+    # Copy the package tests we're going to run into the client repo.
     pushd "$BUILD" >/dev/null
         ls -d packages/*/package-tests | \
             xargs -I{} cp -r --parents {} "$CLIENT"
     popd >/dev/null
 
-    # Print the names of the test files
+    # Print the names of the test files. Otherwise, it's hard to be sure if any
+    # tests are running!
     echo
     echo "Package tests:"
     find packages -type f
 
     find packages -type f | xargs sed -ie 's/@ts-nocheck//'
+
+    # Actually run the tests.
     pnpm tsc
 popd >/dev/null
