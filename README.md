@@ -307,7 +307,7 @@ built tarballs.
 
 Then:
 
-- `pnpm publish /path/to/@longlast-my-package-1.2.3.tgz`
+- `pnpm publish --access public /path/to/@longlast-my-package-1.2.3.tgz`
 - `git tag @longlast/my-package@1.2.3`
 - `git push origin main --tags`
 

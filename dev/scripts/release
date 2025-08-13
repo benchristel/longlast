@@ -23,7 +23,7 @@ cat <<EOF
 
 ## Manual steps:
 
-- 'pnpm publish TARBALL'
+- 'pnpm publish --access public TARBALL'
 - 'git tag TAG'
 - 'git push origin main --tags'
 
