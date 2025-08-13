@@ -267,10 +267,49 @@ make fix       # fixes (some) problems
 
 ### Releasing
 
-```sh
-make release  # interactively cut a release
-make publish  # publish
+Releasing is a semi-manual process for now. We expect releases to be frequent
+and simple (involving only one package at a time).
+
+To do a release, first update the package's `CHANGELOG.md` file, the
+`package.json`, and any other files that reference the old version number. The
+changelog format is:
+
 ```
+# @longlast/my-package
+
+## 1.2.3 (2007-08-09)
+
+Release notes go here.
+
+## 1.2.2 (2007-08-08)
+
+Release notes for version 1.2.2...
+```
+
+The log is reverse-chronological. Each release has a level-2 heading with
+the version number and the date in YYYY-MM-DD format.
+
+Commit all of these files together, but don't push the commit yet. The commit
+message format is:
+
+```
+Release @longlast/my-package@1.2.3
+```
+
+Then run:
+
+```sh
+make release  # builds packages for release and prints additional instructions
+```
+
+This will build all packages in a temp directory and output the paths of the
+built tarballs.
+
+Then:
+
+- `pnpm publish /path/to/@longlast-my-package-1.2.3.tgz`
+- `git tag @longlast/my-package@1.2.3`
+- `git push origin main --tags`
 
 ## TODO
 

@@ -57,3 +57,7 @@ clean:
 .PHONY: deps
 deps:
 	@pnpm install
+
+.PHONY: release
+release: verify
+	@dev/scripts/release

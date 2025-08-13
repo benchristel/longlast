@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [ -n "$(git status --porcelain)" ]; then
+    >&2 echo
+    >&2 echo "Whoa there, partner! Dirty trees can't release."
+    >&2 echo "Git yerself clean first."
+    exit 1
+fi
+
+HERE="$(dirname "$0")"
+RELEASE_DIR="$("$HERE/clone_worktree")"
+>&2 echo "RELEASE_DIR='$RELEASE_DIR'"
+
+pushd "$RELEASE_DIR" >/dev/null
+    make deps
+    make build
+    pnpm pack --recursive
+popd >/dev/null
+
+cat <<EOF
+
+## Manual steps:
+
+- 'pnpm publish TARBALL'
+- 'git tag TAG'
+- 'git push origin main --tags'
+
+An example TAG is '@longlast/my-package@1.2.3'
+
+Here are the TARBALLs you may want to publish:
+
+$(find "$RELEASE_DIR" -maxdepth 1 -name '*.tgz')
+EOF
