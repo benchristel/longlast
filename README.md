@@ -270,9 +270,8 @@ make fix       # fixes (some) problems
 Releasing is a semi-manual process for now. We expect releases to be frequent
 and simple (involving only one package at a time).
 
-To do a release, first update the package's `CHANGELOG.md` file, the
-`package.json`, and any other files that reference the old version number. The
-changelog format is:
+To do a release, first write an entry in the package's `CHANGELOG.md` file (but
+don't commit it). The changelog format is:
 
 ```
 # @longlast/my-package
@@ -289,27 +288,21 @@ Release notes for version 1.2.2...
 The log is reverse-chronological. Each release has a level-2 heading with
 the version number and the date in YYYY-MM-DD format.
 
-Commit all of these files together, but don't push the commit yet. The commit
-message format is:
-
-```
-Release @longlast/my-package@1.2.3
-```
-
 Then run:
 
 ```sh
 make release  # builds packages for release and prints additional instructions
 ```
 
-This will build all packages in a temp directory and output the paths of the
-built tarballs.
+This does the following:
 
-Then:
-
-- `pnpm publish --access public /path/to/@longlast-my-package-1.2.3.tgz`
-- `git tag @longlast/my-package@1.2.3`
-- `git push origin main --tags`
+- runs all checks
+- bumps the version in `package.json`
+- commits the changes to `package.json` and `CHANGELOG.md`
+- tags the commit
+- builds a tarball of the package
+- outputs the commands to actually publish the release on GitHub and NPM. You
+  must run these commands manually to finish the release.
 
 ## TODO
 
