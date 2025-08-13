@@ -291,7 +291,7 @@ the version number and the date in YYYY-MM-DD format.
 Then run:
 
 ```sh
-make release  # builds packages for release and prints additional instructions
+make release
 ```
 
 This does the following:
