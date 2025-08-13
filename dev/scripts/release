@@ -20,7 +20,7 @@ fi
 
 PACKAGE="$(cut -d/ -f2 <<<"$STATUS")"
 CHANGELOG="$(cut -b4- <<<"$STATUS")"
-VERSION="$(grep ^## "$CHANGELOG" | head -n1 | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\S*')"
+VERSION="$(grep ^## "$CHANGELOG" | head -n1 | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\S*' || true)"
 TAG="@longlast/$PACKAGE@$VERSION"
 
 if [ -z "$VERSION" ]; then
