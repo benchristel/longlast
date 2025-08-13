@@ -2,14 +2,42 @@
 
 set -euo pipefail
 
-if [ -n "$(git status --porcelain)" ]; then
+HERE="$(dirname "$0")"
+ROOT="$(cd "$HERE/../.." && pwd)"
+cd "$ROOT"
+
+STATUS="$(git status --porcelain)"
+
+if \
+    [ "$(wc -l <<<"$STATUS")" -ne 1 ] \
+    || ! grep -qE '^ M packages/([^/]+)/CHANGELOG.md$' <<<"$STATUS"
+then
     >&2 echo
-    >&2 echo "Whoa there, partner! Dirty trees can't release."
-    >&2 echo "Git yerself clean first."
+    >&2 echo "Error: your working tree is not in a felicitous state."
+    >&2 echo "Update one CHANGELOG.md file and try again."
     exit 1
 fi
 
-HERE="$(dirname "$0")"
+PACKAGE="$(cut -d/ -f2 <<<"$STATUS")"
+CHANGELOG="$(cut -b4- <<<"$STATUS")"
+VERSION="$(grep ^## "$CHANGELOG" | head -n1 | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\S*')"
+TAG="@longlast/$PACKAGE@$VERSION"
+
+if [ -z "$VERSION" ]; then
+    >&2 echo
+    >&2 echo "Error: version in $CHANGELOG is malformed."
+    exit 1
+fi
+
+pushd "$ROOT/packages/$PACKAGE" >/dev/null
+    pnpm version "$VERSION" --git-tag-version false
+popd >/dev/null
+
+git add "$ROOT/packages/$PACKAGE/package.json"
+git add "$ROOT/packages/$PACKAGE/CHANGELOG.md"
+git commit -m "Release $TAG"
+git tag "$TAG"
+
 RELEASE_DIR="$("$HERE/clone_worktree")"
 >&2 echo "RELEASE_DIR='$RELEASE_DIR'"
 
@@ -21,15 +49,8 @@ popd >/dev/null
 
 cat <<EOF
 
-## Manual steps:
+Almost done! Remaining manual steps:
 
-- 'pnpm publish --access public TARBALL'
-- 'git tag TAG'
-- 'git push origin main --tags'
-
-An example TAG is '@longlast/my-package@1.2.3'
-
-Here are the TARBALLs you may want to publish:
-
-$(find "$RELEASE_DIR" -maxdepth 1 -name '*.tgz')
+    pnpm publish --access public '$RELEASE_DIR/longlast-$PACKAGE-$VERSION.tgz'
+    git push origin main --tags
 EOF
