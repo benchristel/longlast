@@ -273,7 +273,7 @@ and simple (involving only one package at a time).
 To do a release, first write an entry in the package's `CHANGELOG.md` file (but
 don't commit it). The changelog format is:
 
-```
+```markdown
 # @longlast/my-package
 
 ## 1.2.3 (2007-08-09)
