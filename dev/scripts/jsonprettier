@@ -2,5 +2,4 @@ grep '\.json$' | \
     xargs -r pnpm prettier "$@" \
         --config dev/config/prettier.json \
         --ignore-path dev/config/prettierignore \
-        --log-level silent
-
+        --log-level warn
