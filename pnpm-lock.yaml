@@ -30,6 +30,8 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(typescript@5.9.2)
 
+  packages/equals: {}
+
   packages/symbols: {}
 
 packages:

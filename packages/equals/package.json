@@ -1,0 +1,11 @@
+{
+    "name": "@longlast/equals",
+    "version": "0.0.0",
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "packageManager": "pnpm@10.14.0"
+}
