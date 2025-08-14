@@ -36,3 +36,44 @@ This does the following:
 - builds a tarball of the package
 - outputs the commands to actually publish the release on GitHub and NPM. You
   must run these commands manually to finish the release.
+
+## Aborting a release
+
+To abort/undo a release (which can only be done before you've run the manual
+commands `make release` outputs), run:
+
+```sh
+# drop the release commit from the history
+git reset --hard @longlast/my-package@1.2.3~
+# delete the release tag
+git tag -d @longlast/my-package@1.2.3
+```
+
+## Releasing concurrently with other changes
+
+It's bound to happen at some point: you cut a release, try to push to `main`,
+and the push fails because there are new commits you don't have locally.
+
+The fix is to `git reset --hard` your local `main` to `origin/main`
+(effectively dropping the release commit from the history) and then merge in
+the release commit (which will still be accessible via the tag):
+
+```bash
+git fetch origin main
+git checkout main
+git reset --hard origin/main
+git merge @longlast/my-package@1.2.3
+git push origin main
+```
+
+The result should look like this in the git log:
+
+```
+* Merge @longlast/my-package@1.2.3 into main (HEAD -> main, origin/main)
+|\
+* | Commit from main
+* | Another commit from main
+| * Release @longlast/my-package@1.2.3 (tag: @longlast/my-package@1.2.3)
+|/
+* ...
+```
