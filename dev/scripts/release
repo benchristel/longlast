@@ -6,6 +6,12 @@ HERE="$(dirname "$0")"
 ROOT="$(cd "$HERE/../.." && pwd)"
 cd "$ROOT"
 
+if ! grep -qE '^ref: refs/heads/main$' .git/HEAD; then
+    >&2 echo
+    >&2 echo "Error: you must be on the 'main' branch to release."
+    exit 1
+fi
+
 STATUS="$(git status --porcelain)"
 
 if \
@@ -43,6 +49,7 @@ RELEASE_DIR="$("$HERE/clone_worktree")"
 
 pushd "$RELEASE_DIR" >/dev/null
     make deps
+    make verify
     make build
     pnpm pack --recursive
 popd >/dev/null

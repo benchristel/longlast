@@ -59,5 +59,5 @@ deps:
 	@pnpm install
 
 .PHONY: release
-release: verify
+release:
 	@dev/scripts/release
