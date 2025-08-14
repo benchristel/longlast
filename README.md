@@ -18,15 +18,18 @@ latest [styleguide](dev/docs/styleguide.md).
 Recommended dependency versions:
 
 ```
+GNU bash  version 5.0.17(1)-release
 GNU Make  4.2.1
 Node.js   24.5.0
 pnpm      10.14.0
 ```
 
-After installing those, run:
+Other versions might work too, but I have not tested with them.
+
+After installing the aforementioned dependencies, run:
 
 ```sh
-make deps  # installs dependencies and configures git hooks
+make deps  # installs Node.js packages and configures git hooks
 ```
 
 ### Everyday commands
