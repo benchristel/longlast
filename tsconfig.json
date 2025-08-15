@@ -5,7 +5,7 @@
         "target": "es2022",
         "module": "nodenext",
         "declaration": true,
-        "esModuleInterop": true,
+        "esModuleInterop": false,
         "forceConsistentCasingInFileNames": true,
         "allowImportingTsExtensions": true,
         "rewriteRelativeImportExtensions": true,
