@@ -9,11 +9,14 @@ import {glob} from "node:fs/promises"
 import {join} from "node:path"
 
 async function main() {
-    const testFilePattern =
-        join(import.meta.dirname, "..", "..", "packages", "*", "src", "*.test.ts")
+    const root = [import.meta.dirname, "..", ".."]
+    const testFilePatterns = [
+        join(...root, "packages", "*", "src", "**", "*.test.ts"),
+        join(...root, "packages", "*", "src", "**", "test.ts"),
+    ]
 
     // TODO: import files in parallel
-    for await (const path of glob(testFilePattern)) {
+    for await (const path of glob(testFilePatterns)) {
         await import(path)
     }
 
