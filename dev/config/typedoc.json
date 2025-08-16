@@ -1,9 +1,9 @@
 {
     "name": "@longlast",
     "entryPoints": ["../../packages/*/src/index.ts"],
-    "out": "./docs-src",
     "plugin": ["typedoc-plugin-markdown"],
     "entryFileName": "index",
     "hidePageHeader": true,
     "hideBreadcrumbs": true,
+    "parametersFormat": "table",
 }
