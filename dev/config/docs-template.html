@@ -4,8 +4,84 @@
         <meta charset="utf-8">
         <title>{{title}}</title>
     </head>
+    <style>
+
+@font-face {
+    font-family: Vollkorn;
+    src: url("https://cdn.jsdelivr.net/gh/benchristel/cdn@9906347e/fonts/vollkorn/Vollkorn-Regular.woff2") format("woff2");
+}
+
+html {
+    display: flex;
+    min-height: 100%;
+    align-items: stretch;
+    font-family: Vollkorn, Georgia, serif;
+}
+
+body {
+    display: flex;
+    margin: 0;
+    align-items: stretch;
+    flex-basis: 80vw;
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+nav.toc {
+    background: aliceblue;
+    padding: 1em;
+    flex-basis: 19rem;
+    flex-shrink: 1;
+    flex-grow: 0;
+}
+
+nav.toc ul, li {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav.toc ul > li > ul {
+    padding-inline-start: 1em;
+}
+
+.mdsite-breadcrumb > a:after {
+    display: inline-block;
+    padding-inline: 0.5em;
+    content: '/';
+    color: #999;
+}
+
+main {
+    padding: 2rem;
+    flex-basis: 100vw;
+    flex-shrink: 1;
+}
+
+th, td {
+    text-align: left;
+    padding-inline-end: 2em;
+    padding-block: 0.25em;
+}
+
+a, a:visited {
+    text-decoration-color: #bbb;
+    text-underline-offset: 3px;
+    text-decoration-skip-ink: none;
+}
+
+
+code, blockquote :has(code) {
+    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo,
+        Consolas, 'DejaVu Sans Mono', monospace;
+}
+
+blockquote code {
+    color: #a68;
+}
+
+    </style>
     <body>
-        <nav>{{toc /}}</nav>
+        <nav class="toc"><h2>@longlast</h2>{{toc /}}</nav>
         <main>
             <nav>{{breadcrumb}}</nav>
             <article>{{content}}</article>
