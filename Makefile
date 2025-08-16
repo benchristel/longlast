@@ -58,6 +58,14 @@ clean:
 deps:
 	@pnpm install
 
+.PHONY: docs
+docs:
+	@pnpm typedoc --options dev/config/typedoc.json
+
+.PHONY: serve
+serve:
+	@pnpx http-server -c-1 -o docs
+
 .PHONY: release
 release:
 	@dev/scripts/release
