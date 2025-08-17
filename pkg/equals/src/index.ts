@@ -39,8 +39,7 @@ export function equals(a: unknown, b: unknown): boolean {
     if (a instanceof Error && b instanceof Error) {
         return (
             a.message === b.message &&
-            Object.getPrototypeOf(a)?.constructor ===
-                Object.getPrototypeOf(b)?.constructor
+            Object.getPrototypeOf(a) === Object.getPrototypeOf(b)
         );
     }
     if (isObject(a) && isObject(b)) {
@@ -49,8 +48,7 @@ export function equals(a: unknown, b: unknown): boolean {
         return (
             aKeys.length === bKeys.length &&
             aKeys.every((k) => equals(a[k], b[k])) &&
-            Object.getPrototypeOf(a)?.constructor ===
-                Object.getPrototypeOf(b)?.constructor
+            Object.getPrototypeOf(a) === Object.getPrototypeOf(b)
         );
     }
     return a === b;
