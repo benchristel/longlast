@@ -13,6 +13,7 @@ async function main() {
     const testFilePatterns = [
         join(...root, "pkg", "*", "{src,package-tests}", "**", "*.test.ts"),
         join(...root, "pkg", "*", "{src,package-tests}", "**", "test.ts"),
+        join(...root, "dev", "consistency-tests", "**", "*.test.ts"),
     ];
 
     // TODO: import files in parallel
