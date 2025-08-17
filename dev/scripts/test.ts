@@ -11,8 +11,8 @@ import {join} from "node:path";
 async function main() {
     const root = [import.meta.dirname, "..", ".."];
     const testFilePatterns = [
-        join(...root, "pkg", "*", "src", "**", "*.test.ts"),
-        join(...root, "pkg", "*", "src", "**", "test.ts"),
+        join(...root, "pkg", "*", "{src,package-tests}", "**", "*.test.ts"),
+        join(...root, "pkg", "*", "{src,package-tests}", "**", "test.ts"),
     ];
 
     // TODO: import files in parallel

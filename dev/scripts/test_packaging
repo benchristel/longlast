@@ -61,5 +61,5 @@ pushd "$CLIENT" >/dev/null
     find pkg -type f | xargs sed -ie 's/from "#@longlast/from "@longlast/'
 
     # Actually run the tests.
-    pnpm tsc
+    pnpm tsc && dev/scripts/test.ts
 popd >/dev/null
