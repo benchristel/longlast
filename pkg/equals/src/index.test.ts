@@ -1,4 +1,4 @@
-import {test, expect, is, not} from "@benchristel/taste";
+import {test, expect, is} from "@benchristel/taste";
 
 import {equals} from "./index.ts";
 
@@ -180,6 +180,10 @@ test("equals", {
         expect(equals(new Set([1, 2]), new Set([1, 2])), is, true);
     },
 
+    "given sets with equal but not identical elements"() {
+        expect(equals(new Set([{}]), new Set([{}])), is, false);
+    },
+
     "given Errors with equal messages"() {
         expect(equals(new Error("a"), new Error("a")), is, true);
     },
@@ -198,4 +202,31 @@ test("equals", {
         class TestError extends Error {}
         expect(equals(new TestError("a"), new TestError("a")), is, true);
     },
+
+    "given an object with a reference cycle"() {
+        const obj: {a: unknown} = {a: null};
+        obj.a = obj;
+        expect(equals(obj, obj), is, true);
+    },
+
+    "throws given two objects with different reference cycles"() {
+        const obj1: {a: unknown} = {a: null};
+        const obj2: {a: unknown} = {a: null};
+        obj1.a = obj1;
+        obj2.a = obj2;
+        expect(
+            throws(() => equals(obj1, obj2)),
+            is,
+            true,
+        );
+    },
 });
+
+function throws(f: () => unknown) {
+    try {
+        f();
+        return false;
+    } catch {
+        return true;
+    }
+}
