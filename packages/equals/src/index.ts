@@ -2,7 +2,7 @@
  * @module equals
  */
 
-type Equatable = boolean
+type Equatable = boolean;
 
 /**
  * Deeply compares two values, returning a boolean indicating whether they're

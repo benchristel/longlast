@@ -1,4 +1,4 @@
-grep '\.json$' | \
+grep -E '(\.json|\.ts)$' | \
     xargs -r pnpm prettier "$@" \
         --config dev/config/prettier.json \
         --log-level warn

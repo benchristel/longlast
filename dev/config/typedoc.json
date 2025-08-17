@@ -5,5 +5,5 @@
     "entryFileName": "index",
     "hidePageHeader": true,
     "hideBreadcrumbs": true,
-    "parametersFormat": "table",
+    "parametersFormat": "table"
 }

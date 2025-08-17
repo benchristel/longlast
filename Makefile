@@ -16,23 +16,19 @@ ts:
 
 .PHONY: fix
 fix:
-	@dev/scripts/changed_files | dev/scripts/tsfmt --replace
-	@dev/scripts/changed_files | dev/scripts/jsonprettier --write
+	@dev/scripts/changed_files | dev/scripts/prettier --write
 
 .PHONY: fix-all
 fix-all:
-	@dev/scripts/all_files | dev/scripts/tsfmt --replace
-	@dev/scripts/all_files | dev/scripts/jsonprettier --write
+	@dev/scripts/all_files | dev/scripts/prettier --write
 
 .PHONY: lint
 lint:
-	@dev/scripts/changed_files | dev/scripts/tsfmt --verify
-	@dev/scripts/changed_files | dev/scripts/jsonprettier --check
+	@dev/scripts/changed_files | dev/scripts/prettier --check
 
 .PHONY: lint-all
 lint-all:
-	@dev/scripts/all_files | dev/scripts/tsfmt --verify
-	@dev/scripts/all_files | dev/scripts/jsonprettier --check
+	@dev/scripts/all_files | dev/scripts/prettier --check
 
 .PHONY: typetest
 typetest:

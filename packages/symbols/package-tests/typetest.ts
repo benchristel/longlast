@@ -1,6 +1,6 @@
-import {$equals} from "#@longlast/symbols"
+import {$equals} from "#@longlast/symbols";
 
-$equals satisfies Symbol
+$equals satisfies Symbol;
 
 // @ts-expect-error
-$equals satisfies string
+$equals satisfies string;
