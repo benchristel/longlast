@@ -39,6 +39,8 @@ pushd "$ROOT/pkg/$PACKAGE" >/dev/null
     pnpm version "$VERSION" --git-tag-version false
 popd >/dev/null
 
+make verify
+
 git add "$ROOT/pkg/$PACKAGE/package.json"
 git add "$ROOT/pkg/$PACKAGE/CHANGELOG.md"
 git commit -m "Release $TAG"
