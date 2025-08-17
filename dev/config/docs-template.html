@@ -9,6 +9,7 @@
 @font-face {
     font-family: Vollkorn;
     src: url("https://cdn.jsdelivr.net/gh/benchristel/cdn@9906347e/fonts/vollkorn/Vollkorn-Regular.woff2") format("woff2");
+    font-display: fallback;
 }
 
 html {
@@ -35,7 +36,7 @@ nav.toc {
     flex-grow: 0;
 }
 
-nav.toc ul, li {
+nav.toc :is(ul, li) {
     list-style-type: none;
     padding: 0;
 }
