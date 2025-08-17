@@ -1,6 +1,6 @@
 {
     "name": "@longlast",
-    "entryPoints": ["../../packages/*/src/index.ts"],
+    "entryPoints": ["../../pkg/*/src/index.ts"],
     "plugin": ["typedoc-plugin-markdown"],
     "entryFileName": "index",
     "hidePageHeader": true,

@@ -16,7 +16,7 @@ STATUS="$(git status --porcelain)"
 
 if \
     [ "$(wc -l <<<"$STATUS")" -ne 1 ] \
-    || ! grep -qE '^ M packages/([^/]+)/CHANGELOG.md$' <<<"$STATUS"
+    || ! grep -qE '^ M pkg/([^/]+)/CHANGELOG.md$' <<<"$STATUS"
 then
     >&2 echo
     >&2 echo "Error: your working tree is not in a felicitous state."
@@ -35,12 +35,12 @@ if [ -z "$VERSION" ]; then
     exit 1
 fi
 
-pushd "$ROOT/packages/$PACKAGE" >/dev/null
+pushd "$ROOT/pkg/$PACKAGE" >/dev/null
     pnpm version "$VERSION" --git-tag-version false
 popd >/dev/null
 
-git add "$ROOT/packages/$PACKAGE/package.json"
-git add "$ROOT/packages/$PACKAGE/CHANGELOG.md"
+git add "$ROOT/pkg/$PACKAGE/package.json"
+git add "$ROOT/pkg/$PACKAGE/CHANGELOG.md"
 git commit -m "Release $TAG"
 git tag "$TAG"
 

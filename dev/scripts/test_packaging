@@ -34,7 +34,7 @@ popd >/dev/null
 pushd "$CLIENT" >/dev/null
     # Get rid of @longlast source code and pnpm-workspace.yaml. Our client
     # doesn't need to be a monorepo.
-    rm -rf pnpm-workspace.yaml packages
+    rm -rf pnpm-workspace.yaml pkg
 
     make deps >/dev/null
 
@@ -43,7 +43,7 @@ pushd "$CLIENT" >/dev/null
 
     # Copy the package tests we're going to run into the client repo.
     pushd "$BUILD" >/dev/null
-        ls -d packages/*/package-tests | \
+        ls -d pkg/*/package-tests | \
             xargs -I{} cp -r --parents {} "$CLIENT"
     popd >/dev/null
 
@@ -51,14 +51,14 @@ pushd "$CLIENT" >/dev/null
     # tests are running!
     echo
     echo "Package tests:"
-    find packages -type f
+    find pkg -type f
 
     # The package tests contain self-imports like "#@longlast/symbols". During
     # development, these imports are resolved to the packages' index.ts files
     # by an `imports` field in package.json. When running the package tests,
     # though, we can use the actual package name, so we remove the '#' here.
     # See: https://nodejs.org/docs/v22.18.0/api/packages.html#imports
-    find packages -type f | xargs sed -ie 's/from "#@longlast/from "@longlast/'
+    find pkg -type f | xargs sed -ie 's/from "#@longlast/from "@longlast/'
 
     # Actually run the tests.
     pnpm tsc

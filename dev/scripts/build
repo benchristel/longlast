@@ -2,6 +2,6 @@
 
 set -euo pipefail
 
-find packages -name tsconfig.build.json | while read path; do
+find pkg -name tsconfig.build.json | while read path; do
     pnpm tsc --project "$path"
 done

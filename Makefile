@@ -48,7 +48,7 @@ build: clean
 
 .PHONY: clean
 clean:
-	@rm -rf packages/*/dist
+	@rm -rf pkg/*/dist
 
 .PHONY: deps
 deps:
