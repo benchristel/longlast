@@ -17,7 +17,9 @@
  *     class) and the same set of enumerable string-keyed properties, and the
  *     values of their corresponding properties are equal (according to
  *     `equals`).
- *   - Primitives `a` and `b` are equal iff `a === b`.
+ *   - Primitives `a` and `b` are equal iff `Object.is(a, b)`. This is similar
+ *     to `===` comparison, but treats `NaN` as equal to `NaN` and `0` as
+ *     different from `-0`.
  *
  * `equals()` can throw a RangeError if one of its arguments contains a
  * reference cycle. Avoid passing mutable objects to `equals()` unless you know
