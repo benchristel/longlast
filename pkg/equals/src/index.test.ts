@@ -29,6 +29,10 @@ test("equals", {
         expect(equals(BigInt("10"), 10), is, false);
     },
 
+    "considers NaNs equal"() {
+        expect(equals(NaN, NaN), is, true);
+    },
+
     "given empty arrays"() {
         expect(equals([], []), is, true);
     },

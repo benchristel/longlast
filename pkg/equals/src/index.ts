@@ -27,6 +27,10 @@ export function equals(a: unknown, b: unknown): boolean {
     if (a === b) {
         return true;
     }
+    if (a !== a && b !== b) {
+        // If `a` and `b` are not === to themselves, both are NaN.
+        return true;
+    }
     if (Array.isArray(a) && Array.isArray(b)) {
         return a.length === b.length && a.every((_, i) => equals(a[i], b[i]));
     }
