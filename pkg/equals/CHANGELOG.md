@@ -1,5 +1,12 @@
 # @longlast/equals
 
+## 0.2.0 (2025-08-18)
+
+This release changes how zeroes and `NaN`s are compared.
+
+- `0` is now considered different from `-0`.
+- `NaN` is now considered equal to `NaN`.
+
 ## 0.1.2 (2025-08-17)
 
 This patch release simplifies the way `equals()` compares object prototypes.
