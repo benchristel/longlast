@@ -4,8 +4,8 @@ import {equals} from "./index.ts";
 
 test("equals", {
     "equates identical objects"() {
-        const object = {};
-        expect(equals(object, object), is, true);
+        const a = {};
+        expect(equals(a, a), is, true);
     },
 
     "equates identical numbers"() {
@@ -66,18 +66,21 @@ test("equals", {
     },
 
     "equates arrays with equal primitive elements"() {
-        const result = equals([1, 2, NaN], [1, 2, NaN]);
-        expect(result, is, true);
+        const a = [1, 2, NaN];
+        const b = [1, 2, NaN];
+        expect(equals(a, b), is, true);
     },
 
     "equates arrays with equal complex elements"() {
-        const result = equals([[1], {a: 2}], [[1], {a: 2}]);
-        expect(result, is, true);
+        const a = [[1], {a: 2}];
+        const b = [[1], {a: 2}];
+        expect(equals(a, b), is, true);
     },
 
     "distinguishes arrays with unequal complex elements"() {
-        const result = equals([[1], {a: 2}], [[1], {a: 999}]);
-        expect(result, is, false);
+        const a = [[1], {a: 2}];
+        const b = [[1], {a: 999}];
+        expect(equals(a, b), is, false);
     },
 
     "distinguishes an array from a non-array"() {
@@ -100,31 +103,40 @@ test("equals", {
     },
 
     "distinguishes objects with different keys"() {
-        expect(equals({a: 1}, {b: 1}), is, false);
+        const a = {x: 1};
+        const b = {y: 1};
+        expect(equals(a, b), is, false);
     },
 
     "distinguishes objects with the same keys but different values"() {
-        expect(equals({a: 1}, {a: 2}), is, false);
+        const a = {x: 1};
+        const b = {x: 2};
+        expect(equals(a, b), is, false);
     },
 
     "equates objects with equal primitive properties"() {
-        const result = equals({ a: 1, bb: 22 }, { a: 1, bb: 22 });
-        expect(result, is, true);
+        const a = {x: 1, y: 22};
+        const b = {x: 1, y: 22};
+        expect(equals(a, b), is, true);
     },
 
     "ignores object key order"() {
-        const result = equals({ a: 1, bb: 22 }, { bb: 22, a: 1 });
-        expect(result, is, true);
+        const a = {x: 1, y: 2};
+        const b = {y: 2, x: 1};
+        expect(equals(a, b), is, true);
     },
 
     "equates objects with equal complex properties"() {
-        expect(equals({a: {b: 1}}, {a: {b: 1}}), is, true);
+        const a = {x: {y: 1}};
+        const b = {x: {y: 1}};
+        expect(equals(a, b), is, true);
     },
 
     "distinguishes objects with different complex properties"() {
-        expect(equals({a: {b: 1}}, {a: {b: 999}}), is, false);
+        const a = {x: {y: 1}};
+        const b = {x: {y: 999}};
+        expect(equals(a, b), is, false);
     },
-
 
     "distinguishes different classes"() {
         class ClassOne {}
@@ -145,7 +157,9 @@ test("equals", {
                 this.a = a;
             }
         }
-        expect(equals(new ClassOne(1), new ClassOne(1)), is, true);
+        const a = new ClassOne(1);
+        const b = new ClassOne(1);
+        expect(equals(a, b), is, true);
     },
 
     "distinguishes instances of the same class with different properties"() {
@@ -155,7 +169,9 @@ test("equals", {
                 this.a = a;
             }
         }
-        expect(equals(new ClassOne(1), new ClassOne(2)), is, false);
+        const a = new ClassOne(1);
+        const b = new ClassOne(22);
+        expect(equals(a, b), is, false);
     },
 
     "distinguishes a subclass instance from a superclass instance"() {
@@ -166,38 +182,31 @@ test("equals", {
     },
 
     "distinguishes different functions"() {
-        expect(
-            equals(
-                () => {},
-                () => {},
-            ),
-            is,
-            false,
-        );
+        const a = () => {};
+        const b = () => {};
+        expect(equals(a, b), is, false);
     },
 
     "equates a function with itself"() {
         expect(equals(equals, equals), is, true);
     },
 
-    "distinguishes different dates"() {
-        expect(
-            equals(new Date("1999-12-21"), new Date("2001-12-22")),
-            is,
-            false,
-        );
+    "equates equal dates"() {
+        const a = new Date("1999-12-21");
+        const b = new Date("1999-12-21");
+        expect(equals(a, b), is, true);
     },
 
-    "equates equal dates"() {
-        expect(
-            equals(new Date("1999-12-21"), new Date("1999-12-21")),
-            is,
-            true,
-        );
+    "distinguishes different dates"() {
+        const a = new Date("1999-12-21");
+        const b = new Date("2001-01-18");
+        expect(equals(a, b), is, false);
     },
 
     "equates objects with no prototypes"() {
-        expect(equals(Object.create(null), Object.create(null)), is, true);
+        const a = Object.create(null);
+        const b = Object.create(null);
+        expect(equals(a, b), is, true);
     },
 
     "distinguishes sets with different sizes"() {
@@ -206,23 +215,33 @@ test("equals", {
     },
 
     "distinguishes sets with different members"() {
-        expect(equals(new Set([1]), new Set([2])), is, false);
+        const a = new Set([1]);
+        const b = new Set([2]);
+        expect(equals(a, b), is, false);
     },
 
     "equates sets with identical members"() {
-        expect(equals(new Set([1, 2]), new Set([1, 2])), is, true);
+        const a = new Set([1, 2]);
+        const b = new Set([1, 2]);
+        expect(equals(a, b), is, true);
     },
 
     "distinguishes sets with equal but not identical members"() {
-        expect(equals(new Set([{}]), new Set([{}])), is, false);
+        const a = new Set([{}]);
+        const b = new Set([{}]);
+        expect(equals(a, b), is, false);
     },
 
     "equates Errors with equal messages"() {
-        expect(equals(new Error("a"), new Error("a")), is, true);
+        const a = new Error("a");
+        const b = new Error("a");
+        expect(equals(a, b), is, true);
     },
 
     "distinguishes Errors with different messages"() {
-        expect(equals(new Error("a"), new Error("b")), is, false);
+        const a = new Error("a");
+        const b = new Error("b");
+        expect(equals(a, b), is, false);
     },
 
     "distinguishes Errors with different classes"() {
@@ -233,22 +252,24 @@ test("equals", {
 
     "equates instances of the same Error subclass"() {
         class TestError extends Error {}
-        expect(equals(new TestError("a"), new TestError("a")), is, true);
+        const a = new TestError("x");
+        const b = new TestError("x");
+        expect(equals(a, b), is, true);
     },
 
     "handles an object with a reference cycle"() {
-        const obj: {a: unknown} = {a: null};
-        obj.a = obj;
+        const obj: {x: unknown} = {x: null};
+        obj.x = obj;
         expect(equals(obj, obj), is, true);
     },
 
     "throws given two objects with different reference cycles"() {
-        const obj1: {a: unknown} = {a: null};
-        const obj2: {a: unknown} = {a: null};
-        obj1.a = obj1;
-        obj2.a = obj2;
+        const a: {x: unknown} = {x: null};
+        const b: {x: unknown} = {x: null};
+        a.x = a;
+        b.x = b;
         expect(
-            throws(() => equals(obj1, obj2)),
+            throws(() => equals(a, b)),
             is,
             true,
         );
