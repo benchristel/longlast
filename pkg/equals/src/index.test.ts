@@ -3,6 +3,11 @@ import {test, expect, is} from "@benchristel/taste";
 import {equals} from "./index.ts";
 
 test("equals", {
+    "treats identical objects as equal"() {
+        const object = {}
+        expect(equals(object, object), is, true);
+    },
+
     "compares primitives"() {
         expect(equals(1, 1), is, true);
         expect(equals(1, 2), is, false);
@@ -31,6 +36,10 @@ test("equals", {
 
     "considers NaNs equal"() {
         expect(equals(NaN, NaN), is, true);
+    },
+
+    "considers -0 different from 0"() {
+        expect(equals(-0, 0), is, false);
     },
 
     "given empty arrays"() {

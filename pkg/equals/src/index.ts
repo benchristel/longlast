@@ -24,11 +24,7 @@
  * that they do not contain cycles.
  */
 export function equals(a: unknown, b: unknown): boolean {
-    if (a === b) {
-        return true;
-    }
-    if (a !== a && b !== b) {
-        // If `a` and `b` are not === to themselves, both are NaN.
+    if (Object.is(a, b)) {
         return true;
     }
     if (Array.isArray(a) && Array.isArray(b)) {
@@ -55,7 +51,7 @@ export function equals(a: unknown, b: unknown): boolean {
             Object.getPrototypeOf(a) === Object.getPrototypeOf(b)
         );
     }
-    return a === b;
+    return false;
 }
 
 function isObject(x: unknown): x is Record<string, unknown> {
