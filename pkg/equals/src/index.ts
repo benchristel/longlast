@@ -36,7 +36,7 @@ export function equals(a: unknown, b: unknown): boolean {
         return a.toISOString() === b.toISOString();
     }
     if (a instanceof Set && b instanceof Set) {
-        return a.size === b.size && [...a.values()].every((v) => b.has(v));
+        return equalSets(a, b);
     }
     if (a instanceof Error && b instanceof Error) {
         return (
@@ -48,12 +48,16 @@ export function equals(a: unknown, b: unknown): boolean {
         const aKeys = Object.keys(a);
         const bKeys = Object.keys(b);
         return (
-            aKeys.length === bKeys.length &&
+            equalSets(new Set(aKeys), new Set(bKeys)) &&
             aKeys.every((k) => equals(a[k], b[k])) &&
             Object.getPrototypeOf(a) === Object.getPrototypeOf(b)
         );
     }
     return false;
+}
+
+function equalSets(a: Set<unknown>, b: Set<unknown>): boolean {
+    return a.size === b.size && [...a.values()].every((v) => b.has(v));
 }
 
 function isObject(x: unknown): x is Record<string, unknown> {

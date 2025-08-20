@@ -138,6 +138,21 @@ test("equals", {
         expect(equals(a, b), is, false);
     },
 
+    "distinguishes a missing property from undefined"() {
+        const a = {x: undefined};
+        const b = {y: undefined};
+        expect(equals(a, b), is, false);
+    },
+
+    "ignores non-enumerable properties"() {
+        const a = {x: 1};
+        const b = {y: 2};
+        Object.defineProperty(a, "y", {value: 2, enumerable: false});
+        Object.defineProperty(b, "x", {value: 1, enumerable: false});
+        expect(equals(a, b), is, false);
+        expect(equals(b, a), is, false);
+    },
+
     "distinguishes different classes"() {
         class ClassOne {}
         class ClassTwo {}
