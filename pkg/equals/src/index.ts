@@ -21,7 +21,7 @@
  *     to `===` comparison, but treats `NaN` as equal to `NaN` and `0` as
  *     different from `-0`.
  *
- * `equals()` can throw a RangeError if one of its arguments contains a
+ * `equals()` can throw a `RangeError` if one of its arguments contains a
  * reference cycle. Avoid passing mutable objects to `equals()` unless you know
  * that they do not contain cycles.
  */
