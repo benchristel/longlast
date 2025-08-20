@@ -96,6 +96,21 @@ test("equals", {
     },
 
     /*
+     * Symbols
+     */
+
+    "equates identical symbols"() {
+        const a = Symbol()
+        expect(equals(a, a), is, true)
+    },
+
+    "distinguishes different symbols"() {
+        const a = Symbol()
+        const b = Symbol()
+        expect(equals(a, b), is, false)
+    },
+
+    /*
      * Dates
      */
 
