@@ -61,7 +61,7 @@ export function equals(a: unknown, b: unknown): boolean {
 }
 
 function equalSets(a: Set<unknown>, b: Set<unknown>): boolean {
-    return a.size === b.size && [...a.values()].every((v) => b.has(v));
+    return a.size === b.size && [...a].every((v) => b.has(v));
 }
 
 function isObject(x: unknown): x is Record<string, unknown> {

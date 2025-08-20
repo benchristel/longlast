@@ -232,6 +232,18 @@ test("equals", {
         expect(equals(a, b), is, false);
     },
 
+    "equates sets whose members are identical but not ==="() {
+        const a = new Set([NaN]);
+        const b = new Set([NaN]);
+        expect(equals(a, b), is, true);
+    },
+
+    "distinguishes sets whose members are === but not identical"() {
+        const a = new Set([0]);
+        const b = new Set([-0]);
+        expect(equals(a, b), is, true);
+    },
+
     /*
      * Errors
      */
