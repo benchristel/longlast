@@ -149,6 +149,12 @@ test("equals", {
         expect(equals(a, b), is, false);
     },
 
+    "distinguishes objects with different property values"() {
+        const a = {x: 1};
+        const b = {x: 2};
+        expect(equals(a, b), is, false);
+    },
+
     "equates objects with equal properties"() {
         const a = {x: {y: 1}};
         const b = {x: {y: 1}};
@@ -181,5 +187,34 @@ test("equals", {
         const a = new Set([{}]);
         const b = new Set([{}]);
         expect(equals(a, b), is, false);
+    },
+
+    /*
+     * Errors
+     */
+
+    "equates Errors with equal messages"() {
+        const a = new Error("a");
+        const b = new Error("a");
+        expect(equals(a, b), is, true);
+    },
+
+    "distinguishes Errors with different messages"() {
+        const a = new Error("a");
+        const b = new Error("b");
+        expect(equals(a, b), is, false);
+    },
+
+    "distinguishes Errors with different classes"() {
+        class TestError extends Error {}
+        expect(equals(new TestError("a"), new Error("a")), is, false);
+        expect(equals(new Error("a"), new TestError("a")), is, false);
+    },
+
+    "equates instances of the same Error subclass"() {
+        class TestError extends Error {}
+        const a = new TestError("x");
+        const b = new TestError("x");
+        expect(equals(a, b), is, true);
     },
 });
