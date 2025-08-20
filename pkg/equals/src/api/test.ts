@@ -112,6 +112,28 @@ test("equals", {
     },
 
     /*
+     * RegExps
+     */
+
+    "equates equal RegExp objects"() {
+        const a = /x/
+        const b = /x/;
+        expect(equals(a, b), is, true);
+    },
+
+    "distinguishes different RegExp objects"() {
+        const a = /x/
+        const b = /y/;
+        expect(equals(a, b), is, false);
+    },
+
+    "distinguishes RegExp objects that differ only by flags"() {
+        const a = /x/
+        const b = /x/i;
+        expect(equals(a, b), is, false);
+    },
+
+    /*
      * Arrays
      */
 

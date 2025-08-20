@@ -35,6 +35,9 @@ export function equals(a: unknown, b: unknown): boolean {
     if (a instanceof Date && b instanceof Date) {
         return Object.is(+a, +b);
     }
+    if (a instanceof RegExp && b instanceof RegExp) {
+        return String(a) === String(b);
+    }
     if (a instanceof Set && b instanceof Set) {
         return equalSets(a, b);
     }
