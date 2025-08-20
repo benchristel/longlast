@@ -3,7 +3,10 @@
 # (though it will happily create an empty stash if you specify --keep-index and
 # there are staged changes but no unstaged changes!) There might be no changed
 # files if e.g. we're running `git commit --amend` to reword a commit message.
-if [ -z "$(git diff --name-only --diff-filter=ACMRTUB)" ]; then
+if \
+    [ -z "$(git diff --name-only --diff-filter=ACMRTUB)" ] \
+    && [ -z "$(git diff --cached --name-only --diff-filter=ACMRTUB)" ]
+then
     exit 0
 fi
 
