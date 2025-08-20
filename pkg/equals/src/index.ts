@@ -9,7 +9,7 @@
  *   - All values are always equal to themselves.
  *   - Arrays are equal iff they have the same length and their corresponding
  *     elements are equal (according to `equals`).
- *   - Dates are equal iff they serialize to the same ISO string.
+ *   - Dates are equal iff they have the same millisecond-precision timestamp.
  *   - Sets are equal iff they contain the same elements. Note that set
  *     elements are _not_ deeply compared.
  *   - Errors are equal iff they have the same class and message.
