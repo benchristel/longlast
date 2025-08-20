@@ -33,7 +33,7 @@ export function equals(a: unknown, b: unknown): boolean {
         return a.length === b.length && a.every((_, i) => equals(a[i], b[i]));
     }
     if (a instanceof Date && b instanceof Date) {
-        return a.toISOString() === b.toISOString();
+        return Object.is(+a, +b);
     }
     if (a instanceof Set && b instanceof Set) {
         return equalSets(a, b);

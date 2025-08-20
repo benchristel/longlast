@@ -127,6 +127,18 @@ test("equals", {
         expect(equals(obj, obj), is, true);
     },
 
+    "equates invalid Dates"() {
+        const a = new Date("asdf");
+        const b = new Date("jkl;");
+        expect(equals(a, b), is, true);
+    },
+
+    "distinguishes a valid Date from an invalid one"() {
+        const a = new Date("1999-12-21");
+        const b = new Date("asdf");
+        expect(equals(a, b), is, false);
+    },
+
     "throws given two objects with different reference cycles"() {
         const a: {x: unknown} = {x: null};
         const b: {x: unknown} = {x: null};

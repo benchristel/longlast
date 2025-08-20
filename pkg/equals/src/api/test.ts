@@ -106,8 +106,8 @@ test("equals", {
     },
 
     "distinguishes different dates"() {
-        const a = new Date("1999-12-21");
-        const b = new Date("2001-01-18");
+        const a = new Date("1999-12-21 00:00:00.000Z");
+        const b = new Date("1999-12-21 00:00:00.001Z");
         expect(equals(a, b), is, false);
     },
 
