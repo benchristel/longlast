@@ -10,6 +10,7 @@
  *   - Arrays are equal iff they have the same length and their corresponding
  *     elements are equal (according to `equals`).
  *   - Dates are equal iff they have the same millisecond-precision timestamp.
+ *   - RegExps are equal iff they have the same pattern and flags.
  *   - Sets are equal iff they contain the same elements. Note that set
  *     elements are _not_ deeply compared.
  *   - Errors are equal iff they have the same class and message.

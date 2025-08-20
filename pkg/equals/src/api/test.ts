@@ -100,14 +100,14 @@ test("equals", {
      */
 
     "equates identical symbols"() {
-        const a = Symbol()
-        expect(equals(a, a), is, true)
+        const a = Symbol();
+        expect(equals(a, a), is, true);
     },
 
     "distinguishes different symbols"() {
-        const a = Symbol()
-        const b = Symbol()
-        expect(equals(a, b), is, false)
+        const a = Symbol();
+        const b = Symbol();
+        expect(equals(a, b), is, false);
     },
 
     /*
@@ -131,21 +131,27 @@ test("equals", {
      */
 
     "equates equal RegExp objects"() {
-        const a = /x/
+        const a = /x/;
         const b = /x/;
         expect(equals(a, b), is, true);
     },
 
     "distinguishes different RegExp objects"() {
-        const a = /x/
+        const a = /x/;
         const b = /y/;
         expect(equals(a, b), is, false);
     },
 
     "distinguishes RegExp objects that differ only by flags"() {
-        const a = /x/
+        const a = /x/;
         const b = /x/i;
         expect(equals(a, b), is, false);
+    },
+
+    "ignores RegExp flag order"() {
+        const a = /x/gi;
+        const b = /x/gi;
+        expect(equals(a, b), is, true);
     },
 
     /*
