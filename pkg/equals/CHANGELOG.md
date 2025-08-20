@@ -1,5 +1,9 @@
 # @longlast/equals
 
+## 0.3.0 (2025-08-19)
+
+This release adds support for comparing `RegExp` objects.
+
 ## 0.2.1 (2025-08-19)
 
 This patch release fixes two bugs:
