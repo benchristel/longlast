@@ -2,7 +2,10 @@
  * @module equals
  */
 
+import {curry, type Curried2} from "./curry.ts";
+
 /**
+ * @function
  * Deeply compares two values, returning true if they're equal and false
  * otherwise. The following criteria are used to determine equality:
  *
@@ -25,8 +28,13 @@
  * `equals()` can throw a `RangeError` if one of its arguments contains a
  * reference cycle. Avoid passing mutable objects to `equals()` unless you know
  * that they do not contain cycles.
+ *
+ * `equals()` is curried.
  */
-export function equals(a: unknown, b: unknown): boolean {
+
+export const equals: Curried2<unknown, unknown, boolean> = curry(_equals);
+
+function _equals(a: unknown, b: unknown): boolean {
     if (Object.is(a, b)) {
         return true;
     }

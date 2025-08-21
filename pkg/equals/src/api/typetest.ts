@@ -15,4 +15,16 @@ describe("equals", () => {
             (a: number, b: string, c: unknown) => void
         >();
     });
+
+    it("is curried", () => {
+        expect(equals).type.toBeAssignableTo<
+            (a: number) => (b: string) => void
+        >();
+    });
+
+    it("ignores a third argument after partial application", () => {
+        expect(equals).type.toBeAssignableTo<
+            (a: number) => (b: string, c: boolean) => void
+        >();
+    });
 });

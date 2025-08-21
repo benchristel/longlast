@@ -272,4 +272,18 @@ test("equals", {
         const b = new TestError("x");
         expect(equals(a, b), is, true);
     },
+
+    /*
+     * Currying
+     */
+
+    "is curried"() {
+        expect(equals(42)(42), is, true);
+    },
+
+    "ignores extra arguments"() {
+        // `map()` passes the index and array to each invocation of
+        // `equals(1)`.
+        expect([0, 1, 2].map(equals(1)).join(","), is, "false,true,false");
+    },
 });
