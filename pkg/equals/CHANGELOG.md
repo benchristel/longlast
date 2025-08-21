@@ -1,5 +1,10 @@
 # @longlast/equals
 
+## 0.4.0 (2025-08-20)
+
+This release curries `equals` so it can be called as either `equals(a, b)` or
+`equals(a)(b)`.
+
 ## 0.3.0 (2025-08-19)
 
 This release adds support for comparing `RegExp` objects.
