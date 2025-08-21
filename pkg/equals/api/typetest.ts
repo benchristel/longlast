@@ -1,5 +1,5 @@
 import {describe, it, expect} from "tstyche";
-import {equals} from "../index.ts";
+import {equals} from "../src/index.ts";
 
 describe("equals", () => {
     it("returns a boolean", () => {

@@ -1,5 +1,5 @@
 import {test, expect, is} from "@benchristel/taste";
-import {equals} from "../index.ts";
+import {equals} from "../src/index.ts";
 
 test("equals", {
     /*
