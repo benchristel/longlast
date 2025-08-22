@@ -16,7 +16,7 @@ STATUS="$(git status --porcelain)"
 
 if \
     [ "$(wc -l <<<"$STATUS")" -ne 1 ] \
-    || ! grep -qE '^[MA ][MA ] pkg/([^/]+)/CHANGELOG.md$' <<<"$STATUS"
+    || ! grep -qE '^[MA? ][MA? ] pkg/([^/]+)/CHANGELOG.md$' <<<"$STATUS"
 then
     >&2 echo
     >&2 echo "Error: your working tree is not in a felicitous state."
