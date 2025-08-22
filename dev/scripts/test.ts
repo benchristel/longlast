@@ -11,8 +11,8 @@ import {join} from "node:path";
 async function main() {
     const root = [import.meta.dirname, "..", ".."];
     const testFilePatterns = [
-        join(...root, "pkg", "*", "{src,package-tests,api}", "**", "*.test.ts"),
-        join(...root, "pkg", "*", "{src,package-tests,api}", "**", "test.ts"),
+        join(...root, "pkg", "**", "*.test.ts"),
+        join(...root, "pkg", "**", "test.ts"),
         join(...root, "dev", "consistency-tests", "**", "*.test.ts"),
     ];
 
