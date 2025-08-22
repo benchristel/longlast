@@ -4,8 +4,6 @@ Finally, JavaScript feels like home. (At)longlast is a suite of foundational
 TypeScript libraries, inspired by [Ruby], [ActiveSupport], and functional
 programming languages like [F#] and [Elixir].
 
-**This readme is currently aspirational.** There's no actual code here yet :)
-
 ## Development
 
 ### Styleguide
