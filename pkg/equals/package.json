@@ -10,5 +10,8 @@
     "packageManager": "pnpm@10.14.0",
     "imports": {
         "#@longlast/equals": "./src/index.ts"
+    },
+    "dependencies": {
+        "@longlast/curry": "0.1.0"
     }
 }

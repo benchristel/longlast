@@ -2,7 +2,7 @@
  * @module equals
  */
 
-import {curry, type Curried2} from "./curry.ts";
+import {curry, type Curried2} from "@longlast/curry";
 
 /**
  * @function
