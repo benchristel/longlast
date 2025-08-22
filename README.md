@@ -4,6 +4,12 @@ Finally, JavaScript feels like home. (At)longlast is a suite of foundational
 TypeScript libraries, inspired by [Ruby], [ActiveSupport], and functional
 programming languages like [F#] and [Elixir].
 
+[@longlast]: https://www.npmjs.com/org/longlast
+[ActiveSupport]: https://rubygems.org/gems/activesupport
+[Elixir]: https://elixir-lang.org/
+[F#]: https://fsharp.org/
+[Ruby]: https://www.ruby-lang.org/
+
 ## Development
 
 ### Styleguide
@@ -58,10 +64,3 @@ See [dev/docs/releasing.md](dev/docs/releasing.md).
 - `@longlast/expectation-failure`
 - `@longlast/test`
 - `@longlast/result`
-
-[@longlast]: https://www.npmjs.com/org/longlast
-[ActiveSupport]: https://rubygems.org/gems/activesupport
-[Elixir]: https://elixir-lang.org/
-[F#]: https://fsharp.org/
-[Ruby]: https://www.ruby-lang.org/
-[TC39]: https://tc39.es/
