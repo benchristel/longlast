@@ -126,10 +126,32 @@ including:
 - Unit tests for behavior
 - System tests for packaging and installation
 
-Additionally, there will be tests ensuring that each package _really is_
-compatible with the full version range it allows for each dependency. E.g. if
-package `a` depends on `b@^1.0.0`, and the latest version of `b` is 1.2.0,
-tests will ensure that `a` _actually works_ with `b@1.0.0`, not just `b@1.2.0`.
+## Dependencies between packages
+
+longlast packages may depend on each other. Rather than use pnpm's `catalog:`
+protocol, however, we depend only on published package versions and install
+them from NPM. This has multiple benefits:
+
+- It ensures we do not accidentally release a package that depends on
+  unpublished code.
+- It enables us to be deliberate about upgrading the dependencies of each
+  package. For example, if `@longlast/equals@1.2.1` can work with
+  `@longlast/curry` versions as far back as `1.3.0`, it should specify `^1.3.0`
+  as the version range for that dependency; there is no reason for it to
+  require a later version like `^1.5.0`. Demanding package versions newer than
+  those that are actually needed limits interoperability, and might cause
+  packages to be duplicated in clients' bundles if the client explicitly
+  requires an older version of the package in their own code. (Note that as of
+  this writing, all the package versions mentioned in this paragraph are
+  fictitious.)
+
+This approach does come with a cost, however: we can't test that a new package
+version will integrate with its client packages until we actually release it.
+This cost can be reduced by:
+
+- Clearly defining the API of each package and the requirements for each new
+  feature. Those requirements can be converted into unit tests.
+- Cutting prerelease versions of a package before doing the actual release.
 
 ## AI Policy
 
