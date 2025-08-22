@@ -3,8 +3,13 @@
 Releasing is a semi-manual process for now. We expect releases to be frequent
 and simple (involving only one package at a time).
 
-To do a release, first write an entry in the package's `CHANGELOG.md` file (but
-don't commit it). The changelog format is:
+To do a release:
+
+First, commit or stash any changes. `git status` should report a clean working
+directory.
+
+Then, write an entry in the package's `CHANGELOG.md` file (but don't commit
+it). The changelog format is:
 
 ```markdown
 # @longlast/my-package
@@ -63,7 +68,7 @@ git fetch origin main
 git checkout main
 git reset --hard origin/main
 git merge @longlast/my-package@1.2.3
-git push origin main
+git push --tags origin main
 ```
 
 The result should look like this in the git log:
