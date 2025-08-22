@@ -52,14 +52,6 @@ See [dev/docs/releasing.md](dev/docs/releasing.md).
 
 ## TODO
 
-- installer system tests
-- fork typescript-formatter and add a config option to insert trailing newlines
-  - open a pull request
-- dev/checks/ (any executable at the top level fails `make verify` if it exits
-  nonzero)
-- `@longlast/symbols`
-- `@longlast/equals`
-- `@longlast/curry`
 - `@longlast/name`
 - `@longlast/value`
 - `@longlast/format`
