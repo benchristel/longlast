@@ -1,4 +1,4 @@
-import {test, expect, equals} from "@benchristel/taste";
+import {test, expect, is, equals} from "@benchristel/taste";
 import {glob, readFile} from "node:fs/promises";
 import {join} from "node:path";
 
@@ -23,7 +23,19 @@ for await (const path of glob(join(root, "pkg", "*", "tsconfig.build.json"))) {
         },
 
         "extends the base tsconfig.json"() {
-            expect(tsconfig.extends, equals, "../../tsconfig.json");
+            expect(tsconfig.extends, is, "../../tsconfig.json");
+        },
+
+        "emits .js files"() {
+            expect(tsconfig.compilerOptions?.noEmit, is, false);
+        },
+
+        "doesn't typecheck"() {
+            expect(tsconfig.compilerOptions?.noCheck, is, true);
+        },
+
+        "outputs files to dist/"() {
+            expect(tsconfig.compilerOptions?.outDir, is, "dist");
         },
     });
 }
