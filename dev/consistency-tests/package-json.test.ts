@@ -14,7 +14,7 @@ for await (const path of glob(join(root, "pkg", "*", "package.json"))) {
             expect(packageConfig.name, is, `@longlast/${dirName}`);
         },
 
-        "is a module-type package"() {
+        "uses ES6 Modules"() {
             expect(packageConfig.type, is, "module");
         },
 
