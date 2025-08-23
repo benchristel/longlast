@@ -17,9 +17,16 @@ Certain attributes of a package or API mark it explicitly as _unstable_:
 - A major version of 0 (as defined by [semver])
 - A version that includes a prerelease or build suffix, like `1.0.0-beta.4` or
   `1.0.0+1295`
-- A note in the documentation stating that a feature is unstable.
+- A note in the documentation stating that a feature is unstable. The
+  [`@experimental`] tag in a doc comment also marks a feature as unstable.
 
 [semver]: https://semver.org/
+[`@experimental`]: https://typedoc.org/documents/Tags._experimental.html
+
+Documentation may refer to "undefined behavior." This means that the behavior
+of a function for certain inputs is not specified by API tests or
+documentation, and is subject to change in future releases. Clients are
+responsible for avoiding inputs that cause undefined behavior.
 
 ## Documented behavior
 
@@ -40,7 +47,13 @@ not removed or meaningfully changed in non-major releases.
 The TypeScript compiler can make breaking changes in any release. Because of
 this, longlast can't promise to support old TypeScript versions indefinitely.
 
-The TypeScript support policy is TBD.
+The TypeScript support policy is TBD. Tentatively, it might be something like
+this:
+
+- We only support the **latest patch release** of each minor version of
+  TypeScript. E.g. we'll test with 5.7.3 but not 5.7.2.
+- A minor release of a longlast package _may_ drop support for any TypeScript
+  compiler version older than 1 year at the time of release.
 
 ## Stable and unstable properties of types
 

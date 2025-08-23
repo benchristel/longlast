@@ -56,6 +56,8 @@ See [dev/docs/releasing.md](dev/docs/releasing.md).
 
 ## TODO
 
+- Copy tstyche.config.json to packages on build, so we have a record of the
+  supported TypeScript versions for each release.
 - `@longlast/name`
 - `@longlast/value`
 - `@longlast/format`
