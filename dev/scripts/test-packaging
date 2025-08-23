@@ -25,7 +25,7 @@ HERE="$(dirname "$0")"
 # build the packages. The second one will play the role of "client," and we'll
 # install the built packages into it as dependencies. Using a worktree clone as
 # a client is convenient (if kludgey) -- really, all we need is a Node.js
-# repository with TypeScript.
+# repository with TypeScript and Taste installed.
 BUILD="$($HERE/clone-worktree 2>/dev/null)"
 CLIENT="$($HERE/clone-worktree 2>/dev/null)"
 
@@ -61,10 +61,10 @@ pushd "$CLIENT" >/dev/null
     # The package tests contain self-imports like "#@longlast/symbols". During
     # development, these imports are resolved to the packages' index.ts files
     # by an `imports` field in package.json. When running the package tests,
-    # though, we can use the actual package name, so we remove the '#' here.
-    # See: https://nodejs.org/docs/v22.18.0/api/packages.html#imports
+    # though, we need to use the actual package name, so we remove the '#'
+    # here. See: https://nodejs.org/docs/v22.18.0/api/packages.html#imports
     find pkg -type f | xargs sed -ie 's/from "#@longlast/from "@longlast/'
 
     # Actually run the tests.
-    pnpm tsc && dev/scripts/run-unit-tests.ts
+    make --quiet typecheck test
 popd >/dev/null
