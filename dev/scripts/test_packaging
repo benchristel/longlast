@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# This script does a "system test" of the build process and package.json
+# configuration for each package. It verifies that each package can be built,
+# installed in a client project, imported, and used. It relies on files in the
+# `package-tests` directory of each package.
+
 # Exit immediately on any failure.
 set -euo pipefail
 
