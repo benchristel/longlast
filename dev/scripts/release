@@ -35,26 +35,28 @@ if [ -z "$VERSION" ]; then
     exit 1
 fi
 
+# Bump the version in package.json.
 pushd "$ROOT/pkg/$PACKAGE" >/dev/null
     pnpm version "$VERSION" --git-tag-version false
 popd >/dev/null
 
-make verify
-
-git add "$ROOT/pkg/$PACKAGE/package.json"
-git add "$ROOT/pkg/$PACKAGE/CHANGELOG.md"
-git commit -m "Release $TAG"
-git tag "$TAG"
-
+# Create a copy of the working tree in which to build the release.
 RELEASE_DIR="$("$HERE/clone-worktree")"
 >&2 echo "RELEASE_DIR='$RELEASE_DIR'"
 
+# Build it!
 pushd "$RELEASE_DIR" >/dev/null
     make deps
     make verify
     make build
     pnpm pack --recursive
 popd >/dev/null
+
+# Commit and tag the version bump.
+git add "$ROOT/pkg/$PACKAGE/package.json"
+git add "$ROOT/pkg/$PACKAGE/CHANGELOG.md"
+git commit -m "Release $TAG"
+git tag "$TAG"
 
 cat <<EOF
 
