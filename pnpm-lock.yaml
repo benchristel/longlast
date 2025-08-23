@@ -36,10 +36,6 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
 
-  packages/equals: {}
-
-  packages/symbols: {}
-
   pkg/curry: {}
 
   pkg/equals:
