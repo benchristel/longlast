@@ -26,8 +26,8 @@ HERE="$(dirname "$0")"
 # install the built packages into it as dependencies. Using a worktree clone as
 # a client is convenient (if kludgey) -- really, all we need is a Node.js
 # repository with TypeScript.
-BUILD="$($HERE/clone_worktree 2>/dev/null)"
-CLIENT="$($HERE/clone_worktree 2>/dev/null)"
+BUILD="$($HERE/clone-worktree 2>/dev/null)"
+CLIENT="$($HERE/clone-worktree 2>/dev/null)"
 
 # Build the packages and pack them into .tgz files.
 pushd "$BUILD" >/dev/null

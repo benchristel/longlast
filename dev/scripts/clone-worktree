@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# clone_worktree creates a copy of this git repository, including any untracked
+# clone-worktree creates a copy of this git repository, including any untracked
 # files and uncommited changes in the working tree. It outputs the path to the
 # clone.
 #
-# The purpose of clone_worktree is to create a sandbox for running tests on a
+# The purpose of clone-worktree is to create a sandbox for running tests on a
 # modified version of the repository. For example, a cloned worktree can be
 # used to test whether the code typechecks with a particular version of
 # TypeScript, or whether a package works with a specific dependency version

@@ -46,7 +46,7 @@ git add "$ROOT/pkg/$PACKAGE/CHANGELOG.md"
 git commit -m "Release $TAG"
 git tag "$TAG"
 
-RELEASE_DIR="$("$HERE/clone_worktree")"
+RELEASE_DIR="$("$HERE/clone-worktree")"
 >&2 echo "RELEASE_DIR='$RELEASE_DIR'"
 
 pushd "$RELEASE_DIR" >/dev/null

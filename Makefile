@@ -16,7 +16,7 @@ ts:
 
 .PHONY: fix
 fix:
-	@dev/scripts/changed_files | dev/scripts/prettier --write
+	@dev/scripts/changed-files | dev/scripts/prettier --write
 
 .PHONY: fix-all
 fix-all:
@@ -24,7 +24,7 @@ fix-all:
 
 .PHONY: lint
 lint:
-	@dev/scripts/changed_files | dev/scripts/prettier --check
+	@dev/scripts/changed-files | dev/scripts/prettier --check
 
 .PHONY: lint-all
 lint-all:
@@ -40,7 +40,7 @@ typecheck:
 
 .PHONY: sys
 sys:
-	@dev/scripts/test_packaging
+	@dev/scripts/test-packaging
 
 .PHONY: build
 build: clean
