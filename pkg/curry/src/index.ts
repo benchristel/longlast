@@ -6,10 +6,35 @@
 type AnyFunction = (...args: any[]) => any;
 
 type Func2<A, B, Out> = (a: A, b: B) => Out;
+type Func3<A, B, C, Out> = (a: A, b: B, c: C) => Out;
+type Func4<A, B, C, D, Out> = (a: A, b: B, c: C, d: D) => Out;
+type Func5<A, B, C, D, E, Out> = (a: A, b: B, c: C, d: D, e: E) => Out;
 
+// TODO: make these types non-user-constructible
 export interface Curried2<A, B, Out> {
     (a: A, b: B): Out;
     (a: A): (b: B) => Out;
+}
+
+export interface Curried3<A, B, C, Out> {
+    (a: A, b: B, c: C): Out;
+    (a: A, b: B): (c: C) => Out;
+    (a: A): Curried2<B, C, Out>;
+}
+
+export interface Curried4<A, B, C, D, Out> {
+    (a: A, b: B, c: C, d: D): Out;
+    (a: A, b: B, c: C): (d: D) => Out;
+    (a: A, b: B): Curried2<C, D, Out>;
+    (a: A): Curried3<B, C, D, Out>;
+}
+
+export interface Curried5<A, B, C, D, E, Out> {
+    (a: A, b: B, c: C, d: D, e: E): Out;
+    (a: A, b: B, c: C, d: D): (e: E) => Out;
+    (a: A, b: B, c: C): Curried2<D, E, Out>;
+    (a: A, b: B): Curried3<C, D, E, Out>;
+    (a: A): Curried4<B, C, D, E, Out>;
 }
 
 /**
@@ -20,14 +45,27 @@ export interface Curried2<A, B, Out> {
  */
 
 export function curry<A, B, Out>(f: Func2<A, B, Out>): Curried2<A, B, Out>;
+
+export function curry<A, B, C, Out>(
+    f: Func3<A, B, C, Out>,
+): Curried3<A, B, C, Out>;
+
+export function curry<A, B, C, D, Out>(
+    f: Func4<A, B, C, D, Out>,
+): Curried4<A, B, C, D, Out>;
+
+export function curry<A, B, C, D, E, Out>(
+    f: Func5<A, B, C, D, E, Out>,
+): Curried5<A, B, C, D, E, Out>;
+
+// TODO: args spreading is slow (at least, it is in Bun). Add performance tests
+// and consider optimizing this.
 export function curry(f: AnyFunction): AnyFunction {
-    return function (a, b) {
-        if (arguments.length === f.length) {
-            return f(a, b);
+    return function curried(...args: any[]) {
+        if (args.length < f.length) {
+            return (...moreArgs: any[]) => curried(...args, ...moreArgs);
         } else {
-            return function (b: any) {
-                return f(a, b);
-            };
+            return f(...args);
         }
     };
 }
