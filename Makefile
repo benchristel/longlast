@@ -1,7 +1,7 @@
 .DEFAULT_GOAL = right
 
 .PHONY: right
-right: fix verify ;
+right: fix test ;
 
 .PHONY: verify
 verify: test typecheck typetest lint-all sys ;

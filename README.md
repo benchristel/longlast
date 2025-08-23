@@ -40,7 +40,7 @@ make deps  # installs Node.js packages and configures git hooks
 
 ```sh
 make           # alias for `make right` (below)
-make right     # runs all checks and fixes formatting
+make right     # runs unit tests and fixes formatting
 make verify    # runs all checks
 make test      # runs unit tests
 make sys       # runs system tests
