@@ -6,11 +6,63 @@
     </head>
     <style>
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+:root {
+    --ratio: 1.5;
+    --size-0: 1rem;
+    --size-1: calc(var(--size-0) * var(--ratio));
+    --size-2: calc(var(--size-1) * var(--ratio));
+    --size-3: calc(var(--size-2) * var(--ratio));
+    --size-4: calc(var(--size-3) * var(--ratio));
+}
+
+/*
+ * Typography
+ */
+
+:root {
+    font-size: 112.5%
+}
+
 @font-face {
     font-family: Vollkorn;
     src: url("https://cdn.jsdelivr.net/gh/benchristel/cdn@9906347e/fonts/vollkorn/Vollkorn-Regular.woff2") format("woff2");
     font-display: fallback;
 }
+
+article {
+    max-width: 60ch;
+}
+
+article > :first-child {
+    margin-block-start: 0;
+}
+
+article > :last-child {
+    margin-block-end: 0;
+}
+
+article :is(p, ul, ol, blockquote, table, pre) {
+    margin-block: 1em;
+}
+
+article :is(ul, ol) {
+    margin-inline-start: 2.5rem;
+}
+
+article :is(h1, h2, h3, h4, h5, h6) {
+    margin-block: 2em 1em;
+}
+
+/*
+ * Layout
+ */
 
 html {
     display: flex;
@@ -29,8 +81,9 @@ body {
 }
 
 nav.toc {
-    background: aliceblue;
-    padding: 1em;
+    background: #eef;
+    padding-inline: var(--size-1);
+    padding-block: var(--size-3);
     flex-basis: 19rem;
     flex-shrink: 1;
     flex-grow: 0;
@@ -45,15 +98,34 @@ nav.toc ul > li > ul {
     padding-inline-start: 1em;
 }
 
+nav.toc h2 {
+    font-size: 1rem;
+    margin-block-end: 1em;
+}
+
+nav.toc h2 > a {
+    color: inherit;
+}
+
+nav.toc a {
+    color: #208;
+    text-decoration: none;
+}
+
+.mdsite-breadcrumb {
+    margin-bottom: 1em;
+}
+
 .mdsite-breadcrumb > a:after {
     display: inline-block;
     padding-inline: 0.5em;
     content: '/';
-    color: #999;
+    color: #7f7f7f;
 }
 
 main {
-    padding: 2rem;
+    padding-inline: var(--size-4);
+    padding-block: var(--size-3);
     flex-basis: 100vw;
     flex-shrink: 1;
 }
@@ -82,7 +154,10 @@ blockquote code {
 
     </style>
     <body>
-        <nav class="toc"><h2>@longlast</h2>{{toc /}}</nav>
+        <nav class="toc">
+            <h2><a href="/index.html">@longlast</a></h2>
+            {{toc /}}
+        </nav>
         <main>
             <nav>{{breadcrumb}}</nav>
             <article>{{content}}</article>
