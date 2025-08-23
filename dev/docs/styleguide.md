@@ -139,11 +139,10 @@ them from NPM. This has multiple benefits:
   `@longlast/curry` versions as far back as `1.3.0`, it should specify `^1.3.0`
   as the version range for that dependency; there is no reason for it to
   require a later version like `^1.5.0`. Demanding package versions newer than
-  those that are actually needed limits interoperability, and might cause
-  packages to be duplicated in clients' bundles if the client explicitly
-  requires an older version of the package in their own code. (Note that as of
-  this writing, all the package versions mentioned in this paragraph are
-  fictitious.)
+  what's actually needed limits interoperability, and might cause packages to
+  be duplicated in clients' bundles if the client explicitly requires an older
+  version of the package in their own code. (Note that as of this writing, all
+  the package versions mentioned in this paragraph are fictitious.)
 
 This approach does come with a cost, however: we can't test that a new package
 version will integrate with its client packages until we actually release it.
@@ -152,6 +151,8 @@ This cost can be reduced by:
 - Clearly defining the API of each package and the requirements for each new
   feature. Those requirements can be converted into unit tests.
 - Cutting prerelease versions of a package before doing the actual release.
+- Building the initial version of a new package inside a client package. This
+  way the API of the package is sure to support at least one use case well.
 
 ## AI Policy
 
