@@ -8,7 +8,7 @@ verify: test typecheck typetest lint-all sys ;
 
 .PHONY: test
 test:
-	@dev/scripts/test.ts
+	@dev/scripts/run-unit-tests.ts
 
 .PHONY: ts
 ts:
