@@ -19,6 +19,7 @@ const addNoVarargsCurry = noVarargsCurry(add);
 const suite = new Benchmark.Suite()
     .add("reference", () => data.map(addCurry(1)))
     .add("no varargs", () => data.map(addNoVarargsCurry(1)))
+    .add("inline", () => data.map((x) => x + 1))
     .on("cycle", (event: any) => console.log(String(event.target)))
     .on("complete", () =>
         console.log(
