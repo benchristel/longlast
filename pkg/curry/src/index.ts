@@ -37,13 +37,6 @@ export interface Curried5<A, B, C, D, E, Out> {
     (a: A): Curried4<B, C, D, E, Out>;
 }
 
-/**
- * Returns a *curried* version of the given function `f`. The returned function
- * behaves just like `f`, except that, if is passed fewer arguments than `f`
- * requires, it does nothing but return a new function that takes the remaining
- * arguments. `f` is called once all arguments have been supplied.
- */
-
 export function curry<A, B, Out>(f: Func2<A, B, Out>): Curried2<A, B, Out>;
 
 export function curry<A, B, C, Out>(
@@ -57,6 +50,26 @@ export function curry<A, B, C, D, Out>(
 export function curry<A, B, C, D, E, Out>(
     f: Func5<A, B, C, D, E, Out>,
 ): Curried5<A, B, C, D, E, Out>;
+
+/**
+ * Returns a *curried* version of the given function `f`. The returned function
+ * behaves just like `f`, except that, if is passed fewer arguments than `f`
+ * requires, it does nothing but return a new function that takes the remaining
+ * arguments. `f` is called once all arguments have been supplied.
+ *
+ * @example
+ * ```ts
+ * import {curry} from "@longlast/curry";
+ *
+ * const multiply = curry((a: number, b: number) => a * b);
+ *
+ * // `multiply` can be called normally, with both arguments...
+ * multiply(3, 4); // => 12
+ *
+ * // ...or it can be partially applied:
+ * [1, 2, 3].map(multiply(2)); // => [2, 4, 6]
+ * ```
+ */
 
 export function curry(f: AnyFunction): AnyFunction {
     // Optimize the common cases -- functions with 2 and 3 parameters. This
