@@ -1,5 +1,5 @@
 import {test, expect, is} from "@benchristel/taste";
-import {curry} from "../src/index.ts";
+import {curry} from "#@longlast/curry";
 
 test("curry", {
     "returns a function"() {

@@ -1,5 +1,5 @@
 import {test, expect} from "tstyche";
-import {curry} from "../src/index.ts";
+import {curry} from "#@longlast/curry";
 
 declare function twoArgs(a: 1, b: 2): 3;
 
