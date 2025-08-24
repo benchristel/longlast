@@ -50,6 +50,16 @@ make lint      # finds problems
 make fix       # fixes (some) problems
 ```
 
+### Performance benchmarks
+
+To run the perf benchmarks for a particular package:
+
+```sh
+make -C pkg/my-package perf
+```
+
+Note that not all packages have benchmarks.
+
 ### Releasing
 
 See [dev/docs/releasing.md](dev/docs/releasing.md).
