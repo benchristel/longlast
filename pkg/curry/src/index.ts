@@ -10,16 +10,19 @@ type Func3<A, B, C, Out> = (a: A, b: B, c: C) => Out;
 type Func4<A, B, C, D, Out> = (a: A, b: B, c: C, d: D) => Out;
 type Func5<A, B, C, D, E, Out> = (a: A, b: B, c: C, d: D, e: E) => Out;
 
-// TODO: make these types non-user-constructible
+const $nonUserConstructible: unique symbol = Symbol();
+
 export interface Curried2<A, B, Out> {
     (a: A, b: B): Out;
     (a: A): (b: B) => Out;
+    [$nonUserConstructible]: true;
 }
 
 export interface Curried3<A, B, C, Out> {
     (a: A, b: B, c: C): Out;
     (a: A, b: B): (c: C) => Out;
     (a: A): Curried2<B, C, Out>;
+    [$nonUserConstructible]: true;
 }
 
 export interface Curried4<A, B, C, D, Out> {
@@ -27,6 +30,7 @@ export interface Curried4<A, B, C, D, Out> {
     (a: A, b: B, c: C): (d: D) => Out;
     (a: A, b: B): Curried2<C, D, Out>;
     (a: A): Curried3<B, C, D, Out>;
+    [$nonUserConstructible]: true;
 }
 
 export interface Curried5<A, B, C, D, E, Out> {
@@ -35,6 +39,7 @@ export interface Curried5<A, B, C, D, E, Out> {
     (a: A, b: B, c: C): Curried2<D, E, Out>;
     (a: A, b: B): Curried3<C, D, E, Out>;
     (a: A): Curried4<B, C, D, E, Out>;
+    [$nonUserConstructible]: true;
 }
 
 export function curry<A, B, Out>(f: Func2<A, B, Out>): Curried2<A, B, Out>;
