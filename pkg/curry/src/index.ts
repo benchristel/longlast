@@ -58,9 +58,44 @@ export function curry<A, B, C, D, E, Out>(
     f: Func5<A, B, C, D, E, Out>,
 ): Curried5<A, B, C, D, E, Out>;
 
-// TODO: args spreading is slow (at least, it is in Bun). Add performance tests
-// and consider optimizing this.
 export function curry(f: AnyFunction): AnyFunction {
+    switch (f.length) {
+        case 2:
+            return curry2(f);
+        case 3:
+            return curry3(f);
+        default:
+            return curryVarargs(f);
+    }
+}
+
+function curry2(f: AnyFunction): AnyFunction {
+    return function curried(a: any, b: any): AnyFunction {
+        switch (arguments.length) {
+            // TODO: test and implement zero-args case
+            case 1:
+                return (b: any) => f(a, b);
+            default:
+                return f(a, b);
+        }
+    };
+}
+
+function curry3(f: AnyFunction): AnyFunction {
+    return function curried(a: any, b: any, c: any): AnyFunction {
+        switch (arguments.length) {
+            // TODO: test and implement zero-args case
+            case 1:
+                return curry2((b: any, c: any) => f(a, b, c));
+            case 2:
+                return (c: any) => f(a, b, c);
+            default:
+                return f(a, b, c);
+        }
+    };
+}
+
+export function curryVarargs(f: AnyFunction): AnyFunction {
     return function curried(...args: any[]) {
         if (args.length < f.length) {
             return (...moreArgs: any[]) => curried(...args, ...moreArgs);

@@ -1,24 +1,16 @@
 #!/usr/bin/env node
 import Benchmark from "benchmark";
-import {curry} from "#@longlast/curry";
-
-function noVarargsCurry(f: any): any {
-    return (a: any, b: any) => {
-        if (arguments.length < 2) {
-            return (b: any) => f(a, b);
-        }
-        return f(a, b);
-    };
-}
+import {curry as referenceCurry} from "./alt/reference.ts";
+import {curry as publishedCurry} from "#@longlast/curry";
 
 const data = new Array(100).fill(0);
 const add = (a: number, b: number) => a + b;
-const addCurry = curry(add);
-const addNoVarargsCurry = noVarargsCurry(add);
+const addWithPublishedCurry = publishedCurry(add);
+const addWithReferenceCurry = referenceCurry(add);
 
 const suite = new Benchmark.Suite()
-    .add("reference", () => data.map(addCurry(1)))
-    .add("no varargs", () => data.map(addNoVarargsCurry(1)))
+    .add("published", () => data.map(addWithPublishedCurry(1)))
+    .add("reference", () => data.map(addWithReferenceCurry(1)))
     .add("inline", () => data.map((x) => x + 1))
     .on("cycle", (event: any) => console.log(String(event.target)))
     .on("complete", () =>
