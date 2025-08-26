@@ -35,6 +35,8 @@ import {curry, type Curried2} from "@longlast/curry";
 export const equals: Curried2<unknown, unknown, boolean> = curry(_equals);
 
 function _equals(a: unknown, b: unknown): boolean {
+    // This is an optimized implementation. There is a simpler, equivalent one
+    // in pkg/equals/alt/reference.ts.
     if (Object.is(a, b)) {
         return true;
     }
@@ -51,25 +53,27 @@ function _equals(a: unknown, b: unknown): boolean {
         );
     }
     if (a instanceof Set && b instanceof Set) {
-        return equalSets(a, b);
+        return a.size === b.size && [...a].every((v) => b.has(v));
     }
     if (Array.isArray(a) && Array.isArray(b)) {
         return a.length === b.length && a.every((_, i) => equals(a[i], b[i]));
     }
     if (isObject(a) && isObject(b)) {
-        const aKeys = Object.keys(a);
-        const bKeys = Object.keys(b);
-        return (
-            equalSets(new Set(aKeys), new Set(bKeys)) &&
-            aKeys.every((k) => equals(a[k], b[k])) &&
-            Object.getPrototypeOf(a) === Object.getPrototypeOf(b)
-        );
+        if (Object.getPrototypeOf(a) !== Object.getPrototypeOf(b)) {
+            return false;
+        }
+        const bKeys = new Set(Object.keys(b));
+        for (const key of Object.keys(a)) {
+            if (!bKeys.has(key)) {
+                return false;
+            }
+            if (!equals(a[key], (b as typeof a)[key])) {
+                return false;
+            }
+        }
+        return true;
     }
     return false;
-}
-
-function equalSets(a: Set<unknown>, b: Set<unknown>): boolean {
-    return a.size === b.size && [...a].every((v) => b.has(v));
 }
 
 function isObject(x: unknown): x is Record<string, unknown> {
