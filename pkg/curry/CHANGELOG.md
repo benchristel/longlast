@@ -1,5 +1,9 @@
 # @longlast/curry
 
+## 0.2.1 (2025-08-26)
+
+This patch release makes internal improvements to `curry`.
+
 ## 0.2.0 (2025-08-24)
 
 This release generalizes `curry` to functions of 2 to 5 arguments.
