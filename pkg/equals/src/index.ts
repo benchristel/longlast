@@ -58,16 +58,13 @@ function _equals(a: unknown, b: unknown): boolean {
     if (Array.isArray(a) && Array.isArray(b)) {
         return a.length === b.length && a.every((_, i) => equals(a[i], b[i]));
     }
-    if (isObject(a) && isObject(b)) {
-        if (Object.getPrototypeOf(a) !== Object.getPrototypeOf(b)) {
-            return false;
-        }
+    if (a && b && typeof a === "object" && protoOf(a) === protoOf(b)) {
         const bKeys = new Set(Object.keys(b));
         for (const key of Object.keys(a)) {
             if (!bKeys.has(key)) {
                 return false;
             }
-            if (!equals(a[key], (b as typeof a)[key])) {
+            if (!equals((a as any)[key], (b as any)[key])) {
                 return false;
             }
         }
@@ -76,6 +73,4 @@ function _equals(a: unknown, b: unknown): boolean {
     return false;
 }
 
-function isObject(x: unknown): x is Record<string, unknown> {
-    return !!x && typeof x === "object";
-}
+const protoOf = Object.getPrototypeOf;
