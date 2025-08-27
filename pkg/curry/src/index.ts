@@ -92,10 +92,6 @@ export function curry(f: AnyFunction): AnyFunction {
 function curry2(f: AnyFunction): AnyFunction {
     return function curried(a: any, b: any): AnyFunction {
         switch (arguments.length) {
-            case 0:
-                throw new Error(
-                    "@longlast/curry: calling a curried function with zero arguments is not supported.",
-                );
             case 1:
                 return (b: any) => f(a, b);
             default:
@@ -107,10 +103,6 @@ function curry2(f: AnyFunction): AnyFunction {
 function curry3(f: AnyFunction): AnyFunction {
     return function curried(a: any, b: any, c: any): AnyFunction {
         switch (arguments.length) {
-            case 0:
-                throw new Error(
-                    "@longlast/curry: calling a curried function with zero arguments is not supported.",
-                );
             case 1:
                 return curry2((b: any, c: any) => f(a, b, c));
             case 2:
