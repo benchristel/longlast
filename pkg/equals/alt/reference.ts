@@ -1,4 +1,4 @@
-import {curry} from "@longlast/curry";
+import {curry, type Curried2} from "@longlast/curry";
 
 export const equals: Curried2<unknown, unknown, boolean> = curry(_equals);
 

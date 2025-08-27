@@ -47,8 +47,8 @@ importers:
   pkg/equals:
     dependencies:
       '@longlast/curry':
-        specifier: 0.1.0
-        version: 0.1.0
+        specifier: ^0.2.1
+        version: 0.2.1
 
   pkg/symbols: {}
 
@@ -67,8 +67,8 @@ packages:
   '@gerrit0/mini-shiki@3.9.2':
     resolution: {integrity: sha512-Tvsj+AOO4Z8xLRJK900WkyfxHsZQu+Zm1//oT1w443PO6RiYMoq/4NGOhaNuZoUMYsjKIAPVQ6eOFMddj6yphQ==}
 
-  '@longlast/curry@0.1.0':
-    resolution: {integrity: sha512-SUL4Tg6dKYIKbQTN2BmqaixQPgVRmqOcVsC2RFG2Mvrl+PDeqHtSc7KWngUbGbmteb4TOflRzbq40axgMnK8dA==}
+  '@longlast/curry@0.2.1':
+    resolution: {integrity: sha512-nI5MppU2VKRZXUYdZGjoSnOwR/e7rb9xVHmEDt4nEttq6clvMoQbQXgTjv/KeYuRiFzDRVo/ZaAPi5ENs+anSA==}
 
   '@shikijs/engine-oniguruma@3.9.2':
     resolution: {integrity: sha512-Vn/w5oyQ6TUgTVDIC/BrpXwIlfK6V6kGWDVVz2eRkF2v13YoENUvaNwxMsQU/t6oCuZKzqp9vqtEtEzKl9VegA==}
@@ -295,7 +295,7 @@ snapshots:
       '@shikijs/types': 3.9.2
       '@shikijs/vscode-textmate': 10.0.2
 
-  '@longlast/curry@0.1.0': {}
+  '@longlast/curry@0.2.1': {}
 
   '@shikijs/engine-oniguruma@3.9.2':
     dependencies:
