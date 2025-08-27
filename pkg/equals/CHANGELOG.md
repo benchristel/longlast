@@ -1,5 +1,10 @@
 # @longlast/equals
 
+## 0.4.1 (2025-08-26)
+
+This patch release optimizes `equals` to be smaller and faster. Comparing large
+objects is now about 20% faster, relative to 0.4.0.
+
 ## 0.4.0 (2025-08-20)
 
 This release curries `equals` so it can be called as either `equals(a, b)` or
