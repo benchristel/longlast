@@ -1,5 +1,9 @@
 # @longlast/equals
 
+## 0.4.2 (2025-08-27)
+
+This patch release just updates the package metadata in `package.json`.
+
 ## 0.4.1 (2025-08-26)
 
 This patch release optimizes `equals` to be smaller and faster. Comparing large
