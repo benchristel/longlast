@@ -1,5 +1,9 @@
 # @longlast/symbols
 
+## 0.0.3 (2025-08-27)
+
+This release just adds installation instructions to the readme file.
+
 ## 0.0.2 (2025-08-27)
 
 This release only updates metadata in `package.json`.

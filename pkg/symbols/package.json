@@ -1,6 +1,6 @@
 {
     "name": "@longlast/symbols",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Defines unique symbols for use in ubiquitous interfaces",
     "license": "MIT",
     "author": "Ben Christel (https://benchristel.com/)",
