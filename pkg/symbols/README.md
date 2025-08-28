@@ -10,3 +10,13 @@ any app bundle; if two packages import different versions of
 `@longlast/symbols`, then they will not be able to call each others' methods.
 Packages that depend on `@longlast/symbols` should _always_ write their version
 specifiers to get the latest 1.x version, e.g. `^1.0.0`.
+
+## Install
+
+Choose your favorite package manager:
+
+```bash
+npm  add @longlast/symbols
+pnpm add @longlast/symbols
+yarn add @longlast/symbols
+```

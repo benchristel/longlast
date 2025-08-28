@@ -38,8 +38,10 @@ popd >/dev/null
 
 pushd "$CLIENT" >/dev/null
     # Get rid of @longlast source code and pnpm-workspace.yaml. Our client
-    # doesn't need to be a monorepo.
-    rm -rf pnpm-workspace.yaml pkg
+    # doesn't need to be a monorepo. We also get rid of the consistency tests,
+    # since after we delete pkg, the repo will no longer have the structure
+    # they require.
+    rm -rf pnpm-workspace.yaml pkg dev/consistency-tests
 
     make deps >/dev/null
 
