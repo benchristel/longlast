@@ -1,5 +1,10 @@
 # @longlast/equals
 
+## 0.4.3 (2025-08-27)
+
+This patch release just adds installation instructions and a usage example to
+the readme file.
+
 ## 0.4.2 (2025-08-27)
 
 This patch release just updates the package metadata in `package.json`.
