@@ -1,12 +1,17 @@
 {
     "name": "@longlast/equals",
     "version": "0.4.1",
+    "description": "Deeply compares objects",
+    "license": "MIT",
+    "author": "Ben Christel (https://benchristel.com/)",
     "type": "module",
     "files": [
         "dist"
     ],
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
+    "repository": "github:benchristel/longlast",
+    "sideEffects": false,
     "packageManager": "pnpm@10.14.0",
     "imports": {
         "#@longlast/equals": "./src/index.ts"

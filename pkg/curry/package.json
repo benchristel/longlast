@@ -1,12 +1,17 @@
 {
     "name": "@longlast/curry",
     "version": "0.2.1",
+    "description": "Curries functions",
+    "license": "MIT",
+    "author": "Ben Christel (https://benchristel.com/)",
     "type": "module",
     "files": [
         "dist"
     ],
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
+    "repository": "github:benchristel/longlast",
+    "sideEffects": false,
     "packageManager": "pnpm@10.14.0",
     "imports": {
         "#@longlast/curry": "./src/index.ts"
