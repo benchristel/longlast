@@ -113,7 +113,7 @@ function curry3(f: AnyFunction): AnyFunction {
     };
 }
 
-export function curryVarargs(f: AnyFunction): AnyFunction {
+function curryVarargs(f: AnyFunction): AnyFunction {
     return function curried(...args: any[]) {
         if (args.length < f.length) {
             return (...moreArgs: any[]) => curried(...args, ...moreArgs);
