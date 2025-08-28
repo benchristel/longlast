@@ -1,5 +1,9 @@
 # @longlast/curry
 
+## 0.2.2 (2025-08-27)
+
+This patch release just updates the package metadata in `package.json`.
+
 ## 0.2.1 (2025-08-26)
 
 This patch release makes internal improvements to `curry`.
