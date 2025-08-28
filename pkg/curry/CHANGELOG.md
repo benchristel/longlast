@@ -1,5 +1,12 @@
 # @longlast/curry
 
+## 0.3.0 (2025-08-27)
+
+### Breaking changes
+
+This release removes the export of `curryVarargs`, which was intended to be a
+private function.
+
 ## 0.2.3 (2025-08-27)
 
 This patch release just adds installation instructions and a usage example to
