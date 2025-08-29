@@ -13,6 +13,10 @@
     border: none;
 }
 
+/*
+ * Dimensions
+ */
+
 :root {
     --ratio: 1.5;
     --size-0: 1rem;
@@ -20,6 +24,33 @@
     --size-2: calc(var(--size-1) * var(--ratio));
     --size-3: calc(var(--size-2) * var(--ratio));
     --size-4: calc(var(--size-3) * var(--ratio));
+}
+
+/*
+ * Colors
+ */
+
+:root {
+    --bg-accent: #eef;
+    --fg-accent: #208;
+    --gray-0: #000000;
+    --gray-1: #0f0f0f;
+    --gray-2: #1e1e1e;
+    --gray-3: #2d2d2d;
+    --gray-4: #3c3c3c;
+    --gray-5: #4b4b4b;
+    --gray-6: #5a5a5a;
+    --gray-7: #696969;
+    --gray-8: #787878;
+    --gray-9: #878787;
+    --gray-10: #969696;
+    --gray-11: #a5a5a5;
+    --gray-12: #b4b4b4;
+    --gray-13: #c3c3c3;
+    --gray-14: #d2d2d2;
+    --gray-15: #e1e1e1;
+    --gray-16: #f0f0f0;
+    --gray-17: #ffffff;
 }
 
 /*
@@ -107,8 +138,14 @@ body {
     flex-grow: 1;
 }
 
+.hairline {
+    flex-basis: 1px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
 nav.toc {
-    background: #eef;
+    background: var(--bg-accent);
     padding-inline: var(--size-1);
     padding-block: var(--size-3);
     flex-basis: 19rem;
@@ -135,7 +172,7 @@ nav.toc h2 > a {
 }
 
 nav.toc a {
-    color: #208;
+    color: var(--fg-accent);
     text-decoration: none;
 }
 
@@ -147,7 +184,7 @@ nav.toc a {
     display: inline-block;
     padding-inline: 0.5em;
     content: '/';
-    color: #7f7f7f;
+    color: var(--gray-8);
 }
 
 main {
@@ -164,7 +201,7 @@ th, td {
 }
 
 a, a:visited {
-    text-decoration-color: #bbb;
+    text-decoration-color: var(--gray-13);
     text-underline-offset: 3px;
     text-decoration-skip-ink: none;
 }
@@ -181,11 +218,11 @@ blockquote:has(code) > * {
 }
 
 :is(pre, blockquote):has(code) {
-    background-color: #f8f8f8;
+    background-color: var(--gray-16);
     padding: 1em;
     margin-inline: -1em;
     border-radius: 0.5em;
-    border: 1px solid #e4e4e4;
+    border: 1px solid var(--gray-15);
     white-space: pre;
     overflow-x: auto;
 }
@@ -200,6 +237,7 @@ blockquote code {
             <h2><a href="/index.html">@longlast</a></h2>
             {{toc /}}
         </nav>
+        <div class="hairline" style="background: var(--gray-15)"></div>
         <main>
             <nav class="breadcrumb" aria-label="Breadcrumb">
                 {{breadcrumb --no-nav}}&nbsp;
