@@ -170,9 +170,24 @@ a, a:visited {
 }
 
 
-code, blockquote :has(code) {
+code, blockquote:has(code) {
+    font-size: 0.875em;
     font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo,
         Consolas, 'DejaVu Sans Mono', monospace;
+}
+
+blockquote:has(code) > * {
+    margin-block: 0;
+}
+
+:is(pre, blockquote):has(code) {
+    background-color: #f8f8f8;
+    padding: 1em;
+    margin-inline: -1em;
+    border-radius: 0.5em;
+    border: 1px solid #e4e4e4;
+    white-space: pre;
+    overflow-x: auto;
 }
 
 blockquote code {
