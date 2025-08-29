@@ -10,7 +10,7 @@ type Func3<A, B, C, Out> = (a: A, b: B, c: C) => Out;
 type Func4<A, B, C, D, Out> = (a: A, b: B, c: C, d: D) => Out;
 type Func5<A, B, C, D, E, Out> = (a: A, b: B, c: C, d: D, e: E) => Out;
 
-const $nonUserConstructible: unique symbol = Symbol();
+declare const $nonUserConstructible: unique symbol;
 
 export interface Curried2<A, B, Out> {
     (a: A, b: B): Out;
