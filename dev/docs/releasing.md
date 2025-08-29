@@ -1,5 +1,10 @@
 # Releasing
 
+**If you are planning to release version 1.0.0 of a package, please read
+[the 1.0.0 checklist]** first!
+
+[the 1.0.0 checklist]: ./1-dot-0-checklist.md
+
 Releasing is a semi-manual process for now. We expect releases to be frequent
 and simple (involving only one package at a time).
 
