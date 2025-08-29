@@ -5,11 +5,6 @@
 // TODO: move this type to its own package
 type AnyFunction = (...args: any[]) => any;
 
-type Func2<A, B, Out> = (a: A, b: B) => Out;
-type Func3<A, B, C, Out> = (a: A, b: B, c: C) => Out;
-type Func4<A, B, C, D, Out> = (a: A, b: B, c: C, d: D) => Out;
-type Func5<A, B, C, D, E, Out> = (a: A, b: B, c: C, d: D, e: E) => Out;
-
 declare const $nonUserConstructible: unique symbol;
 
 export interface Curried2<A, B, Out> {
@@ -46,18 +41,18 @@ export interface Curried5<A, B, C, D, E, Out> {
     [$nonUserConstructible]: true;
 }
 
-export function curry<A, B, Out>(f: Func2<A, B, Out>): Curried2<A, B, Out>;
+export function curry<A, B, Out>(f: (a: A, b: B) => Out): Curried2<A, B, Out>;
 
 export function curry<A, B, C, Out>(
-    f: Func3<A, B, C, Out>,
+    f: (a: A, b: B, c: C) => Out,
 ): Curried3<A, B, C, Out>;
 
 export function curry<A, B, C, D, Out>(
-    f: Func4<A, B, C, D, Out>,
+    f: (a: A, b: B, c: C, d: D) => Out,
 ): Curried4<A, B, C, D, Out>;
 
 export function curry<A, B, C, D, E, Out>(
-    f: Func5<A, B, C, D, E, Out>,
+    f: (a: A, b: B, c: C, d: D, e: E) => Out,
 ): Curried5<A, B, C, D, E, Out>;
 
 /**
