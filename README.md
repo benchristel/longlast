@@ -10,6 +10,18 @@ programming languages like [F#] and [Elixir].
 [F#]: https://fsharp.org/
 [Ruby]: https://www.ruby-lang.org/
 
+## Documentation
+
+User documentation is available at [longlast.js.org].
+
+If you're here to browse the source code, it's in [`pkg/`]. Please note that
+the source code on `main` is likely to be newer than the packages you have
+installed. You might want to check out the release tag for the package and
+version you're interested in, e.g. `@longlast/curry@0.2.3`.
+
+[longlast.js.org]: https://longlast.js.org/
+[`pkg/`]: https://github.com/benchristel/longlast/tree/main/pkg/
+
 ## Development
 
 ### Codebase Tour
