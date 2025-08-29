@@ -139,11 +139,11 @@ nav.toc a {
     text-decoration: none;
 }
 
-.mdsite-breadcrumb {
+.breadcrumb {
     margin-bottom: 1em;
 }
 
-.mdsite-breadcrumb > a:after {
+.breadcrumb > a:after {
     display: inline-block;
     padding-inline: 0.5em;
     content: '/';
@@ -186,7 +186,9 @@ blockquote code {
             {{toc /}}
         </nav>
         <main>
-            <nav>{{breadcrumb}}</nav>
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                {{breadcrumb --no-nav}}&nbsp;
+            </nav>
             <article>{{content}}</article>
         </main>        
     </body>
