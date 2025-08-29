@@ -129,6 +129,21 @@ body {
     align-items: stretch;
 }
 
+@media (max-width: 120ch) {
+    body {
+        flex-direction: column-reverse;
+    }
+}
+
+@media (min-width: 80ch) and (max-width: 120ch) {
+    nav.toc {
+        column-count: 2;
+    }
+    nav.toc li {
+        break-inside: avoid;
+    }
+}
+
 .hairline {
     flex-basis: 1px;
     flex-grow: 0;
