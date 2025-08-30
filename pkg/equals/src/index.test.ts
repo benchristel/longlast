@@ -1,10 +1,10 @@
 import {test, expect, is} from "@benchristel/taste";
-
 import {equals} from "./index.ts";
+import {behavesLikeEquals} from "../api/spec.ts";
+
+behavesLikeEquals(equals, "equals");
 
 test("equals", {
-    // See also the API tests.
-
     "equates empty arrays"() {
         expect(equals([], []), is, true);
     },

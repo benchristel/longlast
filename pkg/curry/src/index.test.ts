@@ -1,4 +1,4 @@
 import {curry} from "#@longlast/curry";
-import {behavesLikeCurry} from "./spec.ts";
+import {behavesLikeCurry} from "../api/spec.ts";
 
 behavesLikeCurry(curry, "curry");
