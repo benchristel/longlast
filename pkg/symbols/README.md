@@ -20,3 +20,9 @@ npm  add @longlast/symbols
 pnpm add @longlast/symbols
 yarn add @longlast/symbols
 ```
+
+## Documentation
+
+[Browse the docs on longlast.js.org][docs].
+
+[docs]: https://longlast.js.org/symbols/

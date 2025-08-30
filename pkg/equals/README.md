@@ -27,3 +27,9 @@ equals(
     [3, 4, {openThe: "door"}],
 ); // => false
 ```
+
+## Documentation
+
+[Browse the docs on longlast.js.org][docs].
+
+[docs]: https://longlast.js.org/equals/

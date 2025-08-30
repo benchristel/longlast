@@ -82,6 +82,12 @@ Note that not all packages have benchmarks.
 
 See [dev/docs/releasing.md](dev/docs/releasing.md).
 
+## Acknowledgements
+
+Thank you to [js.org] for providing the [longlast.js.org] domain!
+
+[js.org]: https://js.org/
+
 ## TODO
 
 - Copy tstyche.config.json to packages on build, so we have a record of the

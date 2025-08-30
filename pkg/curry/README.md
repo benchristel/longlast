@@ -23,3 +23,9 @@ const multiply = curry((a: number, b: number) => a * b);
 
 multiply(3, 4); // => 12
 ```
+
+## Documentation
+
+[Browse the docs on longlast.js.org][docs].
+
+[docs]: https://longlast.js.org/curry/

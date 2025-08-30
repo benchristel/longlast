@@ -60,6 +60,18 @@ for await (const dirPath of glob(join(root, "pkg", "*"))) {
 
             expect(readme, contains, expected);
         },
+
+        "links to the documentation"() {
+            const expected = trimMargin(`
+                ## Documentation
+
+                [Browse the docs on longlast.js.org][docs].
+
+                [docs]: https://longlast.js.org/${dirName}/
+            `);
+
+            expect(readme, contains, expected);
+        },
     });
 }
 
