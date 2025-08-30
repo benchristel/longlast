@@ -8,6 +8,7 @@
 - Do all exports have typetests?
 - Are all exported types used in function return types marked
   non-user-constructible (if appropriate)?
+- Are all dependencies of this package 1.0.0 already?
 
 Note: this checklist is not complete!
 
