@@ -1,8 +1,11 @@
 import {test, expect, is} from "@benchristel/taste";
 import {type equals} from "#@longlast/equals";
 
-export function behavesLikeEquals(_equals: typeof equals, name: string): void {
-    test(name, {
+export function behavesLikeEquals(
+    _equals: typeof equals,
+    subjectName: string,
+): void {
+    test(subjectName, {
         /*
          * Object identity
          */

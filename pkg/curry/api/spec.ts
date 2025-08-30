@@ -1,8 +1,11 @@
 import {test, expect, is} from "@benchristel/taste";
 import {type curry} from "#@longlast/curry";
 
-export function behavesLikeCurry(_curry: typeof curry, name: string): void {
-    test(name, {
+export function behavesLikeCurry(
+    _curry: typeof curry,
+    subjectName: string,
+): void {
+    test(subjectName, {
         "returns a function"() {
             expect(typeof _curry(() => {}), is, "function");
         },
@@ -10,7 +13,7 @@ export function behavesLikeCurry(_curry: typeof curry, name: string): void {
 
     const curriedConcat2 = _curry((s: string, x: number) => s + x);
 
-    test(`a 2-ary function from ${name}`, {
+    test(`a 2-ary function from ${subjectName}`, {
         "can be passed both arguments at once"() {
             expect(curriedConcat2("a", 1), is, "a1");
         },
@@ -24,7 +27,7 @@ export function behavesLikeCurry(_curry: typeof curry, name: string): void {
         (s: string, x: number, b: boolean) => s + x + b,
     );
 
-    test(`a 3-ary function from ${name}`, {
+    test(`a 3-ary function from ${subjectName}`, {
         "can be passed all arguments at once"() {
             expect(curriedConcat3("a", 1, true), is, "a1true");
         },
@@ -46,7 +49,7 @@ export function behavesLikeCurry(_curry: typeof curry, name: string): void {
         (a: string, b: number, c: boolean, d: BigInt) => a + b + c + d,
     );
 
-    test(`a 4-ary function from ${name}`, {
+    test(`a 4-ary function from ${subjectName}`, {
         "can be passed all arguments at once"() {
             expect(curriedConcat4("a", 1, true, 2n), is, "a1true2");
         },
@@ -85,7 +88,7 @@ export function behavesLikeCurry(_curry: typeof curry, name: string): void {
             a + b + c + d + e,
     );
 
-    test(`a 5-ary function from ${name}`, {
+    test(`a 5-ary function from ${subjectName}`, {
         "can be passed all arguments at once"() {
             expect(curriedConcat5("a", 1, true, 2n, "b"), is, "a1true2b");
         },
