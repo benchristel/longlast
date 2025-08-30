@@ -15,5 +15,8 @@
     "packageManager": "pnpm@10.14.0",
     "imports": {
         "#@longlast/curry": "./src/index.ts"
+    },
+    "dependencies": {
+        "@longlast/symbols": "^0.0.4"
     }
 }

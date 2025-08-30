@@ -2,6 +2,8 @@
  * @module curry
  */
 
+import {$boundArguments} from "@longlast/symbols";
+
 /**
  * @param f - the function to curry
  * @typeParam A - the type of `f`'s first argument
@@ -88,6 +90,7 @@ export function curry(f: AnyFunction): AnyFunction {
 
 export interface Curried1<A, Return> {
     (a: A): Return;
+    [$boundArguments]: unknown[];
     displayName: string;
 }
 
@@ -111,6 +114,8 @@ export interface Curried2<A, B, Return> {
     (a: A): Curried1<B, Return>;
 
     displayName: string;
+
+    [$boundArguments]: unknown[];
 
     /** @hidden */
     [$nonUserConstructible]: true;
@@ -143,6 +148,8 @@ export interface Curried3<A, B, C, Return> {
     (a: A): Curried2<B, C, Return>;
 
     displayName: string;
+
+    [$boundArguments]: unknown[];
 
     /** @hidden */
     [$nonUserConstructible]: true;
@@ -182,6 +189,8 @@ export interface Curried4<A, B, C, D, Return> {
     (a: A): Curried3<B, C, D, Return>;
 
     displayName: string;
+
+    [$boundArguments]: unknown[];
 
     /** @hidden */
     [$nonUserConstructible]: true;
@@ -229,6 +238,8 @@ export interface Curried5<A, B, C, D, E, Return> {
 
     displayName: string;
 
+    [$boundArguments]: unknown[];
+
     /** @hidden */
     [$nonUserConstructible]: true;
 }
@@ -236,46 +247,51 @@ export interface Curried5<A, B, C, D, E, Return> {
 declare const $nonUserConstructible: unique symbol;
 
 function curry2(f: AnyFunction): AnyFunction {
-    return nameAfter(f, function curried(a: any, b: any): AnyFunction {
+    function curried(a: any, b: any): AnyFunction {
         switch (arguments.length) {
             case 1:
-                return nameAfter(curried, (b: any) => f(a, b));
+                return addMetadata(curried, [a], (b: any) => f(a, b));
             default:
                 return f(a, b);
         }
-    });
+    }
+    return addMetadata(f, [], curried);
 }
 
 function curry3(f: AnyFunction): AnyFunction {
-    return nameAfter(f, function curried(a: any, b: any, c: any): AnyFunction {
+    function curried(a: any, b: any, c: any): AnyFunction {
         switch (arguments.length) {
             case 1:
-                return nameAfter(
+                return addMetadata(
                     curried,
+                    [a],
                     curry2((b: any, c: any) => f(a, b, c)),
                 );
             case 2:
-                return nameAfter(curried, (c: any) => f(a, b, c));
+                return addMetadata(curried, [a, b], (c: any) => f(a, b, c));
             default:
                 return f(a, b, c);
         }
-    });
+    }
+    return addMetadata(f, [], curried);
 }
 
 function curryVarargs(f: AnyFunction): AnyFunction {
-    return nameAfter(f, function curried(...args: any[]) {
+    function curried(...args: any[]): any {
         if (args.length < f.length) {
-            return nameAfter(curried, (...moreArgs: any[]) =>
+            return addMetadata(curried, args, (...moreArgs: any[]) =>
                 curried(...args, ...moreArgs),
             );
         } else {
             return f(...args);
         }
-    });
+    }
+    return addMetadata(f, [], curried);
 }
 
-function nameAfter(original: any, f: any): any {
+function addMetadata(original: any, args: any[], f: any): any {
     f.displayName = original.displayName ?? original.name;
+    f[$boundArguments] = args;
     return f;
 }
 

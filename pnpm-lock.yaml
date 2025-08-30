@@ -42,7 +42,11 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
 
-  pkg/curry: {}
+  pkg/curry:
+    dependencies:
+      '@longlast/symbols':
+        specifier: ^0.0.4
+        version: 0.0.4
 
   pkg/equals:
     dependencies:
@@ -69,6 +73,9 @@ packages:
 
   '@longlast/curry@0.3.0':
     resolution: {integrity: sha512-KSdoT21njp+9IuVxQHRlzdsjvh0H6+9I1n5toQssKnwR8dQEhp821LNn4iB14V1U2F4tMiXPuqGen3kn20iN8A==}
+
+  '@longlast/symbols@0.0.4':
+    resolution: {integrity: sha512-aOqLaaiSHyHe5rUJWFdc8g6ftMdxiv72La8v1hTcw+etiJVVK5qjYhR6JP4K2L5Nqj/LavhRdTMEohLNrGuUxw==}
 
   '@shikijs/engine-oniguruma@3.9.2':
     resolution: {integrity: sha512-Vn/w5oyQ6TUgTVDIC/BrpXwIlfK6V6kGWDVVz2eRkF2v13YoENUvaNwxMsQU/t6oCuZKzqp9vqtEtEzKl9VegA==}
@@ -296,6 +303,8 @@ snapshots:
       '@shikijs/vscode-textmate': 10.0.2
 
   '@longlast/curry@0.3.0': {}
+
+  '@longlast/symbols@0.0.4': {}
 
   '@shikijs/engine-oniguruma@3.9.2':
     dependencies:

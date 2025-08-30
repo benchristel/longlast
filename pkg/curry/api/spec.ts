@@ -1,5 +1,6 @@
-import {test, expect, is} from "@benchristel/taste";
+import {test, expect, is, equals} from "@benchristel/taste";
 import {type curry} from "#@longlast/curry";
+import {$boundArguments} from "@longlast/symbols";
 
 export function behavesLikeCurry(
     _curry: typeof curry,
@@ -48,8 +49,16 @@ export function behavesLikeCurry(
             expect(curriedConcat2("a")(1), is, "a1");
         },
 
+        "has no $boundArguments before partial application"() {
+            expect(curriedConcat2[$boundArguments], equals, []);
+        },
+
         "keeps its name after partial application"() {
             expect(curriedConcat2("a").displayName, is, "concat2");
+        },
+
+        "remembers its bound argument"() {
+            expect(curriedConcat2("a")[$boundArguments], equals, ["a"]);
         },
     });
 
@@ -75,12 +84,24 @@ export function behavesLikeCurry(
             expect(curriedConcat3("a")(1, true), is, "a1true");
         },
 
+        "has no $boundArguments before partial application"() {
+            expect(curriedConcat3[$boundArguments], equals, []);
+        },
+
         "keeps its name after partial application of one argument"() {
             expect(curriedConcat3("a").displayName, is, "concat3");
         },
 
         "keeps its name after partial application of two arguments"() {
             expect(curriedConcat3("a", 1).displayName, is, "concat3");
+        },
+
+        "remembers one bound argument"() {
+            expect(curriedConcat3("a")[$boundArguments], equals, ["a"]);
+        },
+
+        "remembers two bound arguments"() {
+            expect(curriedConcat3("a", 1)[$boundArguments], equals, ["a", 1]);
         },
     });
 
@@ -122,6 +143,10 @@ export function behavesLikeCurry(
             expect(curriedConcat4("a")(1)(true, 2n), is, "a1true2");
         },
 
+        "has no $boundArguments before partial application"() {
+            expect(curriedConcat4[$boundArguments], equals, []);
+        },
+
         "keeps its name after partial application of one argument"() {
             expect(curriedConcat4("a").displayName, is, "concat4");
         },
@@ -132,6 +157,19 @@ export function behavesLikeCurry(
 
         "keeps its name after partial application of three arguments"() {
             expect(curriedConcat4("a", 1, true).displayName, is, "concat4");
+        },
+
+        "remembers one bound argument"() {
+            expect(curriedConcat4("a")[$boundArguments], equals, ["a"]);
+        },
+
+        "remembers two bound arguments"() {
+            expect(curriedConcat4("a", 1)[$boundArguments], equals, ["a", 1]);
+        },
+
+        "remembers three bound arguments"() {
+            const args = curriedConcat4("a", 1, true)[$boundArguments];
+            expect(args, equals, ["a", 1, true]);
         },
     });
 
@@ -206,6 +244,10 @@ export function behavesLikeCurry(
             expect(curriedConcat5("a")(1)(true)(2n, "b"), is, "a1true2b");
         },
 
+        "has no $boundArguments before partial application"() {
+            expect(curriedConcat5[$boundArguments], equals, []);
+        },
+
         "keeps its name after partial application of one argument"() {
             expect(curriedConcat5("a").displayName, is, "concat5");
         },
@@ -220,6 +262,24 @@ export function behavesLikeCurry(
 
         "keeps its name after partial application of four arguments"() {
             expect(curriedConcat5("a", 1, true, 2n).displayName, is, "concat5");
+        },
+
+        "remembers one bound argument"() {
+            expect(curriedConcat5("a")[$boundArguments], equals, ["a"]);
+        },
+
+        "remembers two bound arguments"() {
+            expect(curriedConcat5("a", 1)[$boundArguments], equals, ["a", 1]);
+        },
+
+        "remembers three bound arguments"() {
+            const args = curriedConcat5("a", 1, true)[$boundArguments];
+            expect(args, equals, ["a", 1, true]);
+        },
+
+        "remembers four bound arguments"() {
+            const args = curriedConcat5("a", 1, true, 2n)[$boundArguments];
+            expect(args, equals, ["a", 1, true, 2n]);
         },
     });
 }

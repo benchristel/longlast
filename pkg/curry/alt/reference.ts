@@ -1,7 +1,9 @@
+import {$boundArguments} from "@longlast/symbols";
+
 export function curry(f: any): any {
-    const curried = nameAfter(f, (...args: any[]): any =>
+    const curried = addMetadata(f, [], (...args: any[]): any =>
         args.length < f.length
-            ? nameAfter(curried, (...moreArgs: any[]) =>
+            ? addMetadata(curried, args, (...moreArgs: any[]) =>
                   curried(...args, ...moreArgs),
               )
             : f(...args),
@@ -9,7 +11,8 @@ export function curry(f: any): any {
     return curried;
 }
 
-function nameAfter(original: any, f: any): any {
+function addMetadata(original: any, args: any[], f: any): any {
     f.displayName = original.displayName ?? original.name;
+    f[$boundArguments] = args;
     return f;
 }
