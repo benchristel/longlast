@@ -1,5 +1,11 @@
 # @longlast/curry
 
+## 0.3.1 (2025-08-30)
+
+Curried functions now have a `displayName` property, which by default is the
+original, uncurried function's `name`. Partially-applied curried functions
+inherit the `displayName` of the curried function.
+
 ## 0.3.0 (2025-08-27)
 
 ### Breaking changes
