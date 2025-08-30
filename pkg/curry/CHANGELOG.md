@@ -1,5 +1,10 @@
 # @longlast/curry
 
+## 0.3.3 (2025-08-30)
+
+Curried functions now have an `$unapplied` property, which holds arguments
+passed to partial applications of the function.
+
 ## 0.3.2 (2025-08-30)
 
 Curried functions now have a `$boundArguments` property, which holds arguments
