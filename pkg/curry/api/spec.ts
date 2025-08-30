@@ -9,9 +9,35 @@ export function behavesLikeCurry(
         "returns a function"() {
             expect(typeof _curry(() => {}), is, "function");
         },
+
+        "names the curried function after the original function"() {
+            function foo() {}
+            expect(_curry(foo).displayName, is, "foo");
+        },
+
+        "names a curried 2-ary function after the original function"() {
+            function foo(_a: 1, _b: 2) {}
+            expect(_curry(foo).displayName, is, "foo");
+        },
+
+        "names a curried 3-ary function after the original function"() {
+            function foo(_a: 1, _b: 2, _c: 3) {}
+            expect(_curry(foo).displayName, is, "foo");
+        },
+
+        "names a curried 4-ary function after the original function"() {
+            function foo(_a: 1, _b: 2, _c: 3, _d: 4) {}
+            expect(_curry(foo).displayName, is, "foo");
+        },
+
+        "names a curried 5-ary function after the original function"() {
+            function foo(_a: 1, _b: 2, _c: 3, _d: 4, _e: 5) {}
+            expect(_curry(foo).displayName, is, "foo");
+        },
     });
 
     const curriedConcat2 = _curry((s: string, x: number) => s + x);
+    curriedConcat2.displayName = "concat2";
 
     test(`a 2-ary function from ${subjectName}`, {
         "can be passed both arguments at once"() {
@@ -21,11 +47,16 @@ export function behavesLikeCurry(
         "can be passed its arguments one at a time"() {
             expect(curriedConcat2("a")(1), is, "a1");
         },
+
+        "keeps its name after partial application"() {
+            expect(curriedConcat2("a").displayName, is, "concat2");
+        },
     });
 
     const curriedConcat3 = _curry(
         (s: string, x: number, b: boolean) => s + x + b,
     );
+    curriedConcat3.displayName = "concat3";
 
     test(`a 3-ary function from ${subjectName}`, {
         "can be passed all arguments at once"() {
@@ -43,11 +74,20 @@ export function behavesLikeCurry(
         "can be passed one argument, then two"() {
             expect(curriedConcat3("a")(1, true), is, "a1true");
         },
+
+        "keeps its name after partial application of one argument"() {
+            expect(curriedConcat3("a").displayName, is, "concat3");
+        },
+
+        "keeps its name after partial application of two arguments"() {
+            expect(curriedConcat3("a", 1).displayName, is, "concat3");
+        },
     });
 
     const curriedConcat4 = _curry(
         (a: string, b: number, c: boolean, d: BigInt) => a + b + c + d,
     );
+    curriedConcat4.displayName = "concat4";
 
     test(`a 4-ary function from ${subjectName}`, {
         "can be passed all arguments at once"() {
@@ -81,12 +121,25 @@ export function behavesLikeCurry(
         "can be passed its arguments 1, 1, 2"() {
             expect(curriedConcat4("a")(1)(true, 2n), is, "a1true2");
         },
+
+        "keeps its name after partial application of one argument"() {
+            expect(curriedConcat4("a").displayName, is, "concat4");
+        },
+
+        "keeps its name after partial application of two arguments"() {
+            expect(curriedConcat4("a", 1).displayName, is, "concat4");
+        },
+
+        "keeps its name after partial application of three arguments"() {
+            expect(curriedConcat4("a", 1, true).displayName, is, "concat4");
+        },
     });
 
     const curriedConcat5 = _curry(
         (a: string, b: number, c: boolean, d: BigInt, e: string) =>
             a + b + c + d + e,
     );
+    curriedConcat5.displayName = "concat5";
 
     test(`a 5-ary function from ${subjectName}`, {
         "can be passed all arguments at once"() {
@@ -151,6 +204,22 @@ export function behavesLikeCurry(
 
         "can be passed its arguments 1, 1, 1, 2"() {
             expect(curriedConcat5("a")(1)(true)(2n, "b"), is, "a1true2b");
+        },
+
+        "keeps its name after partial application of one argument"() {
+            expect(curriedConcat5("a").displayName, is, "concat5");
+        },
+
+        "keeps its name after partial application of two arguments"() {
+            expect(curriedConcat5("a", 1).displayName, is, "concat5");
+        },
+
+        "keeps its name after partial application of three arguments"() {
+            expect(curriedConcat5("a", 1, true).displayName, is, "concat5");
+        },
+
+        "keeps its name after partial application of four arguments"() {
+            expect(curriedConcat5("a", 1, true, 2n).displayName, is, "concat5");
         },
     });
 }

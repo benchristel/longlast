@@ -1,9 +1,15 @@
 export function curry(f: any): any {
-    return function curried(...args: any[]) {
-        if (args.length < f.length) {
-            return (...moreArgs: any[]) => curried(...args, ...moreArgs);
-        } else {
-            return f(...args);
-        }
-    };
+    const curried = nameAfter(f, (...args: any[]): any =>
+        args.length < f.length
+            ? nameAfter(curried, (...moreArgs: any[]) =>
+                  curried(...args, ...moreArgs),
+              )
+            : f(...args),
+    );
+    return curried;
+}
+
+function nameAfter(original: any, f: any): any {
+    f.displayName = original.displayName ?? original.name;
+    return f;
 }

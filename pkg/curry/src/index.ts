@@ -77,6 +77,21 @@ export function curry(f: AnyFunction): AnyFunction {
 }
 
 /**
+ * A one-argument (unary) function created by partially applying a curried
+ * function.
+ *
+ * This type only exists to declare the `displayName` property.
+ *
+ * @typeParam A - the type of the function's argument
+ * @typeParam Return - the function's return type
+ */
+
+export interface Curried1<A, Return> {
+    (a: A): Return;
+    displayName: string;
+}
+
+/**
  * A two-argument (binary) curried function.
  *
  * @typeParam A - the type of `f`'s first argument
@@ -93,7 +108,9 @@ export interface Curried2<A, B, Return> {
     /**
      * Returns a function that takes the remaining argument and calls `f`.
      */
-    (a: A): (b: B) => Return;
+    (a: A): Curried1<B, Return>;
+
+    displayName: string;
 
     /** @hidden */
     [$nonUserConstructible]: true;
@@ -117,13 +134,15 @@ export interface Curried3<A, B, C, Return> {
     /**
      * Returns a function that takes the remaining argument and calls `f`.
      */
-    (a: A, b: B): (c: C) => Return;
+    (a: A, b: B): Curried1<C, Return>;
 
     /**
      * Returns a curried function that takes the remaining arguments and calls
      * `f`.
      */
     (a: A): Curried2<B, C, Return>;
+
+    displayName: string;
 
     /** @hidden */
     [$nonUserConstructible]: true;
@@ -148,7 +167,7 @@ export interface Curried4<A, B, C, D, Return> {
     /**
      * Returns a function that takes the remaining argument and calls `f`.
      */
-    (a: A, b: B, c: C): (d: D) => Return;
+    (a: A, b: B, c: C): Curried1<D, Return>;
 
     /**
      * Returns a curried function that takes the remaining arguments and calls
@@ -161,6 +180,8 @@ export interface Curried4<A, B, C, D, Return> {
      * `f`.
      */
     (a: A): Curried3<B, C, D, Return>;
+
+    displayName: string;
 
     /** @hidden */
     [$nonUserConstructible]: true;
@@ -186,7 +207,7 @@ export interface Curried5<A, B, C, D, E, Return> {
     /**
      * Returns a function that takes the remaining argument and calls `f`.
      */
-    (a: A, b: B, c: C, d: D): (e: E) => Return;
+    (a: A, b: B, c: C, d: D): Curried1<E, Return>;
 
     /**
      * Returns a curried function that takes the remaining arguments and calls
@@ -206,6 +227,8 @@ export interface Curried5<A, B, C, D, E, Return> {
      */
     (a: A): Curried4<B, C, D, E, Return>;
 
+    displayName: string;
+
     /** @hidden */
     [$nonUserConstructible]: true;
 }
@@ -213,37 +236,47 @@ export interface Curried5<A, B, C, D, E, Return> {
 declare const $nonUserConstructible: unique symbol;
 
 function curry2(f: AnyFunction): AnyFunction {
-    return function curried(a: any, b: any): AnyFunction {
+    return nameAfter(f, function curried(a: any, b: any): AnyFunction {
         switch (arguments.length) {
             case 1:
-                return (b: any) => f(a, b);
+                return nameAfter(curried, (b: any) => f(a, b));
             default:
                 return f(a, b);
         }
-    };
+    });
 }
 
 function curry3(f: AnyFunction): AnyFunction {
-    return function curried(a: any, b: any, c: any): AnyFunction {
+    return nameAfter(f, function curried(a: any, b: any, c: any): AnyFunction {
         switch (arguments.length) {
             case 1:
-                return curry2((b: any, c: any) => f(a, b, c));
+                return nameAfter(
+                    curried,
+                    curry2((b: any, c: any) => f(a, b, c)),
+                );
             case 2:
-                return (c: any) => f(a, b, c);
+                return nameAfter(curried, (c: any) => f(a, b, c));
             default:
                 return f(a, b, c);
         }
-    };
+    });
 }
 
 function curryVarargs(f: AnyFunction): AnyFunction {
-    return function curried(...args: any[]) {
+    return nameAfter(f, function curried(...args: any[]) {
         if (args.length < f.length) {
-            return (...moreArgs: any[]) => curried(...args, ...moreArgs);
+            return nameAfter(curried, (...moreArgs: any[]) =>
+                curried(...args, ...moreArgs),
+            );
         } else {
             return f(...args);
         }
-    };
+    });
+}
+
+function nameAfter(original: any, f: any): any {
+    f.displayName = original.displayName ?? original.name;
+    return f;
 }
 
 // TODO: move this type to its own package
