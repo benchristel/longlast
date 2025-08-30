@@ -1,5 +1,9 @@
 # @longlast/symbols
 
+## 0.0.5 (2025-08-30)
+
+This release adds an `$unapplied` symbol for use by curried functions.
+
 ## 0.0.4 (2025-08-30)
 
 This release adds a `$boundArguments` symbol for use by curried functions.
