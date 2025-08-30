@@ -2,7 +2,7 @@
  * @module curry
  */
 
-import {$boundArguments} from "@longlast/symbols";
+import {$boundArguments, $unapplied} from "@longlast/symbols";
 
 /**
  * @param f - the function to curry
@@ -91,6 +91,7 @@ export function curry(f: AnyFunction): AnyFunction {
 export interface Curried1<A, Return> {
     (a: A): Return;
     [$boundArguments]: unknown[];
+    [$unapplied]: AnyFunction;
     displayName: string;
 }
 
@@ -116,6 +117,8 @@ export interface Curried2<A, B, Return> {
     displayName: string;
 
     [$boundArguments]: unknown[];
+
+    [$unapplied]: AnyFunction;
 
     /** @hidden */
     [$nonUserConstructible]: true;
@@ -150,6 +153,8 @@ export interface Curried3<A, B, C, Return> {
     displayName: string;
 
     [$boundArguments]: unknown[];
+
+    [$unapplied]: AnyFunction;
 
     /** @hidden */
     [$nonUserConstructible]: true;
@@ -191,6 +196,8 @@ export interface Curried4<A, B, C, D, Return> {
     displayName: string;
 
     [$boundArguments]: unknown[];
+
+    [$unapplied]: AnyFunction;
 
     /** @hidden */
     [$nonUserConstructible]: true;
@@ -239,6 +246,8 @@ export interface Curried5<A, B, C, D, E, Return> {
     displayName: string;
 
     [$boundArguments]: unknown[];
+
+    [$unapplied]: AnyFunction;
 
     /** @hidden */
     [$nonUserConstructible]: true;
@@ -291,6 +300,7 @@ function curryVarargs(f: AnyFunction): AnyFunction {
 
 function addMetadata(original: any, args: any[], f: any): any {
     f.displayName = original.displayName ?? original.name;
+    f[$unapplied] = original[$unapplied] ?? f;
     f[$boundArguments] = args;
     return f;
 }

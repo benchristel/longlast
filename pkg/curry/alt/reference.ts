@@ -1,4 +1,4 @@
-import {$boundArguments} from "@longlast/symbols";
+import {$boundArguments, $unapplied} from "@longlast/symbols";
 
 export function curry(f: any): any {
     const curried = addMetadata(f, [], (...args: any[]): any =>
@@ -14,5 +14,6 @@ export function curry(f: any): any {
 function addMetadata(original: any, args: any[], f: any): any {
     f.displayName = original.displayName ?? original.name;
     f[$boundArguments] = args;
+    f[$unapplied] = original[$unapplied] ?? f;
     return f;
 }

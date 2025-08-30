@@ -1,6 +1,6 @@
 import {test, expect, is, equals} from "@benchristel/taste";
 import {type curry} from "#@longlast/curry";
-import {$boundArguments} from "@longlast/symbols";
+import {$boundArguments, $unapplied} from "@longlast/symbols";
 
 export function behavesLikeCurry(
     _curry: typeof curry,
@@ -35,6 +35,30 @@ export function behavesLikeCurry(
             function foo(_a: 1, _b: 2, _c: 3, _d: 4, _e: 5) {}
             expect(_curry(foo).displayName, is, "foo");
         },
+
+        "sets the $unapplied property on a 2-ary curried function"() {
+            function foo(_a: 1, _b: 2) {}
+            const curried = _curry(foo);
+            expect(curried[$unapplied], is, curried);
+        },
+
+        "sets the $unapplied property on a 3-ary curried function"() {
+            function foo(_a: 1, _b: 2, _c: 3) {}
+            const curried = _curry(foo);
+            expect(curried[$unapplied], is, curried);
+        },
+
+        "sets the $unapplied property on a 4-ary curried function"() {
+            function foo(_a: 1, _b: 2, _c: 3, _d: 4) {}
+            const curried = _curry(foo);
+            expect(curried[$unapplied], is, curried);
+        },
+
+        "sets the $unapplied property on a 5-ary curried function"() {
+            function foo(_a: 1, _b: 2, _c: 3, _d: 4, _e: 5) {}
+            const curried = _curry(foo);
+            expect(curried[$unapplied], is, curried);
+        },
     });
 
     const curriedConcat2 = _curry((s: string, x: number) => s + x);
@@ -55,6 +79,10 @@ export function behavesLikeCurry(
 
         "keeps its name after partial application"() {
             expect(curriedConcat2("a").displayName, is, "concat2");
+        },
+
+        "remembers the unapplied function after partial application"() {
+            expect(curriedConcat2("a")[$unapplied], is, curriedConcat2);
         },
 
         "remembers its bound argument"() {
@@ -94,6 +122,14 @@ export function behavesLikeCurry(
 
         "keeps its name after partial application of two arguments"() {
             expect(curriedConcat3("a", 1).displayName, is, "concat3");
+        },
+
+        "remembers the unapplied function after partial application of one argument"() {
+            expect(curriedConcat3("a")[$unapplied], is, curriedConcat3);
+        },
+
+        "remembers the unapplied function after partial application of two arguments"() {
+            expect(curriedConcat3("a", 1)[$unapplied], is, curriedConcat3);
         },
 
         "remembers one bound argument"() {
@@ -157,6 +193,19 @@ export function behavesLikeCurry(
 
         "keeps its name after partial application of three arguments"() {
             expect(curriedConcat4("a", 1, true).displayName, is, "concat4");
+        },
+
+        "remembers the unapplied function after partial application of one argument"() {
+            expect(curriedConcat4("a")[$unapplied], is, curriedConcat4);
+        },
+
+        "remembers the unapplied function after partial application of two arguments"() {
+            expect(curriedConcat4("a", 1)[$unapplied], is, curriedConcat4);
+        },
+
+        "remembers the unapplied function after partial application of three arguments"() {
+            const unapplied = curriedConcat4("a", 1, true)[$unapplied];
+            expect(unapplied, is, curriedConcat4);
         },
 
         "remembers one bound argument"() {
