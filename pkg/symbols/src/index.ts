@@ -8,3 +8,13 @@
  */
 
 export const $equals: unique symbol = Symbol();
+
+/**
+ * Identifies a property that holds an array of arguments that have been bound
+ * to this function by partial application.
+ *
+ * @see {@link curry}
+ * @see https://en.wikipedia.org/wiki/Partial_application
+ */
+
+export const $boundArguments: unique symbol = Symbol();
