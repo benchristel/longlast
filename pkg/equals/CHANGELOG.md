@@ -1,5 +1,9 @@
 # @longlast/equals
 
+## 0.4.4 (2025-08-30)
+
+This patch release updates the dependency on `@longlast/curry` to `^0.3.0`.
+
 ## 0.4.3 (2025-08-27)
 
 This patch release just adds installation instructions and a usage example to
