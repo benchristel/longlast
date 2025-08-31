@@ -17,6 +17,7 @@
         "#@longlast/equals": "./src/index.ts"
     },
     "dependencies": {
-        "@longlast/curry": "^0.3.0"
+        "@longlast/curry": "^0.3.3",
+        "@longlast/symbols": "^0.0.5"
     }
 }

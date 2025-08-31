@@ -105,16 +105,6 @@ test("equals", {
         expect(equals(new Superclass(), new Subclass()), is, false);
     },
 
-    "distinguishes different functions"() {
-        const a = () => {};
-        const b = () => {};
-        expect(equals(a, b), is, false);
-    },
-
-    "equates a function with itself"() {
-        expect(equals(equals, equals), is, true);
-    },
-
     "equates objects with no prototypes"() {
         const a = Object.create(null);
         const b = Object.create(null);

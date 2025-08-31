@@ -1,4 +1,5 @@
 import {curry, type Curried2} from "@longlast/curry";
+import {$boundArguments, $unapplied} from "@longlast/symbols";
 
 export const equals: Curried2<unknown, unknown, boolean> = curry(_equals);
 
@@ -31,6 +32,18 @@ function _equals(a: unknown, b: unknown): boolean {
             equalSets(new Set(aKeys), new Set(bKeys)) &&
             aKeys.every((k) => equals(a[k], b[k])) &&
             Object.getPrototypeOf(a) === Object.getPrototypeOf(b)
+        );
+    }
+    if (typeof a === "function" && typeof b === "function") {
+        const aArgs = (a as any)[$boundArguments];
+        const bArgs = (b as any)[$boundArguments];
+        const aUnapplied = (a as any)[$unapplied];
+        const bUnapplied = (b as any)[$unapplied];
+        return (
+            aArgs != null &&
+            aUnapplied != null &&
+            _equals(aArgs, bArgs) &&
+            aUnapplied === bUnapplied
         );
     }
     return false;

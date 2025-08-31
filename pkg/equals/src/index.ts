@@ -3,6 +3,7 @@
  */
 
 import {curry, type Curried2} from "@longlast/curry";
+import {$boundArguments, $unapplied} from "@longlast/symbols";
 
 /**
  * @function
@@ -20,6 +21,9 @@ import {curry, type Curried2} from "@longlast/curry";
  *     elements are equal (according to `equals`).
  *   - Sets are equal iff they contain the same elements. Note that set
  *     elements are _not_ deeply compared.
+ *   - Partially applied curried functions are equal iff they originate from
+ *     the same curried function and their bound arguments are equal
+ *     according to `equals`. See {@link curry}.
  *   - Other objects are equal iff they have the same prototype (e.g. the same
  *     class) and the same set of enumerable string-keyed properties, and the
  *     values of their corresponding properties are equal (according to
@@ -52,11 +56,22 @@ function _equals(a: unknown, b: unknown): boolean {
             Object.getPrototypeOf(a) === Object.getPrototypeOf(b)
         );
     }
+    if (Array.isArray(a) && Array.isArray(b)) {
+        return a.length === b.length && a.every((_, i) => _equals(a[i], b[i]));
+    }
     if (a instanceof Set && b instanceof Set) {
         return a.size === b.size && [...a].every((v) => b.has(v));
     }
-    if (Array.isArray(a) && Array.isArray(b)) {
-        return a.length === b.length && a.every((_, i) => equals(a[i], b[i]));
+    if (typeof a === "function" && typeof b === "function") {
+        const aArgs = (a as any)[$boundArguments];
+        const bArgs = (b as any)[$boundArguments];
+        const aUnapplied = (a as any)[$unapplied];
+        const bUnapplied = (b as any)[$unapplied];
+        return (
+            aUnapplied != null &&
+            aUnapplied === bUnapplied &&
+            _equals(aArgs, bArgs)
+        );
     }
     if (a && b && typeof a === "object" && protoOf(a) === protoOf(b)) {
         const bKeys = new Set(Object.keys(b));
@@ -64,7 +79,7 @@ function _equals(a: unknown, b: unknown): boolean {
             if (!bKeys.has(key)) {
                 return false;
             }
-            if (!equals((a as any)[key], (b as any)[key])) {
+            if (!_equals((a as any)[key], (b as any)[key])) {
                 return false;
             }
         }
