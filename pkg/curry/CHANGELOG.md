@@ -1,5 +1,15 @@
 # @longlast/curry
 
+## 0.4.0 (2025-09-01)
+
+### Breaking changes
+
+This release of `@longlast/curry` updates the dependency on `@longlast/symbols`
+to `^1.0.0`. If you install this version of `@longlast/curry`, all your other
+packages must also be using a 1.x.x version of `@longlast/symbols`. Otherwise,
+you will not be able to access the `$boundArguments` and `$unapplied`
+properties of curried functions.
+
 ## 0.3.3 (2025-08-30)
 
 Curried functions now have an `$unapplied` property, which holds arguments
