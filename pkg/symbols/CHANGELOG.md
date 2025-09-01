@@ -1,5 +1,10 @@
 # @longlast/symbols
 
+## 1.0.0-rc.1 (2025-09-01)
+
+This release updates documentation and makes internal improvements in
+preparation for the 1.0.0 release.
+
 ## 0.0.5 (2025-08-30)
 
 This release adds an `$unapplied` symbol for use by curried functions.
