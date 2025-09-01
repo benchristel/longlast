@@ -1,5 +1,17 @@
 # @longlast/symbols
 
+## 1.0.0 (2025-09-01)
+
+This is the first stable release of `@longlast/symbols`! There are no changes
+in this release; the code is substantively the same as `0.0.5` and
+`1.0.0-rc.1`.
+
+### Breaking changes
+
+If you install version `1.x.x` of `@longlast/symbols`, _all_ packages in your
+project must be upgraded to also depend on a `1.x.x` version. If multiple 
+versions of `@longlast/symbols` are installed, stuff will break.
+
 ## 1.0.0-rc.1 (2025-09-01)
 
 This release updates documentation and makes internal improvements in
