@@ -104,20 +104,10 @@ export interface Curried1<A, Return> {
  */
 
 export interface Curried2<A, B, Return> {
-    /**
-     * Calls `f` and returns its return value.
-     */
     (a: A, b: B): Return;
-
-    /**
-     * Returns a function that takes the remaining argument and calls `f`.
-     */
     (a: A): Curried1<B, Return>;
-
     displayName: string;
-
     [$boundArguments]: unknown[];
-
     [$unapplied]: AnyFunction;
 
     /** @hidden */
@@ -134,26 +124,11 @@ export interface Curried2<A, B, Return> {
  */
 
 export interface Curried3<A, B, C, Return> {
-    /**
-     * Calls `f` and returns its return value.
-     */
     (a: A, b: B, c: C): Return;
-
-    /**
-     * Returns a function that takes the remaining argument and calls `f`.
-     */
     (a: A, b: B): Curried1<C, Return>;
-
-    /**
-     * Returns a curried function that takes the remaining arguments and calls
-     * `f`.
-     */
     (a: A): Curried2<B, C, Return>;
-
     displayName: string;
-
     [$boundArguments]: unknown[];
-
     [$unapplied]: AnyFunction;
 
     /** @hidden */
@@ -171,32 +146,12 @@ export interface Curried3<A, B, C, Return> {
  */
 
 export interface Curried4<A, B, C, D, Return> {
-    /**
-     * Calls `f` and returns its return value.
-     */
     (a: A, b: B, c: C, d: D): Return;
-
-    /**
-     * Returns a function that takes the remaining argument and calls `f`.
-     */
     (a: A, b: B, c: C): Curried1<D, Return>;
-
-    /**
-     * Returns a curried function that takes the remaining arguments and calls
-     * `f`.
-     */
     (a: A, b: B): Curried2<C, D, Return>;
-
-    /**
-     * Returns a curried function that takes the remaining arguments and calls
-     * `f`.
-     */
     (a: A): Curried3<B, C, D, Return>;
-
     displayName: string;
-
     [$boundArguments]: unknown[];
-
     [$unapplied]: AnyFunction;
 
     /** @hidden */
@@ -215,38 +170,13 @@ export interface Curried4<A, B, C, D, Return> {
  */
 
 export interface Curried5<A, B, C, D, E, Return> {
-    /**
-     * Calls `f` and returns its return value.
-     */
     (a: A, b: B, c: C, d: D, e: E): Return;
-
-    /**
-     * Returns a function that takes the remaining argument and calls `f`.
-     */
     (a: A, b: B, c: C, d: D): Curried1<E, Return>;
-
-    /**
-     * Returns a curried function that takes the remaining arguments and calls
-     * `f`.
-     */
     (a: A, b: B, c: C): Curried2<D, E, Return>;
-
-    /**
-     * Returns a curried function that takes the remaining arguments and calls
-     * `f`.
-     */
     (a: A, b: B): Curried3<C, D, E, Return>;
-
-    /**
-     * Returns a curried function that takes the remaining arguments and calls
-     * `f`.
-     */
     (a: A): Curried4<B, C, D, E, Return>;
-
     displayName: string;
-
     [$boundArguments]: unknown[];
-
     [$unapplied]: AnyFunction;
 
     /** @hidden */
