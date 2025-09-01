@@ -17,6 +17,6 @@
         "#@longlast/curry": "./src/index.ts"
     },
     "dependencies": {
-        "@longlast/symbols": "^0.0.5"
+        "@longlast/symbols": "^1.0.0"
     }
 }
