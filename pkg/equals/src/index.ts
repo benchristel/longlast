@@ -3,7 +3,7 @@
  */
 
 import {curry, type Curried2} from "@longlast/curry";
-import {$boundArguments, $unapplied} from "@longlast/symbols";
+import {$boundArguments, $equals, $unapplied} from "@longlast/symbols";
 
 /**
  * @function
@@ -29,11 +29,39 @@ import {$boundArguments, $unapplied} from "@longlast/symbols";
  *     values of their corresponding properties are equal (according to
  *     `equals`).
  *
+ * You can customize how `equals()` compares values of a specific class by
+ * using the {@link symbols.$equals $equals} symbol to define a method on that class. For
+ * example:
+ *
+ * ```ts
+ * import {$equals} from "@longlast/symbols"
+ *
+ * class HttpError extends Error {
+ *     private statusCode: number;
+ *     constructor(message: string, statusCode: number) {
+ *         super(message);
+ *         this.statusCode = statusCode;
+ *     }
+ *
+ *     [$equals](other: unknown) {
+ *         return other instanceof HttpError &&
+ *             other.statusCode === this.statusCode &&
+ *             other.message === this.message;
+ *     }
+ * }
+ * ```
+ *
+ * Note that this makes the comparison asymmetrical: `a` is considered equal to
+ * `b` iff `a[$equals](b)` returns truthy. The `$equals` method will always be
+ * called on the *first* argument to `equals()`.
+ *
+ * `equals()` is curried. See {@link curry}.
+ *
+ * ## Limitations
+ *
  * `equals()` can throw a `RangeError` if one of its arguments contains a
  * reference cycle. Avoid passing mutable objects to `equals()` unless you know
  * that they do not contain cycles.
- *
- * `equals()` is curried.
  */
 
 export const equals: Curried2<unknown, unknown, boolean> = curry(_equals);
@@ -43,6 +71,9 @@ function _equals(a: unknown, b: unknown): boolean {
     // in pkg/equals/alt/reference.ts.
     if (Object.is(a, b)) {
         return true;
+    }
+    if (a != null && typeof (a as any)[$equals] === "function") {
+        return Boolean((a as any)[$equals](b));
     }
     if (a instanceof Date && b instanceof Date) {
         return Object.is(+a, +b);
