@@ -1,6 +1,6 @@
 {
     "name": "@longlast/equals",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "description": "Deeply compares objects",
     "license": "MIT",
     "author": "Ben Christel (https://benchristel.com/)",

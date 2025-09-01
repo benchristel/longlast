@@ -1,5 +1,10 @@
 # @longlast/equals
 
+## 0.5.1 (2025-09-01)
+
+Custom object comparison via the `$equals` symbol-named method now takes 
+precedence over all other comparisons, including `Object.is()`.
+
 ## 0.5.0 (2025-09-01)
 
 The `equals()` function now compares partially-applied curried functions,
