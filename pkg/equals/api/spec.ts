@@ -70,6 +70,20 @@ export function behavesLikeEquals(
             expect(_equals(a, b), is, false);
         },
 
+        "uses $equals in preference to Object.is() comparison"() {
+            function aNumberGreaterThan(threshold: number): unknown {
+                return {
+                    [$equals](other: unknown) {
+                        return typeof other === "number" && other > threshold;
+                    },
+                };
+            }
+            const aPositive = aNumberGreaterThan(0);
+            expect(_equals(aPositive, 1), is, true);
+            expect(_equals(aPositive, 0), is, false);
+            expect(_equals(aPositive, aPositive), is, false);
+        },
+
         /*
          * Null and undefined
          */

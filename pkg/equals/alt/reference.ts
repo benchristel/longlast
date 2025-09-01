@@ -4,11 +4,11 @@ import {$boundArguments, $equals, $unapplied} from "@longlast/symbols";
 export const equals: Curried2<unknown, unknown, boolean> = curry(_equals);
 
 function _equals(a: unknown, b: unknown): boolean {
-    if (Object.is(a, b)) {
-        return true;
-    }
     if (a != null && typeof (a as any)[$equals] === "function") {
         return Boolean((a as any)[$equals](b));
+    }
+    if (Object.is(a, b)) {
+        return true;
     }
     if (a instanceof Date && b instanceof Date) {
         return Object.is(+a, +b);

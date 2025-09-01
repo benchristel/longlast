@@ -10,7 +10,7 @@ import {$boundArguments, $equals, $unapplied} from "@longlast/symbols";
  * Deeply compares two values, returning true if they're equal and false
  * otherwise. The following criteria are used to determine equality:
  *
- *   - All values are always equal to themselves.
+ *   - All values are equal to themselves.
  *   - Primitives `a` and `b` are equal iff `Object.is(a, b)`. This is similar
  *     to `===` comparison, but treats `NaN` as equal to `NaN` and `0` as
  *     different from `-0`.
@@ -69,11 +69,11 @@ export const equals: Curried2<unknown, unknown, boolean> = curry(_equals);
 function _equals(a: unknown, b: unknown): boolean {
     // This is an optimized implementation. There is a simpler, equivalent one
     // in pkg/equals/alt/reference.ts.
-    if (Object.is(a, b)) {
-        return true;
-    }
     if (a != null && typeof (a as any)[$equals] === "function") {
         return Boolean((a as any)[$equals](b));
+    }
+    if (Object.is(a, b)) {
+        return true;
     }
     if (a instanceof Date && b instanceof Date) {
         return Object.is(+a, +b);
