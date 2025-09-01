@@ -30,8 +30,8 @@ import {$boundArguments, $equals, $unapplied} from "@longlast/symbols";
  *     `equals`).
  *
  * You can customize how `equals()` compares values of a specific class by
- * using the {@link symbols.$equals $equals} symbol to define a method on that class. For
- * example:
+ * using the {@link symbols.$equals $equals} symbol to define a method on that
+ * class. For example:
  *
  * ```ts
  * import {$equals} from "@longlast/symbols"
