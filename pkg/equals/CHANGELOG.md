@@ -1,5 +1,22 @@
 # @longlast/equals
 
+## 0.5.0 (2025-09-01)
+
+The `equals()` function now compares partially-applied curried functions,
+considering them equal if they originate from the same curried function and
+have equal bound arguments.
+
+The behavior of `equals()` can now be customized per-class by defining an
+`$equals` symbol-named method on the class. See the docs for details.
+
+### Breaking changes
+
+This release of `@longlast/equals` updates the dependency on
+`@longlast/symbols` to `^1.0.0`. If you install this version of
+`@longlast/equals`, all your other packages must also be using a 1.x.x version
+of `@longlast/symbols`. Otherwise, the new features listed above might not
+work.
+
 ## 0.4.4 (2025-08-30)
 
 This patch release updates the dependency on `@longlast/curry` to `^0.3.0`.
