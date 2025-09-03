@@ -93,6 +93,9 @@ export interface Curried1<A, Return> {
     [$boundArguments]: unknown[];
     [$unapplied]: AnyFunction;
     displayName: string;
+
+    /** @hidden */
+    [$nonUserConstructible]: true;
 }
 
 /**
