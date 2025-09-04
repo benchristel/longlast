@@ -201,10 +201,7 @@ function curry2(f: AnyFunction): AnyFunction {
                 return f(a, b);
         }
     }
-    curried.displayName = getName(f);
-    curried[$boundArguments] = [] as any;
-    curried[$unapplied] = curried;
-    return curried;
+    return initMetadata(f, curried);
 }
 
 function curry3(f: AnyFunction): AnyFunction {
@@ -230,10 +227,7 @@ function curry3(f: AnyFunction): AnyFunction {
                 return f(a, b, c);
         }
     }
-    curried.displayName = getName(f);
-    curried[$boundArguments] = [] as any;
-    curried[$unapplied] = curried;
-    return curried;
+    return initMetadata(f, curried);
 }
 
 function curryVarargs(f: AnyFunction): AnyFunction {
@@ -249,7 +243,11 @@ function curryVarargs(f: AnyFunction): AnyFunction {
             return f(...args);
         }
     }
-    curried.displayName = getName(f);
+    return initMetadata(f, curried);
+}
+
+function initMetadata(original: any, curried: any): any {
+    curried.displayName = getName(original);
     curried[$boundArguments] = [] as any;
     curried[$unapplied] = curried;
     return curried;
