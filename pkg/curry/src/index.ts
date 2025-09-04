@@ -192,50 +192,75 @@ function curry2(f: AnyFunction): AnyFunction {
     function curried(a: any, b: any): AnyFunction {
         switch (arguments.length) {
             case 1:
-                return addMetadata(curried, [a], (b: any) => f(a, b));
+                const partial = (b: any) => f(a, b) as Curried1<any, any>;
+                partial.displayName = getName(curried);
+                partial[$boundArguments] = getArgs(curried).concat([a]);
+                partial[$unapplied] = curried;
+                return partial;
             default:
                 return f(a, b);
         }
     }
-    return addMetadata(f, [], curried);
+    curried.displayName = getName(f);
+    curried[$boundArguments] = [] as any;
+    curried[$unapplied] = curried;
+    return curried;
 }
 
 function curry3(f: AnyFunction): AnyFunction {
     function curried(a: any, b: any, c: any): AnyFunction {
         switch (arguments.length) {
-            case 1:
-                return addMetadata(
-                    curried,
-                    [a],
-                    curry2((b: any, c: any) => f(a, b, c)),
-                );
-            case 2:
-                return addMetadata(curried, [a, b], (c: any) => f(a, b, c));
+            case 1: {
+                const partial = curry2((b: any, c: any) =>
+                    f(a, b, c),
+                ) as Curried2<any, any, any>;
+                partial.displayName = getName(curried);
+                partial[$boundArguments] = getArgs(curried).concat([a]);
+                partial[$unapplied] = curried;
+                return partial;
+            }
+            case 2: {
+                const partial = (c: any) => f(a, b, c);
+                partial.displayName = getName(curried);
+                partial[$boundArguments] = getArgs(curried).concat([a, b]);
+                partial[$unapplied] = curried;
+                return partial;
+            }
             default:
                 return f(a, b, c);
         }
     }
-    return addMetadata(f, [], curried);
+    curried.displayName = getName(f);
+    curried[$boundArguments] = [] as any;
+    curried[$unapplied] = curried;
+    return curried;
 }
 
 function curryVarargs(f: AnyFunction): AnyFunction {
     function curried(...args: any[]): any {
         if (args.length < f.length) {
-            return addMetadata(curried, args, (...moreArgs: any[]) =>
-                curried(...args, ...moreArgs),
-            );
+            const partial: any = (...moreArgs: any[]) =>
+                curried(...args, ...moreArgs);
+            partial.displayName = getName(curried);
+            partial[$boundArguments] = getArgs(curried).concat(args);
+            partial[$unapplied] = curried;
+            return partial;
         } else {
             return f(...args);
         }
     }
-    return addMetadata(f, [], curried);
+    curried.displayName = getName(f);
+    curried[$boundArguments] = [] as any;
+    curried[$unapplied] = curried;
+    return curried;
 }
 
-function addMetadata(original: any, args: any[], f: any): any {
-    f.displayName = original.displayName ?? original.name;
-    f[$unapplied] = original[$unapplied] ?? f;
-    f[$boundArguments] = args;
-    return f;
+function getName(f: any): string {
+    return f.displayName ?? f.name;
+}
+
+function getArgs(f: any): unknown[] {
+    return f[$boundArguments] ?? [];
 }
 
 // TODO: move this type to its own package
