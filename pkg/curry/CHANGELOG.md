@@ -1,5 +1,19 @@
 # @longlast/curry
 
+## 0.4.1 (2025-09-04)
+
+This release fixes a bug where partially applied 3-ary curried functions would
+only remember the arguments from the most recent application. For example, this
+code:
+
+```js
+const add3 = curry((a, b, c) => a + b + c);
+console.log(add3(1)(2)[$boundArguments])
+```
+
+would incorrectly print `[2]` instead of `[1, 2]` in previous releases of
+`@longlast/curry`.
+
 ## 0.4.0 (2025-09-01)
 
 ### Breaking changes
