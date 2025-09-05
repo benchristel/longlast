@@ -189,7 +189,7 @@ export interface Curried5<A, B, C, D, E, Return> {
 declare const $nonUserConstructible: unique symbol;
 
 function curry2(f: AnyFunction): AnyFunction {
-    function curried(a: any, b: any): AnyFunction {
+    function curried(a: any, b: any) {
         switch (arguments.length) {
             case 1:
                 return copyMetadata(curried, [a], (b: any) => f(a, b));
@@ -201,7 +201,7 @@ function curry2(f: AnyFunction): AnyFunction {
 }
 
 function curry3(f: AnyFunction): AnyFunction {
-    function curried(a: any, b: any, c: any): AnyFunction {
+    function curried(a: any, b: any, c: any) {
         switch (arguments.length) {
             case 1: {
                 return copyMetadata(
@@ -221,7 +221,7 @@ function curry3(f: AnyFunction): AnyFunction {
 }
 
 function curryVarargs(f: AnyFunction): AnyFunction {
-    function curried(...args: any[]): any {
+    function curried(...args: any[]) {
         if (args.length < f.length) {
             return copyMetadata(curried, args, (...moreArgs: any[]) =>
                 curried(...args, ...moreArgs),
@@ -233,14 +233,14 @@ function curryVarargs(f: AnyFunction): AnyFunction {
     return initMetadata(f, curried);
 }
 
-function initMetadata(original: any, curried: any): any {
+function initMetadata(original: any, curried: any) {
     curried.displayName = getName(original);
     curried[$boundArguments] = [] as any;
     curried[$unapplied] = curried;
     return curried;
 }
 
-function copyMetadata(unapplied: any, args: any[], partiallyApplied: any): any {
+function copyMetadata(unapplied: any, args: any[], partiallyApplied: any) {
     partiallyApplied.displayName = getName(unapplied);
     partiallyApplied[$boundArguments] = getArgs(unapplied).concat(args);
     partiallyApplied[$unapplied] = unapplied;
