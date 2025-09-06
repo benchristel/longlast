@@ -1,5 +1,10 @@
 # @longlast/symbols
 
+## 1.0.1 (2025-09-05)
+
+This release just updates the `package.json` file to link to the project
+homepage.
+
 ## 1.0.0 (2025-09-01)
 
 This is the first stable release of `@longlast/symbols`! There are no changes
