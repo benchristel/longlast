@@ -1,5 +1,10 @@
 # @longlast/equals
 
+## 0.5.2 (2025-09-05)
+
+This release just updates the `package.json` file to link to the project
+homepage.
+
 ## 0.5.1 (2025-09-01)
 
 Custom object comparison via the `$equals` symbol-named method now takes 
