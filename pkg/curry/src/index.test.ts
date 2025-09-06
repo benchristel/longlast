@@ -1,15 +1,31 @@
 import {curry} from "#@longlast/curry";
-import {$boundArguments} from "@longlast/symbols";
-import {test, expect, equals} from "@benchristel/taste";
+import {$boundArguments, $unapplied} from "@longlast/symbols";
+import {test, expect, equals, is} from "@benchristel/taste";
 import {behavesLikeCurry} from "../api/spec.ts";
 
 behavesLikeCurry(curry, "curry");
+
+const add2 = curry((a: number, b: number) => a + b);
+
+test("a 2-ary curried function", {
+    "remembers all bound arguments from a sequence of calls"() {
+        expect(add2(1)[$boundArguments], equals, [1]);
+    },
+
+    "remembers the original curried function after partial application"() {
+        expect(add2(1)[$unapplied], is, add2);
+    },
+});
 
 const add3 = curry((a: number, b: number, c: number) => a + b + c);
 
 test("a 3-ary curried function", {
     "remembers all bound arguments from a sequence of calls"() {
         expect(add3(1)(2)[$boundArguments], equals, [1, 2]);
+    },
+
+    "remembers the original curried function after partial application"() {
+        expect(add3(1)(2)[$unapplied], is, add3);
     },
 });
 
@@ -22,5 +38,9 @@ test("a 4-ary curried function", {
         expect(add4(1)[$boundArguments], equals, [1]);
         expect(add4(1)(2)[$boundArguments], equals, [1, 2]);
         expect(add4(1)(2)(3)[$boundArguments], equals, [1, 2, 3]);
+    },
+
+    "remembers the original curried function after partial application"() {
+        expect(add4(1)(2)(3)[$unapplied], is, add4);
     },
 });

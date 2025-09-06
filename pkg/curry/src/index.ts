@@ -240,17 +240,22 @@ function initMetadata(original: any, curried: any) {
     return curried;
 }
 
-function copyMetadata(unapplied: any, args: any[], partiallyApplied: any) {
-    partiallyApplied.displayName = getName(unapplied);
-    partiallyApplied[$boundArguments] = getArgs(unapplied).concat(args);
-    partiallyApplied[$unapplied] = unapplied;
-    return partiallyApplied;
+function copyMetadata(source: any, args: any[], destination: any) {
+    destination.displayName = getName(source);
+    destination[$boundArguments] = getArgs(source).concat(args);
+    destination[$unapplied] = source[$unapplied];
+    return destination;
 }
 
 function getName(f: any): string {
     return f.displayName ?? f.name;
 }
 
+// TODO: make a public getBoundArguments function
+// TODO: make $boundArguments internal to this package, and deprecate it
+// in @longlast/symbols
+// TODO: use a linked list to store arguments, for performance?
+// benchmarks show a ~12% perf hit due to the array concatenation.
 function getArgs(f: any): unknown[] {
     return f[$boundArguments] ?? [];
 }
