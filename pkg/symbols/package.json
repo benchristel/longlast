@@ -2,6 +2,7 @@
     "name": "@longlast/symbols",
     "version": "1.0.0",
     "description": "Defines unique symbols for use in ubiquitous interfaces",
+    "homepage": "https://longlast.js.org/",
     "license": "MIT",
     "author": "Ben Christel (https://benchristel.com/)",
     "type": "module",

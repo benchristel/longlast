@@ -36,8 +36,7 @@ for await (const path of glob(join(root, "pkg", "*", "package.json"))) {
         },
 
         "links to the homepage"() {
-            // TODO: uncomment this test once we register the domain name
-            // expect(packageConfig.homepage, is, "https://longlast.js.org/");
+            expect(packageConfig.homepage, is, "https://longlast.js.org/");
         },
 
         "links to the GitHub repository"() {

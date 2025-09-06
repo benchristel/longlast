@@ -2,6 +2,7 @@
     "name": "@longlast/curry",
     "version": "0.4.2",
     "description": "Curries functions",
+    "homepage": "https://longlast.js.org/",
     "license": "MIT",
     "author": "Ben Christel (https://benchristel.com/)",
     "type": "module",
