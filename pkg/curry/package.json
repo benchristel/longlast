@@ -1,6 +1,6 @@
 {
     "name": "@longlast/curry",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "description": "Curries functions",
     "license": "MIT",
     "author": "Ben Christel (https://benchristel.com/)",

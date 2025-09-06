@@ -1,5 +1,10 @@
 # @longlast/curry
 
+## 0.4.2 (2025-09-05)
+
+This release fixes a bug where partially applied 3-ary curried functions had
+the `[$boundArguments]` property set incorrectly.
+
 ## 0.4.1 (2025-09-04)
 
 This release fixes a bug where partially applied 3-ary curried functions would
