@@ -1,5 +1,10 @@
 # @longlast/curry
 
+## 0.4.3 (2025-09-05)
+
+This release just updates the `package.json` file to link to the project
+homepage.
+
 ## 0.4.2 (2025-09-05)
 
 This release fixes a bug where partially applied 3-ary curried functions had
