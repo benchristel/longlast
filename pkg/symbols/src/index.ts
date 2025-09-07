@@ -2,6 +2,8 @@
  * @module symbols
  */
 
+export {$boundArguments} from "./deprecated.ts";
+
 /**
  * Identifies a method that takes one argument and compares it to `this`,
  * returning `true` if the argument is equal to `this` and `false` otherwise.
@@ -12,14 +14,14 @@
 export const $equals: unique symbol = Symbol();
 
 /**
- * Identifies a property of a function, which holds an array of arguments that
- * have been bound to this function by partial application.
+ * Identifies a method on a function, which returns an array of the arguments
+ * that have been bound to the function by partial application.
  *
  * @see {@link curry}
  * @see https://en.wikipedia.org/wiki/Partial_application
  */
 
-export const $boundArguments: unique symbol = Symbol();
+export const $getBoundArguments: unique symbol = Symbol();
 
 /**
  * Identifies a property of a partially applied curried function, which holds
