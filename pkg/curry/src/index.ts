@@ -192,7 +192,7 @@ function curry2(f: AnyFunction): AnyFunction {
     function curried(a: any, b: any) {
         switch (arguments.length) {
             case 1:
-                return copyMetadata(curried, [a], (b: any) => f(a, b));
+                return copyMetadata(curried, [a], f.bind(null, a));
             default:
                 return f(a, b);
         }
@@ -203,16 +203,10 @@ function curry2(f: AnyFunction): AnyFunction {
 function curry3(f: AnyFunction): AnyFunction {
     function curried(a: any, b: any, c: any) {
         switch (arguments.length) {
-            case 1: {
-                return copyMetadata(
-                    curried,
-                    [a],
-                    curry2((b: any, c: any) => f(a, b, c)),
-                );
-            }
-            case 2: {
-                return copyMetadata(curried, [a, b], (c: any) => f(a, b, c));
-            }
+            case 1:
+                return copyMetadata(curried, [a], curry2(f.bind(null, a)));
+            case 2:
+                return copyMetadata(curried, [a, b], f.bind(null, a, b));
             default:
                 return f(a, b, c);
         }
@@ -221,11 +215,9 @@ function curry3(f: AnyFunction): AnyFunction {
 }
 
 function curryVarargs(f: AnyFunction): AnyFunction {
-    function curried(...args: any[]) {
+    function curried(...args: any[]): any {
         if (args.length < f.length) {
-            return copyMetadata(curried, args, (...moreArgs: any[]) =>
-                curried(...args, ...moreArgs),
-            );
+            return copyMetadata(curried, args, curried.bind(null, ...args));
         } else {
             return f(...args);
         }
