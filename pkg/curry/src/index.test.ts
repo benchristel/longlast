@@ -15,6 +15,10 @@ test("a 2-ary curried function", {
     "remembers the original curried function after partial application"() {
         expect(add2(1)[$unapplied], is, add2);
     },
+
+    "can be called multiple times after partial application"() {
+        expect([1, 2, 3].map(add2(1)), equals, [2, 3, 4]);
+    },
 });
 
 const add3 = curry((a: number, b: number, c: number) => a + b + c);
@@ -26,6 +30,12 @@ test("a 3-ary curried function", {
 
     "remembers the original curried function after partial application"() {
         expect(add3(1)(2)[$unapplied], is, add3);
+    },
+
+    "can be called multiple times after partial application"() {
+        expect([1, 2, 3].map(add3(1)(2)), equals, [4, 5, 6]);
+        // Array.map passes the index as the second argument.
+        expect([1, 2, 3].map(add3(1)), equals, [2, 4, 6]);
     },
 });
 
@@ -42,5 +52,11 @@ test("a 4-ary curried function", {
 
     "remembers the original curried function after partial application"() {
         expect(add4(1)(2)(3)[$unapplied], is, add4);
+    },
+
+    "can be called multiple times after partial application"() {
+        expect([1, 2, 3].map(add4(1)(2)(3)), equals, [7, 8, 9]);
+        // Array.map passes the index as the second argument.
+        expect([1, 2, 3].map(add4(1, 2)), equals, [4, 6, 8]);
     },
 });
