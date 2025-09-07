@@ -1,5 +1,10 @@
 # @longlast/curry
 
+## 0.4.4 (2025-09-07)
+
+This release just adds a "Performance" section to the README, and makes
+internal improvements to the code.
+
 ## 0.4.3 (2025-09-05)
 
 This release just updates the `package.json` file to link to the project
