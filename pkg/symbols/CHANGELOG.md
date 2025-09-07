@@ -1,5 +1,17 @@
 # @longlast/symbols
 
+## 1.1.0 (2025-09-07)
+
+There's now a new `$getBoundArguments` symbol, and the old `$boundArguments` is
+deprecated.
+
+The purpose of the change is to optimize the performance of `curry`. In
+benchmark tests, I found that building the arguments array when partially
+applying a curried function is somewhat slow, and that calls can be sped up
+significantly by building the array only on demand. `[$getBoundArguments]` is
+the planned name for the method that gets the arguments of a partially applied
+curried function.
+
 ## 1.0.1 (2025-09-05)
 
 This release just updates the `package.json` file to link to the project
