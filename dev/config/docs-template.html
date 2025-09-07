@@ -62,6 +62,10 @@
     font-family: Vollkorn, Georgia, serif;
 }
 
+/* TODO: move this @font-face declaration to a separate CSS file with the font
+ * encoded as inline base64, and host the CSS on a CDN. That should prevent
+ * font pop-in and layout shift.
+ */
 @font-face {
     font-family: Vollkorn;
     src: url("https://cdn.jsdelivr.net/gh/benchristel/cdn@9906347e/fonts/vollkorn/Vollkorn-Regular.woff2") format("woff2");
