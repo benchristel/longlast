@@ -47,6 +47,22 @@ importers:
       '@longlast/symbols':
         specifier: ^1.0.0
         version: 1.0.0
+    devDependencies:
+      '@types/lodash':
+        specifier: ^4.17.20
+        version: 4.17.20
+      '@types/ramda':
+        specifier: ^0.31.0
+        version: 0.31.0
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      mu-lambda:
+        specifier: ^0.0.3
+        version: 0.0.3
+      ramda:
+        specifier: ^0.31.3
+        version: 0.31.3
 
   pkg/equals:
     dependencies:
@@ -101,8 +117,14 @@ packages:
   '@types/hast@3.0.4':
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
 
+  '@types/lodash@4.17.20':
+    resolution: {integrity: sha512-H3MHACvFUEiujabxhaI/ImO6gUrd8oOurg7LQtS7mbwIXA/cUqWrvBsaeJ23aZEPk1TAYkurjfMbSELfoCXlGA==}
+
   '@types/node@24.2.1':
     resolution: {integrity: sha512-DRh5K+ka5eJic8CjH7td8QpYEV6Zo10gfRkjHCO3weqZHWDtAaSTFtl4+VMqOJ4N5jcuhZ9/l+yy8rVgw7BQeQ==}
+
+  '@types/ramda@0.31.0':
+    resolution: {integrity: sha512-1lWWZ/2YiNttGcIUxQwnvMuh55GIEbn/zlpzzEojAsbxquI/TXQZCRaXsfxG1CHjlqGoqxWePkvaM/5qYHNuvQ==}
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
@@ -215,6 +237,9 @@ packages:
     resolution: {integrity: sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==}
     engines: {node: '>=16 || 14 >=14.17'}
 
+  mu-lambda@0.0.3:
+    resolution: {integrity: sha512-t5mnn/RizL/UCERDxqFQyIEMhjAbq+xohNW/hZzL40NRxkhmXIlDyjK59tj41ltPgXOtpE/w1wAiqvnOhF13og==}
+
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
 
@@ -235,6 +260,12 @@ packages:
   punycode.js@2.3.1:
     resolution: {integrity: sha512-uxFIHU0YlHYhDQtV4R9J6a52SLx28BCjT+4ieh7IGbgwVJWO+km431c4yRlREUAsAmt/uMjQUyQHNEPf0M39CA==}
     engines: {node: '>=6'}
+
+  ramda@0.31.3:
+    resolution: {integrity: sha512-xKADKRNnqmDdX59PPKLm3gGmk1ZgNnj3k7DryqWwkamp4TJ6B36DdpyKEQ0EoEYmH2R62bV4Q+S0ym2z8N2f3Q==}
+
+  ts-toolbelt@9.6.0:
+    resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
 
   tstyche@4.3.0:
     resolution: {integrity: sha512-X5mSVCivhCSDKHr9tWfCH0kmEo5cLApZILK5XfssTIirc9wEvcSYhCaixj5TSR/39cIC7U5TQD+wtGKsYh7nlw==}
@@ -258,6 +289,9 @@ packages:
     hasBin: true
     peerDependencies:
       typescript: 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x || 5.7.x || 5.8.x || 5.9.x
+
+  types-ramda@0.31.0:
+    resolution: {integrity: sha512-vaoC35CRC3xvL8Z6HkshDbi6KWM1ezK0LHN0YyxXWUn9HKzBNg/T3xSGlJZjCYspnOD3jE7bcizsp0bUXZDxnQ==}
 
   typescript@5.9.2:
     resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
@@ -337,9 +371,15 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
 
+  '@types/lodash@4.17.20': {}
+
   '@types/node@24.2.1':
     dependencies:
       undici-types: 7.10.0
+
+  '@types/ramda@0.31.0':
+    dependencies:
+      types-ramda: 0.31.0
 
   '@types/unist@3.0.3': {}
 
@@ -462,6 +502,8 @@ snapshots:
     dependencies:
       brace-expansion: 2.0.2
 
+  mu-lambda@0.0.3: {}
+
   nth-check@2.1.1:
     dependencies:
       boolbase: 1.0.0
@@ -481,6 +523,10 @@ snapshots:
 
   punycode.js@2.3.1: {}
 
+  ramda@0.31.3: {}
+
+  ts-toolbelt@9.6.0: {}
+
   tstyche@4.3.0(typescript@5.9.2):
     optionalDependencies:
       typescript: 5.9.2
@@ -497,6 +543,10 @@ snapshots:
       minimatch: 9.0.5
       typescript: 5.9.2
       yaml: 2.8.1
+
+  types-ramda@0.31.0:
+    dependencies:
+      ts-toolbelt: 9.6.0
 
   typescript@5.9.2: {}
 

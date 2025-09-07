@@ -19,5 +19,12 @@
     },
     "dependencies": {
         "@longlast/symbols": "^1.0.0"
+    },
+    "devDependencies": {
+        "@types/lodash": "^4.17.20",
+        "@types/ramda": "^0.31.0",
+        "lodash": "^4.17.21",
+        "mu-lambda": "^0.0.3",
+        "ramda": "^0.31.3"
     }
 }
