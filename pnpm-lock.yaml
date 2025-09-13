@@ -45,8 +45,8 @@ importers:
   pkg/curry:
     dependencies:
       '@longlast/symbols':
-        specifier: ^1.0.0
-        version: 1.0.0
+        specifier: ^1.1.0
+        version: 1.1.0
     devDependencies:
       '@types/lodash':
         specifier: ^4.17.20
@@ -71,7 +71,7 @@ importers:
         version: 0.4.0
       '@longlast/symbols':
         specifier: ^1.0.0
-        version: 1.0.0
+        version: 1.1.0
 
   pkg/symbols: {}
 
@@ -95,6 +95,9 @@ packages:
 
   '@longlast/symbols@1.0.0':
     resolution: {integrity: sha512-dfICfJZJ3oNnq93lA5ZDdGnv0wO+4XRi6Yx1BfhEnwPyCf1hkQKA7/Uu6+tCa2FHb3AgV3RUOocFpm7q7NEWdg==}
+
+  '@longlast/symbols@1.1.0':
+    resolution: {integrity: sha512-P5CSQkumJ32UjMYB4wJeCzlm58+YTgF0k+Wxt37vBvmybnxrAuzQzbafOGpZoHRFUAXM45MBPg9i/ZwCVtdFLg==}
 
   '@shikijs/engine-oniguruma@3.9.2':
     resolution: {integrity: sha512-Vn/w5oyQ6TUgTVDIC/BrpXwIlfK6V6kGWDVVz2eRkF2v13YoENUvaNwxMsQU/t6oCuZKzqp9vqtEtEzKl9VegA==}
@@ -341,9 +344,11 @@ snapshots:
 
   '@longlast/curry@0.4.0':
     dependencies:
-      '@longlast/symbols': 1.0.0
+      '@longlast/symbols': 1.1.0
 
   '@longlast/symbols@1.0.0': {}
+
+  '@longlast/symbols@1.1.0': {}
 
   '@shikijs/engine-oniguruma@3.9.2':
     dependencies:

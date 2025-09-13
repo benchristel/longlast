@@ -18,7 +18,7 @@
         "#@longlast/curry": "./src/index.ts"
     },
     "dependencies": {
-        "@longlast/symbols": "^1.0.0"
+        "@longlast/symbols": "^1.1.0"
     },
     "devDependencies": {
         "@types/lodash": "^4.17.20",
