@@ -16,11 +16,15 @@
 
 ## Naming
 
+### Uniqueness
+
 Exported names should be unique across all packages, because they will all get
 exported from `@longlast/index`.
 
 If a suitable unique name cannot be found, the name should be "namespaced" in
 an object.
+
+### Casing
 
 Types, classes, and "namespace" objects use `PascalCase`.
 
@@ -31,6 +35,39 @@ The names of symbol values start with a dollar sign, e.g. `$equals`.
 Ruby casing conventions are used for initialisms: `toJson`, not `toJSON`,
 `HttpClient`, not `HTTPClient`. This allows the casing of names to be
 transformed automatically.
+
+### Blog post style
+
+Function names and signatures should be such that you could use the function
+in a code example in a blog post, and people would understand it without
+further explanation.
+
+This implies that functions should not have "extra" parameters tangential to
+their central purpose. They _especially_ should not have boolean flags, unless
+those are part of a parameter object.
+
+This constraint harmonizes nicely with currying. Curried functions should have
+few parameters, and can't have optional parameters.
+
+### "With" options
+
+Sometimes, though, you want a function to be configurable. In that case, a
+library can provide two versions of the function:
+
+- a configurable version
+- a "default" convenience wrapper
+
+The configurable function's name should end in `With`, and the configuration
+argument should come first.
+
+For example:
+
+```ts
+equals(a, b)
+equalsWith({customCompare}, a, b)
+expect(actual, predicate)
+expectWith({formatter}, actual, predicate)
+```
 
 ## Versioning
 
