@@ -37,8 +37,8 @@ some benchmark results (incrementing 100 numbers with
 `array.map(curriedAdd(1))`):
 
 ```
-inline function | ##################################################################### . 6,929,202 ops/sec ±0.89%
-@longlast/curry | ######################################################### . 5,728,987 ops/sec ±1.33%
-ramda           | ## . 170,954 ops/sec ±2.37%
-lodash          | ## . 163,683 ops/sec ±1.06%
+inline function | #################################### . 7,110,624 ops/sec ±0.43%
+@longlast/curry | ################################# . 6,628,769 ops/sec ±0.57%
+ramda           | # . 204,623 ops/sec ±0.49%
+lodash          | # . 170,245 ops/sec ±0.26%
 ```
