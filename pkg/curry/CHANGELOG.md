@@ -1,5 +1,12 @@
 # @longlast/curry
 
+## 0.4.5 (2025-09-13)
+
+Curried functions now have a `[$getBoundArguments]` method, the
+`$getBoundArguments` symbol coming from `@longlast/symbols`. The
+`[$boundArguments]` property is deprecated and will be removed in the next
+release.
+
 ## 0.4.4 (2025-09-07)
 
 This release just adds a "Performance" section to the README, and makes
