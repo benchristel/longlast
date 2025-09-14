@@ -1,7 +1,7 @@
 import {curry} from "#@longlast/curry";
 import {$boundArguments, $unapplied} from "@longlast/symbols";
 import {test, expect, equals, is} from "@benchristel/taste";
-import {testFunctionCurrying} from "../api/spec.ts";
+import {testFunctionCurrying} from "../api/currying.spec.ts";
 
 testFunctionCurrying(curry, "curry");
 
