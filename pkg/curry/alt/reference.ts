@@ -1,7 +1,10 @@
 export function curry(f: any): any {
     return function curried(...args: any[]): any {
-        return args.length < f.length
-            ? (...moreArgs: any[]) => curried(...args, ...moreArgs)
-            : f(...args);
+        const numParameters = f.length;
+        if (args.length < numParameters) {
+            return (...moreArgs: any[]) => curried(...args, ...moreArgs);
+        } else {
+            return f(...args);
+        }
     };
 }
