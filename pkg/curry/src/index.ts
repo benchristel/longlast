@@ -243,11 +243,6 @@ function getName(f: any): string {
     return f.displayName ?? f.name;
 }
 
-// TODO: make a public getBoundArguments function
-// TODO: make $boundArguments internal to this package, and deprecate it
-// in @longlast/symbols
-// TODO: use a linked list to store arguments, for performance?
-// benchmarks show a ~12% perf hit due to the array concatenation.
 function getArgs(f: any): unknown[] {
     return f[$getBoundArguments]() ?? [];
 }
