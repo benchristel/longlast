@@ -1,9 +1,9 @@
 import {curry} from "#@longlast/curry";
 import {$boundArguments, $unapplied} from "@longlast/symbols";
 import {test, expect, equals, is} from "@benchristel/taste";
-import {behavesLikeCurry} from "../api/spec.ts";
+import {testFunctionCurrying} from "../api/spec.ts";
 
-behavesLikeCurry(curry, "curry");
+testFunctionCurrying(curry, "curry");
 
 const add2 = curry((a: number, b: number) => a + b);
 

@@ -2,7 +2,7 @@ import {test, expect, is, equals} from "@benchristel/taste";
 import {type curry} from "#@longlast/curry";
 import {$boundArguments, $unapplied} from "@longlast/symbols";
 
-export function behavesLikeCurry(
+export function testFunctionCurrying(
     _curry: typeof curry,
     subjectName: string,
 ): void {
