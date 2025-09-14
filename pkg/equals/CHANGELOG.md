@@ -1,5 +1,12 @@
 # @longlast/equals
 
+## 0.5.3 (2025-09-06)
+
+This release updates the dependency on `@longlast/curry` to `^0.5.0`, and
+supports comparing curried functions from both `@longlast/curry@0.4.x` and
+`@longlast/curry@0.5.x`. A future release will drop support for
+`@longlast/curry@0.4.x`.
+
 ## 0.5.2 (2025-09-05)
 
 This release just updates the `package.json` file to link to the project
