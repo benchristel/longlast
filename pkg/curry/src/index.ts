@@ -2,7 +2,11 @@
  * @module curry
  */
 
-import {$boundArguments, $unapplied} from "@longlast/symbols";
+import {
+    $boundArguments,
+    $getBoundArguments,
+    $unapplied,
+} from "@longlast/symbols";
 
 /**
  * @param f - the function to curry
@@ -92,6 +96,7 @@ export interface Curried1<A, Return> {
     (a: A): Return;
     /** @deprecated */
     [$boundArguments]: unknown[];
+    [$getBoundArguments](): unknown[];
     [$unapplied]: AnyFunction;
     displayName: string;
 
@@ -113,6 +118,7 @@ export interface Curried2<A, B, Return> {
     displayName: string;
     /** @deprecated */
     [$boundArguments]: unknown[];
+    [$getBoundArguments](): unknown[];
     [$unapplied]: AnyFunction;
 
     /** @hidden */
@@ -135,6 +141,7 @@ export interface Curried3<A, B, C, Return> {
     displayName: string;
     /** @deprecated */
     [$boundArguments]: unknown[];
+    [$getBoundArguments](): unknown[];
     [$unapplied]: AnyFunction;
 
     /** @hidden */
@@ -159,6 +166,7 @@ export interface Curried4<A, B, C, D, Return> {
     displayName: string;
     /** @deprecated */
     [$boundArguments]: unknown[];
+    [$getBoundArguments](): unknown[];
     [$unapplied]: AnyFunction;
 
     /** @hidden */
@@ -185,6 +193,7 @@ export interface Curried5<A, B, C, D, E, Return> {
     displayName: string;
     /** @deprecated */
     [$boundArguments]: unknown[];
+    [$getBoundArguments](): unknown[];
     [$unapplied]: AnyFunction;
 
     /** @hidden */
@@ -233,6 +242,7 @@ function curryVarargs(f: AnyFunction): AnyFunction {
 function initMetadata(original: any, curried: any) {
     curried.displayName = getName(original);
     curried[$boundArguments] = [] as any;
+    curried[$getBoundArguments] = () => [];
     curried[$unapplied] = curried;
     return curried;
 }
@@ -240,6 +250,7 @@ function initMetadata(original: any, curried: any) {
 function copyMetadata(source: any, args: any[], destination: any) {
     destination.displayName = getName(source);
     destination[$boundArguments] = getArgs(source).concat(args);
+    destination[$getBoundArguments] = () => getArgs(source).concat(args);
     destination[$unapplied] = source[$unapplied];
     return destination;
 }
@@ -254,7 +265,7 @@ function getName(f: any): string {
 // TODO: use a linked list to store arguments, for performance?
 // benchmarks show a ~12% perf hit due to the array concatenation.
 function getArgs(f: any): unknown[] {
-    return f[$boundArguments] ?? [];
+    return f[$getBoundArguments]() ?? [];
 }
 
 // TODO: move this type to its own package

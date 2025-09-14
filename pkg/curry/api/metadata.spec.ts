@@ -1,5 +1,9 @@
 import {type curry} from "#@longlast/curry";
-import {$unapplied, $boundArguments} from "@longlast/symbols";
+import {
+    $unapplied,
+    $boundArguments,
+    $getBoundArguments,
+} from "@longlast/symbols";
 import {test, expect, is, equals} from "@benchristel/taste";
 
 export function testMetadata(_curry: typeof curry, subjectName: string): void {
@@ -51,21 +55,25 @@ export function testMetadata(_curry: typeof curry, subjectName: string): void {
         "sets bound arguments on a 2-ary curried function"() {
             const curried = _curry((_a: 1, _b: 2) => {});
             expect(curried[$boundArguments], equals, []);
+            expect(curried[$getBoundArguments](), equals, []);
         },
 
         "sets bound arguments on a 3-ary curried function"() {
             const curried = _curry((_a: 1, _b: 2, _c: 3) => {});
             expect(curried[$boundArguments], equals, []);
+            expect(curried[$getBoundArguments](), equals, []);
         },
 
         "sets bound arguments on a 4-ary curried function"() {
             const curried = _curry((_a: 1, _b: 2, _c: 3, _d: 4) => {});
             expect(curried[$boundArguments], equals, []);
+            expect(curried[$getBoundArguments](), equals, []);
         },
 
         "sets bound arguments on a 5-ary curried function"() {
             const curried = _curry((_a: 1, _b: 2, _c: 3, _d: 4, _e: 5) => {});
             expect(curried[$boundArguments], equals, []);
+            expect(curried[$getBoundArguments](), equals, []);
         },
     });
 
@@ -83,6 +91,7 @@ export function testMetadata(_curry: typeof curry, subjectName: string): void {
 
         "remembers its bound argument"() {
             expect(curriedConcat2("a")[$boundArguments], equals, ["a"]);
+            expect(curriedConcat2("a")[$getBoundArguments](), equals, ["a"]);
         },
     });
 
@@ -110,10 +119,15 @@ export function testMetadata(_curry: typeof curry, subjectName: string): void {
 
         "remembers one bound argument"() {
             expect(curriedConcat3("a")[$boundArguments], equals, ["a"]);
+            expect(curriedConcat3("a")[$getBoundArguments](), equals, ["a"]);
         },
 
         "remembers two bound arguments"() {
             expect(curriedConcat3("a", 1)[$boundArguments], equals, ["a", 1]);
+            expect(curriedConcat3("a", 1)[$getBoundArguments](), equals, [
+                "a",
+                1,
+            ]);
         },
     });
 
@@ -150,15 +164,25 @@ export function testMetadata(_curry: typeof curry, subjectName: string): void {
 
         "remembers one bound argument"() {
             expect(curriedConcat4("a")[$boundArguments], equals, ["a"]);
+            expect(curriedConcat4("a")[$getBoundArguments](), equals, ["a"]);
         },
 
         "remembers two bound arguments"() {
             expect(curriedConcat4("a", 1)[$boundArguments], equals, ["a", 1]);
+            expect(curriedConcat4("a", 1)[$getBoundArguments](), equals, [
+                "a",
+                1,
+            ]);
         },
 
         "remembers three bound arguments"() {
             const args = curriedConcat4("a", 1, true)[$boundArguments];
             expect(args, equals, ["a", 1, true]);
+            expect(curriedConcat4("a", 1, true)[$getBoundArguments](), equals, [
+                "a",
+                1,
+                true,
+            ]);
         },
     });
 
@@ -187,20 +211,35 @@ export function testMetadata(_curry: typeof curry, subjectName: string): void {
 
         "remembers one bound argument"() {
             expect(curriedConcat5("a")[$boundArguments], equals, ["a"]);
+            expect(curriedConcat5("a")[$getBoundArguments](), equals, ["a"]);
         },
 
         "remembers two bound arguments"() {
             expect(curriedConcat5("a", 1)[$boundArguments], equals, ["a", 1]);
+            expect(curriedConcat5("a", 1)[$getBoundArguments](), equals, [
+                "a",
+                1,
+            ]);
         },
 
         "remembers three bound arguments"() {
             const args = curriedConcat5("a", 1, true)[$boundArguments];
             expect(args, equals, ["a", 1, true]);
+            expect(curriedConcat5("a", 1, true)[$getBoundArguments](), equals, [
+                "a",
+                1,
+                true,
+            ]);
         },
 
         "remembers four bound arguments"() {
             const args = curriedConcat5("a", 1, true, 2n)[$boundArguments];
             expect(args, equals, ["a", 1, true, 2n]);
+            expect(
+                curriedConcat5("a", 1, true, 2n)[$getBoundArguments](),
+                equals,
+                ["a", 1, true, 2n],
+            );
         },
     });
 }
