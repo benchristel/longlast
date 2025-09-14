@@ -67,8 +67,8 @@ importers:
   pkg/equals:
     dependencies:
       '@longlast/curry':
-        specifier: ^0.4.0
-        version: 0.4.0
+        specifier: ^0.5.0
+        version: 0.5.0
       '@longlast/symbols':
         specifier: ^1.0.0
         version: 1.1.0
@@ -90,11 +90,8 @@ packages:
   '@gerrit0/mini-shiki@3.9.2':
     resolution: {integrity: sha512-Tvsj+AOO4Z8xLRJK900WkyfxHsZQu+Zm1//oT1w443PO6RiYMoq/4NGOhaNuZoUMYsjKIAPVQ6eOFMddj6yphQ==}
 
-  '@longlast/curry@0.4.0':
-    resolution: {integrity: sha512-zFcXhzyECqI0dLQomAsnNdkZ8zcOJ0zM0VAlYmBVZvoGtrCk/fPjs9aXSrLYKsgXEDcafm4HLU0c0Gers4lF4A==}
-
-  '@longlast/symbols@1.0.0':
-    resolution: {integrity: sha512-dfICfJZJ3oNnq93lA5ZDdGnv0wO+4XRi6Yx1BfhEnwPyCf1hkQKA7/Uu6+tCa2FHb3AgV3RUOocFpm7q7NEWdg==}
+  '@longlast/curry@0.5.0':
+    resolution: {integrity: sha512-w6lznLnt1NDB/VZ0MHTM1hb4uYx3VyltkpPPl4iNpRdUqpLzLAXDXTSB6aW3LVeRtAp9fg6u0xFBsRSX+GdD8w==}
 
   '@longlast/symbols@1.1.0':
     resolution: {integrity: sha512-P5CSQkumJ32UjMYB4wJeCzlm58+YTgF0k+Wxt37vBvmybnxrAuzQzbafOGpZoHRFUAXM45MBPg9i/ZwCVtdFLg==}
@@ -342,11 +339,9 @@ snapshots:
       '@shikijs/types': 3.9.2
       '@shikijs/vscode-textmate': 10.0.2
 
-  '@longlast/curry@0.4.0':
+  '@longlast/curry@0.5.0':
     dependencies:
       '@longlast/symbols': 1.1.0
-
-  '@longlast/symbols@1.0.0': {}
 
   '@longlast/symbols@1.1.0': {}
 

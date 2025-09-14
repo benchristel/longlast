@@ -3,7 +3,12 @@
  */
 
 import {curry, type Curried2} from "@longlast/curry";
-import {$boundArguments, $equals, $unapplied} from "@longlast/symbols";
+import {
+    $boundArguments,
+    $equals,
+    $getBoundArguments,
+    $unapplied,
+} from "@longlast/symbols";
 
 /**
  * @function
@@ -94,14 +99,12 @@ function _equals(a: unknown, b: unknown): boolean {
         return a.size === b.size && [...a].every((v) => b.has(v));
     }
     if (typeof a === "function" && typeof b === "function") {
-        const aArgs = (a as any)[$boundArguments];
-        const bArgs = (b as any)[$boundArguments];
         const aUnapplied = (a as any)[$unapplied];
         const bUnapplied = (b as any)[$unapplied];
         return (
             aUnapplied != null &&
             aUnapplied === bUnapplied &&
-            _equals(aArgs, bArgs)
+            _equals(getBoundArguments(a), getBoundArguments(b))
         );
     }
     if (a && b && typeof a === "object" && protoOf(a) === protoOf(b)) {
@@ -117,6 +120,10 @@ function _equals(a: unknown, b: unknown): boolean {
         return true;
     }
     return false;
+}
+
+function getBoundArguments(f: any): unknown[] | undefined {
+    return f[$getBoundArguments]?.() ?? f[$boundArguments];
 }
 
 const protoOf = Object.getPrototypeOf;

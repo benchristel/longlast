@@ -1,5 +1,5 @@
 import {curry, type Curried2} from "@longlast/curry";
-import {$boundArguments, $equals, $unapplied} from "@longlast/symbols";
+import {$equals, $getBoundArguments, $unapplied} from "@longlast/symbols";
 
 export const equals: Curried2<unknown, unknown, boolean> = curry(_equals);
 
@@ -38,18 +38,19 @@ function _equals(a: unknown, b: unknown): boolean {
         );
     }
     if (typeof a === "function" && typeof b === "function") {
-        const aArgs = (a as any)[$boundArguments];
-        const bArgs = (b as any)[$boundArguments];
         const aUnapplied = (a as any)[$unapplied];
         const bUnapplied = (b as any)[$unapplied];
         return (
-            aArgs != null &&
             aUnapplied != null &&
-            _equals(aArgs, bArgs) &&
-            aUnapplied === bUnapplied
+            aUnapplied === bUnapplied &&
+            _equals(getBoundArguments(a), getBoundArguments(b))
         );
     }
     return false;
+}
+
+function getBoundArguments(f: any): unknown[] | undefined {
+    return f[$getBoundArguments]?.();
 }
 
 function equalSets(a: Set<unknown>, b: Set<unknown>): boolean {
