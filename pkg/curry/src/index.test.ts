@@ -2,8 +2,10 @@ import {curry} from "#@longlast/curry";
 import {$boundArguments, $unapplied} from "@longlast/symbols";
 import {test, expect, equals, is} from "@benchristel/taste";
 import {testFunctionCurrying} from "../api/currying.spec.ts";
+import {testMetadata} from "../api/metadata.spec.ts";
 
 testFunctionCurrying(curry, "curry");
+testMetadata(curry, "curry");
 
 const add2 = curry((a: number, b: number) => a + b);
 
