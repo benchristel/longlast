@@ -2,11 +2,7 @@
  * @module curry
  */
 
-import {
-    $boundArguments,
-    $getBoundArguments,
-    $unapplied,
-} from "@longlast/symbols";
+import {$getBoundArguments, $unapplied} from "@longlast/symbols";
 
 /**
  * @param f - the function to curry
@@ -94,8 +90,6 @@ export function curry(f: AnyFunction): AnyFunction {
 
 export interface Curried1<A, Return> {
     (a: A): Return;
-    /** @deprecated */
-    [$boundArguments]: unknown[];
     [$getBoundArguments](): unknown[];
     [$unapplied]: AnyFunction;
     displayName: string;
@@ -116,8 +110,6 @@ export interface Curried2<A, B, Return> {
     (a: A, b: B): Return;
     (a: A): Curried1<B, Return>;
     displayName: string;
-    /** @deprecated */
-    [$boundArguments]: unknown[];
     [$getBoundArguments](): unknown[];
     [$unapplied]: AnyFunction;
 
@@ -139,8 +131,6 @@ export interface Curried3<A, B, C, Return> {
     (a: A, b: B): Curried1<C, Return>;
     (a: A): Curried2<B, C, Return>;
     displayName: string;
-    /** @deprecated */
-    [$boundArguments]: unknown[];
     [$getBoundArguments](): unknown[];
     [$unapplied]: AnyFunction;
 
@@ -164,8 +154,6 @@ export interface Curried4<A, B, C, D, Return> {
     (a: A, b: B): Curried2<C, D, Return>;
     (a: A): Curried3<B, C, D, Return>;
     displayName: string;
-    /** @deprecated */
-    [$boundArguments]: unknown[];
     [$getBoundArguments](): unknown[];
     [$unapplied]: AnyFunction;
 
@@ -191,8 +179,6 @@ export interface Curried5<A, B, C, D, E, Return> {
     (a: A, b: B): Curried3<C, D, E, Return>;
     (a: A): Curried4<B, C, D, E, Return>;
     displayName: string;
-    /** @deprecated */
-    [$boundArguments]: unknown[];
     [$getBoundArguments](): unknown[];
     [$unapplied]: AnyFunction;
 
@@ -241,7 +227,6 @@ function curryVarargs(f: AnyFunction): AnyFunction {
 
 function initMetadata(original: any, curried: any) {
     curried.displayName = getName(original);
-    curried[$boundArguments] = [] as any;
     curried[$getBoundArguments] = () => [];
     curried[$unapplied] = curried;
     return curried;
@@ -249,7 +234,6 @@ function initMetadata(original: any, curried: any) {
 
 function copyMetadata(source: any, args: any[], destination: any) {
     destination.displayName = getName(source);
-    destination[$boundArguments] = getArgs(source).concat(args);
     destination[$getBoundArguments] = () => getArgs(source).concat(args);
     destination[$unapplied] = source[$unapplied];
     return destination;
