@@ -1,5 +1,14 @@
 # @longlast/curry
 
+## 0.5.0 (2025-09-13)
+
+### Breaking change
+
+This release removes the `[$boundArguments]` property from curried functions.
+Clients should use the `[$getBoundArguments]` method instead.
+
+This change improves the performance of partially applying a curried function.
+
 ## 0.4.5 (2025-09-13)
 
 Curried functions now have a `[$getBoundArguments]` method, the
