@@ -65,17 +65,34 @@ export function curry<A, B, C, D, E, Return>(
  * [type parameters]: https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#type-parameters
  */
 
-export function curry(f: AnyFunction): AnyFunction {
-    // Optimize the common cases -- functions with 2 and 3 parameters. This
-    // provides a 50x speedup!
-    switch (f.length) {
-        case 2:
-            return curry2(f);
-        case 3:
-            return curry3(f);
-        default:
-            return curryVarargs(f);
+export function curry(f) {
+    function curried(a, b, c, d, e) {
+        let arity = f.length;
+        let args = arguments;
+        let numArguments = args.length;
+        let remaining = arity - numArguments;
+        let next = curried;
+
+        if (remaining <= 0) {
+            return f(a, b, c, d, e);
+        } else {
+            if (remaining === 1) {
+                next = f;
+            }
+            return copyMetadata(
+                curried,
+                args,
+                !--numArguments
+                    ? next.bind(null, a)
+                    : !--numArguments
+                      ? next.bind(null, a, b)
+                      : !--numArguments
+                        ? next.bind(null, a, b, c)
+                        : next.bind(null, a, b, c, d),
+            );
+        }
     }
+    return initMetadata(f, curried);
 }
 
 /**
@@ -188,43 +205,6 @@ export interface Curried5<A, B, C, D, E, Return> {
 
 declare const $nonUserConstructible: unique symbol;
 
-function curry2(f: AnyFunction): AnyFunction {
-    function curried(a: any, b: any) {
-        switch (arguments.length) {
-            case 1:
-                return copyMetadata(curried, [a], f.bind(null, a));
-            default:
-                return f(a, b);
-        }
-    }
-    return initMetadata(f, curried);
-}
-
-function curry3(f: AnyFunction): AnyFunction {
-    function curried(a: any, b: any, c: any) {
-        switch (arguments.length) {
-            case 1:
-                return copyMetadata(curried, [a], curry2(f.bind(null, a)));
-            case 2:
-                return copyMetadata(curried, [a, b], f.bind(null, a, b));
-            default:
-                return f(a, b, c);
-        }
-    }
-    return initMetadata(f, curried);
-}
-
-function curryVarargs(f: AnyFunction): AnyFunction {
-    function curried(...args: any[]): any {
-        if (args.length < f.length) {
-            return copyMetadata(curried, args, curried.bind(null, ...args));
-        } else {
-            return f(...args);
-        }
-    }
-    return initMetadata(f, curried);
-}
-
 function initMetadata(original: any, curried: any) {
     curried.displayName = getName(original);
     curried[$getBoundArguments] = () => [];
@@ -232,9 +212,9 @@ function initMetadata(original: any, curried: any) {
     return curried;
 }
 
-function copyMetadata(source: any, args: any[], destination: any) {
+function copyMetadata(source: any, args: IArguments, destination: any) {
     destination.displayName = getName(source);
-    destination[$getBoundArguments] = () => getArgs(source).concat(args);
+    destination[$getBoundArguments] = () => [...getArgs(source), ...args];
     destination[$unapplied] = source[$unapplied];
     return destination;
 }
