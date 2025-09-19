@@ -68,14 +68,38 @@ export function curry<A, B, C, D, E, Return>(
 export function curry(f: AnyFunction): AnyFunction {
     // Optimize the common cases -- functions with 2 and 3 parameters. This
     // provides a 50x speedup!
-    switch (f.length) {
-        case 2:
-            return curry2(f);
-        case 3:
-            return curry3(f);
-        default:
-            return curryVarargs(f);
-    }
+    let arity = f.length;
+    let n = arity - 1;
+    let curried: AnyFunction;
+    return initMetadata(
+        f,
+        !--n
+            ? function curried2(a: any, b: any) {
+                  return arguments.length === 1
+                      ? copyMetadata(curried2, [a], f.bind(null, a))
+                      : f(a, b);
+              }
+            : !--n
+              ? function curried3(a: any, b: any, c: any): any {
+                    let n = arguments.length;
+                    return !--n
+                        ? copyMetadata(curried3, [a], curried3.bind(null, a))
+                        : !--n
+                          ? copyMetadata(curried3, [a, b], f.bind(null, a, b))
+                          : f(a, b, c);
+                }
+              : (curried = (...args: any[]): any => {
+                    if (args.length < arity) {
+                        return copyMetadata(
+                            curried,
+                            args,
+                            curried.bind(null, ...args),
+                        );
+                    } else {
+                        return f(...args);
+                    }
+                }),
+    );
 }
 
 /**
@@ -188,64 +212,23 @@ export interface Curried5<A, B, C, D, E, Return> {
 
 declare const $nonUserConstructible: unique symbol;
 
-function curry2(f: AnyFunction): AnyFunction {
-    function curried(a: any, b: any) {
-        switch (arguments.length) {
-            case 1:
-                return copyMetadata(curried, [a], f.bind(null, a));
-            default:
-                return f(a, b);
-        }
-    }
-    return initMetadata(f, curried);
-}
+let initMetadata = (original: any, curried: any) => (
+    (curried.displayName = getName(original)),
+    (curried[$getBoundArguments] = () => []),
+    (curried[$unapplied] = curried),
+    curried
+);
 
-function curry3(f: AnyFunction): AnyFunction {
-    function curried(a: any, b: any, c: any) {
-        switch (arguments.length) {
-            case 1:
-                return copyMetadata(curried, [a], curry2(f.bind(null, a)));
-            case 2:
-                return copyMetadata(curried, [a, b], f.bind(null, a, b));
-            default:
-                return f(a, b, c);
-        }
-    }
-    return initMetadata(f, curried);
-}
+let copyMetadata = (source: any, args: any[], destination: any) => (
+    (destination.displayName = getName(source)),
+    (destination[$getBoundArguments] = () => getArgs(source).concat(args)),
+    (destination[$unapplied] = source[$unapplied]),
+    destination
+);
 
-function curryVarargs(f: AnyFunction): AnyFunction {
-    function curried(...args: any[]): any {
-        if (args.length < f.length) {
-            return copyMetadata(curried, args, curried.bind(null, ...args));
-        } else {
-            return f(...args);
-        }
-    }
-    return initMetadata(f, curried);
-}
+let getName = (f: any): string => f.displayName ?? f.name;
 
-function initMetadata(original: any, curried: any) {
-    curried.displayName = getName(original);
-    curried[$getBoundArguments] = () => [];
-    curried[$unapplied] = curried;
-    return curried;
-}
-
-function copyMetadata(source: any, args: any[], destination: any) {
-    destination.displayName = getName(source);
-    destination[$getBoundArguments] = () => getArgs(source).concat(args);
-    destination[$unapplied] = source[$unapplied];
-    return destination;
-}
-
-function getName(f: any): string {
-    return f.displayName ?? f.name;
-}
-
-function getArgs(f: any): unknown[] {
-    return f[$getBoundArguments]() ?? [];
-}
+let getArgs = (f: any): unknown[] => f[$getBoundArguments]() ?? [];
 
 // TODO: move this type to its own package
 type AnyFunction = (...args: any[]) => any;
