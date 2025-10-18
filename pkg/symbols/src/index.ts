@@ -17,6 +17,7 @@ export const $equals: unique symbol = Symbol();
  * Identifies a method on a function, which returns an array of the arguments
  * that have been bound to the function by partial application.
  *
+ * @since Added in version 1.1.0.
  * @see {@link curry}
  * @see https://en.wikipedia.org/wiki/Partial_application
  */
