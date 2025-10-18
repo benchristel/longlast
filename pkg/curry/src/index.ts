@@ -108,6 +108,8 @@ export interface Curried1<A, Return> {
 
 export interface Curried2<A, B, Return> {
     (a: A, b: B): Return;
+    // TODO: change to `(a: A, b?: never): Curried1<B, Return>` to guard
+    // against usages like `["a"].map(concat3("b"))`.
     (a: A): Curried1<B, Return>;
     displayName: string;
     [$getBoundArguments](): unknown[];

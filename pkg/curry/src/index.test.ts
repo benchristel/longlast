@@ -7,58 +7,95 @@ import {testMetadata} from "../api/metadata.spec.ts";
 testFunctionCurrying(curry, "curry");
 testMetadata(curry, "curry");
 
-const add2 = curry((a: number, b: number) => a + b);
+const concat2 = curry((a: string, b: string) => `${a}${b}`);
 
 test("a 2-ary curried function", {
+    "can be passed both arguments at once"() {
+        expect(concat2("a", "b"), equals, "ab");
+    },
+
+    "can be passed its arguments one at a time"() {
+        expect(concat2("x")("y"), equals, "xy");
+    },
+
     "remembers all bound arguments from a sequence of calls"() {
-        expect(add2(1)[$getBoundArguments](), equals, [1]);
+        expect(concat2("a")[$getBoundArguments](), equals, ["a"]);
     },
 
     "remembers the original curried function after partial application"() {
-        expect(add2(1)[$unapplied], is, add2);
+        expect(concat2("a")[$unapplied], is, concat2);
     },
 
     "can be called multiple times after partial application"() {
-        expect([1, 2, 3].map(add2(1)), equals, [2, 3, 4]);
+        expect(["x", "y", "z"].map(concat2("a")), equals, ["ax", "ay", "az"]);
     },
 });
 
-const add3 = curry((a: number, b: number, c: number) => a + b + c);
+const concat3 = curry((a: string, b: string, c: string) => `${a}${b}${c}`);
 
 test("a 3-ary curried function", {
+    "can be passed all arguments at once"() {
+        expect(concat3("a", "b", "c"), is, "abc");
+    },
+
+    "can be passed its arguments one at a time"() {
+        expect(concat3("a")("b")("c"), is, "abc");
+    },
+
+    "can be passed one argument, then two"() {
+        expect(concat3("a")("b", "c"), is, "abc");
+    },
+
+    "can be passed two arguments, then one"() {
+        expect(concat3("a", "b")("c"), is, "abc");
+    },
+
     "remembers all bound arguments from a sequence of calls"() {
-        expect(add3(1)(2)[$getBoundArguments](), equals, [1, 2]);
+        expect(concat3("a")("b")[$getBoundArguments](), equals, ["a", "b"]);
     },
 
     "remembers the original curried function after partial application"() {
-        expect(add3(1)(2)[$unapplied], is, add3);
+        expect(concat3("a")("b")[$unapplied], is, concat3);
     },
 
     "can be called multiple times after partial application"() {
-        expect([1, 2, 3].map(add3(1)(2)), equals, [4, 5, 6]);
-        // Array.map passes the index as the second argument.
-        expect([1, 2, 3].map(add3(1)), equals, [2, 4, 6]);
+        const result = ["x", "y", "z"].map(concat3("a")("b"));
+        expect(result, equals, ["abx", "aby", "abz"]);
     },
 });
 
-const add4 = curry(
-    (a: number, b: number, c: number, d: number) => a + b + c + d,
+const concat4 = curry(
+    (a: string, b: string, c: string, d: string) => `${a}${b}${c}${d}`,
 );
 
 test("a 4-ary curried function", {
+    "can be passed all arguments at once"() {
+        expect(concat4("a", "b", "c", "d"), is, "abcd");
+    },
+
+    "can be passed its arguments one at a time"() {
+        expect(concat4("a")("b")("c")("d"), is, "abcd");
+    },
+
     "remembers all bound arguments from a sequence of calls"() {
-        expect(add4(1)[$getBoundArguments](), equals, [1]);
-        expect(add4(1)(2)[$getBoundArguments](), equals, [1, 2]);
-        expect(add4(1)(2)(3)[$getBoundArguments](), equals, [1, 2, 3]);
+        expect(concat4("a")[$getBoundArguments](), equals, ["a"]);
+        expect(concat4("a")("b")[$getBoundArguments](), equals, ["a", "b"]);
+        expect(concat4("a")("b")("c")[$getBoundArguments](), equals, [
+            "a",
+            "b",
+            "c",
+        ]);
     },
 
     "remembers the original curried function after partial application"() {
-        expect(add4(1)(2)(3)[$unapplied], is, add4);
+        expect(concat4("a")("b")("c")[$unapplied], is, concat4);
     },
 
     "can be called multiple times after partial application"() {
-        expect([1, 2, 3].map(add4(1)(2)(3)), equals, [7, 8, 9]);
-        // Array.map passes the index as the second argument.
-        expect([1, 2, 3].map(add4(1, 2)), equals, [4, 6, 8]);
+        expect(["x", "y", "z"].map(concat4("a")("b")("c")), equals, [
+            "abcx",
+            "abcy",
+            "abcz",
+        ]);
     },
 });
