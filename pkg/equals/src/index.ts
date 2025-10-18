@@ -10,6 +10,9 @@ import {
     $unapplied,
 } from "@longlast/symbols";
 
+// TODO: export an `Equatable` interface that classes with the [$equals] method
+// can implement.
+
 /**
  * @function
  * Deeply compares two values, returning true if they're equal and false
@@ -74,6 +77,11 @@ export const equals: Curried2<unknown, unknown, boolean> = curry(_equals);
 function _equals(a: unknown, b: unknown): boolean {
     // This is an optimized implementation. There is a simpler, equivalent one
     // in pkg/equals/alt/reference.ts.
+
+    // TODO: (pre-1.0.0) decide if we should pass `equals` as the second
+    // argument to [$equals]. This would open the "protocol" up a bit more,
+    // since people could then define their own implementations of `equals`
+    // that work consistently through custom equality comparisons.
     if (a != null && typeof (a as any)[$equals] === "function") {
         return Boolean((a as any)[$equals](b));
     }
