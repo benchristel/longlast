@@ -1,5 +1,19 @@
 # @longlast/curry
 
+## 0.6.0 (2025-10-18)
+
+Users of `curry` will now correctly get type errors if they pass a
+partially-applied curried function as a callback to a function that will call
+it with the wrong argument types.
+
+```ts
+const concat3 = curry((a: string, b: string, c: string) => a + b + c);
+// Type error! `Array.map()` calls the callback with the index (a number) as
+// the second argument. `concat3("b")` requires a string as the second
+// argument.
+["a"].map(concat3("b"));
+```
+
 ## 0.5.2 (2025-10-18)
 
 This release reverts the documentation changes made in 0.5.1.
