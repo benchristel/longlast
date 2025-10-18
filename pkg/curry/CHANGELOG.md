@@ -1,5 +1,11 @@
 # @longlast/curry
 
+## 0.5.1 (2025-10-17)
+
+This release removes the doc comments from the `CurriedN` types. The comments
+were causing TypeDoc generation problems for other longlast packages that use
+`curry` — and they weren't very useful in any case.
+
 ## 0.5.0 (2025-09-13)
 
 ### Breaking change
