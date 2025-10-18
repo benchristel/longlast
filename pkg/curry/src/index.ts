@@ -78,9 +78,15 @@ export function curry(f: AnyFunction): AnyFunction {
     }
 }
 
-// The CurriedN interfaces are not documented because if they have doc
-// comments, TypeDoc generates broken references to them in other packages that
-// use them.
+/**
+ * A one-argument (unary) function created by partially applying a curried
+ * function.
+ *
+ * This type only exists to declare the `displayName` property.
+ *
+ * @typeParam A - the type of the function's argument
+ * @typeParam Return - the function's return type
+ */
 
 export interface Curried1<A, Return> {
     (a: A): Return;
@@ -92,6 +98,14 @@ export interface Curried1<A, Return> {
     [$nonUserConstructible]: true;
 }
 
+/**
+ * A two-argument (binary) curried function.
+ *
+ * @typeParam A - the type of `f`'s first argument
+ * @typeParam B - the type of `f`'s second argument
+ * @typeParam Return - the return type of `f`
+ */
+
 export interface Curried2<A, B, Return> {
     (a: A, b: B): Return;
     (a: A): Curried1<B, Return>;
@@ -102,6 +116,15 @@ export interface Curried2<A, B, Return> {
     /** @hidden */
     [$nonUserConstructible]: true;
 }
+
+/**
+ * A three-argument curried function.
+ *
+ * @typeParam A - the type of `f`'s first argument
+ * @typeParam B - the type of `f`'s second argument
+ * @typeParam C - the type of `f`'s third argument
+ * @typeParam Return - the return type of `f`
+ */
 
 export interface Curried3<A, B, C, Return> {
     (a: A, b: B, c: C): Return;
@@ -115,6 +138,16 @@ export interface Curried3<A, B, C, Return> {
     [$nonUserConstructible]: true;
 }
 
+/**
+ * A four-argument curried function.
+ *
+ * @typeParam A - the type of `f`'s first argument
+ * @typeParam B - the type of `f`'s second argument
+ * @typeParam C - the type of `f`'s third argument
+ * @typeParam D - the type of `f`'s fourth argument
+ * @typeParam Return - the return type of `f`
+ */
+
 export interface Curried4<A, B, C, D, Return> {
     (a: A, b: B, c: C, d: D): Return;
     (a: A, b: B, c: C): Curried1<D, Return>;
@@ -127,6 +160,17 @@ export interface Curried4<A, B, C, D, Return> {
     /** @hidden */
     [$nonUserConstructible]: true;
 }
+
+/**
+ * A five-argument curried function.
+ *
+ * @typeParam A - the type of `f`'s first argument
+ * @typeParam B - the type of `f`'s second argument
+ * @typeParam C - the type of `f`'s third argument
+ * @typeParam D - the type of `f`'s fourth argument
+ * @typeParam E - the type of `f`'s fifth argument
+ * @typeParam Return - the return type of `f`
+ */
 
 export interface Curried5<A, B, C, D, E, Return> {
     (a: A, b: B, c: C, d: D, e: E): Return;
