@@ -6,5 +6,9 @@
     "hidePageHeader": true,
     "hideBreadcrumbs": true,
     "parametersFormat": "table",
-    "expandParameters": true
+    "expandParameters": true,
+    // We set `excludeExternals` to keep TypeDoc from linking to source files
+    // in node_modules when the type of an export comes from another package
+    // (e.g. the `Curried2` type, which is the type of `export const equals`).
+    "excludeExternals": true
 }
