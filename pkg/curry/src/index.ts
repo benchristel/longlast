@@ -30,6 +30,9 @@ export function curry<A, B, C, D, E, Return>(
     f: (a: A, b: B, c: C, d: D, e: E) => Return,
 ): Curried5<A, B, C, D, E, Return>;
 
+// TODO: (pre-1.0.0) document that the behavior of calling a curried function
+// with no arguments is undefined.
+
 /**
  * Returns a [*curried*] version of the given function `f`. The returned
  * function behaves just like `f`, except that, if is passed fewer arguments
@@ -108,9 +111,7 @@ export interface Curried1<A, Return> {
 
 export interface Curried2<A, B, Return> {
     (a: A, b: B): Return;
-    // TODO: change to `(a: A, b?: never): Curried1<B, Return>` to guard
-    // against usages like `["a"].map(concat3("b"))`.
-    (a: A): Curried1<B, Return>;
+    (a: A, b?: never): Curried1<B, Return>;
     displayName: string;
     [$getBoundArguments](): unknown[];
     [$unapplied]: AnyFunction;
@@ -130,8 +131,8 @@ export interface Curried2<A, B, Return> {
 
 export interface Curried3<A, B, C, Return> {
     (a: A, b: B, c: C): Return;
-    (a: A, b: B): Curried1<C, Return>;
-    (a: A): Curried2<B, C, Return>;
+    (a: A, b: B, c?: never): Curried1<C, Return>;
+    (a: A, b?: never, c?: never): Curried2<B, C, Return>;
     displayName: string;
     [$getBoundArguments](): unknown[];
     [$unapplied]: AnyFunction;
@@ -152,9 +153,9 @@ export interface Curried3<A, B, C, Return> {
 
 export interface Curried4<A, B, C, D, Return> {
     (a: A, b: B, c: C, d: D): Return;
-    (a: A, b: B, c: C): Curried1<D, Return>;
-    (a: A, b: B): Curried2<C, D, Return>;
-    (a: A): Curried3<B, C, D, Return>;
+    (a: A, b: B, c: C, d?: never): Curried1<D, Return>;
+    (a: A, b: B, c?: never, d?: never): Curried2<C, D, Return>;
+    (a: A, b?: never, c?: never, d?: never): Curried3<B, C, D, Return>;
     displayName: string;
     [$getBoundArguments](): unknown[];
     [$unapplied]: AnyFunction;
@@ -176,10 +177,11 @@ export interface Curried4<A, B, C, D, Return> {
 
 export interface Curried5<A, B, C, D, E, Return> {
     (a: A, b: B, c: C, d: D, e: E): Return;
-    (a: A, b: B, c: C, d: D): Curried1<E, Return>;
-    (a: A, b: B, c: C): Curried2<D, E, Return>;
-    (a: A, b: B): Curried3<C, D, E, Return>;
-    (a: A): Curried4<B, C, D, E, Return>;
+    (a: A, b: B, c: C, d: D, e?: never): Curried1<E, Return>;
+    (a: A, b: B, c: C, d?: never, e?: never): Curried2<D, E, Return>;
+    (a: A, b: B, c?: never, d?: never, e?: never): Curried3<C, D, E, Return>;
+    // prettier-ignore
+    (a: A, b?: never, c?: never, d?: never, e?: never): Curried4<B, C, D, E, Return>;
     displayName: string;
     [$getBoundArguments](): unknown[];
     [$unapplied]: AnyFunction;

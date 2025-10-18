@@ -1,4 +1,4 @@
-import {test, expect} from "tstyche";
+import {describe, it, test, expect} from "tstyche";
 import {
     curry,
     type Curried2,
@@ -20,21 +20,47 @@ test("a curried 2-ary function", () => {
 
 declare function threeArgs(a: 1, b: 2, c: 3): 4;
 
-test("a curried 3-ary function", () => {
+describe("a curried 3-ary function", () => {
     const curried = curry(threeArgs);
-    expect(curried).type.toBeAssignableTo<(a: 1, b: 2, c: 3) => 4>();
-    expect(curried).type.toBeAssignableTo<
-        (a: 1, b: 2, c: 3, x: unknown) => 4
-    >();
 
-    expect(curried(1)).type.toBeAssignableTo<(b: 2, c: 3) => 4>();
-    expect(curried(1)).type.toBeAssignableTo<(b: 2, c: 3, x: unknown) => 4>();
+    it("has the expected type", () => {
+        expect(curried).type.toBeAssignableTo<(a: 1, b: 2, c: 3) => 4>();
+    });
 
-    expect(curried(1)(2)).type.toBeAssignableTo<(c: 3) => 4>();
-    expect(curried(1)(2)).type.toBeAssignableTo<(c: 3, x: unknown) => 4>();
+    it("ignores extra arguments", () => {
+        expect(curried).type.toBeAssignableTo<
+            (a: 1, b: 2, c: 3, extra: unknown) => 4
+        >();
+    });
 
-    expect(curried(1, 2)).type.toBeAssignableTo<(c: 3) => 4>();
-    expect(curried(1, 2)).type.toBeAssignableTo<(c: 3, x: unknown) => 4>();
+    it("has the expected type after partial application", () => {
+        expect(curried(1)).type.toBeAssignableTo<(b: 2, c: 3) => 4>();
+        expect(curried(1)).type.toBeAssignableTo<(b: 2) => (c: 3) => 4>();
+        expect(curried(1)(2)).type.toBeAssignableTo<(c: 3) => 4>();
+        expect(curried(1, 2)).type.toBeAssignableTo<(c: 3) => 4>();
+    });
+
+    it("ignores extra arguments after partial application", () => {
+        expect(curried(1)).type.toBeAssignableTo<
+            (b: 2, c: 3, extra: unknown) => 4
+        >();
+        expect(curried(1)(2)).type.toBeAssignableTo<
+            (c: 3, extra: unknown) => 4
+        >();
+        expect(curried(1, 2)).type.toBeAssignableTo<
+            (c: 3, extra: unknown) => 4
+        >();
+    });
+
+    it("can be used with Array.map()", () => {
+        expect([3 as const].map(curried(1, 2))).type.toBe<4[]>();
+    });
+
+    it("can't be used with Array.map() when the wrong argument type would be passed", () => {
+        // @ts-expect-error - Array.map() passes the index as the second
+        // argument
+        [2 as const].map(curried(1));
+    });
 });
 
 test("the Curried2 type is not user-constructible", () => {
