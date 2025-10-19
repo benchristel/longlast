@@ -12,8 +12,8 @@ importers:
         specifier: ^0.9.0
         version: 0.9.0
       '@benchristel/taste':
-        specifier: ^0.6.0
-        version: 0.6.0
+        specifier: ^0.7.0
+        version: 0.7.0
       '@types/benchmark':
         specifier: ^2.1.5
         version: 2.1.5
@@ -84,14 +84,17 @@ packages:
   '@benchristel/taste@0.5.0':
     resolution: {integrity: sha512-xr0QL76NohYOMG94O1Tr9N4piH3SzVztznbbZyUDZRZjivcqqUqVyBuQV/KvNUUg4dbntlMEAkidMLB9whHTIg==}
 
-  '@benchristel/taste@0.6.0':
-    resolution: {integrity: sha512-+PNsgwYRKgZQLCUGFCGLRbPTIpJYsyhMr5935ZjEdWlAjm6N0aj0jd80uGqNSgLJOhlmGCQhrZyzhPfXHJTBwg==}
+  '@benchristel/taste@0.7.0':
+    resolution: {integrity: sha512-VhYLQ6g4JTUa6uvq2KiVVSLNqR9iitxFEdwDMhbVSHx16S1OQs3hrI6qIi7JwcLmpIlQ7nJOpMj8qvDGL6wFQA==}
 
   '@gerrit0/mini-shiki@3.9.2':
     resolution: {integrity: sha512-Tvsj+AOO4Z8xLRJK900WkyfxHsZQu+Zm1//oT1w443PO6RiYMoq/4NGOhaNuZoUMYsjKIAPVQ6eOFMddj6yphQ==}
 
   '@longlast/curry@0.5.1':
     resolution: {integrity: sha512-ch1cMmAtnDaSqeDNQWdNAuMObumQZeF6tkoOViMZl8aLWwdevb6FeEah3keb7RN7bZTJo5Pt4rT00Y67XMiMJA==}
+
+  '@longlast/curry@0.6.0':
+    resolution: {integrity: sha512-tSwEqmGTfpL5I4BtsiA0520LJRRpAkg4sI4/HCmGIuNywYs/VS/DPm+A51moVwpCPGxfq0/ng5q+65QlmP7zIQ==}
 
   '@longlast/symbols@1.1.0':
     resolution: {integrity: sha512-P5CSQkumJ32UjMYB4wJeCzlm58+YTgF0k+Wxt37vBvmybnxrAuzQzbafOGpZoHRFUAXM45MBPg9i/ZwCVtdFLg==}
@@ -329,7 +332,10 @@ snapshots:
 
   '@benchristel/taste@0.5.0': {}
 
-  '@benchristel/taste@0.6.0': {}
+  '@benchristel/taste@0.7.0':
+    dependencies:
+      '@longlast/curry': 0.6.0
+      '@longlast/symbols': 1.1.0
 
   '@gerrit0/mini-shiki@3.9.2':
     dependencies:
@@ -340,6 +346,10 @@ snapshots:
       '@shikijs/vscode-textmate': 10.0.2
 
   '@longlast/curry@0.5.1':
+    dependencies:
+      '@longlast/symbols': 1.1.0
+
+  '@longlast/curry@0.6.0':
     dependencies:
       '@longlast/symbols': 1.1.0
 
