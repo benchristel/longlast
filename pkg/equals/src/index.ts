@@ -114,8 +114,9 @@ function _equals(a: unknown, b: unknown): boolean {
         );
     }
     if (a && b && typeof a === "object" && protoOf(a) === protoOf(b)) {
+        const aKeys = Object.keys(a);
         const bKeys = new Set(Object.keys(b));
-        for (const key of Object.keys(a)) {
+        for (const key of aKeys) {
             if (!bKeys.has(key)) {
                 return false;
             }
@@ -123,12 +124,13 @@ function _equals(a: unknown, b: unknown): boolean {
                 return false;
             }
         }
-        return true;
+        return aKeys.length === bKeys.size;
     }
     return false;
 }
 
 function getBoundArguments(f: any): unknown[] | undefined {
+    // TODO: (pre-1.0.0) remove `f[$boundArguments]` fallback.
     return f[$getBoundArguments]?.() ?? f[$boundArguments];
 }
 

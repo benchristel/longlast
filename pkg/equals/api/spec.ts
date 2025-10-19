@@ -257,6 +257,7 @@ export function behavesLikeEquals(
 
         "distinguishes objects with different numbers of keys"() {
             expect(_equals({a: 1}, {}), is, false);
+            expect(_equals({}, {a: 1}), is, false);
         },
 
         "distinguishes objects with different keys"() {
