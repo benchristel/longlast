@@ -1,5 +1,11 @@
 # @longlast/equals
 
+## 0.5.4 (2025-10-18)
+
+Previously, there was a bug where objects with different numbers of keys could
+be considered equal. That's now fixed; objects with different numbers of keys
+are always unequal.
+
 ## 0.5.3 (2025-09-06)
 
 This release updates the dependency on `@longlast/curry` to `^0.5.0`, and

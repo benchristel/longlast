@@ -1,6 +1,6 @@
 {
     "name": "@longlast/equals",
-    "version": "0.5.3",
+    "version": "0.5.4",
     "description": "Deeply compares objects",
     "homepage": "https://longlast.js.org/",
     "license": "MIT",
