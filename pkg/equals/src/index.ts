@@ -115,16 +115,20 @@ function _equals(a: unknown, b: unknown): boolean {
     }
     if (a && b && typeof a === "object" && protoOf(a) === protoOf(b)) {
         const aKeys = Object.keys(a);
-        const bKeys = new Set(Object.keys(b));
+        const bKeys = Object.keys(b);
+        if (aKeys.length !== bKeys.length) {
+            return false;
+        }
+        const bKeySet = new Set(bKeys);
         for (const key of aKeys) {
-            if (!bKeys.has(key)) {
+            if (!bKeySet.has(key)) {
                 return false;
             }
             if (!_equals((a as any)[key], (b as any)[key])) {
                 return false;
             }
         }
-        return aKeys.length === bKeys.size;
+        return true;
     }
     return false;
 }
