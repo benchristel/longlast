@@ -95,10 +95,7 @@ function _equals(a: unknown, b: unknown): boolean {
         return String(a) === String(b);
     }
     if (a instanceof Error && b instanceof Error) {
-        return (
-            a.message === b.message &&
-            Object.getPrototypeOf(a) === Object.getPrototypeOf(b)
-        );
+        return a.message === b.message && protoOf(a) === protoOf(b);
     }
     if (Array.isArray(a) && Array.isArray(b)) {
         return a.length === b.length && a.every((_, i) => _equals(a[i], b[i]));
