@@ -82,6 +82,7 @@ function _equals(a: unknown, b: unknown): boolean {
     // argument to [$equals]. This would open the "protocol" up a bit more,
     // since people could then define their own implementations of `equals`
     // that work consistently through custom equality comparisons.
+    // TODO: Compare cross-realm objects.
     if (a != null && typeof (a as any)[$equals] === "function") {
         return Boolean((a as any)[$equals](b));
     }
