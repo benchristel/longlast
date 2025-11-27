@@ -1,5 +1,13 @@
 # @longlast/equals
 
+## 0.5.5 (2025-11-27)
+
+The `equals` function can now equate native objects from different [realms].
+For example, arrays, errors, dates, and POJOs sent from an iframe via 
+`postMessage` will compare as expected with values from the current realm.
+
+[realms]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model#realms
+
 ## 0.5.4 (2025-10-18)
 
 Previously, there was a bug where objects with different numbers of keys could
