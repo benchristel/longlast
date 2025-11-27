@@ -1,5 +1,9 @@
 # @longlast/equals
 
+## 0.5.6 (2025-11-27)
+
+This release contains internal improvements.
+
 ## 0.5.5 (2025-11-27)
 
 The `equals` function can now equate native objects from different [realms].
