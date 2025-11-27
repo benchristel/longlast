@@ -82,28 +82,47 @@ function _equals(a: unknown, b: unknown): boolean {
     // argument to [$equals]. This would open the "protocol" up a bit more,
     // since people could then define their own implementations of `equals`
     // that work consistently through custom equality comparisons.
-    // TODO: Compare cross-realm objects.
     if (a != null && typeof (a as any)[$equals] === "function") {
         return Boolean((a as any)[$equals](b));
     }
+
     if (Object.is(a, b)) {
         return true;
     }
-    if (a instanceof Date && b instanceof Date) {
+
+    const aConstructorString = functionString(constructorOf(a));
+    const bConstructorString = functionString(constructorOf(b));
+
+    if (aConstructorString !== bConstructorString) {
+        return false;
+    }
+
+    if (aConstructorString === dateConstructorString) {
+        unsafeNarrow<Date>(a);
+        unsafeNarrow<Date>(b);
         return Object.is(+a, +b);
     }
-    if (a instanceof RegExp && b instanceof RegExp) {
+
+    if (aConstructorString === regexConstructorString) {
         return String(a) === String(b);
     }
-    if (a instanceof Error && b instanceof Error) {
-        return a.message === b.message && protoOf(a) === protoOf(b);
+
+    if (nativeErrorConstructorStrings.includes(aConstructorString)) {
+        unsafeNarrow<Error>(a);
+        unsafeNarrow<Error>(b);
+        return a.message === b.message;
     }
+
     if (Array.isArray(a) && Array.isArray(b)) {
         return a.length === b.length && a.every((_, i) => _equals(a[i], b[i]));
     }
-    if (a instanceof Set && b instanceof Set) {
+
+    if (aConstructorString === setConstructorString) {
+        unsafeNarrow<Set<unknown>>(a);
+        unsafeNarrow<Set<unknown>>(b);
         return a.size === b.size && [...a].every((v) => b.has(v));
     }
+
     if (typeof a === "function" && typeof b === "function") {
         const aUnapplied = (a as any)[$unapplied];
         const bUnapplied = (b as any)[$unapplied];
@@ -113,7 +132,12 @@ function _equals(a: unknown, b: unknown): boolean {
             _equals(getBoundArguments(a), getBoundArguments(b))
         );
     }
-    if (a && b && typeof a === "object" && protoOf(a) === protoOf(b)) {
+    if (
+        aConstructorString === objectConstructorString ||
+        (a && b && typeof a === "object" && protoOf(a) === protoOf(b))
+    ) {
+        unsafeNarrow<AnyObject>(a);
+        unsafeNarrow<AnyObject>(b);
         const aKeys = Object.keys(a);
         const bKeys = Object.keys(b);
         if (aKeys.length !== bKeys.length) {
@@ -124,7 +148,7 @@ function _equals(a: unknown, b: unknown): boolean {
             if (!bKeySet.has(key)) {
                 return false;
             }
-            if (!_equals((a as any)[key], (b as any)[key])) {
+            if (!_equals(a[key], b[key])) {
                 return false;
             }
         }
@@ -138,4 +162,39 @@ function getBoundArguments(f: any): unknown[] | undefined {
     return f[$getBoundArguments]?.() ?? f[$boundArguments];
 }
 
+function functionString(f: any): string {
+    if (typeof f !== "function") {
+        return "";
+    }
+    return Function.prototype.toString.call(f);
+}
+
+function constructorOf(value: unknown) {
+    if (value == null) {
+        return null;
+    }
+    return Object.getPrototypeOf(value)?.constructor;
+}
+
+function unsafeNarrow<T>(value: unknown): asserts value is T {
+    value;
+}
+
 const protoOf = Object.getPrototypeOf;
+
+type AnyObject = Record<keyof any, unknown>;
+
+const objectConstructorString = functionString(Object);
+const dateConstructorString = functionString(Date);
+const regexConstructorString = functionString(RegExp);
+const setConstructorString = functionString(Set);
+const nativeErrorConstructorStrings = [
+    functionString(Error),
+    // TODO: add DOMException? Be sure to check the `name` property.
+    functionString(EvalError),
+    functionString(RangeError),
+    functionString(ReferenceError),
+    functionString(SyntaxError),
+    functionString(TypeError),
+    functionString(URIError),
+];

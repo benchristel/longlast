@@ -10,10 +10,10 @@ function _equals(a: unknown, b: unknown): boolean {
     if (Object.is(a, b)) {
         return true;
     }
-    if (a instanceof Date && b instanceof Date) {
+    if (isA(Date, a) && isA(Date, b)) {
         return Object.is(+a, +b);
     }
-    if (a instanceof RegExp && b instanceof RegExp) {
+    if (isA(RegExp, a) && isA(RegExp, b)) {
         return String(a) === String(b);
     }
     if (a instanceof Error && b instanceof Error) {
@@ -34,7 +34,9 @@ function _equals(a: unknown, b: unknown): boolean {
         return (
             equalSets(new Set(aKeys), new Set(bKeys)) &&
             aKeys.every((k) => equals(a[k], b[k])) &&
-            Object.getPrototypeOf(a) === Object.getPrototypeOf(b)
+            // TODO: don't equate objects from two different user-created
+            // classes with the same constructor string.
+            isA(constructorOf(a), b)
         );
     }
     if (typeof a === "function" && typeof b === "function") {
@@ -59,4 +61,22 @@ function equalSets(a: Set<unknown>, b: Set<unknown>): boolean {
 
 function isObject(x: unknown): x is Record<string, unknown> {
     return !!x && typeof x === "object";
+}
+
+function isA<T>(constructor: new (...args: any) => T, a: unknown): a is T {
+    return functionString(constructorOf(a)) === functionString(constructor);
+}
+
+function functionString(f: any): string {
+    if (typeof f !== "function") {
+        return "";
+    }
+    return Function.prototype.toString.call(f);
+}
+
+function constructorOf(value: unknown) {
+    if (value == null) {
+        return null;
+    }
+    return Object.getPrototypeOf(value)?.constructor;
 }
