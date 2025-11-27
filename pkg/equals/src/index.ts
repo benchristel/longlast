@@ -191,7 +191,7 @@ function constructorOf(value: unknown) {
     if (value == null) {
         return null;
     }
-    return Object.getPrototypeOf(value)?.constructor;
+    return protoOf(value)?.constructor;
 }
 
 function unsafeNarrow<T>(value: unknown): asserts value is T {
