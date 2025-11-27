@@ -78,16 +78,36 @@ function _equals(a: unknown, b: unknown): boolean {
     // This is an optimized implementation. There is a simpler, equivalent one
     // in pkg/equals/alt/reference.ts.
 
+    if (a == null) {
+        return a === b;
+    }
+
     // TODO: (pre-1.0.0) decide if we should pass `equals` as the second
     // argument to [$equals]. This would open the "protocol" up a bit more,
     // since people could then define their own implementations of `equals`
     // that work consistently through custom equality comparisons.
-    if (a != null && typeof (a as any)[$equals] === "function") {
+    if (typeof (a as any)[$equals] === "function") {
         return Boolean((a as any)[$equals](b));
     }
 
     if (Object.is(a, b)) {
         return true;
+    }
+
+    if (typeof a === "function" && typeof b === "function") {
+        const aUnapplied = (a as any)[$unapplied];
+        const bUnapplied = (b as any)[$unapplied];
+        return (
+            aUnapplied != null &&
+            aUnapplied === bUnapplied &&
+            _equals(getBoundArguments(a), getBoundArguments(b))
+        );
+    }
+
+    // If `a` is a primitive at this point, return false, since we already know
+    // it is not identical to `b`.
+    if (typeof a !== "object") {
+        return false;
     }
 
     const aConstructorString = functionString(constructorOf(a));
@@ -97,13 +117,13 @@ function _equals(a: unknown, b: unknown): boolean {
         return false;
     }
 
-    if (aConstructorString === dateConstructorString) {
+    if (dateConstructorString === aConstructorString) {
         unsafeNarrow<Date>(a);
         unsafeNarrow<Date>(b);
         return Object.is(+a, +b);
     }
 
-    if (aConstructorString === regexConstructorString) {
+    if (regexConstructorString === aConstructorString) {
         return String(a) === String(b);
     }
 
@@ -117,24 +137,18 @@ function _equals(a: unknown, b: unknown): boolean {
         return a.length === b.length && a.every((_, i) => _equals(a[i], b[i]));
     }
 
-    if (aConstructorString === setConstructorString) {
+    if (setConstructorString === aConstructorString) {
         unsafeNarrow<Set<unknown>>(a);
         unsafeNarrow<Set<unknown>>(b);
         return a.size === b.size && [...a].every((v) => b.has(v));
     }
 
-    if (typeof a === "function" && typeof b === "function") {
-        const aUnapplied = (a as any)[$unapplied];
-        const bUnapplied = (b as any)[$unapplied];
-        return (
-            aUnapplied != null &&
-            aUnapplied === bUnapplied &&
-            _equals(getBoundArguments(a), getBoundArguments(b))
-        );
-    }
+    // TODO: typed arrays
+    // TODO: Map
+
     if (
-        aConstructorString === objectConstructorString ||
-        (a && b && typeof a === "object" && protoOf(a) === protoOf(b))
+        objectConstructorString === aConstructorString ||
+        protoOf(a) === protoOf(b)
     ) {
         unsafeNarrow<AnyObject>(a);
         unsafeNarrow<AnyObject>(b);
