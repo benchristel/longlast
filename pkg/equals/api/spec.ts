@@ -348,6 +348,14 @@ export function behavesLikeEquals(
             expect(_equals(a, b), is, true);
         },
 
+        "ignores nonstandard properties of Error subclasses"() {
+            class TestError extends Error {}
+            const a = new TestError("x");
+            const b = new TestError("x");
+            (a as any).nonstandard = 1;
+            expect(_equals(a, b), is, true);
+        },
+
         /*
          * Functions
          */

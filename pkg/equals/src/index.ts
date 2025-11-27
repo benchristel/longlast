@@ -127,7 +127,10 @@ function _equals(a: unknown, b: unknown): boolean {
         return String(a) === String(b);
     }
 
-    if (nativeErrorConstructorStrings.includes(aConstructorString)) {
+    if (
+        (a instanceof Error && b instanceof Error) ||
+        nativeErrorConstructorStrings.includes(aConstructorString)
+    ) {
         unsafeNarrow<Error>(a);
         unsafeNarrow<Error>(b);
         return a.message === b.message;
