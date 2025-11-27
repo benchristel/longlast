@@ -128,7 +128,7 @@ function _equals(a: unknown, b: unknown): boolean {
     }
 
     if (
-        (a instanceof Error && b instanceof Error) ||
+        a instanceof Error ||
         nativeErrorConstructorStrings.includes(aConstructorString)
     ) {
         unsafeNarrow<Error>(a);
@@ -136,7 +136,8 @@ function _equals(a: unknown, b: unknown): boolean {
         return a.message === b.message;
     }
 
-    if (Array.isArray(a) && Array.isArray(b)) {
+    if (Array.isArray(a)) {
+        unsafeNarrow<Array<unknown>>(b);
         return a.length === b.length && a.every((_, i) => _equals(a[i], b[i]));
     }
 
