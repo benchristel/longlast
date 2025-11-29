@@ -29,6 +29,9 @@ import {
  *     elements are equal (according to `equals`).
  *   - Sets are equal iff they contain the same elements. Note that set
  *     elements are _not_ deeply compared.
+ *   - Maps are equal iff they have the same set of keys, and their
+ *     corresponding values are deeply equal. Note that map keys are _not_
+ *     deeply compared.
  *   - Partially applied curried functions are equal iff they originate from
  *     the same curried function and their bound arguments are equal
  *     according to `equals`. See {@link curry}.
@@ -148,7 +151,20 @@ function _equals(a: unknown, b: unknown): boolean {
     }
 
     // TODO: typed arrays
-    // TODO: Map
+
+    if (mapConstructorString === aConstructorString) {
+        unsafeNarrow<Map<unknown, unknown>>(a);
+        unsafeNarrow<Map<unknown, unknown>>(b);
+        if (a.size !== b.size) {
+            return false;
+        }
+        for (const key of a.keys()) {
+            if (!b.has(key) || !_equals(a.get(key), b.get(key))) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     if (
         objectConstructorString === aConstructorString ||
@@ -206,6 +222,7 @@ const objectConstructorString = functionString(Object);
 const dateConstructorString = functionString(Date);
 const regexConstructorString = functionString(RegExp);
 const setConstructorString = functionString(Set);
+const mapConstructorString = functionString(Map);
 const nativeErrorConstructorStrings = [
     functionString(Error),
     // TODO: add DOMException? Be sure to check the `name` property.
