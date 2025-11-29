@@ -13,9 +13,6 @@ intended for developers of longlast and people who want to browse the code.
     creates a valid NPM package.
   - `src/` contains the source (TypeScript) code, and unit tests for
     functionality that is not part of the stable API.
-  - `alt/` contains alternative implementations of the package, for use in
-    performance benchmarks. Typically, this includes a slow but simple
-    "reference" implementation.
   - `benchmark.ts` runs the benchmarks.
   - `CHANGELOG.md` documents each release.
   - `tsconfig.build.json` says how to compile the source code to JavaScript.

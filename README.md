@@ -90,7 +90,6 @@ Thank you to [js.org] for providing the [longlast.js.org] domain!
 
 ## TODO
 
-- Ditch the reference implementation idea; I don't see the point anymore
 - Copy tstyche.config.json to packages on build, so we have a record of the
   supported TypeScript versions for each release.
 - `@longlast/name`

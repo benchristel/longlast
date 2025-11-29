@@ -78,9 +78,6 @@ import {
 export const equals: Curried2<unknown, unknown, boolean> = curry(_equals);
 
 function _equals(a: unknown, b: unknown): boolean {
-    // This is an optimized implementation. There is a simpler, equivalent one
-    // in pkg/equals/alt/reference.ts.
-
     if (a == null) {
         return a === b;
     }
