@@ -1,5 +1,9 @@
 # @longlast/equals
 
+## 0.5.7 (2025-11-29)
+
+The `equals` function now supports comparing `Map` objects.
+
 ## 0.5.6 (2025-11-27)
 
 This release contains internal improvements.
