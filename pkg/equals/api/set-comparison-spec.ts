@@ -1,9 +1,9 @@
 import {expect, is} from "@benchristel/taste";
-import {type equals} from "#@longlast/equals";
 
+type EqualsFn = (a: unknown, b: unknown) => boolean;
 type Spec = Record<string, () => void>;
 
-export function setComparisonSpec(_equals: typeof equals): Spec {
+export function setComparisonSpec(_equals: EqualsFn): Spec {
     return {
         "distinguishes sets with different sizes"() {
             const a = new Set([1]);

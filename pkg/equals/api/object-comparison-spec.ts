@@ -1,9 +1,9 @@
 import {expect, is} from "@benchristel/taste";
-import {type equals} from "#@longlast/equals";
 
+type EqualsFn = (a: unknown, b: unknown) => boolean;
 type Spec = Record<string, () => void>;
 
-export function objectComparisonSpec(_equals: typeof equals): Spec {
+export function objectComparisonSpec(_equals: EqualsFn): Spec {
     return {
         "equates identical objects"() {
             const a = {};

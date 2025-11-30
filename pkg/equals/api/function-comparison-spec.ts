@@ -1,10 +1,10 @@
 import {expect, is} from "@benchristel/taste";
-import {type equals} from "#@longlast/equals";
 import {curry} from "@longlast/curry";
 
+type EqualsFn = (a: unknown, b: unknown) => boolean;
 type Spec = Record<string, () => void>;
 
-export function functionComparisonSpec(_equals: typeof equals): Spec {
+export function functionComparisonSpec(_equals: EqualsFn): Spec {
     return {
         "distinguishes different functions"() {
             const a = () => {};

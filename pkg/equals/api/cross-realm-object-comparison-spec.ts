@@ -1,10 +1,10 @@
 import {expect, is} from "@benchristel/taste";
-import {type equals} from "#@longlast/equals";
 import {createContext, runInContext} from "node:vm";
 
+type EqualsFn = (a: unknown, b: unknown) => boolean;
 type Spec = Record<string, () => void>;
 
-export function crossRealmObjectComparisonSpec(_equals: typeof equals): Spec {
+export function crossRealmObjectComparisonSpec(_equals: EqualsFn): Spec {
     return {
         "equates objects from different realms"() {
             const a = createCrossRealmObject("{x: 1}");

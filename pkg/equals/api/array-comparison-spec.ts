@@ -1,9 +1,9 @@
 import {expect, is} from "@benchristel/taste";
-import {type equals} from "#@longlast/equals";
 
+type EqualsFn = (a: unknown, b: unknown) => boolean;
 type Spec = Record<string, () => void>;
 
-export function arrayComparisonSpec(_equals: typeof equals): Spec {
+export function arrayComparisonSpec(_equals: EqualsFn): Spec {
     return {
         "equates empty arrays"() {
             expect(_equals([], []), is, true);

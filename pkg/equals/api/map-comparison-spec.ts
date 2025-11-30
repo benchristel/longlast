@@ -1,10 +1,10 @@
 import {expect, is} from "@benchristel/taste";
-import {type equals} from "#@longlast/equals";
 import {$equals} from "@longlast/symbols";
 
+type EqualsFn = (a: unknown, b: unknown) => boolean;
 type Spec = Record<string, () => void>;
 
-export function mapComparisonSpec(_equals: typeof equals): Spec {
+export function mapComparisonSpec(_equals: EqualsFn): Spec {
     return {
         "equates empty maps"() {
             const a = new Map();

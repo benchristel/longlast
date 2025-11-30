@@ -1,9 +1,9 @@
 import {expect, is} from "@benchristel/taste";
-import {type equals} from "#@longlast/equals";
 
+type EqualsFn = (a: unknown, b: unknown) => boolean;
 type Spec = Record<string, () => void>;
 
-export function regexpComparisonSpec(_equals: typeof equals): Spec {
+export function regexpComparisonSpec(_equals: EqualsFn): Spec {
     return {
         "equates equal RegExp objects"() {
             const a = /x/;
