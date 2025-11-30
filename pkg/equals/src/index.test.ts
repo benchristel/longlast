@@ -8,13 +8,13 @@ import {primitiveComparisonSpec} from "../api/primitive-comparison-spec.ts";
 import {dateComparisonSpec} from "../api/date-comparison-spec.ts";
 import {regexpComparisonSpec} from "../api/regexp-comparison-spec.ts";
 import {setComparisonSpec} from "../api/set-comparison-spec.ts";
+import {mapComparisonSpec} from "../api/map-comparison-spec.ts";
 
 import {
     crossRealmObjectComparisonSpec,
     curriedEqualsSpec,
     errorComparisonSpec,
     functionComparisonSpec,
-    mapComparisonSpec,
 } from "../api/spec.ts";
 
 test("equals", objectComparisonSpec(equals));
