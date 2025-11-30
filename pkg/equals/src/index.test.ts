@@ -4,11 +4,12 @@ import {classInstanceComparisonSpec} from "../api/class-instance-comparison-spec
 import {dollarEqualsMethodSpec} from "../api/dollar-equals-method-spec.ts";
 import {objectComparisonSpec} from "../api/object-comparison-spec.ts";
 import {primitiveComparisonSpec} from "../api/primitive-comparison-spec.ts";
+import {dateComparisonSpec} from "../api/date-comparison-spec.ts";
+
 import {
     arrayComparisonSpec,
     crossRealmObjectComparisonSpec,
     curriedEqualsSpec,
-    dateComparisonSpec,
     errorComparisonSpec,
     functionComparisonSpec,
     mapComparisonSpec,
