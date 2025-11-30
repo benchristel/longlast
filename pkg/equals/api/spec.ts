@@ -1,27 +1,127 @@
-import {test, expect, is} from "@benchristel/taste";
+import {expect, is} from "@benchristel/taste";
 import {type equals} from "#@longlast/equals";
 import {curry} from "@longlast/curry";
 import {$equals} from "@longlast/symbols";
 import {createContext, runInContext} from "node:vm";
 
-export function behavesLikeEquals(
-    _equals: typeof equals,
-    subjectName: string,
-): void {
-    test(subjectName, {
-        /*
-         * Object identity
-         */
+type Spec = Record<string, () => void>;
 
+export function objectComparisonSpec(_equals: typeof equals): Spec {
+    return {
         "equates identical objects"() {
             const a = {};
             expect(_equals(a, a), is, true);
         },
 
-        /*
-         * Custom equality operator ($equals)
-         */
+        "distinguishes objects from arrays"() {
+            expect(_equals([], {}), is, false);
+        },
 
+        "distinguishes objects with different numbers of keys"() {
+            expect(_equals({a: 1}, {}), is, false);
+            expect(_equals({}, {a: 1}), is, false);
+        },
+
+        "distinguishes objects with different keys"() {
+            const a = {x: 1};
+            const b = {y: 1};
+            expect(_equals(a, b), is, false);
+        },
+
+        "distinguishes objects with different property values"() {
+            const a = {x: 1};
+            const b = {x: 2};
+            expect(_equals(a, b), is, false);
+        },
+
+        "equates objects with equal properties"() {
+            const a = {x: {y: 1}};
+            const b = {x: {y: 1}};
+            expect(_equals(a, b), is, true);
+        },
+
+        "equates empty objects"() {
+            expect(_equals({}, {}), is, true);
+        },
+
+        "ignores object key order"() {
+            const a = {x: 1, y: 2};
+            const b = {y: 2, x: 1};
+            expect(_equals(a, b), is, true);
+        },
+
+        "distinguishes a missing property from undefined"() {
+            const a = {x: undefined};
+            const b = {y: undefined};
+            expect(_equals(a, b), is, false);
+        },
+
+        "ignores non-enumerable properties"() {
+            const a = {x: 1};
+            const b = {y: 2};
+            Object.defineProperty(a, "y", {value: 2, enumerable: false});
+            Object.defineProperty(b, "x", {value: 1, enumerable: false});
+            expect(_equals(a, b), is, false);
+            expect(_equals(b, a), is, false);
+        },
+
+        "equates objects with no prototypes"() {
+            const a = Object.create(null);
+            const b = Object.create(null);
+            expect(_equals(a, b), is, true);
+        },
+    };
+}
+
+export function classInstanceComparisonSpec(_equals: typeof equals): Spec {
+    return {
+        "distinguishes different classes"() {
+            class ClassOne {}
+            class ClassTwo {}
+            expect(_equals(ClassOne, ClassTwo), is, false);
+        },
+
+        "distinguishes instances of different classes"() {
+            class ClassOne {}
+            class ClassTwo {}
+            expect(_equals(new ClassOne(), new ClassTwo()), is, false);
+        },
+
+        "equates instances of the same class with the same properties"() {
+            class ClassOne {
+                public a: number;
+                constructor(a: number) {
+                    this.a = a;
+                }
+            }
+            const a = new ClassOne(1);
+            const b = new ClassOne(1);
+            expect(_equals(a, b), is, true);
+        },
+
+        "distinguishes instances of the same class with different properties"() {
+            class ClassOne {
+                public a: number;
+                constructor(a: number) {
+                    this.a = a;
+                }
+            }
+            const a = new ClassOne(1);
+            const b = new ClassOne(22);
+            expect(_equals(a, b), is, false);
+        },
+
+        "distinguishes a subclass instance from a superclass instance"() {
+            class Superclass {}
+            class Subclass extends Superclass {}
+            expect(_equals(new Subclass(), new Superclass()), is, false);
+            expect(_equals(new Superclass(), new Subclass()), is, false);
+        },
+    };
+}
+
+export function dollarEqualsMethodSpec(_equals: typeof equals): Spec {
+    return {
         "equates `a` and `b` if `a[$equals](b)` returns true"() {
             class CustomValue {
                 property?: string;
@@ -84,7 +184,11 @@ export function behavesLikeEquals(
             expect(_equals(aPositive, 0), is, false);
             expect(_equals(aPositive, aPositive), is, false);
         },
+    };
+}
 
+export function primitiveComparisonSpec(_equals: typeof equals): Spec {
+    return {
         /*
          * Null and undefined
          */
@@ -183,11 +287,11 @@ export function behavesLikeEquals(
             const b = Symbol();
             expect(_equals(a, b), is, false);
         },
+    };
+}
 
-        /*
-         * Dates
-         */
-
+export function dateComparisonSpec(_equals: typeof equals): Spec {
+    return {
         "equates equal dates"() {
             const a = new Date("1999-12-21");
             const b = new Date("1999-12-21");
@@ -200,10 +304,22 @@ export function behavesLikeEquals(
             expect(_equals(a, b), is, false);
         },
 
-        /*
-         * RegExps
-         */
+        "equates invalid Dates"() {
+            const a = new Date("asdf");
+            const b = new Date("jkl;");
+            expect(_equals(a, b), is, true);
+        },
 
+        "distinguishes a valid Date from an invalid one"() {
+            const a = new Date("1999-12-21");
+            const b = new Date("asdf");
+            expect(_equals(a, b), is, false);
+        },
+    };
+}
+
+export function regexpComparisonSpec(_equals: typeof equals): Spec {
+    return {
         "equates equal RegExp objects"() {
             const a = /x/;
             const b = /x/;
@@ -227,10 +343,14 @@ export function behavesLikeEquals(
             const b = /x/gi;
             expect(_equals(a, b), is, true);
         },
+    };
+}
 
-        /*
-         * Arrays
-         */
+export function arrayComparisonSpec(_equals: typeof equals): Spec {
+    return {
+        "equates empty arrays"() {
+            expect(_equals([], []), is, true);
+        },
 
         "distinguishes arrays of different lengths"() {
             expect(_equals([], [undefined]), is, false);
@@ -248,41 +368,26 @@ export function behavesLikeEquals(
             expect(_equals(a, b), is, true);
         },
 
-        /*
-         * Objects
-         */
+        "distinguishes arrays with unequal complex elements"() {
+            const a = [[1], {a: 2}];
+            const b = [[1], {a: 999}];
+            expect(_equals(a, b), is, false);
+        },
 
-        "distinguishes objects from arrays"() {
+        "distinguishes an array from a non-array"() {
+            expect(_equals([], null), is, false);
+            expect(_equals(null, []), is, false);
+        },
+
+        "distinguishes arrays and objects"() {
             expect(_equals([], {}), is, false);
+            expect(_equals({}, []), is, false);
         },
+    };
+}
 
-        "distinguishes objects with different numbers of keys"() {
-            expect(_equals({a: 1}, {}), is, false);
-            expect(_equals({}, {a: 1}), is, false);
-        },
-
-        "distinguishes objects with different keys"() {
-            const a = {x: 1};
-            const b = {y: 1};
-            expect(_equals(a, b), is, false);
-        },
-
-        "distinguishes objects with different property values"() {
-            const a = {x: 1};
-            const b = {x: 2};
-            expect(_equals(a, b), is, false);
-        },
-
-        "equates objects with equal properties"() {
-            const a = {x: {y: 1}};
-            const b = {x: {y: 1}};
-            expect(_equals(a, b), is, true);
-        },
-
-        /*
-         * Sets
-         */
-
+export function setComparisonSpec(_equals: typeof equals): Spec {
+    return {
         "distinguishes sets with different sizes"() {
             const a = new Set([1]);
             const b = new Set([]);
@@ -318,11 +423,11 @@ export function behavesLikeEquals(
             const b = new Set([-0]);
             expect(_equals(a, b), is, true);
         },
+    };
+}
 
-        /*
-         * Maps
-         */
-
+export function mapComparisonSpec(_equals: typeof equals): Spec {
+    return {
         "equates empty maps"() {
             const a = new Map();
             const b = new Map();
@@ -390,11 +495,11 @@ export function behavesLikeEquals(
 
             expect(_equals(a, b), is, true);
         },
+    };
+}
 
-        /*
-         * Errors
-         */
-
+export function errorComparisonSpec(_equals: typeof equals): Spec {
+    return {
         "equates Errors with equal messages"() {
             const a = new Error("a");
             const b = new Error("a");
@@ -427,11 +532,11 @@ export function behavesLikeEquals(
             (a as any).nonstandard = 1;
             expect(_equals(a, b), is, true);
         },
+    };
+}
 
-        /*
-         * Functions
-         */
-
+export function functionComparisonSpec(_equals: typeof equals): Spec {
+    return {
         "distinguishes different functions"() {
             const a = () => {};
             const b = () => {};
@@ -463,11 +568,11 @@ export function behavesLikeEquals(
             const concat = curry((a: unknown[], b: unknown[]) => a.concat(b));
             expect(_equals(concat([1]), concat([99])), is, false);
         },
+    };
+}
 
-        /*
-         * Values from different realms
-         */
-
+export function crossRealmObjectComparisonSpec(_equals: typeof equals): Spec {
+    return {
         "equates objects from different realms"() {
             const a = createCrossRealmObject("{x: 1}");
             const b = createCrossRealmObject("{x: 1}");
@@ -563,11 +668,11 @@ export function behavesLikeEquals(
             expect(_equals(a, b), is, true);
             expect(_equals(a, new Set([1])), is, true);
         },
+    };
+}
 
-        /*
-         * Currying
-         */
-
+export function curriedEqualsSpec(_equals: typeof equals): Spec {
+    return {
         "is curried"() {
             expect(_equals(42)(42), is, true);
         },
@@ -577,7 +682,7 @@ export function behavesLikeEquals(
             // `_equals(1)`.
             expect([0, 1, 2].map(_equals(1)).join(","), is, "false,true,false");
         },
-    });
+    };
 }
 
 function createCrossRealmObject(expression: string): unknown {
