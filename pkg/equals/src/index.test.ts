@@ -1,8 +1,10 @@
 import {test, expect, is} from "@benchristel/taste";
 import {equals} from "./index.ts";
+
 import {arrayComparisonSpec} from "../api/array-comparison-spec.ts";
 import {classInstanceComparisonSpec} from "../api/class-instance-comparison-spec.ts";
 import {dollarEqualsMethodSpec} from "../api/dollar-equals-method-spec.ts";
+import {errorComparisonSpec} from "../api/error-comparison-spec.ts";
 import {objectComparisonSpec} from "../api/object-comparison-spec.ts";
 import {primitiveComparisonSpec} from "../api/primitive-comparison-spec.ts";
 import {dateComparisonSpec} from "../api/date-comparison-spec.ts";
@@ -13,7 +15,6 @@ import {mapComparisonSpec} from "../api/map-comparison-spec.ts";
 import {
     crossRealmObjectComparisonSpec,
     curriedEqualsSpec,
-    errorComparisonSpec,
     functionComparisonSpec,
 } from "../api/spec.ts";
 
