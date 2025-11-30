@@ -32,12 +32,14 @@ test("equals", curriedEqualsSpec(equals));
 
 test("equals", {
     "handles an object with a reference cycle"() {
+        // Characterization test: this behavior is unsupported.
         const obj: {x: unknown} = {x: null};
         obj.x = obj;
         expect(equals(obj, obj), is, true);
     },
 
     "throws given two objects with different reference cycles"() {
+        // Characterization test: this behavior is unsupported.
         const a: {x: unknown} = {x: null};
         const b: {x: unknown} = {x: null};
         a.x = a;
