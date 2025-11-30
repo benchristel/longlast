@@ -15,19 +15,19 @@ import {primitiveComparisonSpec} from "../api/primitive-comparison-spec.ts";
 import {regexpComparisonSpec} from "../api/regexp-comparison-spec.ts";
 import {setComparisonSpec} from "../api/set-comparison-spec.ts";
 
-test("equals", objectComparisonSpec(equals));
-test("equals", classInstanceComparisonSpec(equals));
-test("equals", dollarEqualsMethodSpec(equals));
-test("equals", primitiveComparisonSpec(equals));
-test("equals", dateComparisonSpec(equals));
-test("equals", regexpComparisonSpec(equals));
 test("equals", arrayComparisonSpec(equals));
-test("equals", setComparisonSpec(equals));
-test("equals", mapComparisonSpec(equals));
-test("equals", errorComparisonSpec(equals));
-test("equals", functionComparisonSpec(equals));
+test("equals", classInstanceComparisonSpec(equals));
 test("equals", crossRealmObjectComparisonSpec(equals));
 test("equals", curriedEqualsSpec(equals));
+test("equals", dateComparisonSpec(equals));
+test("equals", dollarEqualsMethodSpec(equals));
+test("equals", errorComparisonSpec(equals));
+test("equals", functionComparisonSpec(equals));
+test("equals", mapComparisonSpec(equals));
+test("equals", objectComparisonSpec(equals));
+test("equals", primitiveComparisonSpec(equals));
+test("equals", regexpComparisonSpec(equals));
+test("equals", setComparisonSpec(equals));
 
 test("equals", {
     "handles an object with a reference cycle"() {
