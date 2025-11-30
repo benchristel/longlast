@@ -4,6 +4,7 @@ import {equals} from "./index.ts";
 import {arrayComparisonSpec} from "../api/array-comparison-spec.ts";
 import {classInstanceComparisonSpec} from "../api/class-instance-comparison-spec.ts";
 import {crossRealmObjectComparisonSpec} from "../api/cross-realm-object-comparison-spec.ts";
+import {curriedEqualsSpec} from "../api/curried-equals-spec.ts";
 import {dateComparisonSpec} from "../api/date-comparison-spec.ts";
 import {dollarEqualsMethodSpec} from "../api/dollar-equals-method-spec.ts";
 import {errorComparisonSpec} from "../api/error-comparison-spec.ts";
@@ -13,8 +14,6 @@ import {objectComparisonSpec} from "../api/object-comparison-spec.ts";
 import {primitiveComparisonSpec} from "../api/primitive-comparison-spec.ts";
 import {regexpComparisonSpec} from "../api/regexp-comparison-spec.ts";
 import {setComparisonSpec} from "../api/set-comparison-spec.ts";
-
-import {curriedEqualsSpec} from "../api/spec.ts";
 
 test("equals", objectComparisonSpec(equals));
 test("equals", classInstanceComparisonSpec(equals));
