@@ -1,5 +1,6 @@
 import {test, expect, is} from "@benchristel/taste";
 import {equals} from "./index.ts";
+import {objectComparisonSpec} from "../api/object-comparison-spec.ts";
 import {
     arrayComparisonSpec,
     classInstanceComparisonSpec,
@@ -10,7 +11,6 @@ import {
     errorComparisonSpec,
     functionComparisonSpec,
     mapComparisonSpec,
-    objectComparisonSpec,
     primitiveComparisonSpec,
     regexpComparisonSpec,
     setComparisonSpec,
