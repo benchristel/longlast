@@ -1,9 +1,9 @@
 import {test, expect, is} from "@benchristel/taste";
 import {equals} from "./index.ts";
+import {classInstanceComparisonSpec} from "../api/class-instance-comparison-spec.ts";
 import {objectComparisonSpec} from "../api/object-comparison-spec.ts";
 import {
     arrayComparisonSpec,
-    classInstanceComparisonSpec,
     crossRealmObjectComparisonSpec,
     curriedEqualsSpec,
     dateComparisonSpec,
