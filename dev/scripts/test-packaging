@@ -3,7 +3,7 @@
 # This script does a "system test" of the build process and package.json
 # configuration for each package. It verifies that each package can be built,
 # installed in a client project, imported, and used. It relies on files in the
-# `package-tests` directory of each package.
+# `packaging-tests` directory of each package.
 
 # Exit immediately on any failure.
 set -euo pipefail
@@ -48,23 +48,23 @@ pushd "$CLIENT" >/dev/null
     # Install the @longlast packages we built earlier.
     pnpm add "$BUILD"/longlast-*.tgz >/dev/null
 
-    # Copy the package tests we're going to run into the client repo.
+    # Copy the tests we're going to run into the client repo.
     pushd "$BUILD" >/dev/null
-        ls -d pkg/*/package-tests | \
+        ls -d pkg/*/packaging-tests | \
             xargs -I{} cp -r --parents {} "$CLIENT"
     popd >/dev/null
 
     # Print the names of the test files. Otherwise, it's hard to be sure if any
     # tests are running!
     echo
-    echo "Package tests:"
+    echo "Packaging tests:"
     find pkg -type f
 
-    # The package tests contain self-imports like "#@longlast/symbols". During
-    # development, these imports are resolved to the packages' index.ts files
-    # by an `imports` field in package.json. When running the package tests,
-    # though, we need to use the actual package name, so we remove the '#'
-    # here. See: https://nodejs.org/docs/v22.18.0/api/packages.html#imports
+    # The packaging tests contain self-imports like "#@longlast/symbols".
+    # During development, these imports are resolved to the packages' index.ts
+    # files by an `imports` field in package.json. When running the packaging
+    # tests, though, we need to use the actual package name, so we remove the
+    # '#' here. See: https://nodejs.org/docs/v22.18.0/api/packages.html#imports
     find pkg -type f | xargs sed -ie 's/from "#@longlast/from "@longlast/'
 
     # Actually run the tests.

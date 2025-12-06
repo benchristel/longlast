@@ -9,7 +9,7 @@ intended for developers of longlast and people who want to browse the code.
 
   - `spec/` contains executable specifications (i.e. tests) for the package's
     behavior and types.
-  - `package-tests/` contains smoketests to verify that the build process
+  - `packaging-tests/` contains smoketests to verify that the build process
     creates a valid NPM package.
   - `src/` contains the source (TypeScript) code, and unit tests for
     functionality that is not part of the stable API.
