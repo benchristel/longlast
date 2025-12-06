@@ -2,10 +2,10 @@ import {curry} from "#@longlast/curry";
 import {$getBoundArguments, $unapplied} from "@longlast/symbols";
 import {test, expect, equals, is} from "@benchristel/taste";
 import {testFunctionCurrying} from "../api/currying.spec.ts";
-import {testMetadata} from "../api/metadata.spec.ts";
+import {testProvenanceTracking} from "../api/provenance.spec.ts";
 
 testFunctionCurrying(curry, "curry");
-testMetadata(curry, "curry");
+testProvenanceTracking(curry, "curry");
 
 const concat2 = curry((a: string, b: string) => `${a}${b}`);
 

@@ -196,47 +196,47 @@ function curry2(f: AnyFunction): AnyFunction {
     function curried(a: any, b: any) {
         switch (arguments.length) {
             case 1:
-                return copyMetadata(curried, [a], f.bind(null, a));
+                return trackProvenance(curried, [a], f.bind(null, a));
             default:
                 return f(a, b);
         }
     }
-    return initMetadata(f, curried);
+    return initProvenance(f, curried);
 }
 
 function curry3(f: AnyFunction): AnyFunction {
     function curried(a: any, b: any, c: any) {
         switch (arguments.length) {
             case 1:
-                return copyMetadata(curried, [a], curry2(f.bind(null, a)));
+                return trackProvenance(curried, [a], curry2(f.bind(null, a)));
             case 2:
-                return copyMetadata(curried, [a, b], f.bind(null, a, b));
+                return trackProvenance(curried, [a, b], f.bind(null, a, b));
             default:
                 return f(a, b, c);
         }
     }
-    return initMetadata(f, curried);
+    return initProvenance(f, curried);
 }
 
 function curryVarargs(f: AnyFunction): AnyFunction {
     function curried(...args: any[]): any {
         if (args.length < f.length) {
-            return copyMetadata(curried, args, curried.bind(null, ...args));
+            return trackProvenance(curried, args, curried.bind(null, ...args));
         } else {
             return f(...args);
         }
     }
-    return initMetadata(f, curried);
+    return initProvenance(f, curried);
 }
 
-function initMetadata(original: any, curried: any) {
+function initProvenance(original: any, curried: any) {
     curried.displayName = getName(original);
     curried[$getBoundArguments] = () => [];
     curried[$unapplied] = curried;
     return curried;
 }
 
-function copyMetadata(source: any, args: any[], destination: any) {
+function trackProvenance(source: any, args: any[], destination: any) {
     destination.displayName = getName(source);
     destination[$getBoundArguments] = () => getArgs(source).concat(args);
     destination[$unapplied] = source[$unapplied];

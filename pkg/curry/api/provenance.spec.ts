@@ -2,7 +2,10 @@ import {type curry} from "#@longlast/curry";
 import {$unapplied, $getBoundArguments} from "@longlast/symbols";
 import {test, expect, is, equals} from "@benchristel/taste";
 
-export function testMetadata(_curry: typeof curry, subjectName: string): void {
+export function testProvenanceTracking(
+    _curry: typeof curry,
+    subjectName: string,
+): void {
     test(subjectName, {
         "names a curried function after the original function"() {
             function foo(_a: 1, _b: 2) {}
