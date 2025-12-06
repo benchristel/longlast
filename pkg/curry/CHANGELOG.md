@@ -1,5 +1,13 @@
 # @longlast/curry
 
+## 0.6.1 (2025-12-06)
+
+The `[$getBoundArguments]`, `[$unapplied]`, and `displayName`
+properties of curried functions are now grouped together onto
+an unexported interface, `FunctionProvenance`. This change is
+reflected in the docs, but the code functions exactly the
+same.
+
 ## 0.6.0 (2025-10-18)
 
 Users of `curry` will now correctly get type errors if they pass a
