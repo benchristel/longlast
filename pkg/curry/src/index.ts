@@ -201,7 +201,7 @@ function curry2(f: AnyFunction): AnyFunction {
                 return f(a, b);
         }
     }
-    return initProvenance(f, curried);
+    return initProvenance(curried, getName(f));
 }
 
 function curry3(f: AnyFunction): AnyFunction {
@@ -215,7 +215,7 @@ function curry3(f: AnyFunction): AnyFunction {
                 return f(a, b, c);
         }
     }
-    return initProvenance(f, curried);
+    return initProvenance(curried, getName(f));
 }
 
 function curryVarargs(f: AnyFunction): AnyFunction {
@@ -226,11 +226,11 @@ function curryVarargs(f: AnyFunction): AnyFunction {
             return f(...args);
         }
     }
-    return initProvenance(f, curried);
+    return initProvenance(curried, getName(f));
 }
 
-function initProvenance(original: any, curried: any) {
-    curried.displayName = getName(original);
+function initProvenance(curried: any, name: string) {
+    curried.displayName = name;
     curried[$getBoundArguments] = () => [];
     curried[$unapplied] = curried;
     return curried;
