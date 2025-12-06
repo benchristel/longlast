@@ -11,7 +11,7 @@ import {$getBoundArguments, $unapplied} from "@longlast/symbols";
  * @typeParam C - the type of `f`'s third argument
  * @typeParam D - the type of `f`'s fourth argument
  * @typeParam E - the type of `f`'s fifth argument
- * @typeParam Return - the return type of `f`
+ * @typeParam Return - the function's return type
  */
 
 export function curry<A, B, Return>(
@@ -142,113 +142,91 @@ function getArgs(f: any): unknown[] {
 
 declare const $nonUserConstructible: unique symbol;
 
+// TODO: move FunctionProvenance to its own package.
+interface FunctionProvenance {
+    [$getBoundArguments](): unknown[];
+    [$unapplied]: AnyFunction;
+    displayName: string;
+
+    /** @hidden */
+    [$nonUserConstructible]: true;
+}
+
 /**
  * A one-argument (unary) function created by partially applying a curried
  * function.
- *
- * This type only exists to declare the `displayName` property.
  *
  * @typeParam A - the type of the function's argument
  * @typeParam Return - the function's return type
  */
 
-export interface Curried1<A, Return> {
+export interface Curried1<A, Return> extends FunctionProvenance {
     (a: A): Return;
-    [$getBoundArguments](): unknown[];
-    [$unapplied]: AnyFunction;
-    displayName: string;
-
-    /** @hidden */
-    [$nonUserConstructible]: true;
 }
 
 /**
  * A two-argument (binary) curried function.
  *
- * @typeParam A - the type of `f`'s first argument
- * @typeParam B - the type of `f`'s second argument
- * @typeParam Return - the return type of `f`
+ * @typeParam A - the type of the function's first argument
+ * @typeParam B - the type of the function's second argument
+ * @typeParam Return - the function's return type
  */
 
-export interface Curried2<A, B, Return> {
+export interface Curried2<A, B, Return> extends FunctionProvenance {
     (a: A, b: B): Return;
     (a: A, b?: never): Curried1<B, Return>;
-    displayName: string;
-    [$getBoundArguments](): unknown[];
-    [$unapplied]: AnyFunction;
-
-    /** @hidden */
-    [$nonUserConstructible]: true;
 }
 
 /**
  * A three-argument curried function.
  *
- * @typeParam A - the type of `f`'s first argument
- * @typeParam B - the type of `f`'s second argument
- * @typeParam C - the type of `f`'s third argument
- * @typeParam Return - the return type of `f`
+ * @typeParam A - the type of the function's first argument
+ * @typeParam B - the type of the function's second argument
+ * @typeParam C - the type of the function's third argument
+ * @typeParam Return - the function's return type
  */
 
-export interface Curried3<A, B, C, Return> {
+export interface Curried3<A, B, C, Return> extends FunctionProvenance {
     (a: A, b: B, c: C): Return;
     (a: A, b: B, c?: never): Curried1<C, Return>;
     (a: A, b?: never, c?: never): Curried2<B, C, Return>;
-    displayName: string;
-    [$getBoundArguments](): unknown[];
-    [$unapplied]: AnyFunction;
-
-    /** @hidden */
-    [$nonUserConstructible]: true;
 }
 
 /**
  * A four-argument curried function.
  *
- * @typeParam A - the type of `f`'s first argument
- * @typeParam B - the type of `f`'s second argument
- * @typeParam C - the type of `f`'s third argument
- * @typeParam D - the type of `f`'s fourth argument
- * @typeParam Return - the return type of `f`
+ * @typeParam A - the type of the function's first argument
+ * @typeParam B - the type of the function's second argument
+ * @typeParam C - the type of the function's third argument
+ * @typeParam D - the type of the function's fourth argument
+ * @typeParam Return - the function's return type
  */
 
-export interface Curried4<A, B, C, D, Return> {
+export interface Curried4<A, B, C, D, Return> extends FunctionProvenance {
     (a: A, b: B, c: C, d: D): Return;
     (a: A, b: B, c: C, d?: never): Curried1<D, Return>;
     (a: A, b: B, c?: never, d?: never): Curried2<C, D, Return>;
     (a: A, b?: never, c?: never, d?: never): Curried3<B, C, D, Return>;
-    displayName: string;
-    [$getBoundArguments](): unknown[];
-    [$unapplied]: AnyFunction;
-
-    /** @hidden */
-    [$nonUserConstructible]: true;
 }
 
 /**
  * A five-argument curried function.
  *
- * @typeParam A - the type of `f`'s first argument
- * @typeParam B - the type of `f`'s second argument
- * @typeParam C - the type of `f`'s third argument
- * @typeParam D - the type of `f`'s fourth argument
- * @typeParam E - the type of `f`'s fifth argument
- * @typeParam Return - the return type of `f`
+ * @typeParam A - the type of the function's first argument
+ * @typeParam B - the type of the function's second argument
+ * @typeParam C - the type of the function's third argument
+ * @typeParam D - the type of the function's fourth argument
+ * @typeParam E - the type of the function's fifth argument
+ * @typeParam Return - the function's return type
  */
 
-export interface Curried5<A, B, C, D, E, Return> {
+export interface Curried5<A, B, C, D, E, Return> extends FunctionProvenance {
     (a: A, b: B, c: C, d: D, e: E): Return;
     (a: A, b: B, c: C, d: D, e?: never): Curried1<E, Return>;
     (a: A, b: B, c: C, d?: never, e?: never): Curried2<D, E, Return>;
     (a: A, b: B, c?: never, d?: never, e?: never): Curried3<C, D, E, Return>;
     // prettier-ignore
     (a: A, b?: never, c?: never, d?: never, e?: never): Curried4<B, C, D, E, Return>;
-    displayName: string;
-    [$getBoundArguments](): unknown[];
-    [$unapplied]: AnyFunction;
-
-    /** @hidden */
-    [$nonUserConstructible]: true;
 }
 
 // TODO: move this type to its own package
