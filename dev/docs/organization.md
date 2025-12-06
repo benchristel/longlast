@@ -7,7 +7,7 @@ intended for developers of longlast and people who want to browse the code.
   e.g. `pkg/equals/` houses the code for `@longlast/equals`. Within each
   package's directory, the following structure is observed:
 
-  - `api/` contains executable specifications (i.e. tests) for the package's
+  - `spec/` contains executable specifications (i.e. tests) for the package's
     behavior and types.
   - `package-tests/` contains smoketests to verify that the build process
     creates a valid NPM package.

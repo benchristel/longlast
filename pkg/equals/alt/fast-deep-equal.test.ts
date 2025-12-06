@@ -1,16 +1,16 @@
 import {test} from "@benchristel/taste";
 import fastDeepEqual from "fast-deep-equal/es6/index.js";
 
-import {arrayComparisonSpec} from "../api/array-comparison-spec.ts";
-import {classInstanceComparisonSpec} from "../api/class-instance-comparison-spec.ts";
-import {dateComparisonSpec} from "../api/date-comparison-spec.ts";
-import {errorComparisonSpec} from "../api/error-comparison-spec.ts";
-import {functionComparisonSpec} from "../api/function-comparison-spec.ts";
-import {mapComparisonSpec} from "../api/map-comparison-spec.ts";
-import {objectComparisonSpec} from "../api/object-comparison-spec.ts";
-import {primitiveComparisonSpec} from "../api/primitive-comparison-spec.ts";
-import {regexpComparisonSpec} from "../api/regexp-comparison-spec.ts";
-import {setComparisonSpec} from "../api/set-comparison-spec.ts";
+import {arrayComparisonSpec} from "../spec/array-comparison-spec.ts";
+import {classInstanceComparisonSpec} from "../spec/class-instance-comparison-spec.ts";
+import {dateComparisonSpec} from "../spec/date-comparison-spec.ts";
+import {errorComparisonSpec} from "../spec/error-comparison-spec.ts";
+import {functionComparisonSpec} from "../spec/function-comparison-spec.ts";
+import {mapComparisonSpec} from "../spec/map-comparison-spec.ts";
+import {objectComparisonSpec} from "../spec/object-comparison-spec.ts";
+import {primitiveComparisonSpec} from "../spec/primitive-comparison-spec.ts";
+import {regexpComparisonSpec} from "../spec/regexp-comparison-spec.ts";
+import {setComparisonSpec} from "../spec/set-comparison-spec.ts";
 
 const unimplemented = [
     // The lack of distinction between positive and negative zero makes

@@ -38,8 +38,8 @@ be stable.
 ## API tests
 
 The stable API of each package is formally defined by tests and typetests in
-the `api` directory. A feature is stable to the extent that changing it
-would cause a test failure in `api`. API tests are "append-only" — they are
+the `spec` directory. A feature is stable to the extent that changing it
+would cause a test failure in `spec`. API tests are "append-only" — they are
 not removed or meaningfully changed in non-major releases.
 
 ## TypeScript Support Policy

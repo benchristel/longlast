@@ -8,7 +8,7 @@
 - Ensure all exports have typetests.
 - Ensure all exported types used in function return types are marked
   non-user-constructible (if appropriate).
-- Move the tests for any behavior we might not want to support out of `api/`.
+- Move the tests for any behavior we might not want to support out of `spec/`.
 - Ensure the API specs exemplify how the package might be used in both
   TypeScript and JavaScript code.
 - Remove Hyrum's Law footguns. If the package makes certain assumptions about
