@@ -81,6 +81,67 @@ export function curry(f: AnyFunction): AnyFunction {
     }
 }
 
+function curry2(f: AnyFunction): AnyFunction {
+    function curried(a: any, b: any) {
+        switch (arguments.length) {
+            case 1:
+                return trackProvenance(curried, [a], f.bind(null, a));
+            default:
+                return f(a, b);
+        }
+    }
+    return initProvenance(curried, getName(f));
+}
+
+function curry3(f: AnyFunction): AnyFunction {
+    function curried(a: any, b: any, c: any) {
+        switch (arguments.length) {
+            case 1:
+                return trackProvenance(curried, [a], curry2(f.bind(null, a)));
+            case 2:
+                return trackProvenance(curried, [a, b], f.bind(null, a, b));
+            default:
+                return f(a, b, c);
+        }
+    }
+    return initProvenance(curried, getName(f));
+}
+
+function curryVarargs(f: AnyFunction): AnyFunction {
+    function curried(...args: any[]): any {
+        if (args.length < f.length) {
+            return trackProvenance(curried, args, curried.bind(null, ...args));
+        } else {
+            return f(...args);
+        }
+    }
+    return initProvenance(curried, getName(f));
+}
+
+function initProvenance(curried: any, name: string) {
+    curried.displayName = name;
+    curried[$getBoundArguments] = () => [];
+    curried[$unapplied] = curried;
+    return curried;
+}
+
+function trackProvenance(source: any, args: any[], destination: any) {
+    destination.displayName = getName(source);
+    destination[$getBoundArguments] = () => getArgs(source).concat(args);
+    destination[$unapplied] = source[$unapplied];
+    return destination;
+}
+
+function getName(f: any): string {
+    return f.displayName ?? f.name;
+}
+
+function getArgs(f: any): unknown[] {
+    return f[$getBoundArguments]() ?? [];
+}
+
+declare const $nonUserConstructible: unique symbol;
+
 /**
  * A one-argument (unary) function created by partially applying a curried
  * function.
@@ -188,67 +249,6 @@ export interface Curried5<A, B, C, D, E, Return> {
 
     /** @hidden */
     [$nonUserConstructible]: true;
-}
-
-declare const $nonUserConstructible: unique symbol;
-
-function curry2(f: AnyFunction): AnyFunction {
-    function curried(a: any, b: any) {
-        switch (arguments.length) {
-            case 1:
-                return trackProvenance(curried, [a], f.bind(null, a));
-            default:
-                return f(a, b);
-        }
-    }
-    return initProvenance(curried, getName(f));
-}
-
-function curry3(f: AnyFunction): AnyFunction {
-    function curried(a: any, b: any, c: any) {
-        switch (arguments.length) {
-            case 1:
-                return trackProvenance(curried, [a], curry2(f.bind(null, a)));
-            case 2:
-                return trackProvenance(curried, [a, b], f.bind(null, a, b));
-            default:
-                return f(a, b, c);
-        }
-    }
-    return initProvenance(curried, getName(f));
-}
-
-function curryVarargs(f: AnyFunction): AnyFunction {
-    function curried(...args: any[]): any {
-        if (args.length < f.length) {
-            return trackProvenance(curried, args, curried.bind(null, ...args));
-        } else {
-            return f(...args);
-        }
-    }
-    return initProvenance(curried, getName(f));
-}
-
-function initProvenance(curried: any, name: string) {
-    curried.displayName = name;
-    curried[$getBoundArguments] = () => [];
-    curried[$unapplied] = curried;
-    return curried;
-}
-
-function trackProvenance(source: any, args: any[], destination: any) {
-    destination.displayName = getName(source);
-    destination[$getBoundArguments] = () => getArgs(source).concat(args);
-    destination[$unapplied] = source[$unapplied];
-    return destination;
-}
-
-function getName(f: any): string {
-    return f.displayName ?? f.name;
-}
-
-function getArgs(f: any): unknown[] {
-    return f[$getBoundArguments]() ?? [];
 }
 
 // TODO: move this type to its own package
