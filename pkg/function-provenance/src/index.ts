@@ -14,7 +14,7 @@ export interface FunctionProvenance {
     [$nonUserConstructible]: true;
 }
 
-// TOOD: Move this type to its own package. Duplicated in `curry`.
+// TODO: Move this type to its own package. Duplicated in `curry`.
 type AnyFunction = (...args: any[]) => any;
 
 export function getBoundArguments(f: AnyFunction): unknown[] {
