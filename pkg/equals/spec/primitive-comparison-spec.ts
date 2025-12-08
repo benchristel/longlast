@@ -21,6 +21,11 @@ export function primitiveComparisonSpec(_equals: EqualsFn): Spec {
             expect(_equals(null, undefined), is, false);
         },
 
+        "distinguishes null from an object"() {
+            expect(_equals(null, {}), is, false);
+            expect(_equals({}, null), is, false);
+        },
+
         /*
          * Booleans
          */

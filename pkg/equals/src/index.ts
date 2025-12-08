@@ -36,7 +36,7 @@ function _equalsWith(
         return override;
     }
 
-    if (a == null) {
+    if (a == null || b == null) {
         return a === b;
     }
 
@@ -227,9 +227,6 @@ function functionString(f: any): string {
 }
 
 function constructorOf(value: unknown) {
-    if (value == null) {
-        return null;
-    }
     return protoOf(value)?.constructor;
 }
 
