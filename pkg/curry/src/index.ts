@@ -2,6 +2,10 @@
  * @module curry
  */
 
+import {
+    type FunctionProvenance,
+    getBoundArguments as getArgs,
+} from "@longlast/function-provenance";
 import {$getBoundArguments, $unapplied} from "@longlast/symbols";
 
 /**
@@ -134,22 +138,6 @@ function trackProvenance(source: any, args: any[], destination: any) {
 
 function getName(f: any): string {
     return f.displayName ?? f.name;
-}
-
-function getArgs(f: any): unknown[] {
-    return f[$getBoundArguments]() ?? [];
-}
-
-declare const $nonUserConstructible: unique symbol;
-
-// TODO: move FunctionProvenance to its own package.
-interface FunctionProvenance {
-    [$getBoundArguments](): unknown[];
-    [$unapplied]: AnyFunction;
-    displayName: string;
-
-    /** @hidden */
-    [$nonUserConstructible]: true;
 }
 
 /**

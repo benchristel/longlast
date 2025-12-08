@@ -44,6 +44,9 @@ importers:
 
   pkg/curry:
     dependencies:
+      '@longlast/function-provenance':
+        specifier: ^0.0.2
+        version: 0.0.2
       '@longlast/symbols':
         specifier: ^1.1.0
         version: 1.1.0
@@ -105,6 +108,9 @@ packages:
 
   '@longlast/curry@0.6.0':
     resolution: {integrity: sha512-tSwEqmGTfpL5I4BtsiA0520LJRRpAkg4sI4/HCmGIuNywYs/VS/DPm+A51moVwpCPGxfq0/ng5q+65QlmP7zIQ==}
+
+  '@longlast/function-provenance@0.0.2':
+    resolution: {integrity: sha512-XdKsZbqK3VnrC7oSaFNoTxD3VN6fpJVgas80BB6SLNVHarxYBYaZ1O+hhxt5CJuIAHmD0AHds88kKMJnIEZUUw==}
 
   '@longlast/symbols@1.1.0':
     resolution: {integrity: sha512-P5CSQkumJ32UjMYB4wJeCzlm58+YTgF0k+Wxt37vBvmybnxrAuzQzbafOGpZoHRFUAXM45MBPg9i/ZwCVtdFLg==}
@@ -363,6 +369,10 @@ snapshots:
       '@longlast/symbols': 1.1.0
 
   '@longlast/curry@0.6.0':
+    dependencies:
+      '@longlast/symbols': 1.1.0
+
+  '@longlast/function-provenance@0.0.2':
     dependencies:
       '@longlast/symbols': 1.1.0
 
