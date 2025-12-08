@@ -2,7 +2,7 @@
  * @module equals
  */
 
-import {curry, type Curried2} from "@longlast/curry";
+import {curry, type Curried2, type Curried3} from "@longlast/curry";
 import {
     $boundArguments,
     $equals,
@@ -12,6 +12,142 @@ import {
 
 // TODO: export an `Equatable` interface that classes with the [$equals] method
 // can implement.
+
+interface EqualsWithOptions {
+    readonly override?:
+        | undefined
+        | ((a: unknown, b: unknown) => boolean | undefined);
+}
+
+export const equalsWith: Curried3<
+    EqualsWithOptions,
+    unknown,
+    unknown,
+    boolean
+> = curry(_equalsWith);
+
+function _equalsWith(
+    options: EqualsWithOptions,
+    a: unknown,
+    b: unknown,
+): boolean {
+    const override = options.override?.(a, b);
+    if (override !== undefined) {
+        return override;
+    }
+
+    if (a == null) {
+        return a === b;
+    }
+
+    // TODO: (pre-1.0.0) decide if we should pass `equals` as the second
+    // argument to [$equals]. This would open the "protocol" up a bit more,
+    // since people could then define their own implementations of `equals`
+    // that work consistently through custom equality comparisons.
+    if (typeof (a as any)[$equals] === "function") {
+        return Boolean((a as any)[$equals](b));
+    }
+
+    if (Object.is(a, b)) {
+        return true;
+    }
+
+    if (typeof a === "function" && typeof b === "function") {
+        const aUnapplied = (a as any)[$unapplied];
+        const bUnapplied = (b as any)[$unapplied];
+        return (
+            aUnapplied != null &&
+            aUnapplied === bUnapplied &&
+            _equalsWith(options, getBoundArguments(a), getBoundArguments(b))
+        );
+    }
+
+    // If `a` is a primitive at this point, return false, since we already know
+    // it is not identical to `b`.
+    if (typeof a !== "object") {
+        return false;
+    }
+
+    const aConstructorString = functionString(constructorOf(a));
+    const bConstructorString = functionString(constructorOf(b));
+
+    if (aConstructorString !== bConstructorString) {
+        return false;
+    }
+
+    if (dateConstructorString === aConstructorString) {
+        unsafeNarrow<Date>(a);
+        unsafeNarrow<Date>(b);
+        return Object.is(+a, +b);
+    }
+
+    if (regexConstructorString === aConstructorString) {
+        return String(a) === String(b);
+    }
+
+    if (
+        a instanceof Error ||
+        nativeErrorConstructorStrings.includes(aConstructorString)
+    ) {
+        unsafeNarrow<Error>(a);
+        unsafeNarrow<Error>(b);
+        return a.message === b.message;
+    }
+
+    if (Array.isArray(a)) {
+        unsafeNarrow<Array<unknown>>(b);
+        return (
+            a.length === b.length &&
+            a.every((_, i) => _equalsWith(options, a[i], b[i]))
+        );
+    }
+
+    if (setConstructorString === aConstructorString) {
+        unsafeNarrow<Set<unknown>>(a);
+        unsafeNarrow<Set<unknown>>(b);
+        return a.size === b.size && [...a].every((v) => b.has(v));
+    }
+
+    // TODO: typed arrays
+
+    if (mapConstructorString === aConstructorString) {
+        unsafeNarrow<Map<unknown, unknown>>(a);
+        unsafeNarrow<Map<unknown, unknown>>(b);
+        if (a.size !== b.size) {
+            return false;
+        }
+        for (const key of a.keys()) {
+            if (!b.has(key) || !_equalsWith(options, a.get(key), b.get(key))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    if (
+        objectConstructorString === aConstructorString ||
+        protoOf(a) === protoOf(b)
+    ) {
+        unsafeNarrow<AnyObject>(a);
+        unsafeNarrow<AnyObject>(b);
+        const aKeys = Object.keys(a);
+        const bKeys = Object.keys(b);
+        if (aKeys.length !== bKeys.length) {
+            return false;
+        }
+        const bKeySet = new Set(bKeys);
+        for (const key of aKeys) {
+            if (!bKeySet.has(key)) {
+                return false;
+            }
+            if (!_equalsWith(options, a[key], b[key])) {
+                return false;
+            }
+        }
+        return true;
+    }
+    return false;
+}
 
 /**
  * @function
@@ -75,118 +211,8 @@ import {
  * that they do not contain cycles.
  */
 
-export const equals: Curried2<unknown, unknown, boolean> = curry(_equals);
-
-function _equals(a: unknown, b: unknown): boolean {
-    if (a == null) {
-        return a === b;
-    }
-
-    // TODO: (pre-1.0.0) decide if we should pass `equals` as the second
-    // argument to [$equals]. This would open the "protocol" up a bit more,
-    // since people could then define their own implementations of `equals`
-    // that work consistently through custom equality comparisons.
-    if (typeof (a as any)[$equals] === "function") {
-        return Boolean((a as any)[$equals](b));
-    }
-
-    if (Object.is(a, b)) {
-        return true;
-    }
-
-    if (typeof a === "function" && typeof b === "function") {
-        const aUnapplied = (a as any)[$unapplied];
-        const bUnapplied = (b as any)[$unapplied];
-        return (
-            aUnapplied != null &&
-            aUnapplied === bUnapplied &&
-            _equals(getBoundArguments(a), getBoundArguments(b))
-        );
-    }
-
-    // If `a` is a primitive at this point, return false, since we already know
-    // it is not identical to `b`.
-    if (typeof a !== "object") {
-        return false;
-    }
-
-    const aConstructorString = functionString(constructorOf(a));
-    const bConstructorString = functionString(constructorOf(b));
-
-    if (aConstructorString !== bConstructorString) {
-        return false;
-    }
-
-    if (dateConstructorString === aConstructorString) {
-        unsafeNarrow<Date>(a);
-        unsafeNarrow<Date>(b);
-        return Object.is(+a, +b);
-    }
-
-    if (regexConstructorString === aConstructorString) {
-        return String(a) === String(b);
-    }
-
-    if (
-        a instanceof Error ||
-        nativeErrorConstructorStrings.includes(aConstructorString)
-    ) {
-        unsafeNarrow<Error>(a);
-        unsafeNarrow<Error>(b);
-        return a.message === b.message;
-    }
-
-    if (Array.isArray(a)) {
-        unsafeNarrow<Array<unknown>>(b);
-        return a.length === b.length && a.every((_, i) => _equals(a[i], b[i]));
-    }
-
-    if (setConstructorString === aConstructorString) {
-        unsafeNarrow<Set<unknown>>(a);
-        unsafeNarrow<Set<unknown>>(b);
-        return a.size === b.size && [...a].every((v) => b.has(v));
-    }
-
-    // TODO: typed arrays
-
-    if (mapConstructorString === aConstructorString) {
-        unsafeNarrow<Map<unknown, unknown>>(a);
-        unsafeNarrow<Map<unknown, unknown>>(b);
-        if (a.size !== b.size) {
-            return false;
-        }
-        for (const key of a.keys()) {
-            if (!b.has(key) || !_equals(a.get(key), b.get(key))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    if (
-        objectConstructorString === aConstructorString ||
-        protoOf(a) === protoOf(b)
-    ) {
-        unsafeNarrow<AnyObject>(a);
-        unsafeNarrow<AnyObject>(b);
-        const aKeys = Object.keys(a);
-        const bKeys = Object.keys(b);
-        if (aKeys.length !== bKeys.length) {
-            return false;
-        }
-        const bKeySet = new Set(bKeys);
-        for (const key of aKeys) {
-            if (!bKeySet.has(key)) {
-                return false;
-            }
-            if (!_equals(a[key], b[key])) {
-                return false;
-            }
-        }
-        return true;
-    }
-    return false;
-}
+// TODO: clear function provenance on `equals`.
+export const equals: Curried2<unknown, unknown, boolean> = equalsWith({});
 
 function getBoundArguments(f: any): unknown[] | undefined {
     // TODO: (pre-1.0.0) remove `f[$boundArguments]` fallback.

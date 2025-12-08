@@ -1,5 +1,5 @@
 import {test, expect, is} from "@benchristel/taste";
-import {equals} from "./index.ts";
+import {equals, equalsWith} from "./index.ts";
 
 import {arrayComparisonSpec} from "../spec/array-comparison-spec.ts";
 import {classInstanceComparisonSpec} from "../spec/class-instance-comparison-spec.ts";
@@ -15,6 +15,8 @@ import {primitiveComparisonSpec} from "../spec/primitive-comparison-spec.ts";
 import {regexpComparisonSpec} from "../spec/regexp-comparison-spec.ts";
 import {setComparisonSpec} from "../spec/set-comparison-spec.ts";
 
+import {equalsWithSpec} from "../spec/equals-with-spec.ts";
+
 test("equals", arrayComparisonSpec(equals));
 test("equals", classInstanceComparisonSpec(equals));
 test("equals", crossRealmObjectComparisonSpec(equals));
@@ -28,6 +30,8 @@ test("equals", objectComparisonSpec(equals));
 test("equals", primitiveComparisonSpec(equals));
 test("equals", regexpComparisonSpec(equals));
 test("equals", setComparisonSpec(equals));
+
+test("equalsWith", equalsWithSpec(equalsWith));
 
 test("equals", {
     "handles an object with a reference cycle"() {
