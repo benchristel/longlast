@@ -1,5 +1,11 @@
 # @longlast/function-provenance
 
+## 0.0.2 (2025-12-08)
+
+This release adds `getBoundArguments()`, which calls the
+`[$getBoundArguments]()` method on a function and handles the case where the
+method is not defined.
+
 ## 0.0.1 (2025-12-08)
 
 This initial version of `@longlast/function-provenance` exports a
