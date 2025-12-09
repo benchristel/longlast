@@ -12,8 +12,8 @@ importers:
         specifier: ^0.9.0
         version: 0.9.0
       '@benchristel/taste':
-        specifier: ^0.7.0
-        version: 0.7.0
+        specifier: ^0.8.0
+        version: 0.8.0
       '@types/benchmark':
         specifier: ^2.1.5
         version: 2.1.5
@@ -97,8 +97,8 @@ packages:
   '@benchristel/taste@0.5.0':
     resolution: {integrity: sha512-xr0QL76NohYOMG94O1Tr9N4piH3SzVztznbbZyUDZRZjivcqqUqVyBuQV/KvNUUg4dbntlMEAkidMLB9whHTIg==}
 
-  '@benchristel/taste@0.7.0':
-    resolution: {integrity: sha512-VhYLQ6g4JTUa6uvq2KiVVSLNqR9iitxFEdwDMhbVSHx16S1OQs3hrI6qIi7JwcLmpIlQ7nJOpMj8qvDGL6wFQA==}
+  '@benchristel/taste@0.8.0':
+    resolution: {integrity: sha512-6W3aYNnw1tyD8Q3Tkw0bHOWeSnSpfk/17jCKUrpT4i6JmeFYjMjoT1JcFY17+kX+TUEXTFAvHr1KpAbINx5Pmg==}
 
   '@gerrit0/mini-shiki@3.9.2':
     resolution: {integrity: sha512-Tvsj+AOO4Z8xLRJK900WkyfxHsZQu+Zm1//oT1w443PO6RiYMoq/4NGOhaNuZoUMYsjKIAPVQ6eOFMddj6yphQ==}
@@ -108,6 +108,9 @@ packages:
 
   '@longlast/curry@0.6.0':
     resolution: {integrity: sha512-tSwEqmGTfpL5I4BtsiA0520LJRRpAkg4sI4/HCmGIuNywYs/VS/DPm+A51moVwpCPGxfq0/ng5q+65QlmP7zIQ==}
+
+  '@longlast/equals@0.5.8':
+    resolution: {integrity: sha512-oc9nvnBJb58oM8IHgnmGdK52DUgLfKsC7mMtfyZfhw79VAeRCw3lCQ/QwXeR4o8gDup+YG/zu+lGe9Mv+4jALg==}
 
   '@longlast/function-provenance@0.0.2':
     resolution: {integrity: sha512-XdKsZbqK3VnrC7oSaFNoTxD3VN6fpJVgas80BB6SLNVHarxYBYaZ1O+hhxt5CJuIAHmD0AHds88kKMJnIEZUUw==}
@@ -351,9 +354,11 @@ snapshots:
 
   '@benchristel/taste@0.5.0': {}
 
-  '@benchristel/taste@0.7.0':
+  '@benchristel/taste@0.8.0':
     dependencies:
       '@longlast/curry': 0.6.0
+      '@longlast/equals': 0.5.8
+      '@longlast/function-provenance': 0.0.2
       '@longlast/symbols': 1.1.0
 
   '@gerrit0/mini-shiki@3.9.2':
@@ -370,6 +375,11 @@ snapshots:
 
   '@longlast/curry@0.6.0':
     dependencies:
+      '@longlast/symbols': 1.1.0
+
+  '@longlast/equals@0.5.8':
+    dependencies:
+      '@longlast/curry': 0.5.1
       '@longlast/symbols': 1.1.0
 
   '@longlast/function-provenance@0.0.2':
