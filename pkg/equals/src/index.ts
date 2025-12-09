@@ -13,24 +13,45 @@ import {
 // TODO: export an `Equatable` interface that classes with the [$equals] method
 // can implement.
 
-interface EqualsWithOptions {
+export interface EqualsOptions {
+    /**
+     * Custom logic to use in preference to the default {@link equals}
+     * comparison.
+     */
     readonly override?:
         | undefined
         | ((a: unknown, b: unknown) => boolean | undefined);
 }
 
-export const equalsWith: Curried3<
-    EqualsWithOptions,
-    unknown,
-    unknown,
-    boolean
-> = curry(_equalsWith);
+/**
+ * @function
+ * A version of {@link equals} that allows callers to override the default
+ * comparison algorithm. If the provided override function returns a boolean,
+ * it is used as the result of the comparison. If the override returns
+ * `undefined`, the behavior of `equalsWith` defaults to that of
+ * {@link equals}.
+ *
+ * `equalsWith` is curried. See {@link curry}.
+ *
+ * @example
+ * ```ts
+ * // `mathEquals` treats -0 as equal to 0.
+ * const mathEquals = equalsWith({override: trueIfBothZero});
+ *
+ * function trueIfBothZero(a: unknown, b: unknown) {
+ *     if (a === 0 && b === 0) {
+ *         return true;
+ *     }
+ * }
+ *
+ * mathEquals({x: 0}, {x: -0}); // => true
+ * ```
+ */
 
-function _equalsWith(
-    options: EqualsWithOptions,
-    a: unknown,
-    b: unknown,
-): boolean {
+export const equalsWith: Curried3<EqualsOptions, unknown, unknown, boolean> =
+    curry(_equalsWith);
+
+function _equalsWith(options: EqualsOptions, a: unknown, b: unknown): boolean {
     const override = options.override?.(a, b);
     if (override !== undefined) {
         return override;
