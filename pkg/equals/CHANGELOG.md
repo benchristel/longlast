@@ -1,5 +1,10 @@
 # @longlast/equals
 
+## 0.5.8 (2025-12-09)
+
+This release adds an `equalsWith` function, which allows callers to override
+the default comparison algorithm.
+
 ## 0.5.7 (2025-11-29)
 
 The `equals` function now supports comparing `Map` objects.
