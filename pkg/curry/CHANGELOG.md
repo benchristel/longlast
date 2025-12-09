@@ -1,5 +1,11 @@
 # @longlast/curry
 
+## 0.6.2 (2025-12-08)
+
+This release contains internal improvements. `@longlast/curry` now depends on
+`@longlast/function-provenance`; this change might reduce the size of bundles
+that use both packages by a few bytes.
+
 ## 0.6.1 (2025-12-06)
 
 The `[$getBoundArguments]`, `[$unapplied]`, and `displayName`
