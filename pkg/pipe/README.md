@@ -19,21 +19,23 @@ import {pipe} from "@longlast/pipe";
 
 const split = (pattern) => (str) => str.split(pattern);
 const map = (f) => (array) => array.map((elem) => f(elem));
+const mapAt = (idx, f) => (array) => array.map((e, i) => i === idx ? f(e) : e);
 const join = (delim) => (strs) => strs.join(delim);
+const toUpperCase = (s) => s.toUpperCase();
 
 const capitalize = pipe(
     split(""),
-    updateAt(0, upcase),
+    mapAt(0, toUpperCase),
     join(""),
 )
 
-const camelCase = pipe(
+const pascalCase = pipe(
     split(/\W+/),
     map(capitalize),
     join(""),
 );
 
-camelCase("chunky-bacon") // => "ChunkyBacon"
+pascalCase("chunky-bacon") // => "ChunkyBacon"
 ```
 
 ## Documentation
