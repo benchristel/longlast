@@ -2,6 +2,69 @@
  * @module pipe
  */
 
+export function pipe<A, B, C, D, E, F, G, H, I, J, K>(
+    f: (a: A) => B,
+    g: (b: B) => C,
+    h: (c: C) => D,
+    i: (d: D) => E,
+    j: (e: E) => F,
+    k: (f: F) => G,
+    l: (g: G) => H,
+    m: (h: H) => I,
+    n: (i: I) => J,
+    o: (j: J) => K,
+): (a: A) => K;
+
+export function pipe<A, B, C, D, E, F, G, H, I, J>(
+    f: (a: A) => B,
+    g: (b: B) => C,
+    h: (c: C) => D,
+    i: (d: D) => E,
+    j: (e: E) => F,
+    k: (f: F) => G,
+    l: (g: G) => H,
+    m: (h: H) => I,
+    n: (i: I) => J,
+): (a: A) => J;
+
+export function pipe<A, B, C, D, E, F, G, H, I>(
+    f: (a: A) => B,
+    g: (b: B) => C,
+    h: (c: C) => D,
+    i: (d: D) => E,
+    j: (e: E) => F,
+    k: (f: F) => G,
+    l: (g: G) => H,
+    m: (h: H) => I,
+): (a: A) => I;
+
+export function pipe<A, B, C, D, E, F, G, H>(
+    f: (a: A) => B,
+    g: (b: B) => C,
+    h: (c: C) => D,
+    i: (d: D) => E,
+    j: (e: E) => F,
+    k: (f: F) => G,
+    l: (g: G) => H,
+): (a: A) => H;
+
+export function pipe<A, B, C, D, E, F, G>(
+    f: (a: A) => B,
+    g: (b: B) => C,
+    h: (c: C) => D,
+    i: (d: D) => E,
+    j: (e: E) => F,
+    k: (f: F) => G,
+): (a: A) => G;
+
+export function pipe<A, B, C, D, E, F>(
+    f: (a: A) => B,
+    g: (b: B) => C,
+    h: (c: C) => D,
+    i: (d: D) => E,
+    j: (e: E) => F,
+): (a: A) => F;
+
 export function pipe<A, B, C, D, E>(
     f: (a: A) => B,
     g: (b: B) => C,
@@ -44,7 +107,9 @@ export function pipe<A, B, C>(f: (a: A) => B, g: (b: B) => C): (a: A) => C;
  * pascalCase("chunky-bacon"); // => "ChunkyBacon"
  * ```
  *
- * [reverse composition]: https://en.wikipedia.org/wiki/Function_composition
+ * ## Limitations
+ *
+ * The types for `pipe` only support composing up to ten functions at a time.
  */
 
 export function pipe(...fs: any): (x: any) => any {
