@@ -189,9 +189,9 @@ function _equalsWith(options: EqualsOptions, a: unknown, b: unknown): boolean {
  *   - Maps are equal iff they have the same set of keys, and their
  *     corresponding values are deeply equal. Note that map keys are _not_
  *     deeply compared.
- *   - Partially applied curried functions are equal iff they originate from
- *     the same curried function and their bound arguments are equal
- *     according to `equals`. See {@link curry}.
+ *   - Partially applied functions (via {@link curry} or {@link partial-apply})
+ *     are equal iff they originate from the same function and their bound
+ *     arguments are equal according to `equals`.
  *   - Other objects are equal iff they have the same prototype (e.g. the same
  *     class) and the same set of enumerable string-keyed properties, and the
  *     values of their corresponding properties are equal (according to
@@ -202,7 +202,7 @@ function _equalsWith(options: EqualsOptions, a: unknown, b: unknown): boolean {
  * class. For example:
  *
  * ```ts
- * import {$equals} from "@longlast/symbols"
+ * import {$equals} from "@longlast/symbols";
  *
  * class HttpError extends Error {
  *     private statusCode: number;
