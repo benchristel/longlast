@@ -8,6 +8,10 @@ import {
     getBoundArguments,
 } from "@longlast/function-provenance";
 
+/**
+ * A partially-applied function.
+ */
+
 export interface PartiallyApplied<Rest extends any[], Return>
     extends FunctionProvenance {
     (...rest: Rest): Return;
@@ -26,6 +30,7 @@ export interface PartiallyApplied<Rest extends any[], Return>
  * toUsername("elias"); // => "@elias"
  * ```
  */
+
 export function partialApply<Arg, Rest extends any[], Return>(
     arg: Arg,
     f: (a: Arg, ...rest: Rest) => Return,
