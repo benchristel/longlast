@@ -92,6 +92,10 @@ article :is(ul, ol) {
     margin-inline-start: 2.5rem;
 }
 
+article li {
+    margin-block: 0.5em;
+}
+
 article :is(h1, h2, h3, h4, h5, h6) {
     margin-block: 2em 1em;
 }
@@ -168,8 +172,32 @@ nav.toc :is(ul, li) {
     padding: 0;
 }
 
-nav.toc ul > li > ul {
-    padding-inline-start: 1em;
+nav.toc > ul > li {
+    margin-block-start: 1em;
+}
+
+/* Package TOC nodes */
+nav.toc > ul > li > a {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 80%;
+    letter-spacing: 0.03em;
+    font-family: Arial, sans-serif;
+    color: var(--gray-3)
+}
+
+/* Category TOC nodes like "Function", "Interface", etc. */
+nav.toc > ul > li > ul > li > a {
+    /* These are useless, so hide them. */
+    display: none;
+}
+
+/* Individual function, interface, etc. TOC nodes */
+nav.toc > ul > li > ul > li > ul > li {
+    /* Make the click target a bit bigger. */
+    padding-block: 0.33em;
+    /* If a TOC entry spans multiple lines, keep them close together. */
+    line-height: 1.2;
 }
 
 nav.toc h2 {
