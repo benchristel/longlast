@@ -14,5 +14,13 @@ export function partialApplicationSpec(
 
             expect(toUsername("elias"), is, "@elias");
         },
+
+        "binds a function's only argument, creating a thunk"() {
+            const negate = (x: number) => -x;
+
+            const lazyNegativeOne = _partialApply(1, negate);
+
+            expect(lazyNegativeOne(), is, -1);
+        },
     };
 }
