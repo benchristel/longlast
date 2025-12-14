@@ -7,6 +7,17 @@ const stringToNumber = (s: string) => +s;
 describe("pipe", () => {
     it("checks the types of its arguments", () => {
         expect(pipe).type.not.toBeCallableWith(stringToNumber, stringToNumber);
+        expect(pipe).type.not.toBeCallableWith(
+            stringToNumber,
+            numberToString,
+            numberToString,
+        );
+        expect(pipe).type.not.toBeCallableWith(
+            stringToNumber,
+            numberToString,
+            stringToNumber,
+            stringToNumber,
+        );
     });
 
     it("composes two functions", () => {
@@ -23,5 +34,18 @@ describe("pipe", () => {
         expect(fidget).type.toBeCallableWith(0);
         expect(fidget).type.not.toBeCallableWith("");
         expect(fidget(0)).type.toBe<string>();
+    });
+
+    it("composes four functions", () => {
+        const fidget = pipe(
+            numberToString,
+            stringToNumber,
+            numberToString,
+            stringToNumber,
+        );
+
+        expect(fidget).type.toBeCallableWith(0);
+        expect(fidget).type.not.toBeCallableWith("");
+        expect(fidget(0)).type.toBe<number>();
     });
 });
