@@ -1,0 +1,20 @@
+{
+    "name": "@longlast/partial-apply",
+    "version": "0.0.0",
+    "description": "Binds arguments to functions",
+    "homepage": "https://longlast.js.org/",
+    "license": "MIT",
+    "author": "Ben Christel (https://benchristel.com/)",
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "repository": "github:benchristel/longlast",
+    "sideEffects": false,
+    "packageManager": "pnpm@10.14.0",
+    "imports": {
+        "#@longlast/partial-apply": "./src/index.ts"
+    }
+}
