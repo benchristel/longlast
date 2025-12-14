@@ -1,0 +1,18 @@
+import {type partialApply} from "#@longlast/partial-apply";
+import {expect, is} from "@benchristel/taste";
+
+type Spec = Record<string, () => void>;
+
+export function partialApplicationSpec(
+    _partialApply: typeof partialApply,
+): Spec {
+    return {
+        "binds the first argument to a function"() {
+            const concat = (a: string, b: string) => a + b;
+
+            const toUsername = _partialApply("@", concat);
+
+            expect(toUsername("elias"), is, "@elias");
+        },
+    };
+}
