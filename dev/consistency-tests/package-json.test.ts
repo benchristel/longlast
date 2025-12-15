@@ -62,6 +62,14 @@ for await (const path of glob(join(root, "pkg", "*", "package.json"))) {
             expect(typeof packageConfig.sideEffects, is, "boolean");
         },
 
+        "uses the version of @longlast/symbols from the pnpm catalog"() {
+            // All packages must use the same version of @longlast/symbols
+            // during development. Each version exports different unique symbol
+            // types, and using them together causes type errors.
+            const version = packageConfig.dependencies?.["@longlast/symbols"];
+            expect(version, either(is("catalog:"), is(undefined)));
+        },
+
         "defines properties in the order they appear in the NPM docs"() {
             // See: https://docs.npmjs.com/cli/v8/configuring-npm/package-json
             const order = [
@@ -105,6 +113,14 @@ for await (const path of glob(join(root, "pkg", "*", "package.json"))) {
             expect(Object.keys(packageConfig), appearInSameOrderAs, order);
         },
     });
+}
+
+type Predicate = (x: unknown) => boolean;
+
+function either(...predicates: Array<Predicate>): Predicate {
+    const or = (arg: unknown) => (state: boolean, predicate: Predicate) =>
+        state || predicate(arg);
+    return (arg: unknown) => predicates.reduce(or(arg), false);
 }
 
 // TODO: consider giving this function its own package.
