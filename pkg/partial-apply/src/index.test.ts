@@ -3,7 +3,9 @@ import {partialApplicationSpec} from "../spec/partial-application-spec.ts";
 import {partialApply} from "./index.ts";
 import {provenanceSpec} from "../spec/provenance-spec.ts";
 import {isCurriedSpec} from "../spec/is-curried-spec.ts";
+import {pseudoCurryingSpec} from "../spec/pseudo-currying-spec.ts";
 
 test("partialApply", partialApplicationSpec(partialApply));
 test("partialApply", provenanceSpec(partialApply));
 test("partialApply", isCurriedSpec(partialApply));
+test("partialApply", pseudoCurryingSpec(partialApply));

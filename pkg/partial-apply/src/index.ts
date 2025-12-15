@@ -45,6 +45,45 @@ export function partialApply<Arg>(
  *
  * toUsername("elias"); // => "@elias"
  * ```
+ *
+ * ## Manual currying
+ *
+ * Due to limitations of TypeScript, longlast's {@link curry} function does not
+ * support currying functions with [type parameters]. You can, however, use
+ * `partialApply` to create manually curried functions with type parameters, as
+ * in the following example:
+ *
+ * [type parameters]: https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#type-parameters
+ *
+ * ```ts
+ * // Two-argument signature
+ * function filter<T>(
+ *     callback: (elem: T) => boolean,
+ *     array: T[],
+ * ): T[];
+ *
+ * // One-argument signature
+ * function filter<T>(
+ *     callback: (elem: T) => boolean,
+ *     _?: never,
+ * ): (array: T[]) => T[];
+ *
+ * // Implementation
+ * function filter(callback: any, array?: any): any {
+ *     if (arguments.length === 1) {
+ *         return partialApply(callback, filter);
+ *     }
+ *
+ *     return (array as any).filter(callback);
+ * }
+ * ```
+ *
+ * Note the second parameter in the "one-argument signature," `_?: never`. Its
+ * purpose is to prevent the function being called with a second argument of
+ * the wrong type.
+ *
+ * A downside of this approach is that the implementation of the function is
+ * not typesafe, and you must write each call signature yourself.
  */
 
 export function partialApply(arg: any, f: any): any {
