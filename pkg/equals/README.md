@@ -32,4 +32,4 @@ equals(
 
 [Browse the docs on longlast.js.org][docs].
 
-[docs]: https://longlast.js.org/equals/
+[docs]: https://longlast.js.org/reference/equals/

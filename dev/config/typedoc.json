@@ -1,5 +1,5 @@
 {
-    "name": "@longlast",
+    "name": "Reference",
     "entryPoints": ["../../pkg/*/src/index.ts"],
     "plugin": ["typedoc-plugin-markdown"],
     "entryFileName": "index",

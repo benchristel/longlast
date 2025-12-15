@@ -13,7 +13,7 @@ yarn add @longlast/equals
 pnpm add @longlast/equals
 ```
 
-- A link to the docs (which don't yet exist)
+- A link to the docs
 
 https://longlast.js.org/reference/equals
 
@@ -67,7 +67,7 @@ for await (const dirPath of glob(join(root, "pkg", "*"))) {
 
                 [Browse the docs on longlast.js.org][docs].
 
-                [docs]: https://longlast.js.org/${dirName}/
+                [docs]: https://longlast.js.org/reference/${dirName}/
             `);
 
             expect(readme, contains, expected);

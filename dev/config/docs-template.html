@@ -147,7 +147,7 @@ body {
     nav.toc {
         column-count: 2;
     }
-    nav.toc li {
+    nav.toc > ul > li > ul > li {
         break-inside: avoid;
     }
 }
@@ -172,30 +172,39 @@ nav.toc :is(ul, li) {
     padding: 0;
 }
 
-nav.toc > ul > li {
-    margin-block-start: 1em;
+nav.toc > ul > li,
+nav.toc > ul > li > ul > li {
+    margin-block-start: 1.5em;
 }
 
-/* Package TOC nodes */
+/* "Reference", "Handbook" headings */
 nav.toc > ul > li > a {
+    font-weight: bold;
+    font-size: 120%;
+    letter-spacing: 0.03em;
+    color: var(--gray-4);
+    display: inline-block;
+    padding-block: 1em 0.5em;
+}
+/* Package TOC nodes */
+nav.toc > ul > li:nth-child(2) > ul > li > a {
     text-transform: uppercase;
     font-weight: bold;
     font-size: 80%;
     letter-spacing: 0.03em;
-    font-family: Arial, sans-serif;
-    color: var(--gray-3)
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--gray-3);
 }
 
 /* Category TOC nodes like "Function", "Interface", etc. */
-nav.toc > ul > li > ul > li > a {
+nav.toc > ul > li:nth-child(2) > ul > li > ul > li > a {
     /* These are useless, so hide them. */
     display: none;
 }
 
-/* Individual function, interface, etc. TOC nodes */
-nav.toc > ul > li > ul > li > ul > li {
-    /* Make the click target a bit bigger. */
-    padding-block: 0.33em;
+nav.toc li {
+    /* Add space to prevent mis-clicks. */
+    margin-block: 0.66em;
     /* If a TOC entry spans multiple lines, keep them close together. */
     line-height: 1.2;
 }

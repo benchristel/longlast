@@ -42,4 +42,4 @@ pascalCase("chunky-bacon") // => "ChunkyBacon"
 
 [Browse the docs on longlast.js.org][docs].
 
-[docs]: https://longlast.js.org/pipe/
+[docs]: https://longlast.js.org/reference/pipe/

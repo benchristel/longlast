@@ -56,7 +56,7 @@ deps:
 
 .PHONY: docs
 docs:
-	@pnpm typedoc --options dev/config/typedoc.json --out docs-src
+	@pnpm typedoc --options dev/config/typedoc.json --out docs-src/reference
 	@pnpm mdsite -i docs-src -t dev/config/docs-template.html
 
 .PHONY: serve

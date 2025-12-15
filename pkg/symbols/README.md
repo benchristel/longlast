@@ -17,7 +17,7 @@ yarn add @longlast/symbols
 
 [Browse the docs on longlast.js.org][docs].
 
-[docs]: https://longlast.js.org/symbols/
+[docs]: https://longlast.js.org/reference/symbols/
 
 ## Development
 

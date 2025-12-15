@@ -16,4 +16,4 @@ yarn add @longlast/partial-apply
 
 [Browse the docs on longlast.js.org][docs].
 
-[docs]: https://longlast.js.org/partial-apply/
+[docs]: https://longlast.js.org/reference/partial-apply/

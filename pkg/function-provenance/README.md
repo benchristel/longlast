@@ -23,4 +23,4 @@ TODO
 
 [Browse the docs on longlast.js.org][docs].
 
-[docs]: https://longlast.js.org/function-provenance/
+[docs]: https://longlast.js.org/reference/function-provenance/

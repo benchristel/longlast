@@ -28,7 +28,7 @@ multiply(3, 4); // => 12
 
 [Browse the docs on longlast.js.org][docs].
 
-[docs]: https://longlast.js.org/curry/
+[docs]: https://longlast.js.org/reference/curry/
 
 ## Performance
 
