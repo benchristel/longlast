@@ -63,6 +63,9 @@ docs:
 serve:
 	@pnpx http-server -c-1 -o docs
 
+proof: build
+	@dev/scripts/proof
+
 .PHONY: release
 release:
 	@dev/scripts/release

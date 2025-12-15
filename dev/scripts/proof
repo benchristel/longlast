@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Creates a "proof copy" of every package so you can see exactly what will be
+# shipped.
+
+cd "$(dirname "$0")/../.."
+
+pnpm pack --recursive --pack-destination proof
+cd proof
+ls | xargs -n1 -I{} tar -xzf {} --one-top-level package
