@@ -1,5 +1,11 @@
 # @longlast/curry
 
+## 0.6.3 (2025-12-15)
+
+The documentation for Longlast has been split into a handbook and a reference
+section. This patch release just updates the documentation link in the readme
+to point to the new location of the reference docs.
+
 ## 0.6.2 (2025-12-08)
 
 This release contains internal improvements. `@longlast/curry` now depends on
