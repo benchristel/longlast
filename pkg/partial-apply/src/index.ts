@@ -100,10 +100,12 @@ export function partialApply(arg: any, f: any): any {
 }
 
 // TODO: duplicated in curry.
+// Use getFunctionName instead.
 function getName(f: any): string {
     return f.displayName ?? f.name;
 }
 
+// TODO: move to function-provenance
 function getUnapplied(f: any): any {
     return f[$unapplied] ?? f;
 }

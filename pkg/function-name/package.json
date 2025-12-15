@@ -1,0 +1,20 @@
+{
+    "name": "@longlast/function-name",
+    "version": "0.0.0",
+    "description": "Gets and sets the names of functions",
+    "homepage": "https://longlast.js.org/",
+    "license": "MIT",
+    "author": "Ben Christel (https://benchristel.com/)",
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "repository": "github:benchristel/longlast",
+    "sideEffects": false,
+    "packageManager": "pnpm@10.14.0",
+    "imports": {
+        "#@longlast/function-name": "./src/index.ts"
+    }
+}
