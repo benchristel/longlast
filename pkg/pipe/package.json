@@ -16,5 +16,9 @@
     "packageManager": "pnpm@10.14.0",
     "imports": {
         "#@longlast/pipe": "./src/index.ts"
+    },
+    "dependencies": {
+        "@longlast/function-provenance": "^0.0.1",
+        "@longlast/symbols": "^1.1.0"
     }
 }
