@@ -10,8 +10,6 @@ import {
     $unapplied,
 } from "@longlast/symbols";
 
-// TODO: update dependency on symbols to 1.1.0, since we use $getBoundArguments.
-
 // TODO: export an `Equatable` interface that classes with the [$equals] method
 // can implement.
 

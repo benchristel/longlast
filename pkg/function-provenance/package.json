@@ -18,6 +18,6 @@
         "#@longlast/function-provenance": "./src/index.ts"
     },
     "dependencies": {
-        "@longlast/symbols": "^1.1.0"
+        "@longlast/symbols": "catalog:"
     }
 }

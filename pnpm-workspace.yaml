@@ -1,2 +1,7 @@
 packages:
   - "pkg/*"
+catalog:
+  # All packages must use the same version of @longlast/symbols during
+  # development. Each version exports different unique symbol types, and using
+  # them together causes type errors.
+  "@longlast/symbols": ^1.1.0

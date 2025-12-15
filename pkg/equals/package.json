@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "@longlast/curry": "^0.5.0",
-        "@longlast/symbols": "^1.0.0"
+        "@longlast/symbols": "catalog:"
     },
     "devDependencies": {
         "fast-deep-equal": "3.1.3"
