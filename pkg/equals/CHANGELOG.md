@@ -1,5 +1,11 @@
 # @longlast/equals
 
+## 0.5.9 (2025-12-15)
+
+The documentation for Longlast has been split into a handbook and a reference
+section. This patch release just updates the documentation link in the readme
+to point to the new location of the reference docs.
+
 ## 0.5.8 (2025-12-09)
 
 This release adds an `equalsWith` function, which allows callers to override
