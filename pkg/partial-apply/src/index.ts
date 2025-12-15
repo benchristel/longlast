@@ -94,7 +94,7 @@ export function partialApply(arg: any, f: any): any {
 
     const applied = f.bind(null, arg);
     applied[$getBoundArguments] = () => getBoundArguments(f).concat([arg]);
-    applied[$unapplied] = f;
+    applied[$unapplied] = getUnapplied(f);
     applied.displayName = getName(f);
     return applied;
 }
@@ -102,4 +102,8 @@ export function partialApply(arg: any, f: any): any {
 // TODO: duplicated in curry.
 function getName(f: any): string {
     return f.displayName ?? f.name;
+}
+
+function getUnapplied(f: any): any {
+    return f[$unapplied] ?? f;
 }

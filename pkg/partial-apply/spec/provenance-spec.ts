@@ -32,5 +32,11 @@ export function provenanceSpec(_partialApply: typeof partialApply): Spec {
             const applied = _partialApply(1, f);
             expect(applied[$unapplied], is, f);
         },
+
+        "tracks the unapplied function across multiple calls"() {
+            const applied1 = _partialApply(1, f);
+            const applied2 = _partialApply("", applied1);
+            expect(applied2[$unapplied], is, f);
+        },
     };
 }
