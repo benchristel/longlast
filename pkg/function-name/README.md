@@ -15,9 +15,9 @@ yarn add @longlast/function-name
 ## Use
 
 ```ts
-import {getFunctionName} from "@longlast/function-name";
+import {functionName} from "@longlast/function-name";
 
-getFunctionName(getFunctionName); // => "getFunctionName"
+functionName(functionName); // => "functionName"
 ```
 
 ## Documentation

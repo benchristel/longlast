@@ -137,7 +137,7 @@ function trackProvenance(source: any, args: any[], destination: any) {
 }
 
 // TODO: duplicated in partial-apply.
-// Use getFunctionName instead.
+// Use functionName instead.
 function getName(f: any): string {
     return f.displayName ?? f.name;
 }

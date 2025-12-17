@@ -100,7 +100,7 @@ export function partialApply(arg: any, f: any): any {
 }
 
 // TODO: duplicated in curry.
-// Use getFunctionName instead.
+// Use functionName instead.
 function getName(f: any): string {
     return f.displayName ?? f.name;
 }

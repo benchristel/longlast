@@ -1,10 +1,10 @@
-import {getFunctionName} from "#@longlast/function-name";
+import {functionName} from "#@longlast/function-name";
 import {test, expect, is} from "@benchristel/taste";
 
-test("getFunctionName", {
+test("functionName", {
     "returns a string"() {
         expect(
-            getFunctionName(() => {}),
+            functionName(() => {}),
             is,
             "",
         );

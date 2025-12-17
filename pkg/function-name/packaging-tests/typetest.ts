@@ -1,8 +1,8 @@
 import {describe, expect, it} from "tstyche";
-import {getFunctionName} from "#@longlast/function-name";
+import {functionName} from "#@longlast/function-name";
 
-describe("getFunctionName", () => {
+describe("functionName", () => {
     it("returns a string", () => {
-        expect(getFunctionName(() => {})).type.toBe<string>();
+        expect(functionName(() => {})).type.toBe<string>();
     });
 });
