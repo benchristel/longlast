@@ -1,3 +1,3 @@
 // @ts-nocheck %DELETE
-import type {fixme} from "#@longlast/package-name";
+import {fixme} from "#%PACKAGE_NAME";
 import {describe, it, expect} from "tstyche";
