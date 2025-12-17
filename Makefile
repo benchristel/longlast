@@ -63,6 +63,7 @@ docs:
 serve:
 	@pnpx http-server -c-1 -o docs
 
+.PHONY: proof
 proof: build
 	@dev/scripts/proof
 
