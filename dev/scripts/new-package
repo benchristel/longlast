@@ -1,0 +1,25 @@
+#!/bin/bash
+
+UNQUALIFIED_PACKAGE_NAME="${1#@longlast/}"
+PACKAGE_NAME="@longlast/$UNQUALIFIED_PACKAGE_NAME"
+PACKAGE_DIR="pkg/$UNQUALIFIED_PACKAGE_NAME"
+
+if [ -z "$PACKAGE_NAME" ]; then
+    >&2 echo "new-package: please provide a package name."
+    exit 1
+fi
+
+if [ -e "$PACKAGE_DIR" ]; then
+    >&2 echo "new-package: package $PACKAGE_NAME already exists."
+    exit 1
+fi
+
+cd "$(dirname "$0")/../.."
+
+cp -r dev/package-template "$PACKAGE_DIR"
+find "$PACKAGE_DIR" -type f | xargs sed -i \
+    -e "s|%UNQUALIFIED_PACKAGE_NAME|${UNQUALIFIED_PACKAGE_NAME}|" \
+    -e "s|%PACKAGE_NAME|${PACKAGE_NAME}|" \
+    -e "/%DELETE/ d"
+
+echo "Package $PACKAGE_NAME created. Remember to fix TODOs before committing."

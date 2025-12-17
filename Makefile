@@ -70,3 +70,7 @@ proof: build
 .PHONY: release
 release:
 	@dev/scripts/release
+
+.PHONY: new
+new:
+	@dev/scripts/new-package $(PACKAGE)

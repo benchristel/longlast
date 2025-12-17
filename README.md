@@ -82,6 +82,15 @@ Note that not all packages have benchmarks.
 
 See [dev/docs/releasing.md](dev/docs/releasing.md).
 
+### Creating a new package
+
+```sh
+make new PACKAGE=my-new-package
+```
+
+Running this command will create a new directory in pkg/ with some
+TODO comments and type errors for you to fix.
+
 ## Acknowledgements
 
 Thank you to [js.org] for providing the [longlast.js.org] domain!
@@ -100,3 +109,4 @@ Thank you to [js.org] for providing the [longlast.js.org] domain!
 - `@longlast/expectation-failure`
 - `@longlast/test`
 - `@longlast/result`
+- `@longlast/stacktrace`
