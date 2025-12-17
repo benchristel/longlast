@@ -110,3 +110,5 @@ Thank you to [js.org] for providing the [longlast.js.org] domain!
 - `@longlast/test`
 - `@longlast/result`
 - `@longlast/stacktrace`
+- `@longlast/prepend` (strings)
+- `@longlast/append` (strings)

@@ -1,0 +1,11 @@
+immutable-data.md
+# we "update" data by creating a copy that has the changes we want.
+# perf: changes are relatively infrequent, caused by user input, periodic
+# timers, or other events. Computation of derived information is much more
+# frequent.
+map-filter-reduce.md
+currying.md
+composition.md
+# pipe() is better than chained methods because you can easily transform the
+# whole array or an aggregate value with an arbitrary function.
+# We can also `tap` into the pipeline to log an intermediate value.
