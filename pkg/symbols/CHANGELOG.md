@@ -1,5 +1,11 @@
 # @longlast/symbols
 
+## 1.1.2 (2025-12-18)
+
+Symbols are now registered in the global symbol registry. This will ease
+compatibility between packages that depend on different versions of
+`@longlast/symbols`, as long as they are using at least version `1.1.2`.
+
 ## 1.1.1 (2025-12-15)
 
 The documentation for Longlast has been split into a handbook and a reference
