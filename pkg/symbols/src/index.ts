@@ -11,7 +11,7 @@ export {$boundArguments} from "./deprecated.ts";
  * @see {@link equals}
  */
 
-export const $equals: unique symbol = Symbol();
+export const $equals: unique symbol = Symbol.for("@longlast/$equals");
 
 /**
  * Identifies a method on a function, which returns an array of the arguments
@@ -22,7 +22,9 @@ export const $equals: unique symbol = Symbol();
  * @see https://en.wikipedia.org/wiki/Partial_application
  */
 
-export const $getBoundArguments: unique symbol = Symbol();
+export const $getBoundArguments: unique symbol = Symbol.for(
+    "@longlast/$getBoundArguments",
+);
 
 /**
  * Identifies a property of a partially applied curried function, which holds
@@ -32,4 +34,4 @@ export const $getBoundArguments: unique symbol = Symbol();
  * @see https://en.wikipedia.org/wiki/Partial_application
  */
 
-export const $unapplied: unique symbol = Symbol();
+export const $unapplied: unique symbol = Symbol.for("@longlast/$unapplied");
