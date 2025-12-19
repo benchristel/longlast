@@ -77,28 +77,27 @@ export function curry(f: AnyFunction): AnyFunction {
     // provides a 50x speedup!
     switch (f.length) {
         case 2:
-            return curry2(f);
+            return initProvenance(curry2(f), getName(f));
         case 3:
-            return curry3(f);
+            return initProvenance(curry3(f), getName(f));
         default:
-            return curryVarargs(f);
+            return initProvenance(curryVarargs(f), getName(f));
     }
 }
 
 function curry2(f: AnyFunction): AnyFunction {
-    function curried(a: any, b: any) {
+    return function curried(a: any, b: any) {
         switch (arguments.length) {
             case 1:
                 return trackProvenance(curried, [a], f.bind(null, a));
             default:
                 return f(a, b);
         }
-    }
-    return initProvenance(curried, getName(f));
+    };
 }
 
 function curry3(f: AnyFunction): AnyFunction {
-    function curried(a: any, b: any, c: any) {
+    return function curried(a: any, b: any, c: any) {
         switch (arguments.length) {
             case 1:
                 return trackProvenance(curried, [a], curry2(f.bind(null, a)));
@@ -107,19 +106,17 @@ function curry3(f: AnyFunction): AnyFunction {
             default:
                 return f(a, b, c);
         }
-    }
-    return initProvenance(curried, getName(f));
+    };
 }
 
 function curryVarargs(f: AnyFunction): AnyFunction {
-    function curried(...args: any[]): any {
+    return function curried(...args: any[]): any {
         if (args.length < f.length) {
             return trackProvenance(curried, args, curried.bind(null, ...args));
         } else {
             return f(...args);
         }
-    }
-    return initProvenance(curried, getName(f));
+    };
 }
 
 function initProvenance(curried: any, name: string) {
