@@ -1,5 +1,9 @@
 # @longlast/curry
 
+## 0.6.4 (2025-12-19)
+
+This release contains minor performance improvements.
+
 ## 0.6.3 (2025-12-15)
 
 The documentation for Longlast has been split into a handbook and a reference
