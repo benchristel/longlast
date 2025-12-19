@@ -9,6 +9,7 @@ export function testProvenanceTracking(
     test(subjectName, {
         "names a curried function after the original function"() {
             function foo(_a: 1, _b: 2) {}
+            // TODO: (pre-1.0.0) Don't read `displayName` in these tests.
             expect(_curry(foo).displayName, is, "foo");
         },
 

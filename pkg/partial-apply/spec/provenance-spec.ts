@@ -25,6 +25,7 @@ export function provenanceSpec(_partialApply: typeof partialApply): Spec {
 
             const applied = _partialApply(1, add);
 
+            // TODO: (pre-1.0.0) Don't read `displayName` in these tests.
             expect(applied.displayName, is, "add");
         },
 
