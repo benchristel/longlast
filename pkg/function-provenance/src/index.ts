@@ -4,6 +4,7 @@
  */
 
 import {$getBoundArguments, $unapplied} from "@longlast/symbols";
+import type {AnyFunction} from "@longlast/any-function";
 
 declare const $nonUserConstructible: unique symbol;
 
@@ -15,13 +16,12 @@ export interface FunctionProvenance {
     [$nonUserConstructible]: true;
 }
 
-// TODO: Move this type to its own package. Duplicated in `curry`.
-type AnyFunction = (...args: any[]) => any;
-
 export function getBoundArguments(f: AnyFunction): unknown[] {
     return (f as any)[$getBoundArguments]?.() ?? [];
 }
 
+// TODO: (pre-1.0.0) Avoid returning `AnyFunction`. Use `UnknownFunction`:
+// type UnknownFunction = (...args: never) => unknown;
 export function getUnapplied(f: AnyFunction): AnyFunction {
     return (f as any)[$unapplied] ?? f;
 }

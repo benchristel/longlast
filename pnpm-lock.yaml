@@ -100,6 +100,9 @@ importers:
 
   pkg/function-provenance:
     dependencies:
+      '@longlast/any-function':
+        specifier: ^0.0.1
+        version: 0.0.1
       '@longlast/symbols':
         specifier: 'catalog:'
         version: 1.1.0
