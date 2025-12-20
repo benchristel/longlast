@@ -82,6 +82,13 @@ Note that not all packages have benchmarks.
 
 See [dev/docs/releasing.md](dev/docs/releasing.md).
 
+These tools might be helpful in preparing a release:
+
+```bash
+make unreleased  # List packages with unreleased changes
+make proof       # Build all packages to proof/, for proofreading
+```
+
 ### Creating a new package
 
 ```sh

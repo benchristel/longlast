@@ -1,0 +1,29 @@
+#!/bin/bash
+
+cd "$(dirname "$0")/../.."
+
+last_commit_to() {
+    path="$1"
+    git log --format=oneline -n 1 -- "$path" | cut -d' ' -f1
+}
+
+ls pkg | while read package; do
+    if ! [ -e "pkg/${package}/CHANGELOG.md" ]; then
+        echo
+        echo "$package"
+        echo 'No releases yet!'
+        continue
+    fi
+
+    log="$(
+        git log --oneline \
+            "$(last_commit_to "pkg/${package}/CHANGELOG.md")...$(last_commit_to "pkg/${package}")" \
+            "pkg/${package}"
+    )"
+
+    if [ -n "$log" ]; then
+        echo
+        echo "$package"
+        echo "$log"
+    fi
+done

@@ -63,6 +63,10 @@ docs:
 serve:
 	@pnpx http-server -c-1 -o docs
 
+.PHONY: unreleased
+unreleased:
+	@dev/scripts/unreleased
+
 .PHONY: proof
 proof: build
 	@dev/scripts/proof
