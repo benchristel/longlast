@@ -1,6 +1,6 @@
 import {type partialApply} from "#@longlast/partial-apply";
 import {expect, equals, is} from "@benchristel/taste";
-import {$getBoundArguments, $unapplied} from "@longlast/symbols";
+import {getBoundArguments, getUnapplied} from "@longlast/function-provenance";
 
 type Spec = Record<string, () => void>;
 
@@ -10,13 +10,12 @@ export function provenanceSpec(_partialApply: typeof partialApply): Spec {
     return {
         "tracks bound arguments"() {
             const applied = _partialApply(1, f);
-            // TODO: use getBoundArguments()
-            expect(applied[$getBoundArguments](), equals, [1]);
+            expect(getBoundArguments(applied), equals, [1]);
         },
 
         "tracks bound arguments across multiple calls"() {
             const applied = _partialApply("a", _partialApply(1, f));
-            expect(applied[$getBoundArguments](), equals, [1, "a"]);
+            expect(getBoundArguments(applied), equals, [1, "a"]);
         },
 
         "retains the original function name"() {
@@ -32,14 +31,13 @@ export function provenanceSpec(_partialApply: typeof partialApply): Spec {
 
         "keeps a reference to the unapplied function"() {
             const applied = _partialApply(1, f);
-            // TODO: use getUnapplied()
-            expect(applied[$unapplied], is, f);
+            expect(getUnapplied(applied), is, f);
         },
 
         "tracks the unapplied function across multiple calls"() {
             const applied1 = _partialApply(1, f);
             const applied2 = _partialApply("", applied1);
-            expect(applied2[$unapplied], is, f);
+            expect(getUnapplied(applied2), is, f);
         },
     };
 }

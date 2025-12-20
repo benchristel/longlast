@@ -99,8 +99,8 @@ importers:
   pkg/partial-apply:
     dependencies:
       '@longlast/function-provenance':
-        specifier: ^0.0.2
-        version: 0.0.2
+        specifier: ^0.0.3
+        version: 0.0.3
       '@longlast/symbols':
         specifier: 'catalog:'
         version: 1.1.0
