@@ -3,12 +3,8 @@
  */
 
 import {curry, type Curried2, type Curried3} from "@longlast/curry";
-import {
-    $boundArguments,
-    $equals,
-    $getBoundArguments,
-    $unapplied,
-} from "@longlast/symbols";
+import {getBoundArguments, getUnapplied} from "@longlast/function-provenance";
+import {$equals} from "@longlast/symbols";
 
 // TODO: export an `Equatable` interface that classes with the [$equals] method
 // can implement.
@@ -74,13 +70,14 @@ function _equalsWith(options: EqualsOptions, a: unknown, b: unknown): boolean {
     }
 
     if (typeof a === "function" && typeof b === "function") {
-        // TODO: Use getUnapplied(), remove null check
-        const aUnapplied = (a as any)[$unapplied];
-        const bUnapplied = (b as any)[$unapplied];
         return (
-            aUnapplied != null &&
-            aUnapplied === bUnapplied &&
-            _equalsWith(options, getBoundArguments(a), getBoundArguments(b))
+            // TODO: Remove `as any` casts.
+            getUnapplied(a as any) === getUnapplied(b as any) &&
+            _equalsWith(
+                options,
+                getBoundArguments(a as any),
+                getBoundArguments(b as any),
+            )
         );
     }
 
@@ -235,12 +232,6 @@ function _equalsWith(options: EqualsOptions, a: unknown, b: unknown): boolean {
 
 // TODO: clear function provenance on `equals`.
 export const equals: Curried2<unknown, unknown, boolean> = equalsWith({});
-
-// TODO: Use getBoundArguments from function-provenance
-function getBoundArguments(f: any): unknown[] | undefined {
-    // TODO: (pre-1.0.0) remove `f[$boundArguments]` fallback.
-    return f[$getBoundArguments]?.() ?? f[$boundArguments];
-}
 
 function functionString(f: any): string {
     if (typeof f !== "function") {

@@ -80,6 +80,9 @@ importers:
       '@longlast/curry':
         specifier: ^0.5.0
         version: 0.5.1
+      '@longlast/function-provenance':
+        specifier: ^0.0.3
+        version: 0.0.3
       '@longlast/symbols':
         specifier: 'catalog:'
         version: 1.1.0
