@@ -1,6 +1,6 @@
 {
     "name": "@longlast/pipe",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Composes functions left-to-right",
     "homepage": "https://longlast.js.org/",
     "license": "MIT",
