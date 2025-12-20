@@ -8,6 +8,7 @@ import {
     getUnapplied,
 } from "@longlast/function-provenance";
 import {$getBoundArguments, $unapplied} from "@longlast/symbols";
+import type {AnyFunction} from "@longlast/any-function";
 
 /**
  * @param f - the function to curry
@@ -214,6 +215,3 @@ export interface Curried5<A, B, C, D, E, Return> extends FunctionProvenance {
     // prettier-ignore
     (a: A, b?: never, c?: never, d?: never, e?: never): Curried4<B, C, D, E, Return>;
 }
-
-// TODO: move this type to its own package
-type AnyFunction = (...args: any[]) => any;

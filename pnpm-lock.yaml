@@ -48,8 +48,13 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
 
+  pkg/any-function: {}
+
   pkg/curry:
     dependencies:
+      '@longlast/any-function':
+        specifier: ^0.0.1
+        version: 0.0.1
       '@longlast/function-provenance':
         specifier: ^0.0.3
         version: 0.0.3
@@ -133,6 +138,9 @@ packages:
 
   '@gerrit0/mini-shiki@3.9.2':
     resolution: {integrity: sha512-Tvsj+AOO4Z8xLRJK900WkyfxHsZQu+Zm1//oT1w443PO6RiYMoq/4NGOhaNuZoUMYsjKIAPVQ6eOFMddj6yphQ==}
+
+  '@longlast/any-function@0.0.1':
+    resolution: {integrity: sha512-VYsFdIrZPM9QOEaEn2WAyNHu8r5N5W3AFg6xgYNtAR9xE/3FbCLRdRHO5rx4/dTs7yW5bPfPgx1JEBojHNxp6A==}
 
   '@longlast/curry@0.5.1':
     resolution: {integrity: sha512-ch1cMmAtnDaSqeDNQWdNAuMObumQZeF6tkoOViMZl8aLWwdevb6FeEah3keb7RN7bZTJo5Pt4rT00Y67XMiMJA==}
@@ -405,6 +413,8 @@ snapshots:
       '@shikijs/themes': 3.9.2
       '@shikijs/types': 3.9.2
       '@shikijs/vscode-textmate': 10.0.2
+
+  '@longlast/any-function@0.0.1': {}
 
   '@longlast/curry@0.5.1':
     dependencies:
