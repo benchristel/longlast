@@ -1,5 +1,12 @@
 # Styleguide
 
+## `FIXME`, `TODO`, and `FUTURE` comments
+
+- I use FIXME comments to mark things I want to change before committing. FIXME
+  comments should not be committed.
+- TODO comments form a backlog of work to be done ASAP.
+- FUTURE comments offer suggestions to future maintainers of the code.
+
 ## Exports
 
 - Each published function or class is distributed as a separate package.
