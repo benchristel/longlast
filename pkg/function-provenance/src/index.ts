@@ -11,8 +11,7 @@ declare const $nonUserConstructible: unique symbol;
 export interface FunctionProvenance {
     [$getBoundArguments](): unknown[];
     // TODO: (pre-1.0.0) Should these properties be readonly?
-    // TODO: (pre-1.0.0) Avoid using `any` types in [$unapplied].
-    [$unapplied]: AnyFunction;
+    [$unapplied]: UnknownFunction;
     displayName: string;
     [$nonUserConstructible]: true;
 }
@@ -21,8 +20,9 @@ export function getBoundArguments(f: AnyFunction): unknown[] {
     return (f as any)[$getBoundArguments]?.() ?? [];
 }
 
-// TODO: (pre-1.0.0) Avoid returning `AnyFunction`. Use `UnknownFunction`:
-// type UnknownFunction = (...args: never) => unknown;
-export function getUnapplied(f: AnyFunction): AnyFunction {
+export function getUnapplied(f: AnyFunction): UnknownFunction {
     return (f as any)[$unapplied] ?? f;
 }
+
+// TODO: Move UnknownFunction to its own package
+type UnknownFunction = (...args: never) => unknown;
