@@ -10,6 +10,7 @@ declare const $nonUserConstructible: unique symbol;
 
 export interface FunctionProvenance {
     [$getBoundArguments](): unknown[];
+    // TODO: (pre-1.0.0) Should these properties be readonly?
     // TODO: (pre-1.0.0) Avoid using `any` types in [$unapplied].
     [$unapplied]: AnyFunction;
     displayName: string;
