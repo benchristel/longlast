@@ -18,7 +18,7 @@
         "#@longlast/curry": "./src/index.ts"
     },
     "dependencies": {
-        "@longlast/function-provenance": "^0.0.2",
+        "@longlast/function-provenance": "^0.0.3",
         "@longlast/symbols": "catalog:"
     },
     "devDependencies": {

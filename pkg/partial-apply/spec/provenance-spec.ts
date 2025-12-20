@@ -10,6 +10,7 @@ export function provenanceSpec(_partialApply: typeof partialApply): Spec {
     return {
         "tracks bound arguments"() {
             const applied = _partialApply(1, f);
+            // TODO: use getBoundArguments()
             expect(applied[$getBoundArguments](), equals, [1]);
         },
 
@@ -31,6 +32,7 @@ export function provenanceSpec(_partialApply: typeof partialApply): Spec {
 
         "keeps a reference to the unapplied function"() {
             const applied = _partialApply(1, f);
+            // TODO: use getUnapplied()
             expect(applied[$unapplied], is, f);
         },
 

@@ -74,6 +74,7 @@ function _equalsWith(options: EqualsOptions, a: unknown, b: unknown): boolean {
     }
 
     if (typeof a === "function" && typeof b === "function") {
+        // TODO: Use getUnapplied(), remove null check
         const aUnapplied = (a as any)[$unapplied];
         const bUnapplied = (b as any)[$unapplied];
         return (
@@ -235,6 +236,7 @@ function _equalsWith(options: EqualsOptions, a: unknown, b: unknown): boolean {
 // TODO: clear function provenance on `equals`.
 export const equals: Curried2<unknown, unknown, boolean> = equalsWith({});
 
+// TODO: Use getBoundArguments from function-provenance
 function getBoundArguments(f: any): unknown[] | undefined {
     // TODO: (pre-1.0.0) remove `f[$boundArguments]` fallback.
     return f[$getBoundArguments]?.() ?? f[$boundArguments];

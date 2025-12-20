@@ -5,6 +5,7 @@
 import {
     type FunctionProvenance,
     getBoundArguments as getArgs,
+    getUnapplied,
 } from "@longlast/function-provenance";
 import {$getBoundArguments, $unapplied} from "@longlast/symbols";
 
@@ -77,11 +78,11 @@ export function curry(f: AnyFunction): AnyFunction {
     // provides a 50x speedup!
     switch (f.length) {
         case 2:
-            return initProvenance(curry2(f), getName(f));
+            return setDisplayName(curry2(f), getName(f));
         case 3:
-            return initProvenance(curry3(f), getName(f));
+            return setDisplayName(curry3(f), getName(f));
         default:
-            return initProvenance(curryVarargs(f), getName(f));
+            return setDisplayName(curryVarargs(f), getName(f));
     }
 }
 
@@ -119,17 +120,15 @@ function curryVarargs(f: AnyFunction): AnyFunction {
     };
 }
 
-function initProvenance(curried: any, name: string) {
+function setDisplayName(curried: any, name: string) {
     curried.displayName = name;
-    curried[$getBoundArguments] = () => [];
-    curried[$unapplied] = curried;
     return curried;
 }
 
 function trackProvenance(source: any, args: any[], destination: any) {
     destination.displayName = getName(source);
     destination[$getBoundArguments] = () => getArgs(source).concat(args);
-    destination[$unapplied] = source[$unapplied];
+    destination[$unapplied] = getUnapplied(source);
     return destination;
 }
 

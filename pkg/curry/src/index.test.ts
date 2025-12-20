@@ -1,8 +1,8 @@
 import {curry} from "#@longlast/curry";
-import {$getBoundArguments, $unapplied} from "@longlast/symbols";
 import {test, expect, equals, is} from "@benchristel/taste";
 import {testFunctionCurrying} from "../spec/currying.spec.ts";
 import {testProvenanceTracking} from "../spec/provenance.spec.ts";
+import {getBoundArguments, getUnapplied} from "@longlast/function-provenance";
 
 testFunctionCurrying(curry, "curry");
 testProvenanceTracking(curry, "curry");
@@ -19,11 +19,11 @@ test("a 2-ary curried function", {
     },
 
     "remembers all bound arguments from a sequence of calls"() {
-        expect(concat2("a")[$getBoundArguments](), equals, ["a"]);
+        expect(getBoundArguments(concat2("a")), equals, ["a"]);
     },
 
     "remembers the original curried function after partial application"() {
-        expect(concat2("a")[$unapplied], is, concat2);
+        expect(getUnapplied(concat2("a")), is, concat2);
     },
 
     "can be called multiple times after partial application"() {
@@ -51,11 +51,11 @@ test("a 3-ary curried function", {
     },
 
     "remembers all bound arguments from a sequence of calls"() {
-        expect(concat3("a")("b")[$getBoundArguments](), equals, ["a", "b"]);
+        expect(getBoundArguments(concat3("a")("b")), equals, ["a", "b"]);
     },
 
     "remembers the original curried function after partial application"() {
-        expect(concat3("a")("b")[$unapplied], is, concat3);
+        expect(getUnapplied(concat3("a")("b")), is, concat3);
     },
 
     "can be called multiple times after partial application"() {
@@ -78,9 +78,9 @@ test("a 4-ary curried function", {
     },
 
     "remembers all bound arguments from a sequence of calls"() {
-        expect(concat4("a")[$getBoundArguments](), equals, ["a"]);
-        expect(concat4("a")("b")[$getBoundArguments](), equals, ["a", "b"]);
-        expect(concat4("a")("b")("c")[$getBoundArguments](), equals, [
+        expect(getBoundArguments(concat4("a")), equals, ["a"]);
+        expect(getBoundArguments(concat4("a")("b")), equals, ["a", "b"]);
+        expect(getBoundArguments(concat4("a")("b")("c")), equals, [
             "a",
             "b",
             "c",
@@ -88,7 +88,7 @@ test("a 4-ary curried function", {
     },
 
     "remembers the original curried function after partial application"() {
-        expect(concat4("a")("b")("c")[$unapplied], is, concat4);
+        expect(getUnapplied(concat4("a")("b")("c")), is, concat4);
     },
 
     "can be called multiple times after partial application"() {

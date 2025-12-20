@@ -10,6 +10,7 @@ export function provenanceSpec(_pipe: typeof pipe): Spec {
             const f = (x: number) => x;
             const g = (x: number) => x;
             const piped = _pipe(f, g);
+            // TODO: use getBoundArguments() and getUnapplied()
             expect(piped[$getBoundArguments](), equals, [f, g]);
             expect(piped[$unapplied], is, _pipe);
             expect(piped.displayName, is, "pipe");

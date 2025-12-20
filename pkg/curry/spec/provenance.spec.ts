@@ -1,6 +1,6 @@
 import {type curry} from "#@longlast/curry";
-import {$unapplied, $getBoundArguments} from "@longlast/symbols";
 import {test, expect, is, equals} from "@benchristel/taste";
+import {getBoundArguments, getUnapplied} from "@longlast/function-provenance";
 
 export function testProvenanceTracking(
     _curry: typeof curry,
@@ -19,25 +19,25 @@ export function testProvenanceTracking(
             expect(_curry(foo).displayName, is, "theDisplayName");
         },
 
-        "sets the [$unapplied] property on the curried function"() {
+        "can be unapplied"() {
             function foo(_a: 1, _b: 2) {}
             const curried = _curry(foo);
-            expect(curried[$unapplied], is, curried);
+            expect(getUnapplied(curried), is, curried);
         },
 
         "sets bound arguments on the curried function"() {
             const curried = _curry((_a: 1, _b: 2) => {});
-            expect(curried[$getBoundArguments](), equals, []);
+            expect(getBoundArguments(curried), equals, []);
         },
 
         "tracks bound arguments on partially applied functions"() {
             const curried = _curry((_a: 1, _b: 2) => {});
-            expect(curried(1)[$getBoundArguments](), equals, [1]);
+            expect(getBoundArguments(curried(1)), equals, [1]);
         },
 
         "sets [$unapplied] on partially applied functions"() {
             const curried = _curry((_a: 1, _b: 2) => {});
-            expect(curried(1)[$unapplied], equals, curried);
+            expect(getUnapplied(curried(1)), equals, curried);
         },
 
         "sets displayName on partially applied functions"() {
