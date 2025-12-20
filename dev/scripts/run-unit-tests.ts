@@ -16,7 +16,7 @@ async function main() {
         join(...root, "dev", "consistency-tests", "**", "*.test.ts"),
     ];
 
-    // TODO: import files in parallel
+    // FUTURE: import files in parallel
     for await (const path of glob(testFilePatterns)) {
         await import(path);
     }

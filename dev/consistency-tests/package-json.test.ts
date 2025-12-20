@@ -40,7 +40,7 @@ for await (const path of glob(join(root, "pkg", "*", "package.json"))) {
         },
 
         "links to the GitHub repository"() {
-            // TODO: should this use the object form so we can link to the
+            // FUTURE: should this use the object form so we can link to the
             // directory within the repository? See:
             // https://docs.npmjs.com/cli/v8/configuring-npm/package-json#repository
             expect(packageConfig.repository, is, "github:benchristel/longlast");
@@ -123,7 +123,7 @@ function either(...predicates: Array<Predicate>): Predicate {
     return (arg: unknown) => predicates.reduce(or(arg), false);
 }
 
-// TODO: consider giving this function its own package.
+// FUTURE: consider giving this function its own package.
 function appearInSameOrderAs(as: string[], bs: string[]): boolean {
     const aSet = new Set(as);
     const bSet = new Set(bs);
