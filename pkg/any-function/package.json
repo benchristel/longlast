@@ -1,6 +1,6 @@
 {
     "name": "@longlast/any-function",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "A type representing any function, for use in type argument constraints",
     "homepage": "https://longlast.js.org/",
     "license": "MIT",
