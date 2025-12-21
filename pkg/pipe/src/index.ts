@@ -2,8 +2,10 @@
  * @module pipe
  */
 
-import type {FunctionProvenance} from "@longlast/function-provenance";
-import {$getBoundArguments, $unapplied} from "@longlast/symbols";
+import {
+    type FunctionProvenance,
+    trackProvenance,
+} from "@longlast/function-provenance";
 
 export interface Piped<Arg, Return> extends FunctionProvenance {
     (arg: Arg): Return;
@@ -120,11 +122,7 @@ export function pipe<A, B, C>(f: (a: A) => B, g: (b: B) => C): Piped<A, C>;
  */
 
 export function pipe(...fs: any): (x: any) => any {
-    const piped = fs.reduceRight(compose);
-    piped[$getBoundArguments] = () => fs;
-    piped[$unapplied] = pipe;
-    piped.displayName = "pipe";
-    return piped;
+    return trackProvenance(pipe, fs, fs.reduceRight(compose));
 }
 
 function compose(f: any, g: any): any {

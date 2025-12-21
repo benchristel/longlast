@@ -1,6 +1,6 @@
+import {getBoundArguments, getUnapplied} from "@longlast/function-provenance";
 import {type pipe} from "../src/index.ts";
 import {expect, equals, is} from "@benchristel/taste";
-import {$getBoundArguments, $unapplied} from "@longlast/symbols";
 
 type Spec = Record<string, () => void>;
 
@@ -10,9 +10,8 @@ export function provenanceSpec(_pipe: typeof pipe): Spec {
             const f = (x: number) => x;
             const g = (x: number) => x;
             const piped = _pipe(f, g);
-            // TODO: use getBoundArguments() and getUnapplied()
-            expect(piped[$getBoundArguments](), equals, [f, g]);
-            expect(piped[$unapplied], is, _pipe);
+            expect(getBoundArguments(piped), equals, [f, g]);
+            expect(getUnapplied(piped), is, _pipe);
             expect(piped.displayName, is, "pipe");
         },
     };

@@ -113,11 +113,8 @@ importers:
   pkg/pipe:
     dependencies:
       '@longlast/function-provenance':
-        specifier: ^0.0.1
-        version: 0.0.1
-      '@longlast/symbols':
-        specifier: 'catalog:'
-        version: 1.1.0
+        specifier: ^0.1.1
+        version: 0.1.1
 
   pkg/symbols: {}
 
@@ -147,9 +144,6 @@ packages:
 
   '@longlast/equals@0.5.8':
     resolution: {integrity: sha512-oc9nvnBJb58oM8IHgnmGdK52DUgLfKsC7mMtfyZfhw79VAeRCw3lCQ/QwXeR4o8gDup+YG/zu+lGe9Mv+4jALg==}
-
-  '@longlast/function-provenance@0.0.1':
-    resolution: {integrity: sha512-difEP44F9LYcaSEHUDTRbeGqMg1kb7yDv8b5Mn94u1NsKFwU97eXD3BTryojiPsEokVYaxN+G+4TI/HwWuHF7A==}
 
   '@longlast/function-provenance@0.0.2':
     resolution: {integrity: sha512-XdKsZbqK3VnrC7oSaFNoTxD3VN6fpJVgas80BB6SLNVHarxYBYaZ1O+hhxt5CJuIAHmD0AHds88kKMJnIEZUUw==}
@@ -427,10 +421,6 @@ snapshots:
   '@longlast/equals@0.5.8':
     dependencies:
       '@longlast/curry': 0.5.1
-      '@longlast/symbols': 1.1.0
-
-  '@longlast/function-provenance@0.0.1':
-    dependencies:
       '@longlast/symbols': 1.1.0
 
   '@longlast/function-provenance@0.0.2':

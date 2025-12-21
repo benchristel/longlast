@@ -18,7 +18,6 @@
         "#@longlast/pipe": "./src/index.ts"
     },
     "dependencies": {
-        "@longlast/function-provenance": "^0.0.1",
-        "@longlast/symbols": "catalog:"
+        "@longlast/function-provenance": "^0.1.1"
     }
 }
