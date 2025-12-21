@@ -1,5 +1,9 @@
 # @longlast/equals
 
+## 0.5.10 (2025-12-21)
+
+This release contains internal improvements.
+
 ## 0.5.9 (2025-12-15)
 
 The documentation for Longlast has been split into a handbook and a reference
