@@ -96,7 +96,11 @@ importers:
         specifier: 3.1.3
         version: 3.1.3
 
-  pkg/function-name: {}
+  pkg/function-name:
+    dependencies:
+      '@longlast/any-function':
+        specifier: ^0.0.1
+        version: 0.0.1
 
   pkg/function-provenance:
     dependencies:
