@@ -1,6 +1,6 @@
 {
     "name": "@longlast/partial-apply",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "Binds arguments to functions",
     "homepage": "https://longlast.js.org/",
     "license": "MIT",
