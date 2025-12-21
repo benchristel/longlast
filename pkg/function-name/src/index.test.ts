@@ -1,5 +1,5 @@
 import {test, expect, is} from "@benchristel/taste";
-import {getFunctionName} from "./index.ts";
+import {getFunctionName, setFunctionName} from "./index.ts";
 
 test("getFunctionName", {
     "is named"() {
@@ -31,5 +31,25 @@ test("getFunctionName", {
         function foo() {}
         foo.displayName = "";
         expect(getFunctionName(foo), is, "");
+    },
+});
+
+test("setFunctionName", {
+    "customizes the name returned by getFunctionName"() {
+        function foo() {}
+        setFunctionName("changed", foo);
+        expect(getFunctionName(foo), is, "changed");
+    },
+
+    "returns the function"() {
+        function foo() {}
+        const renamed = setFunctionName("changed", foo);
+        expect(getFunctionName(renamed), is, "changed");
+    },
+
+    "is named"() {
+        // Some minifiers mangle function names, so we need to set the
+        // displayName.
+        expect((setFunctionName as any).displayName, is, "setFunctionName");
     },
 });
