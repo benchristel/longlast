@@ -56,11 +56,8 @@ importers:
         specifier: ^0.0.1
         version: 0.0.1
       '@longlast/function-provenance':
-        specifier: ^0.0.3
-        version: 0.0.3
-      '@longlast/symbols':
-        specifier: 'catalog:'
-        version: 1.1.0
+        specifier: ^0.1.1
+        version: 0.1.1
     devDependencies:
       '@types/lodash':
         specifier: ^4.17.20
@@ -162,6 +159,9 @@ packages:
 
   '@longlast/function-provenance@0.0.3':
     resolution: {integrity: sha512-z/NDhlb+II0GhjmWFpbpcxOy6NBQ8AegLsLqHL0Vbe6auYwkxsx5z8H2bzzRx/pgNe8MzcwS3AIFCSLjoGxqZg==}
+
+  '@longlast/function-provenance@0.1.1':
+    resolution: {integrity: sha512-taaq215qtWMH2Aqi5Awwu/RcU5kB4A4ZMqPUVPBl54Ur9YU4AMqkyJKInUUlunZcq2ZJa8fjKBRVqL7K3WeVHQ==}
 
   '@longlast/symbols@1.1.0':
     resolution: {integrity: sha512-P5CSQkumJ32UjMYB4wJeCzlm58+YTgF0k+Wxt37vBvmybnxrAuzQzbafOGpZoHRFUAXM45MBPg9i/ZwCVtdFLg==}
@@ -442,6 +442,11 @@ snapshots:
 
   '@longlast/function-provenance@0.0.3':
     dependencies:
+      '@longlast/symbols': 1.1.0
+
+  '@longlast/function-provenance@0.1.1':
+    dependencies:
+      '@longlast/any-function': 0.0.1
       '@longlast/symbols': 1.1.0
 
   '@longlast/symbols@1.1.0': {}

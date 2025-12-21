@@ -4,10 +4,8 @@
 
 import {
     type FunctionProvenance,
-    getBoundArguments as getArgs,
-    getUnapplied,
+    trackProvenance,
 } from "@longlast/function-provenance";
-import {$getBoundArguments, $unapplied} from "@longlast/symbols";
 import type {AnyFunction} from "@longlast/any-function";
 
 /**
@@ -124,13 +122,6 @@ function curryVarargs(f: AnyFunction): AnyFunction {
 function setDisplayName(curried: any, name: string) {
     curried.displayName = name;
     return curried;
-}
-
-function trackProvenance(source: any, args: any[], destination: any) {
-    destination.displayName = getName(source);
-    destination[$getBoundArguments] = () => getArgs(source).concat(args);
-    destination[$unapplied] = getUnapplied(source);
-    return destination;
 }
 
 // TODO: duplicated in partial-apply.

@@ -19,8 +19,7 @@
     },
     "dependencies": {
         "@longlast/any-function": "^0.0.1",
-        "@longlast/function-provenance": "^0.0.3",
-        "@longlast/symbols": "catalog:"
+        "@longlast/function-provenance": "^0.1.1"
     },
     "devDependencies": {
         "@types/lodash": "^4.17.20",
