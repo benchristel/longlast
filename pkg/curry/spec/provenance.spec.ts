@@ -1,5 +1,6 @@
 import {type curry} from "#@longlast/curry";
 import {test, expect, is, equals} from "@benchristel/taste";
+import {getFunctionName} from "@longlast/function-name";
 import {getBoundArguments, getUnapplied} from "@longlast/function-provenance";
 
 export function testProvenanceTracking(
@@ -9,14 +10,7 @@ export function testProvenanceTracking(
     test(subjectName, {
         "names a curried function after the original function"() {
             function foo(_a: 1, _b: 2) {}
-            // TODO: (pre-1.0.0) Don't read `displayName` in these tests.
-            expect(_curry(foo).displayName, is, "foo");
-        },
-
-        "prefers `displayName` over `name` when naming a curried function"() {
-            function foo(_a: 1, _b: 2) {}
-            foo.displayName = "theDisplayName";
-            expect(_curry(foo).displayName, is, "theDisplayName");
+            expect(getFunctionName(_curry(foo)), is, "foo");
         },
 
         "can be unapplied"() {
@@ -40,10 +34,10 @@ export function testProvenanceTracking(
             expect(getUnapplied(curried(1)), equals, curried);
         },
 
-        "sets displayName on partially applied functions"() {
+        "names partially applied functions"() {
             function foo(_a: 1, _b: 2) {}
             const curried = _curry(foo);
-            expect(curried(1).displayName, equals, "foo");
+            expect(getFunctionName(curried(1)), equals, "foo");
         },
     });
 }

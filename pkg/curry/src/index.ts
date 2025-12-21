@@ -2,6 +2,7 @@
  * @module curry
  */
 
+import {getFunctionName, setFunctionName} from "@longlast/function-name";
 import {
     type FunctionProvenance,
     trackProvenance,
@@ -77,11 +78,11 @@ export function curry(f: AnyFunction): AnyFunction {
     // provides a 50x speedup!
     switch (f.length) {
         case 2:
-            return setDisplayName(curry2(f), getName(f));
+            return setFunctionName(getFunctionName(f), curry2(f));
         case 3:
-            return setDisplayName(curry3(f), getName(f));
+            return setFunctionName(getFunctionName(f), curry3(f));
         default:
-            return setDisplayName(curryVarargs(f), getName(f));
+            return setFunctionName(getFunctionName(f), curryVarargs(f));
     }
 }
 
@@ -117,17 +118,6 @@ function curryVarargs(f: AnyFunction): AnyFunction {
             return f(...args);
         }
     };
-}
-
-function setDisplayName(curried: any, name: string) {
-    curried.displayName = name;
-    return curried;
-}
-
-// TODO: duplicated in partial-apply.
-// Use functionName instead.
-function getName(f: any): string {
-    return f.displayName ?? f.name;
 }
 
 /**

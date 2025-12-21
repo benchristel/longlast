@@ -55,6 +55,9 @@ importers:
       '@longlast/any-function':
         specifier: ^0.0.1
         version: 0.0.1
+      '@longlast/function-name':
+        specifier: ^0.0.1
+        version: 0.0.1
       '@longlast/function-provenance':
         specifier: ^0.1.1
         version: 0.1.1
@@ -151,6 +154,9 @@ packages:
 
   '@longlast/equals@0.5.8':
     resolution: {integrity: sha512-oc9nvnBJb58oM8IHgnmGdK52DUgLfKsC7mMtfyZfhw79VAeRCw3lCQ/QwXeR4o8gDup+YG/zu+lGe9Mv+4jALg==}
+
+  '@longlast/function-name@0.0.1':
+    resolution: {integrity: sha512-xH5poUuDXhrqd77RzNkSvNlAfxdAUfWWdY3OP60lOdzGA7dbuCiXW5D/kYBf7T9ychLNVVxAL7asGKohs7SltA==}
 
   '@longlast/function-provenance@0.0.2':
     resolution: {integrity: sha512-XdKsZbqK3VnrC7oSaFNoTxD3VN6fpJVgas80BB6SLNVHarxYBYaZ1O+hhxt5CJuIAHmD0AHds88kKMJnIEZUUw==}
@@ -429,6 +435,10 @@ snapshots:
     dependencies:
       '@longlast/curry': 0.5.1
       '@longlast/symbols': 1.1.0
+
+  '@longlast/function-name@0.0.1':
+    dependencies:
+      '@longlast/any-function': 0.0.1
 
   '@longlast/function-provenance@0.0.2':
     dependencies:
