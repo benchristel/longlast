@@ -1,3 +1,7 @@
+/**
+ * @module function-name
+ */
+
 import {type AnyFunction} from "@longlast/any-function";
 
 /**
