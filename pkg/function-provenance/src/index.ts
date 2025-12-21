@@ -16,6 +16,9 @@ export interface FunctionProvenance {
     [$nonUserConstructible]: true;
 }
 
+// TODO: Move UnknownFunction to its own package
+type UnknownFunction = (...args: never) => unknown;
+
 export function getBoundArguments(f: AnyFunction): unknown[] {
     return (f as any)[$getBoundArguments]?.() ?? [];
 }
@@ -24,5 +27,31 @@ export function getUnapplied(f: AnyFunction): UnknownFunction {
     return (f as any)[$unapplied] ?? f;
 }
 
-// TODO: Move UnknownFunction to its own package
-type UnknownFunction = (...args: never) => unknown;
+/**
+ * Transfers provenance information from the `source` function to `dest`, which
+ * is assumed to be a partial application of `source`.
+ *
+ * @param args the arguments that were applied to create `dest` from `source`.
+ */
+
+export function trackProvenance<F extends AnyFunction>(
+    source: UnknownFunction,
+    args: readonly unknown[],
+    dest: F,
+): F {
+    unsafeNarrow<F & FunctionProvenance>(dest);
+    dest.displayName = getName(source);
+    dest[$getBoundArguments] = () => getBoundArguments(source).concat(args);
+    dest[$unapplied] = getUnapplied(source);
+    return dest;
+}
+
+// TODO: unsafeNarrow is duplicated in equals.
+function unsafeNarrow<T>(value: unknown): asserts value is T {
+    value;
+}
+
+// TODO: getName is duplicated.
+function getName(f: any): string {
+    return f.displayName ?? f.name;
+}
