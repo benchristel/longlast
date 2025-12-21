@@ -17,14 +17,14 @@ yarn add @longlast/dub
 ```ts
 import {dub} from "@longlast/dub";
 import {curry} from "@longlast/curry";
-import {functionName} from "@longlast/functionName";
+import {getFunctionName} from "@longlast/function-name";
 
 const add = dub(
     "add",
     curry((a: number, b: number) => a + b),
 );
 
-functionName(add); // => "add"
+getFunctionName(add); // => "add"
 ```
 
 ## Documentation

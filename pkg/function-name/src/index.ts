@@ -1,8 +1,8 @@
-export function functionName(f: AnyFunction): string {
+export function getFunctionName(f: AnyFunction): string {
     return (f as any).displayName ?? f.name;
 }
 
-(functionName as any).displayName = "functionName";
+(getFunctionName as any).displayName = "getFunctionName";
 
 // TODO: duplicated
 type AnyFunction = (...args: any[]) => any;

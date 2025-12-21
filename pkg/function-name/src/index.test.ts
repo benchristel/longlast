@@ -1,16 +1,16 @@
 import {test, expect, is} from "@benchristel/taste";
-import {functionName} from "./index.ts";
+import {getFunctionName} from "./index.ts";
 
-test("functionName", {
+test("getFunctionName", {
     "is named"() {
         // Some minifiers mangle function names, so we need to set the
         // displayName.
-        expect((functionName as any).displayName, is, "functionName");
+        expect((getFunctionName as any).displayName, is, "getFunctionName");
     },
 
     "returns empty string given an anonymous function"() {
         expect(
-            functionName(() => {}),
+            getFunctionName(() => {}),
             is,
             "",
         );
@@ -18,18 +18,18 @@ test("functionName", {
 
     "returns the native name of a function"() {
         function foo() {}
-        expect(functionName(foo), is, "foo");
+        expect(getFunctionName(foo), is, "foo");
     },
 
     "prefers the displayName"() {
         function foo() {}
         foo.displayName = "the-display-name";
-        expect(functionName(foo), is, "the-display-name");
+        expect(getFunctionName(foo), is, "the-display-name");
     },
 
     "prefers the displayName, even if empty"() {
         function foo() {}
         foo.displayName = "";
-        expect(functionName(foo), is, "");
+        expect(getFunctionName(foo), is, "");
     },
 });
