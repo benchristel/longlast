@@ -1,5 +1,9 @@
 # @longlast/function-provenance
 
+## 0.1.1 (2025-12-21)
+
+This release adds the `trackProvenance` function.
+
 ## 0.1.0 (2025-12-20)
 
 This release replaces the use of `AnyFunction` in exported types with
