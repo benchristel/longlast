@@ -1,5 +1,11 @@
 # @longlast/pipe
 
+## 0.0.4 (2025-12-21)
+
+This release refactors `pipe` to use more code from
+`@longlast/function-provenance`. The size of bundles that use both packages
+might be reduced by a few bytes.
+
 ## 0.0.3 (2025-12-20)
 
 This release adds support for provenance tracking on piped functions.
