@@ -18,6 +18,7 @@
         "#@longlast/equals": "./src/index.ts"
     },
     "dependencies": {
+        "@longlast/any-function": "^0.0.1",
         "@longlast/curry": "^0.5.0",
         "@longlast/function-provenance": "^0.0.3",
         "@longlast/symbols": "catalog:"

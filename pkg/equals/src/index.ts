@@ -2,6 +2,7 @@
  * @module equals
  */
 
+import {type AnyFunction} from "@longlast/any-function";
 import {curry, type Curried2, type Curried3} from "@longlast/curry";
 import {getBoundArguments, getUnapplied} from "@longlast/function-provenance";
 import {$equals} from "@longlast/symbols";
@@ -70,14 +71,11 @@ function _equalsWith(options: EqualsOptions, a: unknown, b: unknown): boolean {
     }
 
     if (typeof a === "function" && typeof b === "function") {
+        unsafeNarrow<AnyFunction>(a);
+        unsafeNarrow<AnyFunction>(b);
         return (
-            // TODO: Remove `as any` casts.
-            getUnapplied(a as any) === getUnapplied(b as any) &&
-            _equalsWith(
-                options,
-                getBoundArguments(a as any),
-                getBoundArguments(b as any),
-            )
+            getUnapplied(a) === getUnapplied(b) &&
+            _equalsWith(options, getBoundArguments(a), getBoundArguments(b))
         );
     }
 
