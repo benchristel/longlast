@@ -1,5 +1,9 @@
 # @longlast/curry
 
+## 0.7.1 (2025-12-21)
+
+This release contains internal improvements.
+
 ## 0.7.0 (2025-12-20)
 
 The function provenance API of `curry` is now defined in terms of functions
