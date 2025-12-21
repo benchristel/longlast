@@ -2,12 +2,10 @@
  * @module partial-apply
  */
 
-import {$getBoundArguments, $unapplied} from "@longlast/symbols";
 import {
     type FunctionProvenance,
-    getBoundArguments as getArgs,
+    trackProvenance,
 } from "@longlast/function-provenance";
-import {getUnapplied} from "@longlast/function-provenance";
 
 /**
  * A partially-applied function.
@@ -94,18 +92,4 @@ export function partialApply(arg: any, f: any): any {
     }
 
     return trackProvenance(f, [arg], f.bind(null, arg));
-}
-
-// TODO: duplicated in curry. Move to function-provenance
-function trackProvenance(source: any, args: any[], destination: any) {
-    destination.displayName = getName(source);
-    destination[$getBoundArguments] = () => getArgs(source).concat(args);
-    destination[$unapplied] = getUnapplied(source);
-    return destination;
-}
-
-// TODO: duplicated in curry.
-// Use functionName instead.
-function getName(f: any): string {
-    return f.displayName ?? f.name;
 }
