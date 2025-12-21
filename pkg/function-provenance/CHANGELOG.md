@@ -1,5 +1,10 @@
 # @longlast/function-provenance
 
+## 0.1.0 (2025-12-20)
+
+This release replaces the use of `AnyFunction` in exported types with
+`UnknownFunction`. This is a breaking change.
+
 ## 0.0.3 (2025-12-20)
 
 This release adds `getUnapplied()`, which returns a copy of the given function
