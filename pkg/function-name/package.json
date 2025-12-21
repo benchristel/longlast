@@ -1,6 +1,6 @@
 {
     "name": "@longlast/function-name",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "Gets and sets the names of functions",
     "homepage": "https://longlast.js.org/",
     "license": "MIT",
