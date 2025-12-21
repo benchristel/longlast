@@ -1,5 +1,9 @@
 # @longlast/curry
 
+## 0.7.2 (2025-12-21)
+
+`curry` now uses `@longlast/function-name` to get and set function names.
+
 ## 0.7.1 (2025-12-21)
 
 This release contains internal improvements.
