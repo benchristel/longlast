@@ -16,5 +16,8 @@
     "packageManager": "pnpm@10.14.0",
     "imports": {
         "#@longlast/dub": "./src/index.ts"
+    },
+    "dependencies": {
+        "@longlast/any-function": "^0.0.1"
     }
 }

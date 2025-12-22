@@ -78,7 +78,11 @@ importers:
         specifier: ^0.31.3
         version: 0.31.3
 
-  pkg/dub: {}
+  pkg/dub:
+    dependencies:
+      '@longlast/any-function':
+        specifier: ^0.0.1
+        version: 0.0.1
 
   pkg/equals:
     dependencies:

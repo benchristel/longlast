@@ -2,6 +2,8 @@
  * @module dub
  */
 
+import {type AnyFunction} from "@longlast/any-function";
+
 /**
  * Assigns the `name` to the `displayName` property of the given function. Note
  * that this is a mutating operation!
@@ -25,6 +27,3 @@ export function dub<F extends AnyFunction>(name: string, f: F): F {
     (f as any).displayName = name;
     return f;
 }
-
-// TODO: duplicated
-type AnyFunction = (...args: any[]) => any;
