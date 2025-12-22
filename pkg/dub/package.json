@@ -18,6 +18,7 @@
         "#@longlast/dub": "./src/index.ts"
     },
     "dependencies": {
-        "@longlast/any-function": "^0.0.1"
+        "@longlast/any-function": "^0.0.1",
+        "@longlast/function-name": "^0.0.1"
     }
 }

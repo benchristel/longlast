@@ -1,4 +1,5 @@
 import {test, expect, is} from "@benchristel/taste";
+import {getFunctionName} from "@longlast/function-name";
 import {dub} from "./index.ts";
 
 test("dub", {
@@ -7,7 +8,7 @@ test("dub", {
 
         dub("a new name", f);
 
-        expect((f as any).displayName, is, "a new name");
+        expect(getFunctionName(f), is, "a new name");
     },
 
     "returns the function"() {

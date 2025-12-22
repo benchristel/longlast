@@ -83,6 +83,9 @@ importers:
       '@longlast/any-function':
         specifier: ^0.0.1
         version: 0.0.1
+      '@longlast/function-name':
+        specifier: ^0.0.1
+        version: 0.0.1
 
   pkg/equals:
     dependencies:

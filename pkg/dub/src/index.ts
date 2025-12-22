@@ -3,6 +3,7 @@
  */
 
 import {type AnyFunction} from "@longlast/any-function";
+import {setFunctionName} from "@longlast/function-name";
 
 /**
  * Assigns the `name` to the `displayName` property of the given function. Note
@@ -24,6 +25,5 @@ import {type AnyFunction} from "@longlast/any-function";
  */
 
 export function dub<F extends AnyFunction>(name: string, f: F): F {
-    (f as any).displayName = name;
-    return f;
+    return setFunctionName(name, f);
 }
