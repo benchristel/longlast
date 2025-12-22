@@ -15,10 +15,6 @@ pnpm add @longlast/function-provenance
 yarn add @longlast/function-provenance
 ```
 
-## Use
-
-TODO
-
 ## Documentation
 
 [Browse the docs on longlast.js.org][docs].
