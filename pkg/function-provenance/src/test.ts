@@ -1,6 +1,7 @@
 import {test, expect, equals, is} from "@benchristel/taste";
 import {getBoundArguments, getUnapplied, trackProvenance} from "./index.ts";
 import {$getBoundArguments, $unapplied} from "@longlast/symbols";
+import {getFunctionName} from "@longlast/function-name";
 
 test("getBoundArguments", {
     "returns empty given a plain function"() {
@@ -49,8 +50,7 @@ test("trackProvenance", {
 
         trackProvenance(source, [], dest);
 
-        // TODO: use functionName
-        expect((dest as any).displayName, equals, "source");
+        expect(getFunctionName(dest), equals, "source");
     },
 
     "sets the source as the destination's [$unapplied]"() {
@@ -62,7 +62,7 @@ test("trackProvenance", {
         expect((dest as any)[$unapplied], is, source);
     },
 
-    "transfer's the source's [$unapplied] to the destination"() {
+    "transfers the source's [$unapplied] to the destination"() {
         const source = () => {};
         const unapplied = () => {};
         (source as any)[$unapplied] = unapplied;

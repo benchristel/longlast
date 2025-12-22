@@ -4,6 +4,7 @@
  */
 
 import {$getBoundArguments, $unapplied} from "@longlast/symbols";
+import {getFunctionName} from "@longlast/function-name";
 import type {AnyFunction} from "@longlast/any-function";
 
 declare const $nonUserConstructible: unique symbol;
@@ -40,7 +41,7 @@ export function trackProvenance<F extends AnyFunction>(
     dest: F,
 ): F {
     unsafeNarrow<F & FunctionProvenance>(dest);
-    dest.displayName = getName(source);
+    dest.displayName = getFunctionName(source);
     dest[$getBoundArguments] = () => getBoundArguments(source).concat(args);
     dest[$unapplied] = getUnapplied(source);
     return dest;
@@ -49,9 +50,4 @@ export function trackProvenance<F extends AnyFunction>(
 // TODO: unsafeNarrow is duplicated in equals.
 function unsafeNarrow<T>(value: unknown): asserts value is T {
     value;
-}
-
-// TODO: getName is duplicated.
-function getName(f: any): string {
-    return f.displayName ?? f.name;
 }
