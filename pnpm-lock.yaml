@@ -86,6 +86,9 @@ importers:
       '@longlast/function-name':
         specifier: ^0.0.1
         version: 0.0.1
+      '@longlast/partial-apply':
+        specifier: ^0.0.1
+        version: 0.0.1
 
   pkg/equals:
     dependencies:
@@ -176,6 +179,9 @@ packages:
 
   '@longlast/function-provenance@0.1.1':
     resolution: {integrity: sha512-taaq215qtWMH2Aqi5Awwu/RcU5kB4A4ZMqPUVPBl54Ur9YU4AMqkyJKInUUlunZcq2ZJa8fjKBRVqL7K3WeVHQ==}
+
+  '@longlast/partial-apply@0.0.1':
+    resolution: {integrity: sha512-9qaKO2ncGDaIMPHBFafeJMaqRojM7S8giwxUWRDEBrgwmRngkF0pHPbdsJSliSc8HK3+hJDhsGtKJxSrEPWV5A==}
 
   '@longlast/symbols@1.1.0':
     resolution: {integrity: sha512-P5CSQkumJ32UjMYB4wJeCzlm58+YTgF0k+Wxt37vBvmybnxrAuzQzbafOGpZoHRFUAXM45MBPg9i/ZwCVtdFLg==}
@@ -462,6 +468,10 @@ snapshots:
     dependencies:
       '@longlast/any-function': 0.0.1
       '@longlast/symbols': 1.1.0
+
+  '@longlast/partial-apply@0.0.1':
+    dependencies:
+      '@longlast/function-provenance': 0.1.1
 
   '@longlast/symbols@1.1.0': {}
 

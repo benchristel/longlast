@@ -15,4 +15,9 @@ test("dub", {
         const f = () => {};
         expect(dub("", f), is, f);
     },
+
+    "is curried"() {
+        const f = () => {};
+        expect(dub("")(f), is, f);
+    },
 });

@@ -4,6 +4,10 @@
 
 import {type AnyFunction} from "@longlast/any-function";
 import {setFunctionName} from "@longlast/function-name";
+import {partialApply} from "@longlast/partial-apply";
+
+export function dub<F extends AnyFunction>(name: string, f: F): F;
+export function dub(name: string): <F extends AnyFunction>(f: F) => F;
 
 /**
  * Assigns the `name` to the `displayName` property of the given function. Note
@@ -24,6 +28,12 @@ import {setFunctionName} from "@longlast/function-name";
  * ```
  */
 
-export function dub<F extends AnyFunction>(name: string, f: F): F {
+export function dub<F extends AnyFunction>(
+    name: string,
+    f?: F,
+): F | ((f: any) => any) {
+    if (f == null) {
+        return partialApply(name, dub);
+    }
     return setFunctionName(name, f);
 }

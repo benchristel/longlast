@@ -25,6 +25,13 @@ const add = dub(
 );
 
 getFunctionName(add); // => "add"
+
+// `dub` can also be partially applied.
+const multiply = dub("multiply")(
+    curry((a: number, b: number) => a * b),
+);
+
+getFunctionName(multiply); // => "multiply"
 ```
 
 ## Documentation
