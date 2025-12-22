@@ -10,8 +10,10 @@ export function dub<F extends AnyFunction>(name: string, f: F): F;
 export function dub(name: string): <F extends AnyFunction>(f: F) => F;
 
 /**
- * Assigns the `name` to the `displayName` property of the given function. Note
- * that this is a mutating operation!
+ * Assigns the `name` to the given function. Note that this is a mutating
+ * operation!
+ *
+ * `dub` is curried.
  *
  * @example
  * ```ts
