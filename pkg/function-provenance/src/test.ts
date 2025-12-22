@@ -59,7 +59,7 @@ test("trackProvenance", {
 
         trackProvenance(source, [], dest);
 
-        expect((dest as any)[$unapplied], is, source);
+        expect(getUnapplied(dest), is, source);
     },
 
     "transfers the source's [$unapplied] to the destination"() {
@@ -70,6 +70,6 @@ test("trackProvenance", {
 
         trackProvenance(source, [], dest);
 
-        expect((dest as any)[$unapplied], is, unapplied);
+        expect(getUnapplied(dest), is, unapplied);
     },
 });
