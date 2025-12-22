@@ -1,6 +1,6 @@
 {
     "name": "@longlast/function-provenance",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Imbues partially-applied functions with knowledge of their origins",
     "homepage": "https://longlast.js.org/",
     "license": "MIT",

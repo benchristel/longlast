@@ -1,5 +1,9 @@
 # @longlast/function-provenance
 
+## 0.1.2 (2025-12-22)
+
+This release adds a dependency on `@longlast/function-name`.
+
 ## 0.1.1 (2025-12-21)
 
 This release adds the `trackProvenance` function.
