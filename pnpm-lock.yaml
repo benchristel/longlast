@@ -132,6 +132,10 @@ importers:
       '@longlast/function-provenance':
         specifier: ^0.1.1
         version: 0.1.1
+    devDependencies:
+      '@longlast/function-name':
+        specifier: ^0.0.1
+        version: 0.0.1
 
   pkg/pipe:
     dependencies:

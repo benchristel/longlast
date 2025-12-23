@@ -19,5 +19,8 @@
     },
     "dependencies": {
         "@longlast/function-provenance": "^0.1.1"
+    },
+    "devDependencies": {
+        "@longlast/function-name": "^0.0.1"
     }
 }

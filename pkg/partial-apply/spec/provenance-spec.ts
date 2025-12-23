@@ -1,6 +1,7 @@
 import {type partialApply} from "#@longlast/partial-apply";
 import {expect, equals, is} from "@benchristel/taste";
 import {getBoundArguments, getUnapplied} from "@longlast/function-provenance";
+import {getFunctionName} from "@longlast/function-name";
 
 type Spec = Record<string, () => void>;
 
@@ -25,8 +26,7 @@ export function provenanceSpec(_partialApply: typeof partialApply): Spec {
 
             const applied = _partialApply(1, add);
 
-            // TODO: (pre-1.0.0) Don't read `displayName` in these tests.
-            expect(applied.displayName, is, "add");
+            expect(getFunctionName(applied), is, "add");
         },
 
         "keeps a reference to the unapplied function"() {
