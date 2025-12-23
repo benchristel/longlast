@@ -14,6 +14,7 @@ import {objectComparisonSpec} from "../spec/object-comparison-spec.ts";
 import {primitiveComparisonSpec} from "../spec/primitive-comparison-spec.ts";
 import {regexpComparisonSpec} from "../spec/regexp-comparison-spec.ts";
 import {setComparisonSpec} from "../spec/set-comparison-spec.ts";
+import {typedArrayComparisonSpec} from "../spec/typed-array-comparison-spec.ts";
 
 import {equalsWithSpec} from "../spec/equals-with-spec.ts";
 
@@ -30,6 +31,7 @@ test("equals", objectComparisonSpec(equals));
 test("equals", primitiveComparisonSpec(equals));
 test("equals", regexpComparisonSpec(equals));
 test("equals", setComparisonSpec(equals));
+test("equals", typedArrayComparisonSpec(equals));
 
 test("equalsWith", equalsWithSpec(equalsWith));
 

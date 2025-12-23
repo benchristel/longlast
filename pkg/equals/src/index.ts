@@ -125,8 +125,6 @@ function _equalsWith(options: EqualsOptions, a: unknown, b: unknown): boolean {
         return a.size === b.size && [...a].every((v) => b.has(v));
     }
 
-    // TODO: typed arrays
-
     if (mapConstructorString === aConstructorString) {
         unsafeNarrow<Map<unknown, unknown>>(a);
         unsafeNarrow<Map<unknown, unknown>>(b);
