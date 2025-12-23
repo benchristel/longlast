@@ -19,7 +19,7 @@ describe("partialApply", () => {
     it("complains if passed to Array#map", () => {
         // This test ensures that the "curried" unary signature is not used
         // when the second argument passed to partialApply has the wrong type.
-        // @ts-expect-error
+        // @ts-expect-error Types of parameters 'f' and 'index' are incompatible.
         [1].map(partialApply);
     });
 });

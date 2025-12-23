@@ -57,8 +57,7 @@ describe("a curried 3-ary function", () => {
     });
 
     it("can't be used with Array.map() when the wrong argument type would be passed", () => {
-        // @ts-expect-error - Array.map() passes the index as the second
-        // argument
+        // @ts-expect-error Type 'number' is not assignable to type '3'.
         [2 as const].map(curried(1));
     });
 });

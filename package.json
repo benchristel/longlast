@@ -11,7 +11,7 @@
         "benchmark": "^2.1.4",
         "husky": "^9.1.7",
         "prettier": "^3.6.2",
-        "tstyche": "^4.3.0",
+        "tstyche": "^5.0.2",
         "typedoc": "^0.28.10",
         "typedoc-plugin-markdown": "^4.8.1",
         "typescript": "^5.9.2"
