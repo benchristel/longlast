@@ -5,8 +5,11 @@
 export function send<M extends string, Args extends any[]>(
     message: M,
     ...args: Args
-): <Return>(receiver: {[Method in M]: (...args: Args) => Return}) => Return {
+): <Receiver extends {[Method in M]: (...args: Args) => any}>(
+    r: Receiver,
+) => ReturnType<Receiver[M]> {
     message satisfies M;
-    return <Return>(receiver: {[Method in M]: (...args: Args) => Return}) =>
-        receiver[message](...args);
+    return <Receiver extends {[Method in M]: (...args: Args) => any}>(
+        receiver: Receiver,
+    ) => receiver[message](...args);
 }

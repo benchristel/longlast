@@ -47,4 +47,9 @@ describe("send", () => {
             send("transform", 1)(new IdentityTransformer()),
         ).type.toBe<unknown>();
     });
+
+    it("returns the union of the possible return types", () => {
+        const xs = [{foo: () => 1}, {foo: () => "a"}].map(send("foo"));
+        expect(xs).type.toBe<Array<string | number>>();
+    });
 });
