@@ -1,6 +1,6 @@
 # `@longlast/flow`
 
-TODO: Add description to README.md.
+Transforms a value by a sequence of functions.
 
 ## Install
 
@@ -14,7 +14,17 @@ yarn add @longlast/flow
 
 ## Use
 
-TODO: Add usage example to README.md.
+```ts
+import {startWith} from "@longlast/flow"
+
+// Function definitions omitted for brevity.
+
+const actors = startWith(movies)
+    .and(flatMap(castMembers))
+    .and(deduplicate)
+    .and(sort(by(get("name"))))
+    .result();
+```
 
 ## Documentation
 

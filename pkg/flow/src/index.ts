@@ -4,7 +4,7 @@
 
 interface Flow<T> {
     and<U>(f: (value: T) => U): Flow<U>;
-    evaluate(): T;
+    result(): T;
 }
 
 type Lazy<T> = () => T;
@@ -19,7 +19,7 @@ class LazyFlow<T> implements Flow<T> {
         return new LazyFlow(() => f(this.value()));
     }
 
-    evaluate(): T {
+    result(): T {
         return this.value();
     }
 }

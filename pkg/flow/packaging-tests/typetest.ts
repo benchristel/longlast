@@ -9,7 +9,7 @@ describe("a Flow pipeline", () => {
     });
 
     it("produces a value of the correct type", () => {
-        const value = startWith(3).and(String).evaluate();
+        const value = startWith(3).and(String).result();
         expect(value).type.toBe<string>();
     });
 });

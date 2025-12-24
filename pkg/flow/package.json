@@ -1,7 +1,7 @@
 {
     "name": "@longlast/flow",
     "version": "0.0.0",
-    "description": "TODO: Add description to package.json",
+    "description": "Transforms a value by a sequence of functions",
     "homepage": "https://longlast.js.org/",
     "license": "MIT",
     "author": "Ben Christel (https://benchristel.com/)",
