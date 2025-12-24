@@ -2,9 +2,14 @@
  * @module flow
  */
 
+interface Flow<T> {
+    and<U>(f: (value: T) => U): Flow<U>;
+    evaluate(): T;
+}
+
 type Lazy<T> = () => T;
 
-class LazyFlow<T> {
+class LazyFlow<T> implements Flow<T> {
     private value: Lazy<T>;
     constructor(value: Lazy<T>) {
         this.value = value;
@@ -19,6 +24,6 @@ class LazyFlow<T> {
     }
 }
 
-export function startWith<T>(value: T): LazyFlow<T> {
+export function startWith<T>(value: T): Flow<T> {
     return new LazyFlow(() => value);
 }
