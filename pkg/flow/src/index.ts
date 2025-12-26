@@ -2,6 +2,14 @@
  * @module flow
  */
 
+/**
+ * Creates a {@linkcode Flow} computation with the given value.
+ */
+
+export function startWith<T>(value: T): Flow<T> {
+    return new LazyFlow(() => value);
+}
+
 declare const $nonUserConstructible: unique symbol;
 
 /**
@@ -42,12 +50,4 @@ class LazyFlow<T> implements Flow<T> {
     }
 
     declare [$nonUserConstructible]: true;
-}
-
-/**
- * Creates a {@linkcode Flow} computation with the given value.
- */
-
-export function startWith<T>(value: T): Flow<T> {
-    return new LazyFlow(() => value);
 }
