@@ -108,6 +108,10 @@ Thank you to [js.org] for providing the [longlast.js.org] domain!
 
 - Copy tstyche.config.json to packages on build, so we have a record of the
   supported TypeScript versions for each release.
+- `takeFirst(n)`
+- `takeLast`
+- `dropFirst`
+- `dropLast`
 - `@longlast/name`
 - `@longlast/value`
 - `@longlast/format`
@@ -117,5 +121,9 @@ Thank you to [js.org] for providing the [longlast.js.org] domain!
 - `@longlast/test`
 - `@longlast/result`
 - `@longlast/stacktrace`
-- `@longlast/prepend` (strings)
-- `@longlast/append` (strings)
+- `@longlast/prepend` (elem -> array -> array)
+- `@longlast/append` (elem -> array -> array)
+- `@longlast/chain-start` (Enumerables)
+- `@longlast/chain-end` (Enumerables)
+- `@longlast/addPrefix` (strings)
+- `@longlast/addSuffix` (strings)
