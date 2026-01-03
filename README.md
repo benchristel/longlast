@@ -108,6 +108,8 @@ Thank you to [js.org] for providing the [longlast.js.org] domain!
 
 - Copy tstyche.config.json to packages on build, so we have a record of the
   supported TypeScript versions for each release.
+- Add a dev script to draw the package dependency graph.
+- `utf8Encode`, `utf8Decode`
 - `takeFirst(n)`
 - `takeLast`
 - `dropFirst`
