@@ -169,7 +169,6 @@ function _equalsWith(options: EqualsOptions, a: unknown, b: unknown): boolean {
  * Deeply compares two values, returning true if they're equal and false
  * otherwise. The following criteria are used to determine equality:
  *
- *   - All values are equal to themselves.
  *   - Primitives `a` and `b` are equal iff `Object.is(a, b)`. This is similar
  *     to `===` comparison, but treats `NaN` as equal to `NaN` and `0` as
  *     different from `-0`.
@@ -177,7 +176,7 @@ function _equalsWith(options: EqualsOptions, a: unknown, b: unknown): boolean {
  *   - RegExps are equal iff they have the same pattern and flags.
  *   - Errors are equal iff they have the same class and message.
  *   - Arrays are equal iff they have the same length and their corresponding
- *     elements are equal (according to `equals`).
+ *     elements are equal according to `equals`.
  *   - Sets are equal iff they contain the same elements. Note that set
  *     elements are _not_ deeply compared.
  *   - Maps are equal iff they have the same set of keys, and their
@@ -186,10 +185,11 @@ function _equalsWith(options: EqualsOptions, a: unknown, b: unknown): boolean {
  *   - Partially applied functions (via {@link curry} or {@link partial-apply})
  *     are equal iff they originate from the same function and their bound
  *     arguments are equal according to `equals`.
+ *   - Typed arrays are equal iff they have the same type, length, and values.
  *   - Other objects are equal iff they have the same prototype (e.g. the same
  *     class) and the same set of enumerable string-keyed properties, and the
- *     values of their corresponding properties are equal (according to
- *     `equals`).
+ *     values of their corresponding properties are equal according to
+ *     `equals`.
  *
  * You can customize how `equals()` compares values of a specific class by
  * using the {@link symbols.$equals $equals} symbol to define a method on that
