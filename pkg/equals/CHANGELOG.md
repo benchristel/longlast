@@ -1,5 +1,13 @@
 # @longlast/equals
 
+## 0.5.11 (2026-01-11)
+
+The `equals` function now has documented support for [typed arrays]. Typed
+array comparison may work in previous versions as well, since it reuses the
+code for comparing objects.
+
+[typed arrays]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Typed_arrays
+
 ## 0.5.10 (2025-12-21)
 
 This release contains internal improvements.
