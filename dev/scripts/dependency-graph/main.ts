@@ -2,21 +2,21 @@
 
 import {dotGraph} from "./dot-graph.ts";
 
-function main(): Promise<void> {
-    return new Promise((resolve, reject) => {
-        let input = "";
+async function main(): Promise<void> {
+    const input = await read(process.stdin);
+    console.log(dotGraph(JSON.parse(input)));
+}
 
-        process.stdin.on("data", (data) => {
-            input += data;
+function read(stream: NodeJS.ReadStream): Promise<string> {
+    let data = "";
+
+    return new Promise((resolve) => {
+        stream.on("data", (chunk) => {
+            data += chunk;
         });
 
-        process.stdin.on("end", () => {
-            try {
-                console.log(dotGraph(JSON.parse(input)));
-                resolve();
-            } catch (e) {
-                reject(e);
-            }
+        stream.on("end", () => {
+            resolve(data);
         });
     });
 }
