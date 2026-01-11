@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cd "$(dirname "$0")/../.."
+
+if ! which dot >/dev/null; then
+    >&2 echo "Please install dot (https://www.graphviz.org/)"
+    exit 1
+fi
+
+pnpm list --recursive --json \
+    | dev/scripts/dependency-graph/main.ts \
+    | dot -Tsvg > dependency-graph.svg

@@ -78,3 +78,7 @@ release:
 .PHONY: new
 new:
 	@dev/scripts/new-package $(PACKAGE)
+
+.PHONY: graph
+graph:
+	@dev/scripts/graph

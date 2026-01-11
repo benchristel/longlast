@@ -13,6 +13,7 @@ async function main() {
     const testFilePatterns = [
         join(...root, "pkg", "**", "*.test.ts"),
         join(...root, "pkg", "**", "test.ts"),
+        join(...root, "dev", "scripts", "**", "*.test.ts"),
         join(...root, "dev", "consistency-tests", "**", "*.test.ts"),
     ];
 

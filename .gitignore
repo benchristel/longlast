@@ -3,3 +3,4 @@ dist
 /docs
 /docs-src/reference
 /proof
+/dependency-graph.svg
