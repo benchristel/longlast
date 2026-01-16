@@ -51,7 +51,7 @@ pushd "$CLIENT" >/dev/null
     # Copy the tests we're going to run into the client repo.
     pushd "$BUILD" >/dev/null
         ls -d pkg/*/packaging-tests | \
-            xargs -I{} cp -r --parents {} "$CLIENT"
+            xargs -I{} -n1 rsync --relative --recursive {} "$CLIENT"
     popd >/dev/null
 
     # Print the names of the test files. Otherwise, it's hard to be sure if any

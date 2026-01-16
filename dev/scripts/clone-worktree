@@ -17,6 +17,6 @@ TMPDIR="$(mktemp -d)"
 git clone --depth 1 "file://$ROOT" "$TMPDIR" >/dev/null
 
 # Copy untracked and modified files into the clone
-"$HERE/all_files" | xargs -I{} cp --parents {} "$TMPDIR"
+"$HERE/all_files" | xargs -I{} rsync --relative --recursive {} "$TMPDIR"
 
 echo "$TMPDIR"
