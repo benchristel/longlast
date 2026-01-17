@@ -141,7 +141,8 @@ function _equalsWith(options: EqualsOptions, a: unknown, b: unknown): boolean {
 
     if (
         objectConstructorString === aConstructorString ||
-        protoOf(a) === protoOf(b)
+        protoOf(a) === protoOf(b) ||
+        typedArrayConstructorStrings.includes(aConstructorString)
     ) {
         unsafeNarrow<AnyObject>(a);
         unsafeNarrow<AnyObject>(b);
@@ -262,4 +263,18 @@ const nativeErrorConstructorStrings = [
     functionString(SyntaxError),
     functionString(TypeError),
     functionString(URIError),
+];
+const typedArrayConstructorStrings = [
+    functionString(Int8Array),
+    functionString(Uint8Array),
+    functionString(Uint8ClampedArray),
+    functionString(Int16Array),
+    functionString(Uint16Array),
+    functionString(Int32Array),
+    functionString(Uint32Array),
+    functionString(Float16Array),
+    functionString(Float32Array),
+    functionString(Float64Array),
+    functionString(BigInt64Array),
+    functionString(BigUint64Array),
 ];

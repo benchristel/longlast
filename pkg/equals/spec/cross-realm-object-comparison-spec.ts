@@ -101,6 +101,90 @@ export function crossRealmObjectComparisonSpec(_equals: EqualsFn): Spec {
             expect(_equals(a, b), is, true);
             expect(_equals(a, new Set([1])), is, true);
         },
+
+        "equates Int8Arrays from different realms"() {
+            const a = createCrossRealmObject("new Int8Array([1])");
+            const b = createCrossRealmObject("new Int8Array([1])");
+
+            expect(_equals(a, b), is, true);
+        },
+
+        "equates Uint8ClampedArrays from different realms"() {
+            const a = createCrossRealmObject("new Uint8ClampedArray([1])");
+            const b = createCrossRealmObject("new Uint8ClampedArray([1])");
+
+            expect(_equals(a, b), is, true);
+        },
+
+        "equates Int16Arrays from different realms"() {
+            const a = createCrossRealmObject("new Int16Array([1])");
+            const b = createCrossRealmObject("new Int16Array([1])");
+
+            expect(_equals(a, b), is, true);
+        },
+
+        "equates Uint16Arrays from different realms"() {
+            const a = createCrossRealmObject("new Uint16Array([1])");
+            const b = createCrossRealmObject("new Uint16Array([1])");
+
+            expect(_equals(a, b), is, true);
+        },
+
+        "equates Int32Arrays from different realms"() {
+            const a = createCrossRealmObject("new Int32Array([1])");
+            const b = createCrossRealmObject("new Int32Array([1])");
+
+            expect(_equals(a, b), is, true);
+        },
+
+        "equates Uint32Arrays from different realms"() {
+            const a = createCrossRealmObject("new Uint32Array([1])");
+            const b = createCrossRealmObject("new Uint32Array([1])");
+
+            expect(_equals(a, b), is, true);
+        },
+
+        "equates Float16Arrays from different realms"() {
+            const a = createCrossRealmObject("new Float16Array([1])");
+            const b = createCrossRealmObject("new Float16Array([1])");
+
+            expect(_equals(a, b), is, true);
+        },
+
+        "equates Float32Arrays from different realms"() {
+            const a = createCrossRealmObject("new Float32Array([1])");
+            const b = createCrossRealmObject("new Float32Array([1])");
+
+            expect(_equals(a, b), is, true);
+        },
+
+        "equates Float64Arrays from different realms"() {
+            const a = createCrossRealmObject("new Float64Array([1])");
+            const b = createCrossRealmObject("new Float64Array([1])");
+
+            expect(_equals(a, b), is, true);
+        },
+
+        "equates BigInt64Arrays from different realms"() {
+            const a = createCrossRealmObject("new BigInt64Array([1n])");
+            const b = createCrossRealmObject("new BigInt64Array([1n])");
+
+            expect(_equals(a, b), is, true);
+        },
+
+        "equates BigUint64Arrays from different realms"() {
+            const a = createCrossRealmObject("new BigUint64Array([1n])");
+            const b = createCrossRealmObject("new BigUint64Array([1n])");
+
+            expect(_equals(a, b), is, true);
+        },
+
+        "equates Uint8Arrays from different realms"() {
+            const a = createCrossRealmObject("new Uint8Array([1])");
+            const b = createCrossRealmObject("new Uint8Array([1])");
+
+            expect(_equals(a, b), is, true);
+        },
     };
 }
 
