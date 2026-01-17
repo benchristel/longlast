@@ -255,26 +255,26 @@ const regexConstructorString = functionString(RegExp);
 const setConstructorString = functionString(Set);
 const mapConstructorString = functionString(Map);
 const nativeErrorConstructorStrings = [
-    functionString(Error),
+    Error,
     // TODO: add DOMException? Be sure to check the `name` property.
-    functionString(EvalError),
-    functionString(RangeError),
-    functionString(ReferenceError),
-    functionString(SyntaxError),
-    functionString(TypeError),
-    functionString(URIError),
-];
+    EvalError,
+    RangeError,
+    ReferenceError,
+    SyntaxError,
+    TypeError,
+    URIError,
+].map(functionString);
 const typedArrayConstructorStrings = [
-    functionString(Int8Array),
-    functionString(Uint8Array),
-    functionString(Uint8ClampedArray),
-    functionString(Int16Array),
-    functionString(Uint16Array),
-    functionString(Int32Array),
-    functionString(Uint32Array),
-    functionString(Float16Array),
-    functionString(Float32Array),
-    functionString(Float64Array),
-    functionString(BigInt64Array),
-    functionString(BigUint64Array),
-];
+    Int8Array,
+    Uint8Array,
+    Uint8ClampedArray,
+    Int16Array,
+    Uint16Array,
+    Int32Array,
+    Uint32Array,
+    Float16Array,
+    Float32Array,
+    Float64Array,
+    BigInt64Array,
+    BigUint64Array,
+].map(functionString);
