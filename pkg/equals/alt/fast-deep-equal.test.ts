@@ -11,6 +11,7 @@ import {objectComparisonSpec} from "../spec/object-comparison-spec.ts";
 import {primitiveComparisonSpec} from "../spec/primitive-comparison-spec.ts";
 import {regexpComparisonSpec} from "../spec/regexp-comparison-spec.ts";
 import {setComparisonSpec} from "../spec/set-comparison-spec.ts";
+import {typedArrayComparisonSpec} from "../spec/typed-array-comparison-spec.ts";
 
 const unimplemented = [
     // The lack of distinction between positive and negative zero makes
@@ -42,6 +43,7 @@ const specs = [
     mapComparisonSpec,
     regexpComparisonSpec,
     setComparisonSpec,
+    typedArrayComparisonSpec,
 ];
 
 for (const spec of specs) {
