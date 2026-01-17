@@ -42,6 +42,7 @@ Recommended dependency versions:
 ```
 GNU bash  version 5.0.17(1)-release
 GNU Make  4.2.1
+rsync     3.1.3
 Node.js   24.5.0
 pnpm      10.14.0
 ```
