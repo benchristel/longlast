@@ -17,14 +17,19 @@ async function main() {
         join(...root, "dev", "consistency-tests", "**", "*.test.ts"),
     ];
 
-    // FUTURE: import files in parallel
-    for await (const path of glob(testFilePatterns)) {
-        await import(path);
-    }
+    await importAll(glob(testFilePatterns));
 
     await runTests(getAllTests())
         .then(reportResultsAndExit)
         .catch(console.error);
+}
+
+async function importAll(paths: AsyncIterable<string>): Promise<void> {
+    const imported = [];
+    for await (const path of paths) {
+        imported.push(import(path));
+    }
+    await Promise.all(imported);
 }
 
 function reportResultsAndExit(r: {results: TestResult[]}): never {
