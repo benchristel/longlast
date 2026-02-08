@@ -1,7 +1,3 @@
 #!/bin/bash
 
-set -euo pipefail
-
-find pkg -name tsconfig.build.json | while read path; do
-    pnpm tsc --project "$path"
-done
+pnpm tsc --build pkg/*/tsconfig.build.json
