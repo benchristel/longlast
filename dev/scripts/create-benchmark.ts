@@ -1,7 +1,7 @@
 import Benchmark from "benchmark";
 
-export function createBenchmark(): Benchmark.Suite {
-    const suite = new Benchmark.Suite()
+export function createBenchmark(name?: string): Benchmark.Suite {
+    const suite = new Benchmark.Suite(name)
         .on("cycle", (event: any) => console.log(String(event.target)))
         .on("complete", () =>
             console.log(
