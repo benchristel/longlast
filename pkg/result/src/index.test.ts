@@ -7,7 +7,11 @@ test("a success", {
     },
 
     "knows it is a success"() {
-        expect(success(42).isSuccess(), is, true);
+        expect(success(0).isSuccess(), is, true);
+    },
+
+    "knows it is not a failure"() {
+        expect(success(0).isFailure(), is, false);
     },
 
     "is equal to another success with the same value"() {
@@ -22,6 +26,14 @@ test("a success", {
 test("a failure", {
     "wraps details about what went wrong"() {
         expect(failure("uh oh").detail, equals, "uh oh");
+    },
+
+    "knows it is a failure"() {
+        expect(failure(0).isFailure(), is, true);
+    },
+
+    "knows it is not a success"() {
+        expect(failure(0).isSuccess(), is, false);
     },
 
     "is equal to another failure with the same detail"() {

@@ -4,8 +4,9 @@
 
 export type Result<T, F> = Success<T> | Failure<F>;
 
-export interface ResultMethods<T> {
+export interface ResultMethods<T, F> {
     isSuccess(): this is Success<T>;
+    isFailure(): this is Failure<F>;
 }
 
 export function success<T>(value: T): Success<T> {
@@ -16,7 +17,7 @@ export function failure<F>(detail: F): Failure<F> {
     return new Failure(detail);
 }
 
-export class Success<T> implements ResultMethods<T> {
+export class Success<T> implements ResultMethods<T, never> {
     public readonly value: T;
 
     constructor(value: T) {
@@ -26,9 +27,13 @@ export class Success<T> implements ResultMethods<T> {
     isSuccess(): this is Success<T> {
         return true;
     }
+
+    isFailure(): this is Failure<never> {
+        return false;
+    }
 }
 
-export class Failure<F> implements ResultMethods<never> {
+export class Failure<F> implements ResultMethods<never, F> {
     public readonly detail: F;
 
     constructor(detail: F) {
@@ -37,5 +42,9 @@ export class Failure<F> implements ResultMethods<never> {
 
     isSuccess(): this is Success<never> {
         return false;
+    }
+
+    isFailure(): this is Failure<F> {
+        return true;
     }
 }

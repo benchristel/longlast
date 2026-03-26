@@ -37,6 +37,18 @@ describe("Result#isSuccess", () => {
     });
 });
 
+describe("Result#isFailure", () => {
+    it("narrows the type of result", () => {
+        const result = summon<Result<string, number>>();
+        if (result.isFailure()) {
+            expect(result.detail).type.toBe<number>();
+        }
+        if (!result.isFailure()) {
+            expect(result.value).type.toBe<string>();
+        }
+    });
+});
+
 function summon<T>(): T {
     return null as any;
 }
