@@ -24,3 +24,19 @@ describe("a failure", () => {
         expect(failure(1)).type.toBeAssignableTo<Result<string, number>>();
     });
 });
+
+describe("Result#isSuccess", () => {
+    it("narrows the type of result", () => {
+        const result = summon<Result<string, number>>();
+        if (result.isSuccess()) {
+            expect(result.value).type.toBe<string>();
+        }
+        if (!result.isSuccess()) {
+            expect(result.detail).type.toBe<number>();
+        }
+    });
+});
+
+function summon<T>(): T {
+    return null as any;
+}

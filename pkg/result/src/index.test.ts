@@ -1,9 +1,13 @@
-import {test, expect, equals, not} from "@benchristel/taste";
+import {test, expect, equals, is, not} from "@benchristel/taste";
 import {success, failure} from "./index.ts";
 
 test("a success", {
     "wraps a value"() {
         expect(success(42).value, equals, 42);
+    },
+
+    "knows it is a success"() {
+        expect(success(42).isSuccess(), is, true);
     },
 
     "is equal to another success with the same value"() {
