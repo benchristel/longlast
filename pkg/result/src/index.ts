@@ -2,6 +2,8 @@
  * @module result
  */
 
+export type Result<T, F> = Success<T> | Failure<F>;
+
 export function success<T>(value: T): Success<T> {
     return new Success(value);
 }
