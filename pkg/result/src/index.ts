@@ -18,6 +18,7 @@ export function failure<F>(detail: F): Failure<F> {
 }
 
 export class Success<T> implements ResultMethods<T, never> {
+    public readonly type = "success" as const;
     public readonly value: T;
 
     constructor(value: T) {
@@ -34,6 +35,7 @@ export class Success<T> implements ResultMethods<T, never> {
 }
 
 export class Failure<F> implements ResultMethods<never, F> {
+    public readonly type = "failure" as const;
     public readonly detail: F;
 
     constructor(detail: F) {

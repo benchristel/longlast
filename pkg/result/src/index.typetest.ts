@@ -25,6 +25,20 @@ describe("a failure", () => {
     });
 });
 
+describe("Result#type", () => {
+    it("supports type narrowing in switch statements", () => {
+        const result = summon<Result<"ok", "err">>();
+        switch (result.type) {
+            case "success":
+                expect(result.value).type.toBe<"ok">();
+                break;
+            case "failure":
+                expect(result.detail).type.toBe<"err">();
+                break;
+        }
+    });
+});
+
 describe("Result#isSuccess", () => {
     it("narrows the type of result", () => {
         const result = summon<Result<string, number>>();
