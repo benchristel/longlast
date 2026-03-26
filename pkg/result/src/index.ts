@@ -7,7 +7,7 @@ export function success<T>(value: T): Success<T> {
 }
 
 export class Success<T> {
-    public value: T;
+    public readonly value: T;
 
     constructor(value: T) {
         this.value = value;
