@@ -21,6 +21,11 @@ test("a success", {
     "is unequal to a success with a different value"() {
         expect(success(42), not(equals), success(54));
     },
+
+    "can be transformed without unwrapping, via mapSuccess"() {
+        const times = (a: number) => (b: number) => a * b;
+        expect(success(6).mapSuccess(times(9)), equals, success(54));
+    },
 });
 
 test("a failure", {

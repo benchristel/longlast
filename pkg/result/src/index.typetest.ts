@@ -1,5 +1,5 @@
 import {describe, it, expect} from "tstyche";
-import {success, failure, type Result} from "./index.ts";
+import {success, failure, type Result, type Failure} from "./index.ts";
 
 describe("a success", () => {
     it("has an immutable value", () => {
@@ -22,6 +22,13 @@ describe("a failure", () => {
 
     it("is a type of Result", () => {
         expect(failure(1)).type.toBeAssignableTo<Result<string, number>>();
+    });
+
+    it("returns itself on mapSuccess", () => {
+        // Note: the type of the callback function doesn't matter, since it
+        // won't be called.
+        const mapped = failure(1).mapSuccess((_: string): boolean => false);
+        expect(mapped).type.toBe<Failure<number>>();
     });
 });
 
