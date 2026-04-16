@@ -20,6 +20,22 @@ export function failure<F>(detail: F): Failure<F> {
     return new Failure(detail);
 }
 
+export function assertSuccess<T, F>(
+    result: Result<T, F>,
+): asserts result is Success<T> {
+    if (!result.isSuccess()) {
+        throw "assertSuccess: unexpected failure";
+    }
+}
+
+export function assertFailure<T, F>(
+    result: Result<T, F>,
+): asserts result is Failure<F> {
+    if (!result.isFailure()) {
+        throw "assertFailure: unexpected success";
+    }
+}
+
 export class Success<T> implements ResultMethods<T, never> {
     public readonly type = "success" as const;
     public readonly value: T;
