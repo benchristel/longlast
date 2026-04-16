@@ -8,6 +8,7 @@ export interface ResultMethods<T, F> {
     isSuccess(): this is Success<T>;
     isFailure(): this is Failure<F>;
     mapSuccess<U>(f: (value: T) => U): Result<U, F>;
+    flatMapSuccess<U, G>(f: (value: T) => Result<U, G>): Result<U, F | G>;
 }
 
 export function success<T>(value: T): Success<T> {
@@ -37,6 +38,10 @@ export class Success<T> implements ResultMethods<T, never> {
     mapSuccess<U>(f: (value: T) => U): Success<U> {
         return success(f(this.value));
     }
+
+    flatMapSuccess<U, G>(f: (value: T) => Result<U, G>): Result<U, G> {
+        return f(this.value);
+    }
 }
 
 export class Failure<F> implements ResultMethods<never, F> {
@@ -56,6 +61,10 @@ export class Failure<F> implements ResultMethods<never, F> {
     }
 
     mapSuccess(_f: (value: never) => unknown): Failure<F> {
+        return this;
+    }
+
+    flatMapSuccess<U, G>(_f: (value: never) => Result<U, G>): Result<never, F> {
         return this;
     }
 }
