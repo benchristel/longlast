@@ -48,4 +48,8 @@ test("a failure", {
     "is unequal to a failure with different details"() {
         expect(failure("uh oh"), not(equals), failure("kablooie"));
     },
+
+    "is unequal to a success"() {
+        expect(failure(""), not(equals), success(""));
+    },
 });
