@@ -4,7 +4,7 @@
 
 export type Result<T, F> = Success<T> | Failure<F>;
 
-export interface ResultMethods<T, F> {
+interface ResultMethods<T, F> {
     isSuccess(): this is Success<T>;
     isFailure(): this is Failure<F>;
     mapSuccess<U>(f: (value: T) => U): Result<U, F>;
