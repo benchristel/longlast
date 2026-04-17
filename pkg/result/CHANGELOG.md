@@ -1,5 +1,13 @@
 # @longlast/result
 
+## 0.0.2 (2026-04-17)
+
+This release adds an `orThrow` method to Result.
+
+It also adds functional equivalents of the Result methods: `isSuccess`,
+`isFailure`, `mapSuccess`, `mapFailure`, `flatMapSuccess`, `flatMapFailure`,
+and `orThrow`.
+
 ## 0.0.1 (2026-04-15)
 
 This initial release exports a `Result` type with the following methods:
