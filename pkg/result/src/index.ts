@@ -37,6 +37,38 @@ export function assertFailure<T, F>(
     }
 }
 
+export function isSuccess<T, F>(result: Result<T, F>): result is Success<T> {
+    return result.isSuccess();
+}
+
+export function isFailure<T, F>(result: Result<T, F>): result is Failure<F> {
+    return result.isFailure();
+}
+
+export function mapSuccess<T, F, U>(
+    f: (value: T) => U,
+): (result: Result<T, F>) => Result<U, F> {
+    return (result) => result.mapSuccess(f);
+}
+
+export function mapFailure<T, F, G>(
+    f: (detail: F) => G,
+): (result: Result<T, F>) => Result<T, G> {
+    return (result) => result.mapFailure(f);
+}
+
+export function flatMapSuccess<T, F, U, G>(
+    f: (value: T) => Result<U, G>,
+): (result: Result<T, F>) => Result<U, F | G> {
+    return (result) => result.flatMapSuccess(f);
+}
+
+export function flatMapFailure<T, F, U, G>(
+    f: (detail: F) => Result<U, G>,
+): (result: Result<T, F>) => Result<T | U, G> {
+    return (result) => result.flatMapFailure(f);
+}
+
 export class Success<T> implements ResultMethods<T, never> {
     public readonly type = "success" as const;
     public readonly value: T;
