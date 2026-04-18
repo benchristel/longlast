@@ -6,6 +6,10 @@ import {
     type Failure,
     assertSuccess,
     assertFailure,
+    mapSuccess,
+    mapFailure,
+    flatMapSuccess,
+    flatMapFailure,
 } from "./index.ts";
 
 describe("a success", () => {
@@ -103,9 +107,70 @@ describe("Result#flatMapSuccess", () => {
     });
 });
 
+describe("functional mapSuccess", () => {
+    it("late-binds the failure detail type", () => {
+        const incrementResult = mapSuccess(increment);
+
+        const incremented = incrementResult(indexOf("a", "b"));
+
+        expect(incremented).type.toBe<Result<number, null>>();
+    });
+});
+
+describe("functional mapFailure", () => {
+    it("late-binds the success value type", () => {
+        const toNotFound = mapFailure(() => "not found");
+
+        const indexResult = toNotFound(indexOf("a", "b"));
+
+        expect(indexResult).type.toBe<Result<number, string>>();
+    });
+});
+
+describe("functional flatMapSuccess", () => {
+    it("late-binds the failure detail type", () => {
+        const result = flatMapSuccess(divide(3))(indexOf("a", "b"));
+
+        expect(result).type.toBe<Result<number, "division by zero" | null>>();
+    });
+});
+
+describe("functional flatMapFailure", () => {
+    it("late-binds the success value type", () => {
+        function recoverNotFound(detail: ReadError) {
+            if (detail === "does not exist") {
+                return success(Buffer.from(""));
+            }
+            return failure(detail);
+        }
+
+        const result = flatMapFailure(recoverNotFound)(readSync("/tmp/f"));
+
+        expect(result).type.toBe<
+            Result<
+                Buffer<ArrayBuffer>,
+                "is a directory" | "insufficient permissions"
+            >
+        >();
+    });
+});
+
+declare function increment(n: number): number;
+
 declare function indexOf(
     needle: string,
     haystack: string,
 ): Result<number, null>;
+
+type ReadError =
+    | "does not exist"
+    | "is a directory"
+    | "insufficient permissions";
+
+declare function readSync(path: string): Result<Buffer<ArrayBuffer>, ReadError>;
+
+declare function divide(
+    dividend: number,
+): (divisor: number) => Result<number, "division by zero">;
 
 declare function summon<T>(): T;

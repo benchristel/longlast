@@ -46,27 +46,27 @@ export function isFailure<T, F>(result: Result<T, F>): result is Failure<F> {
     return result.isFailure();
 }
 
-export function mapSuccess<T, F, U>(
+export function mapSuccess<T, U>(
     f: (value: T) => U,
-): (result: Result<T, F>) => Result<U, F> {
+): <F>(result: Result<T, F>) => Result<U, F> {
     return (result) => result.mapSuccess(f);
 }
 
-export function mapFailure<T, F, G>(
+export function mapFailure<F, G>(
     f: (detail: F) => G,
-): (result: Result<T, F>) => Result<T, G> {
+): <T>(result: Result<T, F>) => Result<T, G> {
     return (result) => result.mapFailure(f);
 }
 
-export function flatMapSuccess<T, F, U, G>(
+export function flatMapSuccess<T, U, G>(
     f: (value: T) => Result<U, G>,
-): (result: Result<T, F>) => Result<U, F | G> {
+): <F>(result: Result<T, F>) => Result<U, F | G> {
     return (result) => result.flatMapSuccess(f);
 }
 
-export function flatMapFailure<T, F, U, G>(
+export function flatMapFailure<F, U, G>(
     f: (detail: F) => Result<U, G>,
-): (result: Result<T, F>) => Result<T | U, G> {
+): <T>(result: Result<T, F>) => Result<T | U, G> {
     return (result) => result.flatMapFailure(f);
 }
 
