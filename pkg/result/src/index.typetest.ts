@@ -93,11 +93,6 @@ describe("assertFailure", () => {
     });
 });
 
-declare function indexOf(
-    needle: string,
-    haystack: string,
-): Result<number, null>;
-
 describe("Result#flatMapSuccess", () => {
     it("chains result-returning operations", () => {
         const resultOfString = summon<Result<string, number>>();
@@ -108,6 +103,9 @@ describe("Result#flatMapSuccess", () => {
     });
 });
 
-function summon<T>(): T {
-    return null as any;
-}
+declare function indexOf(
+    needle: string,
+    haystack: string,
+): Result<number, null>;
+
+declare function summon<T>(): T;
