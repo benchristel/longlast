@@ -1,5 +1,12 @@
 import {describe, it, expect} from "tstyche";
-import {success, failure, type Result, type Failure} from "./index.ts";
+import {
+    success,
+    failure,
+    type Result,
+    type Failure,
+    assertSuccess,
+    assertFailure,
+} from "./index.ts";
 
 describe("a success", () => {
     it("has an immutable value", () => {
@@ -67,6 +74,22 @@ describe("Result#isFailure", () => {
         if (!result.isFailure()) {
             expect(result.value).type.toBe<string>();
         }
+    });
+});
+
+describe("assertSuccess", () => {
+    it("narrows the type of result", () => {
+        const result = summon<Result<string, number>>();
+        assertSuccess(result);
+        expect(result.value).type.toBe<string>();
+    });
+});
+
+describe("assertFailure", () => {
+    it("narrows the type of result", () => {
+        const result = summon<Result<string, number>>();
+        assertFailure(result);
+        expect(result.detail).type.toBe<number>();
     });
 });
 
