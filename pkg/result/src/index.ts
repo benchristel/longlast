@@ -11,7 +11,6 @@ interface ResultMethods<T, F> {
     mapFailure<G>(f: (detail: F) => G): Result<T, G>;
     flatMapSuccess<U, G>(f: (value: T) => Result<U, G>): Result<U, F | G>;
     flatMapFailure<U, G>(f: (detail: F) => Result<U, G>): Result<T | U, G>;
-    orThrow(toError: (detail: F) => Error): T;
 }
 
 export function success<T>(value: T): Success<T> {
@@ -70,12 +69,6 @@ export function flatMapFailure<F, U, G>(
     return (result) => result.flatMapFailure(f);
 }
 
-export function orThrow<T, F>(
-    toError: (detail: F) => Error,
-): (result: Result<T, F>) => T {
-    return (result) => result.orThrow(toError);
-}
-
 export class Success<T> implements ResultMethods<T, never> {
     public readonly type = "success" as const;
     public readonly value: T;
@@ -109,10 +102,6 @@ export class Success<T> implements ResultMethods<T, never> {
     ): Result<T, never> {
         return this;
     }
-
-    orThrow(_: (detail: never) => Error): T {
-        return this.value;
-    }
 }
 
 export class Failure<F> implements ResultMethods<never, F> {
@@ -145,9 +134,5 @@ export class Failure<F> implements ResultMethods<never, F> {
 
     flatMapFailure<U, G>(f: (detail: F) => Result<U, G>): Result<U, G> {
         return f(this.detail);
-    }
-
-    orThrow(toError: (detail: F) => Error): never {
-        throw toError(this.detail);
     }
 }
