@@ -1,5 +1,12 @@
 # @longlast/result
 
+## 0.1.0 (2026-04-18)
+
+Breaking change: `orThrow` has been removed.
+
+This release also fixes type-level bugs in the functional API, where type
+arguments were bound too early, resulting in `unknown` types.
+
 ## 0.0.2 (2026-04-17)
 
 This release adds an `orThrow` method to Result.

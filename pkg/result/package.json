@@ -1,6 +1,6 @@
 {
     "name": "@longlast/result",
-    "version": "0.0.2",
+    "version": "0.1.0",
     "description": "Represents the outcome of an operation that can fail",
     "homepage": "https://longlast.js.org/",
     "license": "MIT",
